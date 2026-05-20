@@ -186,6 +186,7 @@
         <a href="#faq" class="text-zinc-400 hover:text-white transition-colors focus-ring" role="listitem">FAQ</a>
       </div>
       <a href="https://github.com/nacholiporace/goal-labs-releases/releases/latest"
+         data-download
          class="btn-primary bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors flex items-center gap-2 focus-ring"
          aria-label="Descargar Goal Labs gratis para Windows">
         <i class="fas fa-download text-xs" aria-hidden="true"></i>
@@ -222,6 +223,7 @@
         <!-- CTA -->
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
           <a href="https://github.com/nacholiporace/goal-labs-releases/releases/latest"
+             data-download
              class="btn-primary bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-bold px-8 py-4 rounded-xl text-lg transition-colors flex items-center gap-3 shadow-lg shadow-indigo-900/40 focus-ring"
              aria-label="Descargar Goal Labs para Windows — gratis">
             <i class="fas fa-download" aria-hidden="true"></i>
@@ -504,6 +506,7 @@
               <li class="flex items-center gap-3 text-sm text-zinc-300 font-body"><i class="fas fa-check text-emerald-400 w-4" aria-hidden="true"></i>100% offline</li>
             </ul>
             <a href="https://github.com/nacholiporace/goal-labs-releases/releases/latest"
+               data-download
                class="btn-primary block text-center bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-colors focus-ring"
                aria-label="Descargar Goal Labs gratis">
               Descargar gratis
@@ -623,12 +626,13 @@
         </h2>
         <p class="text-zinc-400 text-lg mb-10 font-body">Gratis. Sin cuenta. Sin internet. Hecho por alguien del fútbol.</p>
         <a href="https://github.com/nacholiporace/goal-labs-releases/releases/latest"
+           data-download
            class="btn-primary inline-flex items-center gap-3 bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-bold px-10 py-4 rounded-xl text-xl transition-colors shadow-xl shadow-indigo-900/40 focus-ring"
            aria-label="Descargar Goal Labs para Windows — gratis, sin cuenta requerida">
           <i class="fas fa-download" aria-hidden="true"></i>
           Descargar para Windows
         </a>
-        <p class="text-zinc-600 text-sm mt-4 font-body tabular-nums">v1.0.10 · Windows 10/11 · Actualización automática incluida</p>
+        <p id="version-text" class="text-zinc-600 text-sm mt-4 font-body tabular-nums">v1.0.11 · Windows 10/11 · Actualización automática incluida</p>
       </div>
     </section>
 
@@ -690,6 +694,33 @@
 
     // Animate hero mock on load (already visible, mark immediately)
     document.querySelector('.reveal').classList.add('visible');
+
+    // Direct download: fetch latest release asset URL from GitHub API
+    (async () => {
+      try {
+        const res = await fetch('https://api.github.com/repos/nacholiporace/goal-labs-releases/releases/latest', {
+          headers: { Accept: 'application/vnd.github+json' }
+        });
+        if (!res.ok) return;
+        const data = await res.json();
+        const asset = data.assets?.find(a => a.name.endsWith('.exe'));
+        if (!asset) return;
+
+        const url = asset.browser_download_url;
+        document.querySelectorAll('[data-download]').forEach(btn => {
+          btn.href = url;
+          btn.removeAttribute('target');
+          btn.setAttribute('download', asset.name);
+        });
+
+        const versionEl = document.getElementById('version-text');
+        if (versionEl && data.tag_name) {
+          versionEl.textContent = `${data.tag_name} · Windows 10/11 · Actualización automática incluida`;
+        }
+      } catch (_) {
+        // Si falla la API, los botones mantienen el fallback a /releases/latest
+      }
+    })();
   </script>
 </body>
 </html>
