@@ -16,6 +16,22 @@
   <meta name="twitter:title" content="Goal Labs — Análisis Táctico de Fútbol Gratis" />
   <meta name="twitter:description" content="Tagueá tu próximo partido en 45 minutos. Gratis. Offline. Para Windows." />
 
+  <!-- Canonical -->
+  <link rel="canonical" href="https://nacholiporace.github.io/goal-labs-releases/" />
+
+  <!-- Social share image (TODO: subir assets/og-image.png — 1200x630) -->
+  <meta property="og:image" content="https://nacholiporace.github.io/goal-labs-releases/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Goal Labs — software de videoanálisis táctico de fútbol" />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="Goal Labs" />
+  <meta name="twitter:image" content="https://nacholiporace.github.io/goal-labs-releases/assets/og-image.png" />
+
+  <!-- Favicon (TODO: subir assets/favicon.svg + assets/apple-touch-icon.png) -->
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+
   <!-- Fonts: Barlow (sports editorial) + Outfit (clean body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,6 +59,26 @@
     html { scroll-behavior: smooth; }
     body { font-family: 'Outfit', sans-serif; }
     h1, h2, h3, .font-display { font-family: 'Barlow Condensed', sans-serif; }
+
+    /* Pulse keyframe (no se emite vía CDN salvo que se use animate-pulse) */
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+
+    /* Pro badge */
+    .tag-pro {
+      background: linear-gradient(135deg, #34d399, #10b981);
+      color: #052e1a;
+      font-weight: 800;
+      letter-spacing: .04em;
+    }
+
+    /* Chalk pitch line accent */
+    .chalk-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(16,185,129,0.35), transparent);
+    }
 
     /* Utility */
     .text-balance { text-wrap: balance; }
@@ -216,8 +252,8 @@
 
         <p class="text-pretty text-xl text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed font-body">
           Software de videoanálisis táctico para el fútbol argentino.
-          Hotkeys configurables, telestrator, verificador de offside con corrección de perspectiva y análisis con IA.
-          Funciona sin internet.
+          Taggeá con hotkeys, dibujá con el telestrator, verificá offsides con perspectiva
+          y armá <span class="text-zinc-200">reels verticales para redes</span> — todo en una app que funciona sin internet.
         </p>
 
         <!-- CTA -->
@@ -359,6 +395,12 @@
           <p class="text-zinc-400 text-lg font-body">Sin saltar entre apps. Sin flujos rotos.</p>
         </div>
 
+        <h3 class="font-display font-bold text-lg uppercase tracking-wider text-zinc-500 mb-5 flex items-center gap-3">
+          <span class="gradient-text-green">El núcleo</span>
+          <span class="text-zinc-700">·</span>
+          <span class="text-zinc-400 normal-case font-body font-medium text-sm tracking-normal">Gratis para siempre</span>
+        </h3>
+
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
 
           <article class="feature-card bg-zinc-900 border border-zinc-800 rounded-2xl p-6 reveal reveal-d1">
@@ -397,8 +439,8 @@
             <div class="w-10 h-10 bg-orange-950 border border-orange-800/50 rounded-xl flex items-center justify-center mb-4" aria-hidden="true">
               <i class="fas fa-file-export text-orange-400" aria-hidden="true"></i>
             </div>
-            <h3 class="font-display font-bold text-xl text-white mb-2">Exportación Pro</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed font-body">FCP XML para Premiere y DaVinci. Clips MP4 vía FFmpeg nativo. CSV y JSON de estadísticas.</p>
+            <h3 class="font-display font-bold text-xl text-white mb-2">Exportación a tu editor</h3>
+            <p class="text-zinc-500 text-sm leading-relaxed font-body">Clips MP4 vía FFmpeg nativo. FCP XML para Premiere y DaVinci. CSV y JSON de estadísticas.</p>
           </article>
 
           <article class="feature-card bg-zinc-900 border border-zinc-800 rounded-2xl p-6 reveal reveal-d6">
@@ -410,6 +452,110 @@
           </article>
 
         </div>
+
+        <!-- Grupo Pro -->
+        <div class="flex items-center gap-3 mt-16 mb-5">
+          <h3 class="font-display font-bold text-lg uppercase tracking-wider text-zinc-500 flex items-center gap-3">
+            <span class="gradient-text">Temporada y producción</span>
+          </h3>
+          <span class="tag-pro text-[10px] px-2 py-0.5 rounded-full uppercase">Pro</span>
+          <span class="hidden sm:block flex-1 chalk-line" aria-hidden="true"></span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+          <article class="feature-card bg-zinc-900 border border-zinc-800 rounded-2xl p-6 reveal reveal-d1">
+            <div class="w-10 h-10 bg-emerald-950 border border-emerald-800/50 rounded-xl flex items-center justify-center mb-4" aria-hidden="true">
+              <i class="fas fa-mobile-screen-button text-emerald-400" aria-hidden="true"></i>
+            </div>
+            <h3 class="font-display font-bold text-xl text-white mb-2">Reels verticales 9:16</h3>
+            <p class="text-zinc-500 text-sm leading-relaxed font-body">Armá highlights por jugador y exportá en 9:16 con seguimiento de la jugada — listos para Instagram y TikTok. También 16:9.</p>
+          </article>
+
+          <article class="feature-card bg-zinc-900 border border-zinc-800 rounded-2xl p-6 reveal reveal-d2">
+            <div class="w-10 h-10 bg-emerald-950 border border-emerald-800/50 rounded-xl flex items-center justify-center mb-4" aria-hidden="true">
+              <i class="fas fa-calendar-week text-emerald-400" aria-hidden="true"></i>
+            </div>
+            <h3 class="font-display font-bold text-xl text-white mb-2">Análisis de Temporada</h3>
+            <p class="text-zinc-500 text-sm leading-relaxed font-body">Estadísticas agregadas de todos los partidos y los momentos destacados de cada jugador a lo largo de la temporada.</p>
+          </article>
+
+          <article class="feature-card bg-zinc-900 border border-zinc-800 rounded-2xl p-6 reveal reveal-d3">
+            <div class="w-10 h-10 bg-emerald-950 border border-emerald-800/50 rounded-xl flex items-center justify-center mb-4" aria-hidden="true">
+              <i class="fas fa-file-pdf text-emerald-400" aria-hidden="true"></i>
+            </div>
+            <h3 class="font-display font-bold text-xl text-white mb-2">Reportes PDF</h3>
+            <p class="text-zinc-500 text-sm leading-relaxed font-body">Plantillas listas de partido, jugador y scouting. Compartí informes profesionales con el cuerpo técnico en un click.</p>
+          </article>
+
+          <article class="feature-card bg-zinc-900 border border-zinc-800 rounded-2xl p-6 reveal reveal-d4">
+            <div class="w-10 h-10 bg-emerald-950 border border-emerald-800/50 rounded-xl flex items-center justify-center mb-4" aria-hidden="true">
+              <i class="fas fa-cloud text-emerald-400" aria-hidden="true"></i>
+            </div>
+            <h3 class="font-display font-bold text-xl text-white mb-2">Biblioteca en la nube</h3>
+            <p class="text-zinc-500 text-sm leading-relaxed font-body">Guardá tus proyectos y accedé a ellos desde cualquier dispositivo. Tu temporada entera, sincronizada.</p>
+          </article>
+
+          <article class="feature-card bg-zinc-900 border border-zinc-800 rounded-2xl p-6 reveal reveal-d5">
+            <div class="w-10 h-10 bg-emerald-950 border border-emerald-800/50 rounded-xl flex items-center justify-center mb-4" aria-hidden="true">
+              <i class="fas fa-wand-magic-sparkles text-emerald-400" aria-hidden="true"></i>
+            </div>
+            <h3 class="font-display font-bold text-xl text-white mb-2">Insights con IA</h3>
+            <p class="text-zinc-500 text-sm leading-relaxed font-body">Resúmenes automáticos del partido y lectura de patrones, para llegar a la charla con el equipo con todo masticado.</p>
+          </article>
+
+          <article class="feature-card bg-zinc-900 border border-zinc-800 rounded-2xl p-6 reveal reveal-d6">
+            <div class="w-10 h-10 bg-emerald-950 border border-emerald-800/50 rounded-xl flex items-center justify-center mb-4" aria-hidden="true">
+              <i class="fas fa-futbol text-emerald-400" aria-hidden="true"></i>
+            </div>
+            <h3 class="font-display font-bold text-xl text-white mb-2">LPF Play + planteles</h3>
+            <p class="text-zinc-500 text-sm leading-relaxed font-body">Importá video directo de la liga y cargá planteles predefinidos desde el catálogo de equipos. Menos carga manual.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FLUJO: DEL PARTIDO AL REEL -->
+    <section class="py-24 border-t border-zinc-800/50" aria-labelledby="flujo-heading">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="text-center mb-16 reveal">
+          <div class="section-accent" aria-hidden="true"></div>
+          <h2 id="flujo-heading" class="text-balance font-display text-4xl md:text-5xl font-black text-white mb-4">
+            Del partido al <span class="gradient-text-green">reel</span> en tres pasos.
+          </h2>
+          <p class="text-zinc-400 text-lg font-body">Del video crudo a un clip listo para redes — sin salir de la app.</p>
+        </div>
+
+        <ol class="grid md:grid-cols-3 gap-6" aria-label="Cómo funciona Goal Labs en tres pasos">
+          <li class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 reveal reveal-d1">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="font-display font-black text-2xl gradient-text-green tabular-nums" aria-hidden="true">01</span>
+              <span class="chalk-line flex-1" aria-hidden="true"></span>
+              <i class="fas fa-keyboard text-emerald-400" aria-hidden="true"></i>
+            </div>
+            <h3 class="font-display font-bold text-xl text-white mb-2">Taggeás el partido</h3>
+            <p class="text-zinc-500 text-sm leading-relaxed font-body">Una tecla por evento, sin pausar el video. Goles, tiros, pérdidas, offsides — todo queda registrado con su minuto.</p>
+          </li>
+          <li class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 reveal reveal-d2">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="font-display font-black text-2xl gradient-text-green tabular-nums" aria-hidden="true">02</span>
+              <span class="chalk-line flex-1" aria-hidden="true"></span>
+              <i class="fas fa-clapperboard text-emerald-400" aria-hidden="true"></i>
+            </div>
+            <h3 class="font-display font-bold text-xl text-white mb-2">Elegís los momentos</h3>
+            <p class="text-zinc-500 text-sm leading-relaxed font-body">Revisá clip por clip con atajos de teclado y armá el reel de cada jugador con sus mejores acciones de la temporada.</p>
+          </li>
+          <li class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 reveal reveal-d3">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="font-display font-black text-2xl gradient-text-green tabular-nums" aria-hidden="true">03</span>
+              <span class="chalk-line flex-1" aria-hidden="true"></span>
+              <i class="fas fa-share-nodes text-emerald-400" aria-hidden="true"></i>
+            </div>
+            <h3 class="font-display font-bold text-xl text-white mb-2">Exportás para redes</h3>
+            <p class="text-zinc-500 text-sm leading-relaxed font-body">9:16 vertical con seguimiento de la jugada o 16:9 clásico. Listo para Instagram, TikTok o el grupo del club.</p>
+          </li>
+        </ol>
       </div>
     </section>
 
@@ -465,6 +611,18 @@
                 <td class="py-3 px-4 text-center text-emerald-400"><i class="fas fa-check" aria-label="Sí" aria-hidden="true"></i><span class="sr-only">Sí</span></td>
                 <td class="py-3 px-4 text-center text-zinc-600"><i class="fas fa-xmark" aria-label="No" aria-hidden="true"></i><span class="sr-only">No</span></td>
               </tr>
+              <tr class="border-b border-zinc-900 hover:bg-zinc-900/50 transition-colors">
+                <td class="py-3 px-4 text-zinc-400">Reels verticales 9:16 (redes)</td>
+                <td class="py-3 px-4 text-center text-emerald-400"><i class="fas fa-check" aria-hidden="true"></i><span class="sr-only">Sí</span></td>
+                <td class="py-3 px-4 text-center text-zinc-600"><i class="fas fa-xmark" aria-hidden="true"></i><span class="sr-only">No</span></td>
+                <td class="py-3 px-4 text-center text-zinc-500">Parcial</td>
+              </tr>
+              <tr class="border-b border-zinc-900 hover:bg-zinc-900/50 transition-colors">
+                <td class="py-3 px-4 text-zinc-400">Import directo de la liga (LPF)</td>
+                <td class="py-3 px-4 text-center text-emerald-400"><i class="fas fa-check" aria-hidden="true"></i><span class="sr-only">Sí</span></td>
+                <td class="py-3 px-4 text-center text-zinc-600"><i class="fas fa-xmark" aria-hidden="true"></i><span class="sr-only">No</span></td>
+                <td class="py-3 px-4 text-center text-zinc-600"><i class="fas fa-xmark" aria-hidden="true"></i><span class="sr-only">No</span></td>
+              </tr>
               <tr class="hover:bg-zinc-900/50 transition-colors">
                 <td class="py-3 px-4 text-zinc-400">Curva de aprendizaje</td>
                 <td class="py-3 px-4 text-center text-emerald-400">Baja</td>
@@ -514,24 +672,32 @@
           </div>
 
           <!-- Pro -->
-          <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 opacity-60 reveal reveal-d2" aria-label="Plan Pro — próximamente">
+          <div class="bg-zinc-900 border-2 border-emerald-600/70 rounded-2xl p-8 relative reveal reveal-d2" aria-label="Plan Pro">
+            <div class="absolute -top-3 left-6 tag-pro text-xs px-3 py-1 rounded-full uppercase">Prueba 15 días gratis</div>
             <h3 class="font-display text-2xl font-black text-white mb-1">Pro</h3>
-            <div class="text-4xl font-display font-black text-zinc-500 mb-1">Próximamente</div>
-            <p class="text-zinc-600 text-sm mb-6 font-body">Para equipos con más necesidades.</p>
+            <div class="text-4xl font-display font-black gradient-text-green mb-1">15 días gratis</div>
+            <p class="text-zinc-500 text-sm mb-6 font-body">Sin tarjeta. Para clubes y analistas que trabajan toda la temporada.</p>
             <ul class="space-y-3 mb-8" aria-label="Funcionalidades del plan Pro">
-              <li class="flex items-center gap-3 text-sm text-zinc-500 font-body"><i class="fas fa-check text-zinc-600 w-4" aria-hidden="true"></i>Todo lo del plan gratuito</li>
-              <li class="flex items-center gap-3 text-sm text-zinc-500 font-body"><i class="fas fa-cloud text-zinc-600 w-4" aria-hidden="true"></i>Sincronización en la nube</li>
-              <li class="flex items-center gap-3 text-sm text-zinc-500 font-body"><i class="fas fa-users text-zinc-600 w-4" aria-hidden="true"></i>Colaboración entre analistas</li>
-              <li class="flex items-center gap-3 text-sm text-zinc-500 font-body"><i class="fas fa-chart-bar text-zinc-600 w-4" aria-hidden="true"></i>Reportes avanzados</li>
+              <li class="flex items-center gap-3 text-sm text-zinc-300 font-body"><i class="fas fa-check text-emerald-400 w-4" aria-hidden="true"></i>Todo lo del plan gratuito</li>
+              <li class="flex items-center gap-3 text-sm text-zinc-300 font-body"><i class="fas fa-mobile-screen-button text-emerald-400 w-4" aria-hidden="true"></i>Reels por jugador + export 9:16 y 16:9</li>
+              <li class="flex items-center gap-3 text-sm text-zinc-300 font-body"><i class="fas fa-calendar-week text-emerald-400 w-4" aria-hidden="true"></i>Análisis de temporada y momentos por jugador</li>
+              <li class="flex items-center gap-3 text-sm text-zinc-300 font-body"><i class="fas fa-cloud text-emerald-400 w-4" aria-hidden="true"></i>Biblioteca en la nube multi-dispositivo</li>
+              <li class="flex items-center gap-3 text-sm text-zinc-300 font-body"><i class="fas fa-file-pdf text-emerald-400 w-4" aria-hidden="true"></i>Reportes PDF (partido, jugador, scouting)</li>
+              <li class="flex items-center gap-3 text-sm text-zinc-300 font-body"><i class="fas fa-wand-magic-sparkles text-emerald-400 w-4" aria-hidden="true"></i>Insights con IA y panel de estadísticas avanzado</li>
+              <li class="flex items-center gap-3 text-sm text-zinc-300 font-body"><i class="fas fa-futbol text-emerald-400 w-4" aria-hidden="true"></i>LPF Play + planteles predefinidos</li>
             </ul>
-            <div class="text-center text-zinc-600 text-sm py-3 border border-zinc-800 rounded-xl font-body" aria-label="En desarrollo">
-              En desarrollo
-            </div>
+            <a href="https://github.com/nacholiporace/goal-labs-releases/releases/latest"
+               data-download
+               class="btn-primary block text-center bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-bold py-3 rounded-xl transition-colors focus-ring"
+               aria-label="Descargar Goal Labs y probar Pro gratis 15 días">
+              Probar Pro gratis
+            </a>
+            <p class="text-zinc-600 text-xs text-center mt-3 font-body">Activá la prueba desde <strong class="text-zinc-500">Ver planes</strong> dentro de la app.</p>
           </div>
         </div>
 
         <p class="text-center text-zinc-600 text-sm mt-8 max-w-xl mx-auto font-body">
-          El núcleo de Goal Labs es gratis y siempre lo va a ser. No es una demo de 14 días. No tiene funciones deshabilitadas para empujarte a pagar.
+          El núcleo de Goal Labs es gratis y siempre lo va a ser. No es una demo de 14 días. No tiene funciones deshabilitadas para empujarte a pagar. Pro suma herramientas para toda la temporada — nunca te quita lo que ya tenés.
         </p>
       </div>
     </section>
@@ -548,7 +714,7 @@
 
           <div class="faq-item bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden reveal reveal-d1">
             <button class="faq-trigger w-full flex items-center justify-between px-6 py-4 text-left focus-ring" aria-expanded="false" aria-controls="faq-smartscreen">
-              <span class="font-semibold text-white text-sm font-body">¿Windows muestra una advertencia al instalar. ¿Es seguro?</span>
+              <span class="font-semibold text-white text-sm font-body">Al instalar, Windows muestra una advertencia. ¿Es seguro?</span>
               <i class="fas fa-chevron-down faq-icon text-zinc-500 text-sm shrink-0 ml-4" aria-hidden="true"></i>
             </button>
             <div class="faq-content" id="faq-smartscreen" role="region">
@@ -584,7 +750,19 @@
             </button>
             <div class="faq-content" id="faq-gratis" role="region">
               <div class="px-6 pb-5">
-                <p class="text-zinc-400 text-sm leading-relaxed font-body">El core es gratis para siempre. No es una demo de 14 días ni una versión recortada. Podés tagguear partidos, usar el telestrator, verificar offsides y exportar clips sin pagar un peso — hoy, en seis meses, y en dos años. Cuando haya un plan pago, va a ser para features adicionales, no para quitarte lo que ya tenés.</p>
+                <p class="text-zinc-400 text-sm leading-relaxed font-body">El core es gratis para siempre. No es una demo de 14 días ni una versión recortada. Podés tagguear partidos, usar el telestrator, verificar offsides y exportar clips sin pagar un peso — hoy, en seis meses, y en dos años. El plan Pro suma features adicionales (temporada, nube, reels, PDF), pero nunca te quita lo que ya tenés.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden reveal reveal-d4">
+            <button class="faq-trigger w-full flex items-center justify-between px-6 py-4 text-left focus-ring" aria-expanded="false" aria-controls="faq-pro">
+              <span class="font-semibold text-white text-sm font-body">¿Qué es Goal Labs Pro y cómo pruebo los 15 días?</span>
+              <i class="fas fa-chevron-down faq-icon text-zinc-500 text-sm shrink-0 ml-4" aria-hidden="true"></i>
+            </button>
+            <div class="faq-content" id="faq-pro" role="region">
+              <div class="px-6 pb-5">
+                <p class="text-zinc-400 text-sm leading-relaxed font-body">Pro desbloquea el trabajo de toda la temporada: biblioteca en la nube, análisis de temporada, reels por jugador con export 9:16, reportes PDF, insights con IA, panel de estadísticas avanzado y LPF Play. Para probarlo, descargá la app gratis y activá la prueba de <strong class="text-zinc-300">15 días sin tarjeta</strong> desde <strong class="text-zinc-300">Ver planes</strong> dentro de cualquier función Pro. Cuando termina la prueba, seguís usando todo el plan gratuito sin perder nada.</p>
               </div>
             </div>
           </div>
@@ -632,7 +810,7 @@
           <i class="fas fa-download" aria-hidden="true"></i>
           Descargar para Windows
         </a>
-        <p id="version-text" class="text-zinc-600 text-sm mt-4 font-body tabular-nums">v1.0.11 · Windows 10/11 · Actualización automática incluida</p>
+        <p id="version-text" class="text-zinc-600 text-sm mt-4 font-body tabular-nums">v1.2.1 · Windows 10/11 · Actualización automática incluida</p>
       </div>
     </section>
 
@@ -721,6 +899,89 @@
         // Si falla la API, los botones mantienen el fallback a /releases/latest
       }
     })();
+  </script>
+
+  <!-- Structured data: SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Goal Labs",
+    "applicationCategory": "MultimediaApplication",
+    "applicationSubCategory": "Análisis táctico de fútbol",
+    "operatingSystem": "Windows 10, Windows 11",
+    "inLanguage": ["es", "en", "it"],
+    "url": "https://nacholiporace.github.io/goal-labs-releases/",
+    "image": "https://nacholiporace.github.io/goal-labs-releases/assets/og-image.png",
+    "description": "Software de videoanálisis táctico para el fútbol. Tagging con hotkeys, telestrator, verificador de offside con perspectiva, reels verticales 9:16 e IA. Gratis y offline para Windows.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Nacho Liporace"
+    }
+  }
+  </script>
+
+  <!-- Structured data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Al instalar, Windows muestra una advertencia. ¿Es seguro?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. Es normal en aplicaciones nuevas sin firma de código extendida (EV). Hacé click en 'Más información' y luego en 'Ejecutar de todas formas'. El código es auditado antes de cada release."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Funciona con cualquier video?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. Goal Labs abre cualquier video reproducible en un navegador o en VLC: MP4, MOV, AVI, MKV y más. No necesitás convertir nada antes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Es realmente gratis? ¿No tiene fecha de vencimiento?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El core es gratis para siempre. No es una demo de 14 días ni una versión recortada. El plan Pro suma features de temporada, pero nunca te quita lo que ya tenés."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué es Goal Labs Pro y cómo pruebo los 15 días?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pro desbloquea biblioteca en la nube, análisis de temporada, reels por jugador con export 9:16, reportes PDF, insights con IA y LPF Play. Descargá la app gratis y activá la prueba de 15 días sin tarjeta desde 'Ver planes' dentro de cualquier función Pro."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cuánto tiempo lleva aprender a usarlo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tu primer partido lo analizás el mismo día que instalás la app. Configurás los hotkeys en 2 minutos, cargás el video y arrancás. Sin formación previa."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué pasa con mis datos si no tengo internet?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Todo se guarda localmente como archivos .json en tu computadora, con autosave en cada acción. El backup en la nube es opcional."
+        }
+      }
+    ]
+  }
   </script>
 </body>
 </html>
