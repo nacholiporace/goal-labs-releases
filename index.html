@@ -80,32 +80,9 @@
       background: linear-gradient(90deg, transparent, rgba(16,185,129,0.35), transparent);
     }
 
-    /* Offside interactive demo */
-    #offside-stage { touch-action: none; }
-    .player-dot {
-      position: absolute;
-      border-radius: 9999px;
-      transform: translate(-50%, -50%);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.6);
-    }
-    #offside-line {
-      position: absolute; top: -5%; bottom: -5%; width: 3px;
-      transform: translateX(-50%) rotate(6deg);
-      transition: background-color .12s ease, box-shadow .12s ease, left .05s linear;
-      pointer-events: none; z-index: 20;
-    }
-    #offside-stage[data-state="onside"]  #offside-line { background:#34d399; box-shadow:0 0 18px rgba(52,211,153,.7); }
-    #offside-stage[data-state="offside"] #offside-line { background:#f87171; box-shadow:0 0 18px rgba(248,113,113,.7); }
-    #offside-handle {
-      position: absolute; top: 50%; left: 50%;
-      width: 28px; height: 28px; border-radius: 9999px; background:#fff;
-      transform: translate(-50%, -50%);
-      display: flex; align-items: center; justify-content: center;
-      color:#09090b; font-size: 11px; box-shadow: 0 2px 10px rgba(0,0,0,.55);
-    }
-    #offside-verdict { border: 1px solid transparent; }
-    #offside-verdict[data-state="onside"]  { color:#34d399; border-color: rgba(16,185,129,.35); background: rgba(16,185,129,.08); }
-    #offside-verdict[data-state="offside"] { color:#f87171; border-color: rgba(248,113,113,.35); background: rgba(248,113,113,.08); }
+    /* Billing toggle (mensual / anual) */
+    .bill-btn { color:#a1a1aa; transition: color .15s ease, background-color .15s ease; }
+    .bill-btn[aria-pressed="true"] { background:#ffffff; color:#09090b; }
 
     /* Utility */
     .text-balance { text-wrap: balance; }
@@ -315,13 +292,88 @@
 
         <!-- App preview mock -->
         <div class="mt-16 relative max-w-4xl mx-auto reveal">
-          <div class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl shadow-black/60 aspect-[16/9]">
-            <img src="assets/offside-pitch.jpg"
-                 data-i18n-alt="hero.heroImgAlt"
-                 alt="Visualización del análisis de offside con corrección de perspectiva sobre una cancha"
-                 class="w-full h-full object-cover"
-                 width="1456" height="816" loading="eager"
-                 onerror="this.style.display='none';" />
+          <!-- Reemplazá este mock por <video> del software real cuando tengas el clip (assets/hero-demo.mp4) -->
+          <div class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl shadow-black/60" role="img" data-i18n-aria="hero.mockAria" aria-label="Captura de pantalla simulada de la interfaz de Goal Labs mostrando el reproductor de video con tags y el registro de eventos">
+            <!-- Mock title bar -->
+            <div class="bg-zinc-950 border-b border-zinc-800 px-4 py-3 flex items-center gap-3">
+              <div class="flex gap-1.5" aria-hidden="true">
+                <div class="w-3 h-3 rounded-full bg-zinc-700"></div>
+                <div class="w-3 h-3 rounded-full bg-zinc-700"></div>
+                <div class="w-3 h-3 rounded-full bg-zinc-700"></div>
+              </div>
+              <div class="flex-1 flex items-center gap-2" aria-hidden="true">
+                <span translate="no" class="text-white font-display font-black text-xs tracking-tight">GOAL</span>
+                <span translate="no" class="text-zinc-500 font-display font-light text-xs tracking-widest">LABS</span>
+                <span class="text-zinc-700 text-xs ml-2">— Partido: River vs Boca · 90 min</span>
+              </div>
+              <div class="flex gap-2" aria-hidden="true">
+                <div class="bg-indigo-600 text-white text-[10px] font-bold px-3 py-1 rounded">GUARDAR</div>
+                <div class="bg-emerald-600 text-white text-[10px] font-bold px-3 py-1 rounded">EXPORTAR (12)</div>
+              </div>
+            </div>
+            <!-- Mock content -->
+            <div class="flex h-52 md:h-80" aria-hidden="true">
+              <!-- Video area -->
+              <div class="flex-1 bg-zinc-900 flex items-center justify-center relative overflow-hidden">
+                <!-- Field lines -->
+                <div class="absolute inset-0" style="background: linear-gradient(0deg, rgba(16,185,129,0.03) 0%, transparent 60%)"></div>
+                <div class="absolute top-1/2 left-0 right-0 h-px bg-white/5"></div>
+                <div class="absolute top-1/4 bottom-1/4 left-1/2 -translate-x-1/2 w-24 md:w-36 h-12 md:h-20 border border-white/5 rounded-full"></div>
+                <!-- Play icon -->
+                <div class="relative text-center z-10">
+                  <div class="text-zinc-700 text-5xl md:text-6xl mb-2">
+                    <i class="fas fa-play-circle" style="filter: drop-shadow(0 0 12px rgba(99,102,241,0.3))"></i>
+                  </div>
+                  <p class="text-zinc-600 text-xs font-display uppercase tracking-widest">45'&nbsp;23"</p>
+                </div>
+                <!-- Telestrator arrow mock -->
+                <svg class="absolute top-8 right-12 w-16 h-12 opacity-60" viewBox="0 0 64 48" fill="none" aria-hidden="true">
+                  <path d="M8 40 C20 20, 40 12, 56 8" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                  <path d="M50 4 L56 8 L52 14" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+                <!-- Tag buttons -->
+                <div class="absolute bottom-4 left-4 flex gap-1.5 flex-wrap max-w-xs">
+                  <div class="bg-emerald-700 text-white text-[9px] font-bold px-2 py-1 rounded font-display tracking-wide">GOL [G]</div>
+                  <div class="bg-red-700 text-white text-[9px] font-bold px-2 py-1 rounded font-display tracking-wide">PÉRDIDA [P]</div>
+                  <div class="bg-blue-700 text-white text-[9px] font-bold px-2 py-1 rounded font-display tracking-wide">RECUPERACIÓN [R]</div>
+                  <div class="bg-orange-700 text-white text-[9px] font-bold px-2 py-1 rounded font-display tracking-wide">TIRO [T]</div>
+                  <div class="bg-purple-700 text-white text-[9px] font-bold px-2 py-1 rounded font-display tracking-wide">OFFSIDE [O]</div>
+                </div>
+              </div>
+              <!-- Event log sidebar -->
+              <div class="w-44 md:w-60 bg-zinc-950 border-l border-zinc-800 p-3 flex flex-col gap-2" aria-hidden="true">
+                <p class="text-zinc-600 text-[9px] font-display font-bold uppercase tracking-wider">Registro de Eventos</p>
+                <div class="space-y-1 overflow-hidden">
+                  <div class="bg-zinc-900 rounded px-2 py-1.5 flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></div>
+                    <span class="text-zinc-400 text-[10px] truncate">Gol — 12:34</span>
+                  </div>
+                  <div class="bg-zinc-900 rounded px-2 py-1.5 flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-red-500 shrink-0"></div>
+                    <span class="text-zinc-400 text-[10px] truncate">Pérdida — 18:02</span>
+                  </div>
+                  <div class="bg-zinc-900 rounded px-2 py-1.5 flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-blue-500 shrink-0"></div>
+                    <span class="text-zinc-400 text-[10px] truncate">Recuperación — 23:47</span>
+                  </div>
+                  <div class="bg-indigo-950/60 border border-indigo-800/40 rounded px-2 py-1.5 flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-orange-500 shrink-0"></div>
+                    <span class="text-zinc-300 text-[10px] font-semibold truncate">Tiro — 31:15 ←</span>
+                  </div>
+                  <div class="bg-zinc-900 rounded px-2 py-1.5 flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-purple-500 shrink-0"></div>
+                    <span class="text-zinc-400 text-[10px] truncate">Offside — 38:22</span>
+                  </div>
+                  <div class="bg-zinc-900 rounded px-2 py-1.5 flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></div>
+                    <span class="text-zinc-400 text-[10px] truncate">Recuperación — 41:09</span>
+                  </div>
+                </div>
+                <div class="mt-auto pt-2 border-t border-zinc-800">
+                  <p class="text-zinc-700 text-[9px] font-display uppercase tracking-wider">12 eventos · 45'</p>
+                </div>
+              </div>
+            </div>
           </div>
           <!-- Glow -->
           <div class="absolute -inset-4 bg-indigo-600/5 rounded-3xl blur-2xl -z-10" aria-hidden="true"></div>
@@ -482,68 +534,6 @@
       </div>
     </section>
 
-    <!-- OFFSIDE INTERACTIVO -->
-    <section id="offside-demo" class="py-24 border-t border-zinc-800/50" aria-labelledby="offside-heading">
-      <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-
-        <!-- Texto -->
-        <div class="reveal order-2 lg:order-1">
-          <span class="inline-flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase tracking-widest mb-4">
-            <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full" style="animation: pulse 2s ease-in-out infinite;" aria-hidden="true"></span>
-            <span data-i18n="offside.tag">Demo interactivo</span>
-          </span>
-          <h2 id="offside-heading" class="font-display text-4xl md:text-5xl font-black text-white mb-4 leading-none text-balance" data-i18n="offside.h2">Trazá el offside vos mismo.</h2>
-          <p class="text-zinc-400 text-lg font-body mb-8 text-pretty" data-i18n="offside.sub">Arrastrá la línea sobre la jugada. Así de directo es verificar un offside con corrección de perspectiva en Goal Labs.</p>
-          <div class="flex items-center gap-4">
-            <div id="offside-verdict" data-state="offside" class="font-display font-black text-2xl px-4 py-2 rounded-xl shrink-0">OFFSIDE</div>
-            <p class="text-zinc-600 text-sm font-body text-pretty" data-i18n="offside.note">En la app la línea se ajusta a la cancha real con homografía — el mismo principio del VAR.</p>
-          </div>
-        </div>
-
-        <!-- Cancha interactiva -->
-        <div class="reveal reveal-d1 order-1 lg:order-2">
-          <div id="offside-stage" data-state="offside" class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-zinc-800 cursor-ew-resize select-none shadow-2xl shadow-black/50"
-               role="group" data-i18n-aria="offside.stageAria"
-               aria-label="Demo interactivo de offside: arrastrá la línea para ver si el atacante está habilitado o en posición adelantada.">
-            <!-- Césped -->
-            <div class="absolute inset-0 bg-gradient-to-b from-emerald-900/55 via-emerald-950/45 to-zinc-950" aria-hidden="true"></div>
-            <div class="absolute inset-0 opacity-[0.15]" aria-hidden="true" style="background-image: repeating-linear-gradient(90deg, transparent 0, transparent 38px, rgba(255,255,255,0.18) 38px, rgba(255,255,255,0.18) 76px);"></div>
-            <!-- Líneas de cancha en perspectiva -->
-            <svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true">
-              <g stroke="rgba(255,255,255,0.16)" stroke-width="1.5" fill="none">
-                <line x1="0" y1="18" x2="400" y2="2"/>
-                <line x1="0" y1="282" x2="400" y2="298"/>
-                <path d="M400 66 L292 70 L292 230 L400 234"/>
-                <path d="M400 116 L344 118 L344 182 L400 184"/>
-              </g>
-            </svg>
-            <!-- Defensores (azul) -->
-            <div class="player-dot" style="left:26%; top:33%; width:14px; height:14px; background:#3b82f6;" aria-hidden="true"></div>
-            <div class="player-dot" style="left:38%; top:64%; width:14px; height:14px; background:#3b82f6;" aria-hidden="true"></div>
-            <div class="player-dot" style="left:48%; top:28%; width:14px; height:14px; background:#3b82f6;" aria-hidden="true"></div>
-            <div class="player-dot" style="left:55%; top:72%; width:15px; height:15px; background:#3b82f6; box-shadow:0 0 0 3px rgba(59,130,246,.25),0 1px 4px rgba(0,0,0,.6);" aria-hidden="true"></div>
-            <!-- Arquero -->
-            <div class="player-dot" style="left:90%; top:50%; width:13px; height:13px; background:#facc15;" aria-hidden="true"></div>
-            <!-- Atacante (naranja) -->
-            <div class="player-dot" style="left:62%; top:50%; width:16px; height:16px; background:#fb923c; box-shadow:0 0 0 3px rgba(251,146,60,.25),0 1px 4px rgba(0,0,0,.6);" aria-hidden="true"></div>
-            <!-- Pelota -->
-            <div class="player-dot" style="left:40%; top:58%; width:8px; height:8px; background:#fff;" aria-hidden="true"></div>
-            <!-- Etiquetas -->
-            <span class="absolute text-[10px] font-bold text-orange-300 bg-zinc-950/75 px-1.5 py-0.5 rounded pointer-events-none" style="left:62%; top:40%; transform:translateX(-50%); z-index:15;" data-i18n="offside.attacker">Atacante</span>
-            <span class="absolute text-[9px] font-semibold text-blue-300/90 bg-zinc-950/75 px-1.5 py-0.5 rounded pointer-events-none" style="left:55%; top:84%; transform:translateX(-50%); z-index:15;" data-i18n="offside.lastDefender">Última línea defensiva</span>
-            <!-- Línea de offside (arrastrable) -->
-            <div id="offside-line" style="left:55%;" aria-hidden="true">
-              <div id="offside-handle"><i class="fas fa-arrows-left-right" aria-hidden="true"></i></div>
-            </div>
-          </div>
-          <p class="text-center text-zinc-600 text-xs mt-3 font-body">
-            <i class="fas fa-hand-pointer mr-1" aria-hidden="true"></i><span data-i18n="offside.dragHint">Arrastrá la línea ←→</span>
-          </p>
-        </div>
-
-      </div>
-    </section>
-
     <!-- FLUJO: DEL PARTIDO AL REEL -->
     <section class="py-24 border-t border-zinc-800/50" aria-labelledby="flujo-heading">
       <div class="max-w-5xl mx-auto px-6">
@@ -695,6 +685,27 @@
           <p class="text-zinc-400 text-lg font-body" data-i18n="pricing.sub">El análisis que necesitás para el partido del domingo está en el plan gratuito.</p>
         </div>
 
+        <!-- Controles de precio: ciclo + moneda -->
+        <div class="flex flex-col items-center gap-4 mb-10 reveal">
+          <div class="inline-flex items-center bg-zinc-900 border border-zinc-800 rounded-full p-1" role="group" data-i18n-aria="pricing.cycleAria" aria-label="Ciclo de facturación">
+            <button type="button" data-billing="monthly" aria-pressed="true" class="bill-btn px-5 py-1.5 rounded-full text-sm font-semibold focus-ring">
+              <span data-i18n="pricing.monthly">Mensual</span>
+            </button>
+            <button type="button" data-billing="annual" aria-pressed="false" class="bill-btn px-5 py-1.5 rounded-full text-sm font-semibold focus-ring flex items-center gap-1.5">
+              <span data-i18n="pricing.annual">Anual</span>
+              <span class="text-[10px] tag-pro px-1.5 py-0.5 rounded-full uppercase" data-i18n="pro.twoFree">2 meses gratis</span>
+            </button>
+          </div>
+          <label class="flex items-center gap-2 text-xs text-zinc-500 font-body">
+            <span data-i18n="pricing.currency">Moneda</span>
+            <select id="currency-select" class="bg-zinc-900 border border-zinc-700 text-zinc-300 rounded-lg px-2 py-1 focus-ring cursor-pointer hover:border-zinc-600 transition-colors">
+              <option value="ARS">ARS $</option>
+              <option value="EUR">EUR €</option>
+              <option value="USD">USD $</option>
+            </select>
+          </label>
+        </div>
+
         <div class="grid md:grid-cols-2 gap-6">
           <!-- Free -->
           <div class="bg-zinc-900 border-2 border-indigo-600 rounded-2xl p-8 relative reveal reveal-d1" aria-label="Plan Free">
@@ -726,9 +737,10 @@
             <div class="absolute -top-3 left-6 tag-pro text-xs px-3 py-1 rounded-full uppercase" data-i18n="pro.badge">Prueba 15 días gratis</div>
             <h3 class="font-display text-2xl font-black text-white mb-1">Pro</h3>
             <div class="flex items-end gap-1.5 mb-1">
-              <span id="pro-price-amount" class="text-4xl font-display font-black gradient-text-green tabular-nums">€15</span>
-              <span class="text-zinc-500 text-base font-body mb-1.5" data-i18n="pro.perMonth">/mes</span>
+              <span id="pro-price-amount" class="text-4xl font-display font-black gradient-text-green tabular-nums">AR$ 20.000</span>
+              <span id="pro-price-period" class="text-zinc-500 text-base font-body mb-1.5">/mes</span>
             </div>
+            <p id="pro-annual-note" class="text-emerald-400 text-xs font-semibold mb-2 hidden"></p>
             <p class="text-zinc-500 text-sm mb-6 font-body" data-i18n="pro.tagline">15 días gratis, sin tarjeta. Después seguís con Pro para todo el trabajo de temporada.</p>
             <ul class="space-y-3 mb-8" data-i18n-aria="pro.ulAria" aria-label="Funcionalidades del plan Pro">
               <li class="flex items-center gap-3 text-sm text-zinc-300 font-body"><i class="fas fa-check text-emerald-400 w-4" aria-hidden="true"></i><span data-i18n="pro.f1">Todo lo del plan gratuito</span></li>
@@ -1379,6 +1391,12 @@
     const EXTRA = {
       es: {
         "pro.perMonth": `/mes`,
+        "pro.perYear": `/año`,
+        "pro.twoFree": `2 meses gratis`,
+        "pricing.monthly": `Mensual`,
+        "pricing.annual": `Anual`,
+        "pricing.currency": `Moneda`,
+        "pricing.cycleAria": `Ciclo de facturación`,
         "pro.tagline": `15 días gratis, sin tarjeta. Después seguís con Pro para todo el trabajo de temporada.`,
         "offside.tag": `Demo interactivo`,
         "offside.h2": `Trazá el offside vos mismo.`,
@@ -1397,6 +1415,12 @@
       },
       en: {
         "pro.perMonth": `/mo`,
+        "pro.perYear": `/yr`,
+        "pro.twoFree": `2 months free`,
+        "pricing.monthly": `Monthly`,
+        "pricing.annual": `Annual`,
+        "pricing.currency": `Currency`,
+        "pricing.cycleAria": `Billing cycle`,
         "pro.tagline": `15 days free, no card. After that you keep Pro for the whole season's work.`,
         "offside.tag": `Interactive demo`,
         "offside.h2": `Draw the offside yourself.`,
@@ -1415,6 +1439,12 @@
       },
       it: {
         "pro.perMonth": `/mese`,
+        "pro.perYear": `/anno`,
+        "pro.twoFree": `2 mesi gratis`,
+        "pricing.monthly": `Mensile`,
+        "pricing.annual": `Annuale`,
+        "pricing.currency": `Valuta`,
+        "pricing.cycleAria": `Ciclo di fatturazione`,
         "pro.tagline": `15 giorni gratis, senza carta. Poi continui con Pro per tutto il lavoro della stagione.`,
         "offside.tag": `Demo interattivo`,
         "offside.h2": `Traccia il fuorigioco tu stesso.`,
@@ -1502,74 +1532,80 @@
       });
     }
 
-    // Precio Pro por región (independiente del idioma): Argentina -> ARS, Europa -> EUR, resto -> USD
-    const PRICES = { ARS: 'AR$ 20.000', EUR: '€15', USD: 'US$ 15' };
+    // ---- Precio Pro: moneda (ARS/EUR/USD) + ciclo (mensual/anual, 2 meses gratis) ----
+    const PRICES = {
+      ARS: { monthly: 'AR$ 20.000', annual: 'AR$ 200.000', perMo: 'AR$ 16.667' },
+      EUR: { monthly: '€15',        annual: '€150',         perMo: '€12,50' },
+      USD: { monthly: 'US$ 15',     annual: 'US$ 150',      perMo: 'US$ 12.50' }
+    };
+    const CUR_KEY = 'gl_currency', BILL_KEY = 'gl_billing';
+
     function detectCurrency() {
       try {
-        const tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || '');
-        if (tz.indexOf('Argentina') !== -1) return 'ARS';
-        if (tz.indexOf('Europe/') === 0) return 'EUR';
+        const saved = localStorage.getItem(CUR_KEY);
+        if (saved && PRICES[saved]) return saved;
       } catch (e) {}
-      const region = ((navigator.language || '').split('-')[1] || '').toUpperCase();
-      if (region === 'AR') return 'ARS';
+      let tz = '';
+      try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+      if (/Argentina|Buenos_Aires|Catamarca|Cordoba|Jujuy|La_Rioja|Mendoza|Rio_Gallegos|Salta|San_Juan|San_Luis|Tucuman|Ushuaia/i.test(tz)) return 'ARS';
+      if (tz.indexOf('Europe/') === 0) return 'EUR';
       const EUR_REGIONS = ['ES','IT','FR','DE','PT','NL','BE','IE','AT','GR','FI','SK','SI','LU','LV','LT','EE','CY','MT','HR'];
-      if (EUR_REGIONS.indexOf(region) !== -1) return 'EUR';
+      const langs = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || ''];
+      for (let i = 0; i < langs.length; i++) {
+        const reg = ((langs[i] || '').split('-')[1] || '').toUpperCase();
+        if (reg === 'AR') return 'ARS';
+        if (EUR_REGIONS.indexOf(reg) !== -1) return 'EUR';
+      }
       return 'USD';
     }
-    const priceEl = document.getElementById('pro-price-amount');
-    if (priceEl) priceEl.textContent = PRICES[detectCurrency()] || PRICES.EUR;
-  })();
-  </script>
 
-  <!-- Demo interactivo de offside -->
-  <script>
-  (function () {
-    const stage = document.getElementById('offside-stage');
-    if (!stage) return;
-    const verdict = document.getElementById('offside-verdict');
-    const line = document.getElementById('offside-line');
-    const ATTACKER = 62;   // posición % del atacante
-    let lineX = 55;        // posición % de la línea (arranca en el último defensor)
-    let dragging = false;
+    function tt(k, fb) { try { const v = window.GLi18n && window.GLi18n.t(k); return v != null ? v : fb; } catch (e) { return fb; } }
 
-    function t(k, fb) {
-      try { const v = window.GLi18n && window.GLi18n.t(k); return v != null ? v : fb; }
-      catch (e) { return fb; }
-    }
+    let currency = detectCurrency();
+    let billing = 'monthly';
+    try { const b = localStorage.getItem(BILL_KEY); if (b === 'annual' || b === 'monthly') billing = b; } catch (e) {}
 
-    function render() {
-      if (line) line.style.left = lineX + '%';
-      const offside = ATTACKER > (lineX + 0.5);
-      const state = offside ? 'offside' : 'onside';
-      stage.dataset.state = state;
-      if (verdict) {
-        verdict.dataset.state = state;
-        verdict.textContent = offside ? t('offside.verdictOffside', 'OFFSIDE') : t('offside.verdictOnside', 'HABILITADO');
+    const amountEl = document.getElementById('pro-price-amount');
+    const periodEl = document.getElementById('pro-price-period');
+    const noteEl   = document.getElementById('pro-annual-note');
+
+    function renderPrice() {
+      const p = PRICES[currency] || PRICES.EUR;
+      const annual = billing === 'annual';
+      if (amountEl) amountEl.textContent = annual ? p.annual : p.monthly;
+      if (periodEl) periodEl.textContent = annual ? tt('pro.perYear', '/año') : tt('pro.perMonth', '/mes');
+      if (noteEl) {
+        if (annual) {
+          noteEl.textContent = tt('pro.twoFree', '2 meses gratis') + ' · ≈ ' + p.perMo + tt('pro.perMonth', '/mes');
+          noteEl.classList.remove('hidden');
+        } else {
+          noteEl.classList.add('hidden');
+        }
       }
+      document.querySelectorAll('[data-billing]').forEach(function (b) {
+        b.setAttribute('aria-pressed', b.getAttribute('data-billing') === billing ? 'true' : 'false');
+      });
+      const cs = document.getElementById('currency-select');
+      if (cs) cs.value = currency;
     }
 
-    function setFromClientX(cx) {
-      const r = stage.getBoundingClientRect();
-      const pct = ((cx - r.left) / r.width) * 100;
-      lineX = Math.max(12, Math.min(88, pct));
-      render();
+    document.querySelectorAll('[data-billing]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        billing = btn.getAttribute('data-billing');
+        try { localStorage.setItem(BILL_KEY, billing); } catch (e) {}
+        renderPrice();
+      });
+    });
+    const curSel = document.getElementById('currency-select');
+    if (curSel) {
+      curSel.addEventListener('change', function () {
+        currency = curSel.value;
+        try { localStorage.setItem(CUR_KEY, currency); } catch (e) {}
+        renderPrice();
+      });
     }
-
-    stage.addEventListener('pointerdown', function (e) {
-      dragging = true;
-      try { stage.setPointerCapture(e.pointerId); } catch (_) {}
-      setFromClientX(e.clientX);
-    });
-    stage.addEventListener('pointermove', function (e) { if (dragging) setFromClientX(e.clientX); });
-    window.addEventListener('pointerup', function () { dragging = false; });
-    // Teclado (accesibilidad): flechas mueven la línea
-    stage.tabIndex = 0;
-    stage.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowLeft') { lineX = Math.max(12, lineX - 2); render(); e.preventDefault(); }
-      if (e.key === 'ArrowRight') { lineX = Math.min(88, lineX + 2); render(); e.preventDefault(); }
-    });
-    window.addEventListener('gl:langchange', render);
-    render();
+    window.addEventListener('gl:langchange', renderPrice);
+    renderPrice();
   })();
   </script>
 
