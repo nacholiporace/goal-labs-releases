@@ -77,6 +77,15 @@
     .serif-italic { font-style: italic; }
     #hero-heading .gradient-text { font-style: italic; }
 
+    /* Fondo animado del hero (aura que respira) */
+    .hero-aura { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+    .hero-aura::before, .hero-aura::after { content:''; position:absolute; border-radius:50%; filter:blur(90px); }
+    .hero-aura::before { width:640px; height:640px; background:radial-gradient(circle, rgba(16,185,129,.20), transparent 70%); top:-12%; left:-6%; animation:auraA 19s ease-in-out infinite alternate; }
+    .hero-aura::after { width:560px; height:560px; background:radial-gradient(circle, rgba(240,235,225,.07), transparent 70%); bottom:-16%; right:-6%; animation:auraB 23s ease-in-out infinite alternate; }
+    @keyframes auraA { to { transform:translate(140px,90px) scale(1.18); } }
+    @keyframes auraB { to { transform:translate(-110px,-70px) scale(1.12); } }
+    @media (prefers-reduced-motion: reduce) { .hero-aura::before, .hero-aura::after { animation:none; } }
+
     /* Motion (GSAP / Lenis) — con GSAP activo, el estado natural es visible (GSAP anima desde 0) */
     .anim-ready .reveal { opacity: 1; transform: none; transition: none !important; }
     html.lenis, html.lenis body { height: auto; }
@@ -265,7 +274,7 @@
 
   <!-- NAV -->
   <nav class="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/60 bg-zinc-950/90 backdrop-blur-md" aria-label="Navegación principal">
-    <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
       <a href="/" class="flex items-center gap-2.5 select-none focus-ring" aria-label="Goal Labs — Inicio">
         <!-- Pelota (placeholder — reemplazar por el logo del software) -->
         <svg width="20" height="20" viewBox="0 0 32 32" aria-hidden="true" class="shrink-0">
@@ -310,7 +319,11 @@
 
     <!-- HERO -->
     <section class="min-h-screen flex items-center pt-14 relative overflow-hidden" aria-labelledby="hero-heading">
-      <div class="max-w-6xl mx-auto px-6 py-24 text-center w-full">
+      <!-- Fondo animado -->
+      <div class="hero-aura" aria-hidden="true"></div>
+      <div class="absolute inset-0 pitch-bg opacity-50" aria-hidden="true"></div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-6 py-24 text-center w-full">
 
         <!-- Eyebrow -->
         <div class="flex items-center justify-center gap-4 mb-8 reveal">
@@ -320,7 +333,7 @@
         </div>
 
         <!-- H1 -->
-        <h1 id="hero-heading" data-i18n-html="hero.h1" class="text-balance font-display text-white leading-[0.92] tracking-tight mb-8 text-5xl sm:text-7xl md:text-[5.75rem]">
+        <h1 id="hero-heading" data-i18n-html="hero.h1" class="text-balance font-display text-white leading-[0.9] tracking-tight mb-8 text-6xl sm:text-8xl md:text-[7rem] lg:text-[8rem]">
           Tagueá tu próximo<br class="hidden md:block" />
           partido en 45 minutos.<br />
           <span class="gradient-text serif-italic">Gratis.</span>
@@ -351,18 +364,12 @@
         </div>
         <p class="eyebrow reveal" data-i18n="hero.noAccount">Sin cuenta · Sin tarjeta · Windows 10/11</p>
 
-        <!-- Video real del software -->
-        <div class="mt-16 relative max-w-4xl mx-auto reveal">
-          <div class="bg-zinc-900 border border-white/10 rounded-2xl overflow-hidden shadow-2xl shadow-black/60">
-            <video class="w-full aspect-video block bg-zinc-950"
-                   autoplay muted loop playsinline preload="auto"
-                   poster="assets/hero-poster.jpg"
-                   data-i18n-aria="hero.videoAria"
-                   aria-label="Video de Goal Labs en funcionamiento: tagging, telestrator y exportación">
-              <source src="assets/hero-demo.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <div class="absolute -inset-6 bg-emerald-500/5 rounded-[2rem] blur-3xl -z-10" aria-hidden="true"></div>
+        <!-- Indicador de scroll -->
+        <div class="mt-20 reveal flex justify-center" aria-hidden="true">
+          <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-zinc-600 flex flex-col items-center gap-2">
+            Scroll
+            <i class="fas fa-arrow-down text-xs animate-bounce"></i>
+          </span>
         </div>
       </div>
     </section>
@@ -397,14 +404,14 @@
 
     <!-- SCROLL-STORY: pizarra táctica — gol de Di María -->
     <section id="story" class="relative min-h-screen flex items-center overflow-hidden border-t border-white/5 py-16">
-      <div class="max-w-6xl mx-auto px-6 w-full">
+      <div class="max-w-7xl mx-auto px-6 w-full">
         <div class="story-head text-center mb-6 md:mb-8">
           <span class="eyebrow" data-i18n="story.eyebrow">De la jugada al dato</span>
           <h2 class="font-display text-white text-4xl md:text-6xl mt-3 text-balance" data-i18n="story.h2">Cada jugada se vuelve un dato.</h2>
           <p class="text-zinc-400 font-body max-w-xl mx-auto mt-3 text-pretty" data-i18n="story.sub">Seguís la acción, tocás una tecla y queda registrada con su minuto. Scrolleá y mirá la jugada.</p>
         </div>
 
-        <div class="relative max-w-4xl mx-auto">
+        <div class="relative max-w-5xl mx-auto">
           <svg id="story-svg" viewBox="0 0 1080 728" role="img" data-i18n-aria="story.svgAria"
                aria-label="Pizarra táctica: la secuencia de pases del gol de Di María en la final de Qatar 2022, registrada como datos.">
             <!-- Cancha -->
@@ -455,11 +462,15 @@
             <g id="ball"><circle class="b" r="11" fill="#f0ebe1"/><circle r="11" fill="none" stroke="#0a0a0a" stroke-opacity="0.25" stroke-width="1.5"/><path d="M-5 -3 L5 -3 M-6 3 L6 3" stroke="#0a0a0a" stroke-opacity="0.2" stroke-width="1.2"/></g>
 
             <!-- GOL -->
-            <text id="gol-label" x="985" y="150" text-anchor="middle" class="story-gol">GOL</text>
+            <text id="gol-label" x="840" y="150" text-anchor="middle" class="story-gol">GOL</text>
           </svg>
 
-          <!-- Reloj de partido -->
-          <div id="story-clock" class="absolute top-2 right-3 text-2xl md:text-3xl text-cream tabular-nums">35:12</div>
+          <!-- Marcador tipo TV -->
+          <div id="story-clock" class="absolute top-2 left-2 flex items-center gap-2 bg-black/40 border border-white/10 rounded px-2.5 py-1 text-[11px] md:text-xs font-mono">
+            <span id="sb-time" class="text-cream tabular-nums">35:12</span>
+            <span class="text-zinc-600">|</span>
+            <span class="text-zinc-400 tracking-wide" translate="no">ARG <span id="sb-arg" class="text-cream font-medium">1</span> <span class="text-zinc-600">-</span> 0 FRA</span>
+          </div>
 
           <!-- Chip de evento registrado -->
           <div id="event-tag" class="absolute left-1/2 -translate-x-1/2 bottom-2 flex items-center gap-3 bg-[#0f1a14] border border-emerald-500/40 rounded-lg px-4 py-2">
@@ -484,7 +495,7 @@
 
     <!-- FUNCIONALIDADES -->
     <section id="funcionalidades" class="py-24 border-t border-zinc-800/50" aria-labelledby="funcionalidades-heading">
-      <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-16 reveal">
           <div class="section-accent" aria-hidden="true"></div>
           <h2 id="funcionalidades-heading" class="text-balance font-display text-4xl md:text-5xl font-black text-white mb-4" data-i18n="features.h2">
@@ -669,7 +680,7 @@
         <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/55 to-zinc-950/20" aria-hidden="true"></div>
         <div class="absolute inset-0 bg-gradient-to-r from-zinc-950/70 to-transparent" aria-hidden="true"></div>
         <div class="absolute inset-0 flex items-end">
-          <div class="max-w-6xl mx-auto px-6 pb-10 md:pb-14 w-full reveal">
+          <div class="max-w-7xl mx-auto px-6 pb-10 md:pb-14 w-full reveal">
             <div class="section-accent !mx-0" aria-hidden="true"></div>
             <h2 id="contexto-heading" class="font-display text-3xl md:text-5xl font-black text-white text-balance max-w-2xl" data-i18n="ctx.h2">Hecho para el fútbol de verdad.</h2>
             <p class="text-zinc-300 text-lg mt-3 font-body max-w-xl text-pretty" data-i18n="ctx.sub">Del potrero al club: el mismo análisis profesional, sin la licencia profesional.</p>
@@ -970,7 +981,7 @@
 
   <!-- FOOTER -->
   <footer class="border-t border-zinc-800/50 py-10" role="contentinfo">
-    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-2">
         <span translate="no" class="text-white font-display font-black text-sm tracking-tight">GOAL</span>
         <span translate="no" class="text-zinc-600 font-display font-light text-sm tracking-widest">LABS</span>
@@ -1129,7 +1140,7 @@
         tl.to('#ball', { autoAlpha: 1, duration: 0.02 }, 0.04);
 
         // reloj 35:12 → 35:22
-        const clk = document.getElementById('story-clock');
+        const clk = document.getElementById('sb-time');
         const clkObj = { s: 12 };
         tl.to(clkObj, { s: 22, duration: 0.80, onUpdate: () => { if (clk) clk.textContent = '35:' + String(Math.round(clkObj.s)).padStart(2, '0'); } }, 0.06);
 
@@ -1150,6 +1161,11 @@
         tl.to('#shot', { strokeDashoffset: 0, duration: 0.10 }, ts);
         tl.to('#ball', { x: GOAL[0], y: GOAL[1], duration: 0.10, ease: 'power2.in' }, ts);
         tl.to('#gol-label', { autoAlpha: 1, scale: 1, duration: 0.10, ease: 'back.out(2)' }, ts + 0.10);
+        // marcador: ARG 1 → 2 al convertir
+        tl.to({}, { duration: 0.001,
+          onComplete() { const a = document.getElementById('sb-arg'); if (a) a.textContent = '2'; },
+          onReverseComplete() { const a = document.getElementById('sb-arg'); if (a) a.textContent = '1'; }
+        }, ts + 0.10);
         tl.to('#event-tag', { autoAlpha: 1, y: 0, duration: 0.07 }, ts + 0.16);
 
         // reveal del video real
