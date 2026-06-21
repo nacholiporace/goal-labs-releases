@@ -4,3 +4,6 @@ assets/*.MOV
 
 # Artefactos de build local
 vite.config.ts.timestamp-*.mjs
+
+# Herramientas de autoría locales (editor de jugada)
+tools/
