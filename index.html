@@ -91,6 +91,17 @@
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     @media (prefers-reduced-motion: reduce) { .marquee__track { animation: none; } }
 
+    /* Scroll-story (jugada → arco → dato) */
+    #story-svg { width: 100%; height: auto; max-height: 52vh; overflow: visible; }
+    #story-svg .stroke-frame { stroke: rgba(240,235,225,0.55); stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    #story-svg .stroke-net { stroke: rgba(240,235,225,0.16); stroke-width: 1; fill: none; }
+    #story-svg .stroke-ground { stroke: rgba(240,235,225,0.22); stroke-width: 1.5; }
+    #story-svg #traj { stroke: #34d399; stroke-width: 3; fill: none; stroke-linecap: round; }
+    #story-svg .story-mono { font-family: 'DM Mono', monospace; font-size: 15px; fill: #d8d8d2; letter-spacing: 2px; text-transform: uppercase; }
+    #story-svg .story-mono-sm { font-family: 'DM Mono', monospace; font-size: 13px; fill: #f0ebe1; }
+    #story-svg .story-mono-xs { font-family: 'DM Mono', monospace; font-size: 10px; fill: #9aa39d; letter-spacing: 1px; text-transform: uppercase; }
+    #story-svg .story-gol { font-family: 'Instrument Serif', serif; font-size: 76px; fill: #f0ebe1; }
+
     /* Pulse keyframe (no se emite vía CDN salvo que se use animate-pulse) */
     @keyframes pulse {
       0%, 100% { opacity: 1; }
@@ -362,6 +373,68 @@
             Goal Labs cambia eso.
           </p>
         </div>
+      </div>
+    </section>
+
+    <!-- SCROLL-STORY: la jugada se vuelve dato -->
+    <section id="story" class="relative min-h-screen flex flex-col justify-center overflow-hidden border-t border-white/5 py-16">
+      <div class="max-w-6xl mx-auto px-6 w-full">
+        <div class="text-center mb-8 md:mb-12">
+          <span class="eyebrow" data-i18n="story.eyebrow">De la jugada al dato</span>
+          <h2 class="font-display text-white text-4xl md:text-6xl mt-3 text-balance" data-i18n="story.h2">Cada jugada se vuelve un dato.</h2>
+          <p class="text-zinc-400 font-body max-w-xl mx-auto mt-3 text-pretty" data-i18n="story.sub">Seguís la acción, tocás una tecla y queda registrada con su minuto. Scrolleá y mirá la jugada.</p>
+        </div>
+        <svg id="story-svg" viewBox="0 0 1200 560" role="img" data-i18n-aria="story.svgAria"
+             aria-label="Animación: una jugada de fútbol recorre una trayectoria hasta el arco y se convierte en un evento registrado.">
+          <!-- Piso -->
+          <line class="stroke-ground" x1="120" y1="472" x2="1180" y2="472" />
+          <!-- Arco (line-art) -->
+          <g id="goal-frame">
+            <g id="net">
+              <line class="stroke-net" x1="950" y1="166" x2="948" y2="450" />
+              <line class="stroke-net" x1="1000" y1="156" x2="998" y2="442" />
+              <line class="stroke-net" x1="1050" y1="146" x2="1048" y2="432" />
+              <line class="stroke-net" x1="1095" y1="136" x2="1093" y2="422" />
+              <line class="stroke-net" x1="905" y1="240" x2="1120" y2="200" />
+              <line class="stroke-net" x1="905" y1="320" x2="1120" y2="285" />
+              <line class="stroke-net" x1="905" y1="400" x2="1120" y2="368" />
+            </g>
+            <path class="stroke-frame" d="M905 458 L905 175 L1120 130 L1120 410 L905 458" />
+          </g>
+          <!-- Trayectoria del tiro -->
+          <path id="traj" d="M160 462 C 430 175, 720 130, 1000 300" />
+          <!-- Tags de la jugada -->
+          <g id="tag1" transform="translate(430,252)">
+            <circle r="4" fill="#34d399" />
+            <line x1="0" y1="-4" x2="0" y2="-26" stroke="#34d399" stroke-width="1.2" />
+            <text x="0" y="-34" text-anchor="middle" class="story-mono" data-i18n="story.tag1">Pase</text>
+          </g>
+          <g id="tag2" transform="translate(690,165)">
+            <circle r="4" fill="#34d399" />
+            <line x1="0" y1="-4" x2="0" y2="-26" stroke="#34d399" stroke-width="1.2" />
+            <text x="0" y="-34" text-anchor="middle" class="story-mono" data-i18n="story.tag2">Conducción</text>
+          </g>
+          <g id="tag3" transform="translate(862,208)">
+            <circle r="4" fill="#34d399" />
+            <line x1="0" y1="-4" x2="0" y2="-26" stroke="#34d399" stroke-width="1.2" />
+            <text x="0" y="-34" text-anchor="middle" class="story-mono" data-i18n="story.tag3">Remate</text>
+          </g>
+          <!-- Pelota -->
+          <g id="ball" transform="translate(160,462)">
+            <circle r="12" fill="#f0ebe1" />
+            <circle r="12" fill="none" stroke="#0a0a0a" stroke-opacity="0.22" stroke-width="1.5" />
+            <path d="M-5 -3 L5 -3 M-6 3 L6 3" stroke="#0a0a0a" stroke-opacity="0.2" stroke-width="1.2" />
+          </g>
+          <!-- GOL -->
+          <text id="gol-label" x="1012" y="118" text-anchor="middle" class="story-gol">GOL</text>
+          <!-- Chip de evento registrado -->
+          <g id="event-tag" transform="translate(470,498)">
+            <rect x="0" y="0" width="260" height="50" rx="10" fill="#0f1a14" stroke="#34d399" stroke-opacity="0.45" />
+            <circle cx="24" cy="25" r="5" fill="#34d399" />
+            <text x="42" y="22" class="story-mono-sm">GOL · 31:15</text>
+            <text x="42" y="39" class="story-mono-xs" data-i18n="story.event">Evento registrado</text>
+          </g>
+        </svg>
       </div>
     </section>
 
@@ -875,6 +948,7 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
 
   <script>
     // FAQ accordion with ARIA
@@ -907,12 +981,14 @@
       }
 
       gsap.registerPlugin(ScrollTrigger);
+      if (window.MotionPathPlugin) gsap.registerPlugin(MotionPathPlugin);
       document.documentElement.classList.add('anim-ready');
 
       // Smooth scroll (Lenis) sincronizado con ScrollTrigger
       let lenis = null;
       if (window.Lenis) {
         lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+        window.__lenis = lenis;
         lenis.on('scroll', ScrollTrigger.update);
         gsap.ticker.add((t) => lenis.raf(t * 1000));
         gsap.ticker.lagSmoothing(0);
@@ -965,6 +1041,52 @@
           onUpdate: () => { el.textContent = Math.round(obj.v).toLocaleString('es-AR'); }
         });
       });
+
+      // ---- Scroll-story: la jugada se vuelve dato (pelota → arco → evento) ----
+      (function () {
+        const svg = document.getElementById('story-svg');
+        if (!svg || !window.MotionPathPlugin) return;
+        const traj = svg.querySelector('#traj');
+        const len = traj.getTotalLength();
+
+        gsap.set(traj, { strokeDasharray: len, strokeDashoffset: len });
+        gsap.set('#ball', { autoAlpha: 0 });
+        gsap.set(['#tag1', '#tag2', '#tag3', '#event-tag'], { autoAlpha: 0 });
+        gsap.set('#gol-label', { autoAlpha: 0, scale: 0.6, transformOrigin: '50% 50%' });
+
+        const tl = gsap.timeline({
+          defaults: { ease: 'none' },
+          scrollTrigger: {
+            trigger: '#story',
+            start: 'top top',
+            end: '+=1700',
+            scrub: 0.6,
+            pin: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true
+          }
+        });
+
+        tl.from('#goal-frame', { autoAlpha: 0, duration: 0.08 }, 0);
+        tl.to('#ball', { autoAlpha: 1, duration: 0.04 }, 0.08);
+        tl.to(traj, { strokeDashoffset: 0, duration: 0.62 }, 0.10);
+        tl.to('#ball', {
+          motionPath: { path: '#traj', align: '#traj', alignOrigin: [0.5, 0.5] },
+          duration: 0.62
+        }, 0.10);
+        tl.to('#tag1', { autoAlpha: 1, duration: 0.05 }, 0.26);
+        tl.to('#tag2', { autoAlpha: 1, duration: 0.05 }, 0.42);
+        tl.to('#tag3', { autoAlpha: 1, duration: 0.05 }, 0.58);
+        tl.to('#net', { scaleY: 1.06, transformOrigin: '50% 0%', yoyo: true, repeat: 1, duration: 0.04 }, 0.72);
+        tl.to('#gol-label', { autoAlpha: 1, scale: 1, duration: 0.10, ease: 'back.out(2)' }, 0.74);
+        tl.to('#event-tag', { autoAlpha: 1, duration: 0.08 }, 0.84);
+
+        // Reveal de cabecera de la sección al entrar
+        gsap.from('#story .eyebrow, #story h2, #story p', {
+          opacity: 0, y: 24, duration: 0.8, ease: 'power3.out', stagger: 0.08,
+          scrollTrigger: { trigger: '#story', start: 'top 70%', once: true }
+        });
+      })();
 
       ScrollTrigger.refresh();
     })();
@@ -1436,7 +1558,15 @@
         "hero.videoAria": `Video de Goal Labs en funcionamiento: tagging, telestrator y exportación`,
         "ctx.h2": `Hecho para el fútbol de verdad.`,
         "ctx.sub": `Del potrero al club: el mismo análisis profesional, sin la licencia profesional.`,
-        "ctx.alt": `Notebook con Goal Labs analizando un partido al borde de la cancha de un club argentino al atardecer`
+        "ctx.alt": `Notebook con Goal Labs analizando un partido al borde de la cancha de un club argentino al atardecer`,
+        "story.eyebrow": `De la jugada al dato`,
+        "story.h2": `Cada jugada se vuelve un dato.`,
+        "story.sub": `Seguís la acción, tocás una tecla y queda registrada con su minuto. Scrolleá y mirá la jugada.`,
+        "story.tag1": `Pase`,
+        "story.tag2": `Conducción`,
+        "story.tag3": `Remate`,
+        "story.event": `Evento registrado`,
+        "story.svgAria": `Animación: una jugada de fútbol recorre una trayectoria hasta el arco y se convierte en un evento registrado.`
       },
       en: {
         "pro.perMonth": `/mo`,
@@ -1461,7 +1591,15 @@
         "hero.videoAria": `Goal Labs in action: tagging, telestrator and export`,
         "ctx.h2": `Built for real football.`,
         "ctx.sub": `From the local pitch to the club: the same pro analysis, without the pro license.`,
-        "ctx.alt": `Laptop running Goal Labs analyzing a match at the edge of an Argentine club pitch at dusk`
+        "ctx.alt": `Laptop running Goal Labs analyzing a match at the edge of an Argentine club pitch at dusk`,
+        "story.eyebrow": `From play to data`,
+        "story.h2": `Every play becomes data.`,
+        "story.sub": `Follow the action, hit a key, and it's logged with its minute. Scroll and watch the play.`,
+        "story.tag1": `Pass`,
+        "story.tag2": `Carry`,
+        "story.tag3": `Shot`,
+        "story.event": `Event logged`,
+        "story.svgAria": `Animation: a football play travels along a trajectory into the goal and becomes a logged event.`
       },
       it: {
         "pro.perMonth": `/mese`,
@@ -1486,7 +1624,15 @@
         "hero.videoAria": `Goal Labs in funzione: tagging, telestrator ed esportazione`,
         "ctx.h2": `Fatto per il calcio vero.`,
         "ctx.sub": `Dal campetto al club: la stessa analisi professionale, senza la licenza professionale.`,
-        "ctx.alt": `Laptop con Goal Labs che analizza una partita a bordo campo di un club argentino al tramonto`
+        "ctx.alt": `Laptop con Goal Labs che analizza una partita a bordo campo di un club argentino al tramonto`,
+        "story.eyebrow": `Dall'azione al dato`,
+        "story.h2": `Ogni azione diventa un dato.`,
+        "story.sub": `Segui l'azione, premi un tasto e resta registrata con il suo minuto. Scorri e guarda l'azione.`,
+        "story.tag1": `Passaggio`,
+        "story.tag2": `Conduzione`,
+        "story.tag3": `Tiro`,
+        "story.event": `Evento registrato`,
+        "story.svgAria": `Animazione: un'azione di calcio percorre una traiettoria fino alla porta e diventa un evento registrato.`
       }
     };
     ['es', 'en', 'it'].forEach(function (l) { Object.assign(I18N[l], EXTRA[l]); });
