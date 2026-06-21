@@ -376,34 +376,13 @@
       </div>
     </div>
 
-    <!-- EL PROBLEMA -->
-    <section class="py-20 border-t border-zinc-800/50" aria-labelledby="problema-heading">
-      <div class="max-w-3xl mx-auto px-6 text-center">
-        <div class="section-accent" aria-hidden="true"></div>
-        <h2 id="problema-heading" class="text-balance font-display text-3xl md:text-4xl font-black text-white mb-8 reveal" data-i18n="problem.h2">
-          Esto te suena familiar.
-        </h2>
-        <div class="space-y-5 text-zinc-400 text-lg leading-relaxed text-left font-body">
-          <p class="text-pretty reveal reveal-d1" data-i18n="problem.p1">
-            Terminás el partido. Tenés el video. Pero para tener 10 minutos de clips útiles para el entreno del lunes, necesitás 4 horas en Premiere — o pagar una licencia que tu club no puede costear.
-          </p>
-          <p class="text-pretty reveal reveal-d2" data-i18n="problem.p2">
-            El análisis táctico en video lleva años siendo exclusivo de quienes pueden pagar Hudl o Nacsport. Para el resto: notas en papel, capturas de pantalla y hojas de cálculo sin contexto visual.
-          </p>
-          <p class="text-zinc-200 font-semibold reveal reveal-d3" data-i18n="problem.p3">
-            Goal Labs cambia eso.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SCROLL-STORY: pizarra táctica — gol de Di María -->
+    <!-- DE LA JUGADA AL DATO (problema + jugada, fusionados) -->
     <section id="story" class="relative min-h-screen flex items-center overflow-hidden border-t border-white/5 py-16">
       <div class="max-w-7xl mx-auto px-6 w-full">
-        <div class="story-head text-center mb-6 md:mb-8">
-          <span class="eyebrow" data-i18n="story.eyebrow">De la jugada al dato</span>
-          <h2 class="font-display text-white text-4xl md:text-6xl mt-3 text-balance" data-i18n="story.h2">Cada jugada se vuelve un dato.</h2>
-          <p class="text-zinc-400 font-body max-w-xl mx-auto mt-3 text-pretty" data-i18n="story.sub">Seguís la acción, tocás una tecla y queda registrada con su minuto. Scrolleá y mirá la jugada.</p>
+        <div class="story-head text-center max-w-3xl mx-auto mb-8 md:mb-12">
+          <span class="eyebrow" data-i18n="story.eyebrow">El problema, resuelto</span>
+          <h2 class="font-display text-white text-5xl md:text-7xl mt-4 leading-[0.95] text-balance" data-i18n="story.h2">Cada jugada se vuelve un dato.</h2>
+          <p class="text-zinc-400 font-body mt-4 text-pretty text-lg" data-i18n="story.sub">Antes: 4 horas en Premiere o una licencia impagable. Ahora: una tecla y queda registrado. Scrolleá la jugada.</p>
         </div>
 
         <div id="story-board" class="relative max-w-5xl mx-auto">
@@ -460,14 +439,11 @@
             <text id="gol-label" x="912" y="150" text-anchor="middle" class="story-gol">GOL</text>
           </svg>
 
-          <!-- Marcador tipo TV (dentro del campo, arriba-izquierda) -->
-          <div id="story-clock" class="absolute top-[7%] left-[5%]">
-            <div class="flex items-center gap-2 bg-black/45 border border-white/10 rounded px-2.5 py-1 text-[11px] md:text-xs font-mono">
-              <span id="sb-time" class="text-cream tabular-nums">35:12</span>
-              <span class="text-zinc-600">|</span>
-              <span class="text-zinc-400 tracking-wide" translate="no">ARG <span id="sb-arg" class="text-cream font-medium">1</span> <span class="text-zinc-600">-</span> 0 FRA</span>
-            </div>
-            <div class="mt-1 font-mono text-[9px] uppercase tracking-[0.15em] text-zinc-600" data-i18n="story.match">Final · Qatar 2022</div>
+          <!-- Marcador tipo TV (dentro del campo) -->
+          <div id="story-clock" class="absolute top-[11%] left-[7%] flex items-center gap-2 bg-black/45 border border-white/10 rounded px-2.5 py-1 text-[11px] md:text-xs font-mono">
+            <span id="sb-time" class="text-cream tabular-nums">35:12</span>
+            <span class="text-zinc-600">|</span>
+            <span class="text-zinc-400 tracking-wide" translate="no">ARG <span id="sb-arg" class="text-cream font-medium">1</span> <span class="text-zinc-600">-</span> 0 FRA</span>
           </div>
 
           <!-- Chip de evento registrado -->
@@ -585,42 +561,29 @@
     </section>
 
     <!-- FLUJO: DEL PARTIDO AL REEL -->
-    <section class="py-24 border-t border-zinc-800/50" aria-labelledby="flujo-heading">
-      <div class="max-w-5xl mx-auto px-6">
-        <div class="text-center mb-16 reveal">
-          <div class="section-accent" aria-hidden="true"></div>
-          <h2 id="flujo-heading" data-i18n-html="flow.h2" class="text-balance font-display text-4xl md:text-5xl font-black text-white mb-4">
+    <section class="py-24 md:py-32 border-t border-white/10" aria-labelledby="flujo-heading">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="max-w-3xl mb-16 reveal">
+          <h2 id="flujo-heading" data-i18n-html="flow.h2" class="font-display text-white text-5xl md:text-7xl leading-[0.95] text-balance">
             Del partido al <span class="gradient-text-green">reel</span> en tres pasos.
           </h2>
-          <p class="text-zinc-400 text-lg font-body" data-i18n="flow.sub">Del video crudo a un clip listo para redes — sin salir de la app.</p>
+          <p class="text-zinc-400 text-lg font-body mt-5 text-pretty" data-i18n="flow.sub">Del video crudo a un clip listo para redes — sin salir de la app.</p>
         </div>
 
-        <ol class="grid md:grid-cols-3 gap-6" data-i18n-aria="flow.olAria" aria-label="Cómo funciona Goal Labs en tres pasos">
-          <li class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 reveal reveal-d1">
-            <div class="flex items-center gap-3 mb-4">
-              <span class="font-display font-black text-2xl gradient-text-green tabular-nums" aria-hidden="true">01</span>
-              <span class="chalk-line flex-1" aria-hidden="true"></span>
-              <i class="fas fa-keyboard text-emerald-400" aria-hidden="true"></i>
-            </div>
-            <h3 class="font-display font-bold text-xl text-white mb-2" data-i18n="flow.s1.t">Taggeás el partido</h3>
+        <ol class="grid sm:grid-cols-3 gap-px bg-white/10 border-x border-b border-white/10" data-i18n-aria="flow.olAria" aria-label="Cómo funciona Goal Labs en tres pasos" data-stagger>
+          <li class="bg-ink p-7 md:p-8" data-stagger-item>
+            <div class="flex items-center justify-between mb-6"><span class="font-mono text-xs text-emerald-400">01</span><i class="fas fa-keyboard text-zinc-600 text-lg" aria-hidden="true"></i></div>
+            <h3 class="font-display text-2xl md:text-3xl text-white leading-tight mb-2.5" data-i18n="flow.s1.t">Taggeás el partido</h3>
             <p class="text-zinc-500 text-sm leading-relaxed font-body" data-i18n="flow.s1.d">Una tecla por evento, sin pausar el video. Goles, tiros, pérdidas, offsides — todo queda registrado con su minuto.</p>
           </li>
-          <li class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 reveal reveal-d2">
-            <div class="flex items-center gap-3 mb-4">
-              <span class="font-display font-black text-2xl gradient-text-green tabular-nums" aria-hidden="true">02</span>
-              <span class="chalk-line flex-1" aria-hidden="true"></span>
-              <i class="fas fa-clapperboard text-emerald-400" aria-hidden="true"></i>
-            </div>
-            <h3 class="font-display font-bold text-xl text-white mb-2" data-i18n="flow.s2.t">Elegís los momentos</h3>
+          <li class="bg-ink p-7 md:p-8" data-stagger-item>
+            <div class="flex items-center justify-between mb-6"><span class="font-mono text-xs text-emerald-400">02</span><i class="fas fa-clapperboard text-zinc-600 text-lg" aria-hidden="true"></i></div>
+            <h3 class="font-display text-2xl md:text-3xl text-white leading-tight mb-2.5" data-i18n="flow.s2.t">Elegís los momentos</h3>
             <p class="text-zinc-500 text-sm leading-relaxed font-body" data-i18n="flow.s2.d">Revisá clip por clip con atajos de teclado y armá el reel de cada jugador con sus mejores acciones de la temporada.</p>
           </li>
-          <li class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 reveal reveal-d3">
-            <div class="flex items-center gap-3 mb-4">
-              <span class="font-display font-black text-2xl gradient-text-green tabular-nums" aria-hidden="true">03</span>
-              <span class="chalk-line flex-1" aria-hidden="true"></span>
-              <i class="fas fa-share-nodes text-emerald-400" aria-hidden="true"></i>
-            </div>
-            <h3 class="font-display font-bold text-xl text-white mb-2" data-i18n="flow.s3.t">Exportás para redes</h3>
+          <li class="bg-ink p-7 md:p-8" data-stagger-item>
+            <div class="flex items-center justify-between mb-6"><span class="font-mono text-xs text-emerald-400">03</span><i class="fas fa-share-nodes text-zinc-600 text-lg" aria-hidden="true"></i></div>
+            <h3 class="font-display text-2xl md:text-3xl text-white leading-tight mb-2.5" data-i18n="flow.s3.t">Exportás para redes</h3>
             <p class="text-zinc-500 text-sm leading-relaxed font-body" data-i18n="flow.s3.d">9:16 vertical con seguimiento de la jugada o 16:9 clásico. Listo para Instagram, TikTok o el grupo del club.</p>
           </li>
         </ol>
@@ -640,9 +603,8 @@
         <div class="absolute inset-0 bg-gradient-to-r from-zinc-950/70 to-transparent" aria-hidden="true"></div>
         <div class="absolute inset-0 flex items-end">
           <div class="max-w-7xl mx-auto px-6 pb-10 md:pb-14 w-full reveal">
-            <div class="section-accent !mx-0" aria-hidden="true"></div>
-            <h2 id="contexto-heading" class="font-display text-3xl md:text-5xl font-black text-white text-balance max-w-2xl" data-i18n="ctx.h2">Hecho para el fútbol de verdad.</h2>
-            <p class="text-zinc-300 text-lg mt-3 font-body max-w-xl text-pretty" data-i18n="ctx.sub">Del potrero al club: el mismo análisis profesional, sin la licencia profesional.</p>
+            <h2 id="contexto-heading" class="font-display text-4xl md:text-6xl text-white text-balance max-w-2xl leading-[0.95]" data-i18n="ctx.h2">Hecho para el fútbol de verdad.</h2>
+            <p class="text-zinc-300 text-lg mt-4 font-body max-w-xl text-pretty" data-i18n="ctx.sub">Del potrero al club: el mismo análisis profesional, sin la licencia profesional.</p>
           </div>
         </div>
       </div>
@@ -651,22 +613,22 @@
     <!-- COMPARACIÓN -->
     <section id="comparacion" class="py-24 border-t border-zinc-800/50" aria-labelledby="comparacion-heading">
       <div class="max-w-5xl mx-auto px-6">
-        <div class="text-center mb-12 reveal">
-          <div class="section-accent" aria-hidden="true"></div>
-          <h2 id="comparacion-heading" class="text-balance font-display text-4xl md:text-5xl font-black text-white mb-4" data-i18n="compare.h2">
+        <div class="max-w-3xl mb-12 reveal">
+          <span class="eyebrow" data-i18n="nav.compare">Vs. alternativas</span>
+          <h2 id="comparacion-heading" class="font-display text-white text-5xl md:text-7xl mt-4 leading-[0.95] text-balance" data-i18n="compare.h2">
             Alternativa gratuita a Nacsport y Hudl.
           </h2>
-          <p class="text-zinc-400 text-lg font-body" data-i18n="compare.sub">Las mismas herramientas de análisis, sin la licencia de EUR 1.000/año.</p>
+          <p class="text-zinc-400 text-lg font-body mt-5 text-pretty" data-i18n="compare.sub">Las mismas herramientas de análisis, sin la licencia de EUR 1.000/año.</p>
         </div>
 
         <div class="overflow-x-auto reveal reveal-d1">
           <table class="w-full text-sm border-collapse" aria-label="Comparación de Goal Labs vs Nacsport vs Hudl">
             <thead>
-              <tr class="border-b border-zinc-800">
-                <th scope="col" class="text-left py-3 px-4 text-zinc-500 font-body font-medium" data-i18n="compare.criterion">Criterio</th>
-                <th scope="col" class="py-3 px-4 text-indigo-400 font-display font-black text-base text-center" translate="no">Goal Labs</th>
-                <th scope="col" class="py-3 px-4 text-zinc-400 font-body font-medium text-center" translate="no">Nacsport</th>
-                <th scope="col" class="py-3 px-4 text-zinc-400 font-body font-medium text-center" translate="no">Hudl</th>
+              <tr class="border-b border-white/15">
+                <th scope="col" class="text-left py-4 px-4 eyebrow" data-i18n="compare.criterion">Criterio</th>
+                <th scope="col" class="py-4 px-4 text-emerald-400 font-mono text-sm text-center" translate="no">Goal Labs</th>
+                <th scope="col" class="py-4 px-4 text-zinc-400 font-mono text-xs uppercase tracking-wider text-center" translate="no">Nacsport</th>
+                <th scope="col" class="py-4 px-4 text-zinc-400 font-mono text-xs uppercase tracking-wider text-center" translate="no">Hudl</th>
               </tr>
             </thead>
             <tbody class="font-body">
@@ -725,14 +687,14 @@
     </section>
 
     <!-- PRECIOS -->
-    <section id="precios" class="py-24 border-t border-zinc-800/50" aria-labelledby="precios-heading">
-      <div class="max-w-4xl mx-auto px-6">
-        <div class="text-center mb-16 reveal">
-          <div class="section-accent" aria-hidden="true"></div>
-          <h2 id="precios-heading" class="text-balance font-display text-4xl md:text-5xl font-black text-white mb-4" data-i18n="pricing.h2">
+    <section id="precios" class="py-24 md:py-32 border-t border-white/10" aria-labelledby="precios-heading">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-12 reveal">
+          <span class="eyebrow" data-i18n="nav.pricing">Precios</span>
+          <h2 id="precios-heading" class="font-display text-white text-5xl md:text-7xl mt-4 leading-[0.95] text-balance" data-i18n="pricing.h2">
             Gratis para siempre. Sin letra chica.
           </h2>
-          <p class="text-zinc-400 text-lg font-body" data-i18n="pricing.sub">El análisis que necesitás para el partido del domingo está en el plan gratuito.</p>
+          <p class="text-zinc-400 text-lg font-body mt-5 text-pretty" data-i18n="pricing.sub">El análisis que necesitás para el partido del domingo está en el plan gratuito.</p>
         </div>
 
         <!-- Controles de precio: ciclo + moneda -->
@@ -758,8 +720,8 @@
 
         <div class="grid md:grid-cols-2 gap-6">
           <!-- Free -->
-          <div class="bg-zinc-900 border-2 border-indigo-600 rounded-2xl p-8 relative reveal reveal-d1" aria-label="Plan Free">
-            <div class="absolute -top-3 left-6 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full" data-i18n="free.badge">Disponible ahora</div>
+          <div class="bg-zinc-900/60 border border-emerald-500/40 rounded-2xl p-8 relative reveal reveal-d1" aria-label="Plan Free">
+            <div class="absolute -top-3 left-6 bg-cream text-ink text-xs font-bold px-3 py-1 rounded-full" data-i18n="free.badge">Disponible ahora</div>
             <h3 class="font-display text-2xl font-black text-white mb-1">Free</h3>
             <div class="text-5xl font-display font-black text-white mb-1 tabular-nums">$0</div>
             <p class="text-zinc-500 text-sm mb-6 font-body" data-i18n="free.tagline">Para siempre. Sin límite de proyectos.</p>
@@ -775,7 +737,7 @@
             </ul>
             <a href="https://github.com/nacholiporace/goal-labs-releases/releases/latest"
                data-download
-               class="btn-primary block text-center bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-colors focus-ring"
+               class="btn-primary block text-center bg-cream hover:bg-white text-ink font-body font-semibold py-3 rounded-full transition-colors focus-ring"
                data-i18n-aria="free.ctaAria"
                aria-label="Descargar Goal Labs gratis">
               <span data-i18n="free.cta">Descargar gratis</span>
@@ -819,16 +781,16 @@
     </section>
 
     <!-- FAQ -->
-    <section id="faq" class="py-24 border-t border-zinc-800/50" aria-labelledby="faq-heading">
+    <section id="faq" class="py-24 md:py-32 border-t border-white/10" aria-labelledby="faq-heading">
       <div class="max-w-3xl mx-auto px-6">
-        <div class="text-center mb-12 reveal">
-          <div class="section-accent" aria-hidden="true"></div>
-          <h2 id="faq-heading" class="text-balance font-display text-4xl md:text-5xl font-black text-white" data-i18n="faq.h2">Preguntas Frecuentes</h2>
+        <div class="mb-12 reveal">
+          <span class="eyebrow" data-i18n="nav.faq">FAQ</span>
+          <h2 id="faq-heading" class="font-display text-white text-5xl md:text-7xl mt-4 leading-[0.95] text-balance" data-i18n="faq.h2">Preguntas Frecuentes</h2>
         </div>
 
         <div class="space-y-3" id="faq-container" aria-label="Preguntas frecuentes sobre Goal Labs">
 
-          <div class="faq-item bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden reveal reveal-d1">
+          <div class="faq-item border-b border-white/10 reveal reveal-d1">
             <button class="faq-trigger w-full flex items-center justify-between px-6 py-4 text-left focus-ring" aria-expanded="false" aria-controls="faq-smartscreen">
               <span class="font-semibold text-white text-sm font-body" data-i18n="faq.q1">Al instalar, Windows muestra una advertencia. ¿Es seguro?</span>
               <i class="fas fa-chevron-down faq-icon text-zinc-500 text-sm shrink-0 ml-4" aria-hidden="true"></i>
@@ -847,7 +809,7 @@
             </div>
           </div>
 
-          <div class="faq-item bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden reveal reveal-d2">
+          <div class="faq-item border-b border-white/10 reveal reveal-d2">
             <button class="faq-trigger w-full flex items-center justify-between px-6 py-4 text-left focus-ring" aria-expanded="false" aria-controls="faq-formatos">
               <span class="font-semibold text-white text-sm font-body" data-i18n="faq.q2">¿Funciona con cualquier video?</span>
               <i class="fas fa-chevron-down faq-icon text-zinc-500 text-sm shrink-0 ml-4" aria-hidden="true"></i>
@@ -859,7 +821,7 @@
             </div>
           </div>
 
-          <div class="faq-item bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden reveal reveal-d3">
+          <div class="faq-item border-b border-white/10 reveal reveal-d3">
             <button class="faq-trigger w-full flex items-center justify-between px-6 py-4 text-left focus-ring" aria-expanded="false" aria-controls="faq-gratis">
               <span class="font-semibold text-white text-sm font-body" data-i18n="faq.q3">¿Es realmente gratis? ¿No tiene fecha de vencimiento?</span>
               <i class="fas fa-chevron-down faq-icon text-zinc-500 text-sm shrink-0 ml-4" aria-hidden="true"></i>
@@ -871,7 +833,7 @@
             </div>
           </div>
 
-          <div class="faq-item bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden reveal reveal-d4">
+          <div class="faq-item border-b border-white/10 reveal reveal-d4">
             <button class="faq-trigger w-full flex items-center justify-between px-6 py-4 text-left focus-ring" aria-expanded="false" aria-controls="faq-pro">
               <span class="font-semibold text-white text-sm font-body" data-i18n="faq.q4">¿Qué es Goal Labs Pro y cómo pruebo los 15 días?</span>
               <i class="fas fa-chevron-down faq-icon text-zinc-500 text-sm shrink-0 ml-4" aria-hidden="true"></i>
@@ -883,7 +845,7 @@
             </div>
           </div>
 
-          <div class="faq-item bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden reveal reveal-d4">
+          <div class="faq-item border-b border-white/10 reveal reveal-d4">
             <button class="faq-trigger w-full flex items-center justify-between px-6 py-4 text-left focus-ring" aria-expanded="false" aria-controls="faq-aprendizaje">
               <span class="font-semibold text-white text-sm font-body" data-i18n="faq.q5">¿Cuánto tiempo lleva aprender a usarlo?</span>
               <i class="fas fa-chevron-down faq-icon text-zinc-500 text-sm shrink-0 ml-4" aria-hidden="true"></i>
@@ -895,7 +857,7 @@
             </div>
           </div>
 
-          <div class="faq-item bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden reveal reveal-d5">
+          <div class="faq-item border-b border-white/10 reveal reveal-d5">
             <button class="faq-trigger w-full flex items-center justify-between px-6 py-4 text-left focus-ring" aria-expanded="false" aria-controls="faq-datos">
               <span class="font-semibold text-white text-sm font-body" data-i18n="faq.q6">¿Qué pasa con mis datos si no tengo internet?</span>
               <i class="fas fa-chevron-down faq-icon text-zinc-500 text-sm shrink-0 ml-4" aria-hidden="true"></i>
@@ -912,24 +874,23 @@
     </section>
 
     <!-- CTA FINAL -->
-    <section class="relative py-24 border-t border-zinc-800/50 pitch-bg overflow-hidden" aria-labelledby="cta-heading">
+    <section class="relative py-28 md:py-40 border-t border-white/10 pitch-bg overflow-hidden" aria-labelledby="cta-heading">
       <img src="assets/tactics-board.jpg" alt="" aria-hidden="true"
            class="absolute inset-0 w-full h-full object-cover opacity-25"
            width="1456" height="816" loading="lazy"
            onerror="this.style.display='none';" />
       <div class="absolute inset-0 bg-gradient-to-b from-zinc-950 via-zinc-950/70 to-zinc-950" aria-hidden="true"></div>
-      <div class="relative max-w-3xl mx-auto px-6 text-center reveal">
-        <div class="section-accent" aria-hidden="true"></div>
-        <h2 id="cta-heading" data-i18n-html="cta.h2" class="text-balance font-display text-5xl md:text-6xl font-black text-white mb-4 leading-tight">
+      <div class="relative max-w-4xl mx-auto px-6 text-center reveal">
+        <h2 id="cta-heading" data-i18n-html="cta.h2" class="font-display text-white text-6xl md:text-8xl mb-6 leading-[0.95] text-balance">
           El análisis táctico que el<br />fútbol argentino se merecía.
         </h2>
         <p class="text-zinc-400 text-lg mb-10 font-body" data-i18n="cta.sub">Gratis. Sin cuenta. Sin internet. Hecho por alguien del fútbol.</p>
         <a href="https://github.com/nacholiporace/goal-labs-releases/releases/latest"
            data-download
-           class="btn-primary inline-flex items-center gap-3 bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-bold px-10 py-4 rounded-xl text-xl transition-colors shadow-xl shadow-indigo-900/40 focus-ring"
+           class="btn-primary inline-flex items-center gap-3 bg-cream hover:bg-white text-ink font-body font-semibold px-10 py-4 rounded-full text-lg transition-colors focus-ring"
            data-i18n-aria="cta.downloadAria"
            aria-label="Descargar Goal Labs para Windows — gratis, sin cuenta requerida">
-          <i class="fas fa-download" aria-hidden="true"></i>
+          <i class="fas fa-download text-sm" aria-hidden="true"></i>
           <span data-i18n="cta.downloadWindows">Descargar para Windows</span>
         </a>
         <p id="version-text" class="text-zinc-600 text-sm mt-4 font-body tabular-nums"><span id="version-num">v1.2.1</span> <span data-i18n="versionSuffix">· Windows 10/11 · Actualización automática incluida</span></p>
@@ -939,15 +900,16 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="border-t border-zinc-800/50 py-10" role="contentinfo">
+  <footer class="border-t border-white/10 py-12" role="contentinfo">
     <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-2">
-        <span translate="no" class="text-white font-display font-black text-sm tracking-tight">GOAL</span>
-        <span translate="no" class="text-zinc-600 font-display font-light text-sm tracking-widest">LABS</span>
-        <span class="text-zinc-700 text-sm ml-2 font-body" data-i18n="footer.madeIn">— Hecho en Argentina</span>
+      <div class="flex items-center gap-2.5">
+        <span class="w-6 h-6 rounded bg-cream flex items-center justify-center shrink-0" aria-hidden="true"><i class="fas fa-futbol text-ink text-xs"></i></span>
+        <span translate="no" class="text-white font-mono text-sm tracking-[0.25em] uppercase">Goal</span>
+        <span translate="no" class="text-zinc-500 font-mono text-sm tracking-[0.35em] uppercase">Labs</span>
+        <span class="text-zinc-600 text-xs ml-3 font-mono" data-i18n="footer.madeIn">— Hecho en Argentina</span>
       </div>
-      <nav class="flex items-center gap-6 text-zinc-600 text-sm font-body" aria-label="Navegación del pie de página">
-        <a href="https://github.com/nacholiporace/goal-labs-releases" class="hover:text-zinc-400 transition-colors flex items-center gap-1.5 focus-ring" aria-label="Ver Goal Labs en GitHub">
+      <nav class="flex items-center gap-6 text-zinc-500 text-xs font-mono uppercase tracking-wider" aria-label="Navegación del pie de página">
+        <a href="https://github.com/nacholiporace/goal-labs-releases" class="hover:text-cream transition-colors flex items-center gap-1.5 focus-ring" aria-label="Ver Goal Labs en GitHub">
           <i class="fab fa-github" aria-hidden="true"></i> GitHub
         </a>
         <span aria-label="Copyright 2026 Nacho Liporace">© 2026 Nacho Liporace</span>
@@ -1613,9 +1575,9 @@
         "ctx.h2": `Hecho para el fútbol de verdad.`,
         "ctx.sub": `Del potrero al club: el mismo análisis profesional, sin la licencia profesional.`,
         "ctx.alt": `Notebook con Goal Labs analizando un partido al borde de la cancha de un club argentino al atardecer`,
-        "story.eyebrow": `De la jugada al dato`,
+        "story.eyebrow": `El problema, resuelto`,
         "story.h2": `Cada jugada se vuelve un dato.`,
-        "story.sub": `Seguís la acción, tocás una tecla y queda registrada con su minuto. Scrolleá y mirá la jugada.`,
+        "story.sub": `Antes: 4 horas en Premiere o una licencia impagable. Ahora: una tecla y queda registrado. Scrolleá la jugada.`,
         "story.tag1": `Pase`,
         "story.tag2": `Conducción`,
         "story.tag3": `Remate`,
@@ -1649,9 +1611,9 @@
         "ctx.h2": `Built for real football.`,
         "ctx.sub": `From the local pitch to the club: the same pro analysis, without the pro license.`,
         "ctx.alt": `Laptop running Goal Labs analyzing a match at the edge of an Argentine club pitch at dusk`,
-        "story.eyebrow": `From play to data`,
+        "story.eyebrow": `The problem, solved`,
         "story.h2": `Every play becomes data.`,
-        "story.sub": `Follow the action, hit a key, and it's logged with its minute. Scroll and watch the play.`,
+        "story.sub": `Before: 4 hours in Premiere or a license you can't afford. Now: one key and it's logged. Scroll the play.`,
         "story.tag1": `Pass`,
         "story.tag2": `Carry`,
         "story.tag3": `Shot`,
@@ -1685,9 +1647,9 @@
         "ctx.h2": `Fatto per il calcio vero.`,
         "ctx.sub": `Dal campetto al club: la stessa analisi professionale, senza la licenza professionale.`,
         "ctx.alt": `Laptop con Goal Labs che analizza una partita a bordo campo di un club argentino al tramonto`,
-        "story.eyebrow": `Dall'azione al dato`,
+        "story.eyebrow": `Il problema, risolto`,
         "story.h2": `Ogni azione diventa un dato.`,
-        "story.sub": `Segui l'azione, premi un tasto e resta registrata con il suo minuto. Scorri e guarda l'azione.`,
+        "story.sub": `Prima: 4 ore in Premiere o una licenza impagabile. Ora: un tasto e resta registrato. Scorri l'azione.`,
         "story.tag1": `Passaggio`,
         "story.tag2": `Conduzione`,
         "story.tag3": `Tiro`,
