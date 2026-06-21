@@ -462,14 +462,17 @@
             <g id="ball"><circle class="b" r="11" fill="#f0ebe1"/><circle r="11" fill="none" stroke="#0a0a0a" stroke-opacity="0.25" stroke-width="1.5"/><path d="M-5 -3 L5 -3 M-6 3 L6 3" stroke="#0a0a0a" stroke-opacity="0.2" stroke-width="1.2"/></g>
 
             <!-- GOL -->
-            <text id="gol-label" x="840" y="150" text-anchor="middle" class="story-gol">GOL</text>
+            <text id="gol-label" x="912" y="150" text-anchor="middle" class="story-gol">GOL</text>
           </svg>
 
-          <!-- Marcador tipo TV -->
-          <div id="story-clock" class="absolute top-2 left-2 flex items-center gap-2 bg-black/40 border border-white/10 rounded px-2.5 py-1 text-[11px] md:text-xs font-mono">
-            <span id="sb-time" class="text-cream tabular-nums">35:12</span>
-            <span class="text-zinc-600">|</span>
-            <span class="text-zinc-400 tracking-wide" translate="no">ARG <span id="sb-arg" class="text-cream font-medium">1</span> <span class="text-zinc-600">-</span> 0 FRA</span>
+          <!-- Marcador tipo TV (dentro del campo, arriba-izquierda) -->
+          <div id="story-clock" class="absolute top-[7%] left-[5%]">
+            <div class="flex items-center gap-2 bg-black/45 border border-white/10 rounded px-2.5 py-1 text-[11px] md:text-xs font-mono">
+              <span id="sb-time" class="text-cream tabular-nums">35:12</span>
+              <span class="text-zinc-600">|</span>
+              <span class="text-zinc-400 tracking-wide" translate="no">ARG <span id="sb-arg" class="text-cream font-medium">1</span> <span class="text-zinc-600">-</span> 0 FRA</span>
+            </div>
+            <div class="mt-1 font-mono text-[9px] uppercase tracking-[0.15em] text-zinc-600" data-i18n="story.match">Final · Qatar 2022</div>
           </div>
 
           <!-- Chip de evento registrado -->
@@ -1125,7 +1128,7 @@
         const tl = gsap.timeline({
           defaults: { ease: 'none' },
           scrollTrigger: {
-            trigger: '#story', start: 'top top', end: '+=2800',
+            trigger: '#story', start: 'top top', end: '+=2000',
             scrub: 0.6, pin: true, anticipatePin: 1, invalidateOnRefresh: true
           }
         });
@@ -1660,6 +1663,7 @@
         "story.event": `Evento registrado`,
         "story.actPase": `Pase`,
         "story.actGol": `Gol`,
+        "story.match": `Final · Qatar 2022`,
         "story.svgAria": `Pizarra táctica: la secuencia de pases del gol de Di María en la final de Qatar 2022, registrada como datos.`
       },
       en: {
@@ -1695,6 +1699,7 @@
         "story.event": `Event logged`,
         "story.actPase": `Pass`,
         "story.actGol": `Goal`,
+        "story.match": `Final · Qatar 2022`,
         "story.svgAria": `Tactical board: the passing sequence of Di María's goal in the Qatar 2022 final, logged as data.`
       },
       it: {
@@ -1730,6 +1735,7 @@
         "story.event": `Evento registrato`,
         "story.actPase": `Passaggio`,
         "story.actGol": `Gol`,
+        "story.match": `Finale · Qatar 2022`,
         "story.svgAria": `Lavagna tattica: la sequenza di passaggi del gol di Di María nella finale di Qatar 2022, registrata come dati.`
       }
     };
