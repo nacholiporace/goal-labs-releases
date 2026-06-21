@@ -276,15 +276,10 @@
   <nav class="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/60 bg-zinc-950/90 backdrop-blur-md" aria-label="Navegación principal">
     <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
       <a href="/" class="flex items-center gap-2.5 select-none focus-ring" aria-label="Goal Labs — Inicio">
-        <!-- Pelota (placeholder — reemplazar por el logo del software) -->
-        <svg width="20" height="20" viewBox="0 0 32 32" aria-hidden="true" class="shrink-0">
-          <circle cx="16" cy="16" r="15" fill="#f0ebe1" />
-          <polygon points="16,9 21,12.6 19.1,18.5 12.9,18.5 11,12.6" fill="#0a0a0a" />
-          <g stroke="#0a0a0a" stroke-width="1.1" fill="none" stroke-opacity="0.85">
-            <path d="M16,9 L16,3.5 M21,12.6 L26.2,10.8 M19.1,18.5 L22.7,23 M12.9,18.5 L9.3,23 M11,12.6 L5.8,10.8" />
-            <circle cx="16" cy="16" r="15" />
-          </g>
-        </svg>
+        <!-- Logo (cuadrado + pelota fa-futbol, igual que en la app) -->
+        <span class="w-7 h-7 rounded-md bg-cream flex items-center justify-center shrink-0" aria-hidden="true">
+          <i class="fas fa-futbol text-ink text-sm"></i>
+        </span>
         <span translate="no" class="text-white font-mono font-medium text-sm tracking-[0.25em] uppercase">Goal</span>
         <span translate="no" class="text-zinc-500 font-mono text-sm tracking-[0.35em] uppercase">Labs</span>
       </a>
@@ -411,7 +406,7 @@
           <p class="text-zinc-400 font-body max-w-xl mx-auto mt-3 text-pretty" data-i18n="story.sub">Seguís la acción, tocás una tecla y queda registrada con su minuto. Scrolleá y mirá la jugada.</p>
         </div>
 
-        <div class="relative max-w-5xl mx-auto">
+        <div id="story-board" class="relative max-w-5xl mx-auto">
           <svg id="story-svg" viewBox="0 0 1080 728" role="img" data-i18n-aria="story.svgAria"
                aria-label="Pizarra táctica: la secuencia de pases del gol de Di María en la final de Qatar 2022, registrada como datos.">
             <!-- Cancha -->
@@ -1133,8 +1128,11 @@
         tl.to('#event-tag', { autoAlpha: 1, y: 0, duration: 0.07 }, ts + 0.16);
 
         // reveal del video real
-        tl.to('#story-svg', { autoAlpha: 0.15, duration: 0.12 }, ts + 0.30);
+        tl.to('#story-svg', { autoAlpha: 0.12, duration: 0.12 }, ts + 0.30);
         tl.to('#story-clock', { autoAlpha: 0, duration: 0.10 }, ts + 0.30);
+        // al aparecer el video, el encabezado se desvanece y el board sube para centrar
+        tl.to('.story-head', { autoAlpha: 0, duration: 0.12 }, ts + 0.28);
+        tl.to('#story-board', { y: -70, duration: 0.16, ease: 'power2.out' }, ts + 0.28);
         tl.to('#story-video', { autoAlpha: 1, duration: 0.14 }, ts + 0.32);
 
         // Reveal de cabecera al entrar
