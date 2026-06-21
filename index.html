@@ -292,88 +292,14 @@
 
         <!-- App preview mock -->
         <div class="mt-16 relative max-w-4xl mx-auto reveal">
-          <!-- Reemplazá este mock por <video> del software real cuando tengas el clip (assets/hero-demo.mp4) -->
-          <div class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl shadow-black/60" role="img" data-i18n-aria="hero.mockAria" aria-label="Captura de pantalla simulada de la interfaz de Goal Labs mostrando el reproductor de video con tags y el registro de eventos">
-            <!-- Mock title bar -->
-            <div class="bg-zinc-950 border-b border-zinc-800 px-4 py-3 flex items-center gap-3">
-              <div class="flex gap-1.5" aria-hidden="true">
-                <div class="w-3 h-3 rounded-full bg-zinc-700"></div>
-                <div class="w-3 h-3 rounded-full bg-zinc-700"></div>
-                <div class="w-3 h-3 rounded-full bg-zinc-700"></div>
-              </div>
-              <div class="flex-1 flex items-center gap-2" aria-hidden="true">
-                <span translate="no" class="text-white font-display font-black text-xs tracking-tight">GOAL</span>
-                <span translate="no" class="text-zinc-500 font-display font-light text-xs tracking-widest">LABS</span>
-                <span class="text-zinc-700 text-xs ml-2">— Partido: River vs Boca · 90 min</span>
-              </div>
-              <div class="flex gap-2" aria-hidden="true">
-                <div class="bg-indigo-600 text-white text-[10px] font-bold px-3 py-1 rounded">GUARDAR</div>
-                <div class="bg-emerald-600 text-white text-[10px] font-bold px-3 py-1 rounded">EXPORTAR (12)</div>
-              </div>
-            </div>
-            <!-- Mock content -->
-            <div class="flex h-52 md:h-80" aria-hidden="true">
-              <!-- Video area -->
-              <div class="flex-1 bg-zinc-900 flex items-center justify-center relative overflow-hidden">
-                <!-- Field lines -->
-                <div class="absolute inset-0" style="background: linear-gradient(0deg, rgba(16,185,129,0.03) 0%, transparent 60%)"></div>
-                <div class="absolute top-1/2 left-0 right-0 h-px bg-white/5"></div>
-                <div class="absolute top-1/4 bottom-1/4 left-1/2 -translate-x-1/2 w-24 md:w-36 h-12 md:h-20 border border-white/5 rounded-full"></div>
-                <!-- Play icon -->
-                <div class="relative text-center z-10">
-                  <div class="text-zinc-700 text-5xl md:text-6xl mb-2">
-                    <i class="fas fa-play-circle" style="filter: drop-shadow(0 0 12px rgba(99,102,241,0.3))"></i>
-                  </div>
-                  <p class="text-zinc-600 text-xs font-display uppercase tracking-widest">45'&nbsp;23"</p>
-                </div>
-                <!-- Telestrator arrow mock -->
-                <svg class="absolute top-8 right-12 w-16 h-12 opacity-60" viewBox="0 0 64 48" fill="none" aria-hidden="true">
-                  <path d="M8 40 C20 20, 40 12, 56 8" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                  <path d="M50 4 L56 8 L52 14" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                </svg>
-                <!-- Tag buttons -->
-                <div class="absolute bottom-4 left-4 flex gap-1.5 flex-wrap max-w-xs">
-                  <div class="bg-emerald-700 text-white text-[9px] font-bold px-2 py-1 rounded font-display tracking-wide">GOL [G]</div>
-                  <div class="bg-red-700 text-white text-[9px] font-bold px-2 py-1 rounded font-display tracking-wide">PÉRDIDA [P]</div>
-                  <div class="bg-blue-700 text-white text-[9px] font-bold px-2 py-1 rounded font-display tracking-wide">RECUPERACIÓN [R]</div>
-                  <div class="bg-orange-700 text-white text-[9px] font-bold px-2 py-1 rounded font-display tracking-wide">TIRO [T]</div>
-                  <div class="bg-purple-700 text-white text-[9px] font-bold px-2 py-1 rounded font-display tracking-wide">OFFSIDE [O]</div>
-                </div>
-              </div>
-              <!-- Event log sidebar -->
-              <div class="w-44 md:w-60 bg-zinc-950 border-l border-zinc-800 p-3 flex flex-col gap-2" aria-hidden="true">
-                <p class="text-zinc-600 text-[9px] font-display font-bold uppercase tracking-wider">Registro de Eventos</p>
-                <div class="space-y-1 overflow-hidden">
-                  <div class="bg-zinc-900 rounded px-2 py-1.5 flex items-center gap-2">
-                    <div class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></div>
-                    <span class="text-zinc-400 text-[10px] truncate">Gol — 12:34</span>
-                  </div>
-                  <div class="bg-zinc-900 rounded px-2 py-1.5 flex items-center gap-2">
-                    <div class="w-2 h-2 rounded-full bg-red-500 shrink-0"></div>
-                    <span class="text-zinc-400 text-[10px] truncate">Pérdida — 18:02</span>
-                  </div>
-                  <div class="bg-zinc-900 rounded px-2 py-1.5 flex items-center gap-2">
-                    <div class="w-2 h-2 rounded-full bg-blue-500 shrink-0"></div>
-                    <span class="text-zinc-400 text-[10px] truncate">Recuperación — 23:47</span>
-                  </div>
-                  <div class="bg-indigo-950/60 border border-indigo-800/40 rounded px-2 py-1.5 flex items-center gap-2">
-                    <div class="w-2 h-2 rounded-full bg-orange-500 shrink-0"></div>
-                    <span class="text-zinc-300 text-[10px] font-semibold truncate">Tiro — 31:15 ←</span>
-                  </div>
-                  <div class="bg-zinc-900 rounded px-2 py-1.5 flex items-center gap-2">
-                    <div class="w-2 h-2 rounded-full bg-purple-500 shrink-0"></div>
-                    <span class="text-zinc-400 text-[10px] truncate">Offside — 38:22</span>
-                  </div>
-                  <div class="bg-zinc-900 rounded px-2 py-1.5 flex items-center gap-2">
-                    <div class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></div>
-                    <span class="text-zinc-400 text-[10px] truncate">Recuperación — 41:09</span>
-                  </div>
-                </div>
-                <div class="mt-auto pt-2 border-t border-zinc-800">
-                  <p class="text-zinc-700 text-[9px] font-display uppercase tracking-wider">12 eventos · 45'</p>
-                </div>
-              </div>
-            </div>
+          <div class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl shadow-black/60">
+            <video class="w-full aspect-video block bg-zinc-950"
+                   autoplay muted loop playsinline preload="auto"
+                   poster="assets/hero-poster.jpg"
+                   data-i18n-aria="hero.videoAria"
+                   aria-label="Video de Goal Labs en funcionamiento: tagging, telestrator y exportación">
+              <source src="assets/hero-demo.mp4" type="video/mp4" />
+            </video>
           </div>
           <!-- Glow -->
           <div class="absolute -inset-4 bg-indigo-600/5 rounded-3xl blur-2xl -z-10" aria-hidden="true"></div>
@@ -1409,6 +1335,7 @@
         "offside.verdictOffside": `OFFSIDE`,
         "offside.stageAria": `Demo interactivo de offside: arrastrá la línea para ver si el atacante está habilitado o en posición adelantada.`,
         "hero.heroImgAlt": `Visualización del análisis de offside con corrección de perspectiva sobre una cancha`,
+        "hero.videoAria": `Video de Goal Labs en funcionamiento: tagging, telestrator y exportación`,
         "ctx.h2": `Hecho para el fútbol de verdad.`,
         "ctx.sub": `Del potrero al club: el mismo análisis profesional, sin la licencia profesional.`,
         "ctx.alt": `Notebook con Goal Labs analizando un partido al borde de la cancha de un club argentino al atardecer`
@@ -1433,6 +1360,7 @@
         "offside.verdictOffside": `OFFSIDE`,
         "offside.stageAria": `Interactive offside demo: drag the line to see whether the attacker is onside or offside.`,
         "hero.heroImgAlt": `Visualization of offside analysis with perspective correction over a pitch`,
+        "hero.videoAria": `Goal Labs in action: tagging, telestrator and export`,
         "ctx.h2": `Built for real football.`,
         "ctx.sub": `From the local pitch to the club: the same pro analysis, without the pro license.`,
         "ctx.alt": `Laptop running Goal Labs analyzing a match at the edge of an Argentine club pitch at dusk`
@@ -1457,6 +1385,7 @@
         "offside.verdictOffside": `FUORIGIOCO`,
         "offside.stageAria": `Demo interattivo di fuorigioco: trascina la linea per vedere se l'attaccante è regolare o in fuorigioco.`,
         "hero.heroImgAlt": `Visualizzazione dell'analisi del fuorigioco con correzione prospettica su un campo`,
+        "hero.videoAria": `Goal Labs in funzione: tagging, telestrator ed esportazione`,
         "ctx.h2": `Fatto per il calcio vero.`,
         "ctx.sub": `Dal campetto al club: la stessa analisi professionale, senza la licenza professionale.`,
         "ctx.alt": `Laptop con Goal Labs che analizza una partita a bordo campo di un club argentino al tramonto`
