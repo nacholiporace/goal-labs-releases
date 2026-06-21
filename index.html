@@ -32,10 +32,10 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 
-  <!-- Fonts: Barlow (sports editorial) + Outfit (clean body) -->
+  <!-- Fonts: Instrument Serif (display editorial) + DM Mono (labels/datos) + Outfit (body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&family=Barlow+Condensed:wght@600;700;800;900&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -43,22 +43,53 @@
       theme: {
         extend: {
           fontFamily: {
-            display: ['"Barlow Condensed"', 'sans-serif'],
-            sans: ['Barlow', 'sans-serif'],
+            display: ['"Instrument Serif"', 'Georgia', 'serif'],
+            mono: ['"DM Mono"', 'ui-monospace', 'monospace'],
+            sans: ['"Barlow Condensed"', 'sans-serif'],
             body: ['Outfit', 'sans-serif'],
           },
           colors: {
-            zinc: { 950: '#09090b' }
+            zinc: { 950: '#0a0a0a' },
+            ink: '#0a0a0a',
+            cream: '#f0ebe1'
           }
         }
       }
     }
   </script>
   <style>
-    /* Base */
-    html { scroll-behavior: smooth; }
+    /* Base — editorial: serif display + mono labels + sans body */
+    html { scroll-behavior: smooth; background:#0a0a0a; }
     body { font-family: 'Outfit', sans-serif; }
-    h1, h2, h3, .font-display { font-family: 'Barlow Condensed', sans-serif; }
+    h1, h2, h3, .font-display { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: -0.015em; }
+    .font-mono { font-family: 'DM Mono', ui-monospace, monospace; }
+
+    /* Eyebrow / etiqueta mono (estilo editorial bam83) */
+    .eyebrow {
+      font-family: 'DM Mono', ui-monospace, monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 0.7rem;
+      color: #8b8b86;
+    }
+    .hairline { height: 1px; background: rgba(240,235,225,0.12); }
+    .text-cream { color: #f0ebe1; }
+    .serif-italic { font-style: italic; }
+    #hero-heading .gradient-text { font-style: italic; }
+
+    /* Motion (GSAP / Lenis) — con GSAP activo, el estado natural es visible (GSAP anima desde 0) */
+    .anim-ready .reveal { opacity: 1; transform: none; transition: none !important; }
+    html.lenis, html.lenis body { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+    .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+    .lenis.lenis-stopped { overflow: hidden; }
+
+    /* Marquee (cinta de texto en loop) */
+    .marquee { overflow: hidden; white-space: nowrap; }
+    .marquee__track { display: inline-block; will-change: transform; animation: marquee 30s linear infinite; }
+    .marquee:hover .marquee__track { animation-play-state: paused; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) { .marquee__track { animation: none; } }
 
     /* Pulse keyframe (no se emite vía CDN salvo que se use animate-pulse) */
     @keyframes pulse {
@@ -99,7 +130,7 @@
 
     /* Gradient text */
     .gradient-text {
-      background: linear-gradient(135deg, #818cf8 0%, #6366f1 50%, #4f46e5 100%);
+      background: linear-gradient(135deg, #6ee7b7 0%, #34d399 55%, #10b981 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -185,9 +216,8 @@
 
     /* Section divider accent */
     .section-accent {
-      width: 40px; height: 3px;
-      background: linear-gradient(90deg, #6366f1, #818cf8);
-      border-radius: 2px;
+      width: 64px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(240,235,225,0.5), transparent);
       margin: 0 auto 1.5rem;
     }
 
@@ -216,14 +246,14 @@
   <nav class="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/60 bg-zinc-950/90 backdrop-blur-md" aria-label="Navegación principal">
     <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
       <a href="/" class="flex items-center gap-2 select-none focus-ring" aria-label="Goal Labs — Inicio">
-        <span translate="no" class="text-white font-display font-black text-xl tracking-tight">GOAL</span>
-        <span translate="no" class="text-zinc-400 font-display font-light text-xl tracking-widest">LABS</span>
+        <span translate="no" class="text-white font-mono font-medium text-sm tracking-[0.25em] uppercase">Goal</span>
+        <span translate="no" class="text-zinc-500 font-mono text-sm tracking-[0.35em] uppercase">Labs</span>
       </a>
-      <div class="hidden md:flex items-center gap-8 text-sm" role="list">
-        <a href="#funcionalidades" class="text-zinc-400 hover:text-white transition-colors focus-ring" role="listitem" data-i18n="nav.features">Funcionalidades</a>
-        <a href="#comparacion" class="text-zinc-400 hover:text-white transition-colors focus-ring" role="listitem" data-i18n="nav.compare">Vs. alternativas</a>
-        <a href="#precios" class="text-zinc-400 hover:text-white transition-colors focus-ring" role="listitem" data-i18n="nav.pricing">Precios</a>
-        <a href="#faq" class="text-zinc-400 hover:text-white transition-colors focus-ring" role="listitem" data-i18n="nav.faq">FAQ</a>
+      <div class="hidden md:flex items-center gap-8" role="list">
+        <a href="#funcionalidades" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.features">Funcionalidades</a>
+        <a href="#comparacion" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.compare">Vs. alternativas</a>
+        <a href="#precios" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.pricing">Precios</a>
+        <a href="#faq" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.faq">FAQ</a>
       </div>
       <div class="flex items-center gap-3">
         <label class="sr-only" for="lang-select" data-i18n="nav.langLabel">Idioma</label>
@@ -236,7 +266,7 @@
         </select>
         <a href="https://github.com/nacholiporace/goal-labs-releases/releases/latest"
            data-download
-           class="btn-primary bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors flex items-center gap-2 focus-ring"
+           class="btn-primary bg-cream hover:bg-white text-ink text-xs font-body font-semibold px-4 py-2 rounded-full transition-colors flex items-center gap-2 focus-ring"
            data-i18n-aria="nav.downloadFreeAria"
            aria-label="Descargar Goal Labs gratis para Windows">
           <i class="fas fa-download text-xs" aria-hidden="true"></i>
@@ -249,50 +279,51 @@
   <main id="main-content">
 
     <!-- HERO -->
-    <section class="min-h-screen flex items-center pt-14 pitch-bg" aria-labelledby="hero-heading">
-      <div class="max-w-6xl mx-auto px-6 py-24 text-center">
+    <section class="min-h-screen flex items-center pt-14 relative overflow-hidden" aria-labelledby="hero-heading">
+      <div class="max-w-6xl mx-auto px-6 py-24 text-center w-full">
 
-        <!-- Badge -->
-        <div class="inline-flex items-center gap-2 bg-indigo-950/60 border border-indigo-800/50 text-indigo-300 text-xs font-semibold px-3 py-1.5 rounded-full mb-8" role="note">
-          <span class="w-1.5 h-1.5 bg-indigo-400 rounded-full" style="animation: pulse 2s ease-in-out infinite;" aria-hidden="true"></span>
-          <span data-i18n="hero.badge">Gratis · Offline · Solo para Windows</span>
+        <!-- Eyebrow -->
+        <div class="flex items-center justify-center gap-4 mb-8 reveal">
+          <span class="hidden sm:block w-12 hairline" aria-hidden="true"></span>
+          <span class="eyebrow" data-i18n="hero.badge">Gratis · Offline · Solo para Windows</span>
+          <span class="hidden sm:block w-12 hairline" aria-hidden="true"></span>
         </div>
 
         <!-- H1 -->
-        <h1 id="hero-heading" data-i18n-html="hero.h1" class="text-balance font-display text-6xl md:text-8xl font-black text-white leading-none tracking-tight mb-6">
+        <h1 id="hero-heading" data-i18n-html="hero.h1" class="text-balance font-display text-white leading-[0.92] tracking-tight mb-8 text-5xl sm:text-7xl md:text-[5.75rem]">
           Tagueá tu próximo<br class="hidden md:block" />
           partido en 45 minutos.<br />
-          <span class="gradient-text">Gratis.</span>
+          <span class="gradient-text serif-italic">Gratis.</span>
         </h1>
 
-        <p data-i18n-html="hero.sub" class="text-pretty text-xl text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed font-body">
+        <p data-i18n-html="hero.sub" class="text-pretty text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed font-body reveal">
           Software de videoanálisis táctico para el fútbol argentino.
           Taggeá con hotkeys, dibujá con el telestrator, verificá offsides con perspectiva
-          y armá <span class="text-zinc-200">reels verticales para redes</span> — todo en una app que funciona sin internet.
+          y armá <span class="text-cream">reels verticales para redes</span> — todo en una app que funciona sin internet.
         </p>
 
         <!-- CTA -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-5 mb-6 reveal">
           <a href="https://github.com/nacholiporace/goal-labs-releases/releases/latest"
              data-download
-             class="btn-primary bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-bold px-8 py-4 rounded-xl text-lg transition-colors flex items-center gap-3 shadow-lg shadow-indigo-900/40 focus-ring"
+             class="btn-primary bg-cream hover:bg-white text-ink font-body font-semibold px-8 py-4 rounded-full text-base transition-colors flex items-center gap-3 focus-ring"
              data-i18n-aria="hero.ctaDownloadAria"
              aria-label="Descargar Goal Labs para Windows — gratis">
-            <i class="fas fa-download" aria-hidden="true"></i>
+            <i class="fas fa-download text-sm" aria-hidden="true"></i>
             <span data-i18n="cta.downloadWindows">Descargar para Windows</span>
           </a>
           <a href="#funcionalidades"
-             class="text-zinc-400 hover:text-white text-sm flex items-center gap-2 transition-colors focus-ring"
+             class="font-mono text-xs uppercase tracking-[0.18em] text-zinc-400 hover:text-cream flex items-center gap-2 transition-colors focus-ring"
              data-i18n-aria="hero.seeFeaturesAria"
              aria-label="Ver funcionalidades de Goal Labs">
-            <span data-i18n="hero.seeFeatures">Ver qué incluye</span> <i class="fas fa-chevron-down text-xs" aria-hidden="true"></i>
+            <span data-i18n="hero.seeFeatures">Ver qué incluye</span> <i class="fas fa-arrow-down text-[10px]" aria-hidden="true"></i>
           </a>
         </div>
-        <p class="text-zinc-600 text-sm font-body" data-i18n="hero.noAccount">Sin cuenta · Sin tarjeta · Windows 10/11</p>
+        <p class="eyebrow reveal" data-i18n="hero.noAccount">Sin cuenta · Sin tarjeta · Windows 10/11</p>
 
-        <!-- App preview mock -->
+        <!-- Video real del software -->
         <div class="mt-16 relative max-w-4xl mx-auto reveal">
-          <div class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl shadow-black/60">
+          <div class="bg-zinc-900 border border-white/10 rounded-2xl overflow-hidden shadow-2xl shadow-black/60">
             <video class="w-full aspect-video block bg-zinc-950"
                    autoplay muted loop playsinline preload="auto"
                    poster="assets/hero-poster.jpg"
@@ -301,11 +332,17 @@
               <source src="assets/hero-demo.mp4" type="video/mp4" />
             </video>
           </div>
-          <!-- Glow -->
-          <div class="absolute -inset-4 bg-indigo-600/5 rounded-3xl blur-2xl -z-10" aria-hidden="true"></div>
+          <div class="absolute -inset-6 bg-emerald-500/5 rounded-[2rem] blur-3xl -z-10" aria-hidden="true"></div>
         </div>
       </div>
     </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee border-y border-white/10 py-4 bg-ink select-none" aria-hidden="true">
+      <div class="marquee__track font-mono text-sm uppercase tracking-[0.2em] text-zinc-500">
+        <span class="px-6">Análisis táctico</span><span class="px-6 text-cream">✦</span><span class="px-6">Tagging con hotkeys</span><span class="px-6 text-cream">✦</span><span class="px-6">Telestrator</span><span class="px-6 text-cream">✦</span><span class="px-6">Offside con perspectiva</span><span class="px-6 text-cream">✦</span><span class="px-6">Reels 9:16</span><span class="px-6 text-cream">✦</span><span class="px-6">100% Offline</span><span class="px-6 text-cream">✦</span><span class="px-6">Gratis</span><span class="px-6 text-cream">✦</span><span class="px-6">Análisis táctico</span><span class="px-6 text-cream">✦</span><span class="px-6">Tagging con hotkeys</span><span class="px-6 text-cream">✦</span><span class="px-6">Telestrator</span><span class="px-6 text-cream">✦</span><span class="px-6">Offside con perspectiva</span><span class="px-6 text-cream">✦</span><span class="px-6">Reels 9:16</span><span class="px-6 text-cream">✦</span><span class="px-6">100% Offline</span><span class="px-6 text-cream">✦</span><span class="px-6">Gratis</span><span class="px-6 text-cream">✦</span>
+      </div>
+    </div>
 
     <!-- EL PROBLEMA -->
     <section class="py-20 border-t border-zinc-800/50" aria-labelledby="problema-heading">
@@ -834,6 +871,11 @@
   <!-- Live region for screen readers -->
   <div aria-live="polite" aria-atomic="true" class="sr-only" id="announcer"></div>
 
+  <!-- Animación: GSAP + ScrollTrigger + Lenis (smooth scroll) -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+
   <script>
     // FAQ accordion with ARIA
     document.querySelectorAll('.faq-trigger').forEach(btn => {
@@ -853,23 +895,79 @@
       });
     });
 
-    // Scroll reveal with Intersection Observer
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
-    );
-    reveals.forEach(el => observer.observe(el));
+    // ---- Motion: GSAP + ScrollTrigger + Lenis (con fallback y reduced-motion) ----
+    (function () {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const hasGSAP = window.gsap && window.ScrollTrigger;
 
-    // Animate hero mock on load (already visible, mark immediately)
-    document.querySelector('.reveal').classList.add('visible');
+      // Fallback: si GSAP no cargó (o reduced-motion), mostrar todo sin animar
+      if (!hasGSAP || reduce) {
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+        return;
+      }
+
+      gsap.registerPlugin(ScrollTrigger);
+      document.documentElement.classList.add('anim-ready');
+
+      // Smooth scroll (Lenis) sincronizado con ScrollTrigger
+      let lenis = null;
+      if (window.Lenis) {
+        lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((t) => lenis.raf(t * 1000));
+        gsap.ticker.lagSmoothing(0);
+        // Anclas del nav → scroll suave con Lenis
+        document.querySelectorAll('a[href^="#"]').forEach((a) => {
+          a.addEventListener('click', (e) => {
+            const id = a.getAttribute('href');
+            if (id.length > 1) {
+              const target = document.querySelector(id);
+              if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: -70 }); }
+            }
+          });
+        });
+      }
+
+      // Reveals: cada .reveal entra al scrollear (fade + subida)
+      gsap.utils.toArray('.reveal').forEach((el) => {
+        gsap.from(el, {
+          opacity: 0, y: 36, duration: 0.95, ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 88%', once: true }
+        });
+      });
+
+      // Stagger dentro de [data-stagger] (hijos con [data-stagger-item])
+      gsap.utils.toArray('[data-stagger]').forEach((group) => {
+        const items = group.querySelectorAll('[data-stagger-item]');
+        if (!items.length) return;
+        gsap.from(items, {
+          opacity: 0, y: 30, duration: 0.85, ease: 'power3.out', stagger: 0.08,
+          scrollTrigger: { trigger: group, start: 'top 84%', once: true }
+        });
+      });
+
+      // Parallax: [data-parallax="px"]
+      gsap.utils.toArray('[data-parallax]').forEach((el) => {
+        const amt = parseFloat(el.getAttribute('data-parallax')) || 60;
+        gsap.fromTo(el, { y: -amt }, {
+          y: amt, ease: 'none',
+          scrollTrigger: { trigger: el.closest('section') || el, start: 'top bottom', end: 'bottom top', scrub: true }
+        });
+      });
+
+      // Contadores: [data-count="123"]
+      gsap.utils.toArray('[data-count]').forEach((el) => {
+        const target = parseFloat(el.getAttribute('data-count')) || 0;
+        const obj = { v: 0 };
+        gsap.to(obj, {
+          v: target, duration: 1.4, ease: 'power2.out',
+          scrollTrigger: { trigger: el, start: 'top 92%', once: true },
+          onUpdate: () => { el.textContent = Math.round(obj.v).toLocaleString('es-AR'); }
+        });
+      });
+
+      ScrollTrigger.refresh();
+    })();
 
     // Direct download: fetch latest release asset URL from GitHub API
     (async () => {
