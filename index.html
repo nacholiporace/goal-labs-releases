@@ -101,6 +101,10 @@
     .hero-pitch { position:absolute; inset:0; pointer-events:none; opacity:.5; }
     .hero-pitch svg { position:absolute; left:50%; top:50%; width:min(120vh,1100px); height:auto; transform:translate(-50%,-50%); }
 
+    /* Sticky-scroll media transition */
+    .feat-media { transition: opacity 0.35s ease; }
+    .feat-item { display: flex; flex-direction: column; justify-content: center; }
+
     /* ---- Microinteracciones ---- */
     .btn-primary { transition: transform .25s cubic-bezier(.2,.7,.2,1), background-color .2s ease; }
     .btn-primary:hover { transform: translateY(-2px); }
@@ -562,7 +566,7 @@
                 <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
               </div>
               <div class="feat-media absolute inset-0 flex flex-col items-center justify-center gap-4" data-feat="5" style="opacity:0;pointer-events:none">
-                <i class="fas fa-mobile-screen-button text-emerald-400" style="font-size:2.5rem" aria-hidden="true"></i>
+                <i class="fas fa-film text-emerald-400" style="font-size:2.5rem" aria-hidden="true"></i>
                 <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
               </div>
               <div class="feat-media absolute inset-0 flex flex-col items-center justify-center gap-4" data-feat="6" style="opacity:0;pointer-events:none">
@@ -583,7 +587,7 @@
           <div class="md:w-[54%] md:pl-16 lg:pl-20">
 
             <!-- 01 Taggeás con hotkeys — Gratis -->
-            <div class="feat-item border-b border-white/10 py-20 md:py-28" data-feat="1">
+            <div class="feat-item border-b border-white/10 py-12 md:py-16" data-feat="1">
               <div class="md:hidden mb-6 rounded-sm overflow-hidden flex flex-col items-center justify-center gap-3" style="aspect-ratio:16/10;background:#0f0f0f;border:1px solid rgba(255,255,255,0.07)">
                 <i class="fas fa-keyboard text-emerald-400" style="font-size:1.75rem" aria-hidden="true"></i>
                 <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
@@ -638,18 +642,18 @@
               <p class="text-zinc-400 font-body text-base md:text-lg leading-relaxed" data-i18n="fv.4.d">Generá tags desde lenguaje natural. Análisis de patrones, sugerencias automáticas de eventos e insights del partido para llegar preparado a la charla técnica.</p>
             </div>
 
-            <!-- 05 Producís para redes — Pro -->
+            <!-- 05 Exportás el análisis — Pro -->
             <div class="feat-item border-b border-white/10 py-12 md:py-16" data-feat="5">
               <div class="md:hidden mb-6 rounded-sm overflow-hidden flex flex-col items-center justify-center gap-3" style="aspect-ratio:16/10;background:#0f0f0f;border:1px solid rgba(255,255,255,0.07)">
-                <i class="fas fa-mobile-screen-button text-emerald-400" style="font-size:1.75rem" aria-hidden="true"></i>
+                <i class="fas fa-film text-emerald-400" style="font-size:1.75rem" aria-hidden="true"></i>
                 <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
               </div>
               <div class="flex items-center justify-between gap-4 mb-5">
                 <span class="font-mono text-emerald-400 text-xs tracking-widest" data-i18n="fv.5.num">05</span>
                 <span class="tag-pro font-mono text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full" data-i18n="fv.5.badge">Pro</span>
               </div>
-              <h3 class="font-display text-white leading-tight mb-4" style="font-size:clamp(1.75rem,3.2vw,2.75rem)" data-i18n="fv.5.t">Producís para redes</h3>
-              <p class="text-zinc-400 font-body text-base md:text-lg leading-relaxed" data-i18n="fv.5.d">Highlights en 9:16 con seguimiento de la jugada, listos para Instagram. También exportás a MP4 o FCP XML para tu editor de video.</p>
+              <h3 class="font-display text-white leading-tight mb-4" style="font-size:clamp(1.75rem,3.2vw,2.75rem)" data-i18n="fv.5.t">Exportás el análisis</h3>
+              <p class="text-zinc-400 font-body text-base md:text-lg leading-relaxed" data-i18n="fv.5.d">Cortá clips por patrón táctico, armá playlists de acciones y exportá en MP4, CSV o FCP XML para Premiere y DaVinci. Del taggeo al briefing técnico sin salir de la app.</p>
             </div>
 
             <!-- 06 Tu temporada, ordenada — Pro -->
@@ -1261,6 +1265,94 @@
         });
       })();
 
+      // ---- Funcionalidades: sticky scroll (GSAP ScrollTrigger + height sync + snap) ----
+      (function () {
+        var featItems = document.querySelectorAll('.feat-item');
+        var featMedias = document.querySelectorAll('.feat-media');
+        var bar = document.getElementById('feat-bar');
+        var numEl = document.getElementById('feat-num');
+        var mediaWrap = document.getElementById('feat-media-wrap');
+        var stageEl = document.getElementById('feat-stage');
+        if (!featItems.length) return;
+
+        function activateFeat(n) {
+          var idx = parseInt(n, 10) - 1;
+          featMedias.forEach(function (m, i) {
+            var on = i === idx;
+            gsap.to(m, { opacity: on ? 1 : 0, duration: 0.35, ease: 'power2.inOut',
+              onStart: on ? function () { m.style.pointerEvents = 'auto'; } : undefined,
+              onComplete: on ? undefined : function () { m.style.pointerEvents = 'none'; }
+            });
+          });
+          featItems.forEach(function (it, i) {
+            it.classList.toggle('feat-item--active', i === idx);
+          });
+          if (bar) bar.style.width = ((idx + 1) / 6 * 100).toFixed(2) + '%';
+          if (numEl) numEl.textContent = String(parseInt(n, 10)).padStart(2, '0');
+        }
+
+        // Match each feat-item's min-height to the media panel
+        function syncHeights() {
+          if (!mediaWrap) return;
+          var h = mediaWrap.offsetHeight;
+          if (h < 80) return;
+          featItems.forEach(function (item) { item.style.minHeight = h + 'px'; });
+        }
+
+        // Cache each item's document-Y for snap calculation
+        function cacheSnapY() {
+          var sy = window.scrollY || 0;
+          featItems.forEach(function (item) {
+            item._snapY = item.getBoundingClientRect().top + sy;
+          });
+        }
+
+        function init() { syncHeights(); cacheSnapY(); }
+        init();
+        window.addEventListener('resize', function () { init(); ScrollTrigger.refresh(); });
+
+        activateFeat('1');
+
+        // ScrollTrigger: activate on scroll
+        featItems.forEach(function (item) {
+          ScrollTrigger.create({
+            trigger: item,
+            start: 'top 55%',
+            end: 'bottom 45%',
+            onEnter: function () { activateFeat(item.dataset.feat); },
+            onEnterBack: function () { activateFeat(item.dataset.feat); },
+            invalidateOnRefresh: true,
+          });
+        });
+
+        // Snap to each item's top position within feat-stage
+        if (stageEl) {
+          ScrollTrigger.create({
+            trigger: stageEl,
+            start: 'top top',
+            end: 'bottom bottom',
+            snap: {
+              snapTo: function (p, self) {
+                var range = self.end - self.start;
+                if (range <= 0) return p;
+                var currentPos = self.start + p * range;
+                var nearest = currentPos, minDist = Infinity;
+                featItems.forEach(function (item) {
+                  var s = item._snapY || 0;
+                  var d = Math.abs(s - currentPos);
+                  if (d < minDist) { minDist = d; nearest = s; }
+                });
+                return Math.max(0, Math.min(1, (nearest - self.start) / range));
+              },
+              duration: { min: 0.2, max: 0.4 },
+              delay: 0.05,
+              ease: 'power1.inOut',
+            },
+            invalidateOnRefresh: true,
+          });
+        }
+      })();
+
       ScrollTrigger.refresh();
     })();
 
@@ -1333,8 +1425,8 @@
         "fv.3.d": `Línea de perspectiva geométrica por homografía — el mismo principio que usa el VAR profesional. Único en esta categoría de precio.`,
         "fv.4.num": `04`, "fv.4.t": `IA Integrada (Gemini)`, "fv.4.badge": `Pro`,
         "fv.4.d": `Generá tags desde lenguaje natural. Análisis de patrones, sugerencias automáticas de eventos e insights del partido para llegar preparado a la charla técnica.`,
-        "fv.5.num": `05`, "fv.5.t": `Producís para redes`, "fv.5.badge": `Pro`,
-        "fv.5.d": `Highlights en 9:16 con seguimiento de la jugada, listos para Instagram. También exportás a MP4 o FCP XML para tu editor de video.`,
+        "fv.5.num": `05`, "fv.5.t": `Exportás el análisis`, "fv.5.badge": `Pro`,
+        "fv.5.d": `Cortá clips por patrón táctico, armá playlists de acciones y exportá en MP4, CSV o FCP XML para Premiere y DaVinci. Del taggeo al briefing técnico sin salir de la app.`,
         "fv.6.num": `06`, "fv.6.t": `Tu temporada, ordenada`, "fv.6.badge": `Pro`,
         "fv.6.d": `Biblioteca en la nube, análisis de temporada, reportes PDF y LPF Play con planteles. Todo sincronizado — y 100% offline cuando no tenés señal.`,
         "f.hotkeys.t": `Tagging con Hotkeys`,
@@ -1482,8 +1574,8 @@
         "fv.3.d": `Geometric perspective line via homography — the same principle professional VAR uses. Unique at this price point.`,
         "fv.4.num": `04`, "fv.4.t": `Built-in AI (Gemini)`, "fv.4.badge": `Pro`,
         "fv.4.d": `Generate tags from natural language. Pattern analysis, automatic event suggestions and match insights so you arrive at the team talk fully prepared.`,
-        "fv.5.num": `05`, "fv.5.t": `Produce for social`, "fv.5.badge": `Pro`,
-        "fv.5.d": `9:16 highlights with action tracking, ready for Instagram. Also export to MP4 or FCP XML for your video editor.`,
+        "fv.5.num": `05`, "fv.5.t": `Export the analysis`, "fv.5.badge": `Pro`,
+        "fv.5.d": `Cut clips by tactical pattern, build action playlists and export to MP4, CSV or FCP XML for Premiere and DaVinci. From tagging to technical briefing without leaving the app.`,
         "fv.6.num": `06`, "fv.6.t": `Your season, organized`, "fv.6.badge": `Pro`,
         "fv.6.d": `Cloud library, season analysis, PDF reports and LPF Play with squads. All synced — and 100% offline when you have no signal.`,
         "f.hotkeys.t": `Hotkey Tagging`,
@@ -1631,8 +1723,8 @@
         "fv.3.d": `Linea prospettica geometrica tramite omografia — lo stesso principio del VAR professionale. Unico in questa fascia di prezzo.`,
         "fv.4.num": `04`, "fv.4.t": `IA Integrata (Gemini)`, "fv.4.badge": `Pro`,
         "fv.4.d": `Genera tag dal linguaggio naturale. Analisi dei pattern, suggerimenti automatici di eventi e insight della partita per arrivare preparato al briefing tecnico.`,
-        "fv.5.num": `05`, "fv.5.t": `Produci per i social`, "fv.5.badge": `Pro`,
-        "fv.5.d": `Highlight in 9:16 con tracking dell'azione, pronti per Instagram. Esporta anche in MP4 o FCP XML per il tuo editor video.`,
+        "fv.5.num": `05`, "fv.5.t": `Esporti l'analisi`, "fv.5.badge": `Pro`,
+        "fv.5.d": `Taglia clip per pattern tattico, costruisci playlist di azioni ed esporta in MP4, CSV o FCP XML per Premiere e DaVinci. Dal tag al briefing tecnico senza uscire dall'app.`,
         "fv.6.num": `06`, "fv.6.t": `La tua stagione, organizzata`, "fv.6.badge": `Pro`,
         "fv.6.d": `Libreria cloud, analisi di stagione, report PDF e LPF Play con rose. Tutto sincronizzato — e 100% offline senza segnale.`,
         "f.hotkeys.t": `Tagging con Hotkey`,
