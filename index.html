@@ -525,94 +525,148 @@
     </section>
 
     <!-- FUNCIONALIDADES -->
-    <section id="funcionalidades" class="py-24 md:py-32 border-t border-white/10" aria-labelledby="funcionalidades-heading">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="max-w-3xl mb-16 reveal">
+    <section id="funcionalidades" class="border-t border-white/10" aria-labelledby="funcionalidades-heading">
+
+      <!-- Header -->
+      <div class="max-w-7xl mx-auto px-6 pt-24 md:pt-32 pb-16 md:pb-20">
+        <div class="max-w-3xl reveal">
           <span class="eyebrow" data-i18n="nav.features">Funcionalidades</span>
           <h2 id="funcionalidades-heading" class="font-display text-white text-5xl md:text-7xl mt-4 leading-[0.95] text-balance" data-i18n="features.h2">
             Todo lo que necesitás en una sola pantalla.
           </h2>
           <p class="text-zinc-400 text-lg font-body mt-5 text-pretty" data-i18n="features.sub">Sin saltar entre apps. Sin flujos rotos.</p>
         </div>
+      </div>
 
-        <!-- Núcleo (gratis) -->
-        <div class="flex items-center gap-4 mb-px">
-          <span class="eyebrow text-emerald-400/90" data-i18n="features.coreLabel">El núcleo</span>
-          <span class="eyebrow" data-i18n="features.coreFree">Gratis para siempre</span>
-          <span class="flex-1 hairline" aria-hidden="true"></span>
-        </div>
+      <!-- Sticky-scroll stage -->
+      <div id="feat-stage" class="max-w-[1400px] mx-auto px-6 pb-24 md:pb-32">
+        <div class="md:flex md:items-start">
 
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 border-x border-b border-white/10" data-stagger>
-          <article class="bg-ink p-9 md:p-11" data-stagger-item>
-            <div class="flex items-center justify-between mb-6"><span class="font-mono text-xs text-emerald-400">01</span><i class="fas fa-keyboard text-zinc-600 text-lg" aria-hidden="true"></i></div>
-            <h3 class="font-display text-2xl md:text-3xl text-white leading-tight mb-2.5" data-i18n="f.hotkeys.t">Tagging con Hotkeys</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed font-body" data-i18n="f.hotkeys.d">Configurá tus propias teclas. Una tecla = un evento táctico registrado, sin pausar el video.</p>
-          </article>
-          <article class="bg-ink p-9 md:p-11" data-stagger-item>
-            <div class="flex items-center justify-between mb-6"><span class="font-mono text-xs text-emerald-400">02</span><i class="fas fa-pen-nib text-zinc-600 text-lg" aria-hidden="true"></i></div>
-            <h3 class="font-display text-2xl md:text-3xl text-white leading-tight mb-2.5" data-i18n="f.telestrator.t">Telestrator Completo</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed font-body" data-i18n="f.telestrator.d">11 herramientas de dibujo con animación sobre el video — flechas, zonas, spotlight, texto y más.</p>
-          </article>
-          <article class="bg-ink p-9 md:p-11" data-stagger-item>
-            <div class="flex items-center justify-between mb-6"><span class="font-mono text-xs text-emerald-400">03</span><i class="fas fa-ruler-combined text-zinc-600 text-lg" aria-hidden="true"></i></div>
-            <h3 class="font-display text-2xl md:text-3xl text-white leading-tight mb-2.5" data-i18n="f.offside.t">Offside con Perspectiva</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed font-body" data-i18n="f.offside.d">Verificación geométrica por homografía — el mismo principio que usa el VAR profesional. Único en este precio.</p>
-          </article>
-          <article class="bg-ink p-9 md:p-11" data-stagger-item>
-            <div class="flex items-center justify-between mb-6"><span class="font-mono text-xs text-emerald-400">04</span><i class="fas fa-robot text-zinc-600 text-lg" aria-hidden="true"></i></div>
-            <h3 class="font-display text-2xl md:text-3xl text-white leading-tight mb-2.5" data-i18n="f.ai.t">IA Integrada (Gemini)</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed font-body" data-i18n="f.ai.d">Generá tags desde lenguaje natural. Análisis de patrones y sugerencias automáticas de eventos.</p>
-          </article>
-          <article class="bg-ink p-9 md:p-11" data-stagger-item>
-            <div class="flex items-center justify-between mb-6"><span class="font-mono text-xs text-emerald-400">05</span><i class="fas fa-file-export text-zinc-600 text-lg" aria-hidden="true"></i></div>
-            <h3 class="font-display text-2xl md:text-3xl text-white leading-tight mb-2.5" data-i18n="f.export.t">Exportación a tu editor</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed font-body" data-i18n="f.export.d">Clips MP4 vía FFmpeg nativo. FCP XML para Premiere y DaVinci. CSV y JSON de estadísticas.</p>
-          </article>
-          <article class="bg-ink p-9 md:p-11" data-stagger-item>
-            <div class="flex items-center justify-between mb-6"><span class="font-mono text-xs text-emerald-400">06</span><i class="fas fa-wifi-slash text-zinc-600 text-lg" aria-hidden="true"></i></div>
-            <h3 class="font-display text-2xl md:text-3xl text-white leading-tight mb-2.5" data-i18n="f.offline.t">100% Offline</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed font-body" data-i18n="f.offline.d">Funciona en cualquier cancha, sin wifi, sin servidores. Tus proyectos se guardan como archivos .json en tu computadora.</p>
-          </article>
-        </div>
+          <!-- Left: sticky media panel (desktop only) -->
+          <div class="hidden md:block md:w-[46%] md:sticky md:top-24 md:self-start">
+            <div id="feat-media-wrap" class="relative overflow-hidden rounded-sm" style="aspect-ratio:16/10;background:#0f0f0f;border:1px solid rgba(255,255,255,0.07)">
+              <div class="feat-media absolute inset-0 flex flex-col items-center justify-center gap-4" data-feat="1">
+                <i class="fas fa-keyboard text-emerald-400" style="font-size:2.5rem" aria-hidden="true"></i>
+                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
+              </div>
+              <div class="feat-media absolute inset-0 flex flex-col items-center justify-center gap-4" data-feat="2" style="opacity:0;pointer-events:none">
+                <i class="fas fa-pen-nib text-emerald-400" style="font-size:2.5rem" aria-hidden="true"></i>
+                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
+              </div>
+              <div class="feat-media absolute inset-0 flex flex-col items-center justify-center gap-4" data-feat="3" style="opacity:0;pointer-events:none">
+                <i class="fas fa-ruler-combined text-emerald-400" style="font-size:2.5rem" aria-hidden="true"></i>
+                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
+              </div>
+              <div class="feat-media absolute inset-0 flex flex-col items-center justify-center gap-4" data-feat="4" style="opacity:0;pointer-events:none">
+                <i class="fas fa-wand-magic-sparkles text-emerald-400" style="font-size:2.5rem" aria-hidden="true"></i>
+                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
+              </div>
+              <div class="feat-media absolute inset-0 flex flex-col items-center justify-center gap-4" data-feat="5" style="opacity:0;pointer-events:none">
+                <i class="fas fa-mobile-screen-button text-emerald-400" style="font-size:2.5rem" aria-hidden="true"></i>
+                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
+              </div>
+              <div class="feat-media absolute inset-0 flex flex-col items-center justify-center gap-4" data-feat="6" style="opacity:0;pointer-events:none">
+                <i class="fas fa-cloud text-emerald-400" style="font-size:2.5rem" aria-hidden="true"></i>
+                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
+              </div>
+            </div>
+            <!-- Progress -->
+            <div class="flex items-center gap-3 mt-4" aria-hidden="true">
+              <span class="font-mono text-xs text-zinc-600"><span id="feat-num">01</span><span class="text-zinc-700"> / 06</span></span>
+              <div class="flex-1 h-px bg-white/10 relative overflow-hidden rounded-full">
+                <div id="feat-bar" class="absolute inset-y-0 left-0 bg-emerald-400/50 rounded-full transition-all duration-500" style="width:16.67%"></div>
+              </div>
+            </div>
+          </div>
 
-        <!-- Pro (temporada y producción) -->
-        <div class="flex items-center gap-3 mt-20 mb-px">
-          <span class="eyebrow text-emerald-300" data-i18n="features.proLabel">Temporada y producción</span>
-          <span class="tag-pro text-[9px] px-2 py-0.5 rounded-full uppercase">Pro</span>
-          <span class="flex-1 hairline" aria-hidden="true"></span>
-        </div>
+          <!-- Right: scrolling feature list -->
+          <div class="md:w-[54%] md:pl-16 lg:pl-20">
 
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 border-x border-b border-white/10" data-stagger>
-          <article class="bg-ink p-9 md:p-11" data-stagger-item>
-            <div class="flex items-center justify-between mb-6"><span class="font-mono text-xs text-emerald-400">01</span><i class="fas fa-mobile-screen-button text-zinc-600 text-lg" aria-hidden="true"></i></div>
-            <h3 class="font-display text-2xl md:text-3xl text-white leading-tight mb-2.5" data-i18n="p.reels.t">Reels verticales 9:16</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed font-body" data-i18n="p.reels.d">Armá highlights por jugador y exportá en 9:16 con seguimiento de la jugada — listos para Instagram y TikTok. También 16:9.</p>
-          </article>
-          <article class="bg-ink p-9 md:p-11" data-stagger-item>
-            <div class="flex items-center justify-between mb-6"><span class="font-mono text-xs text-emerald-400">02</span><i class="fas fa-calendar-week text-zinc-600 text-lg" aria-hidden="true"></i></div>
-            <h3 class="font-display text-2xl md:text-3xl text-white leading-tight mb-2.5" data-i18n="p.season.t">Análisis de Temporada</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed font-body" data-i18n="p.season.d">Estadísticas agregadas de todos los partidos y los momentos destacados de cada jugador a lo largo de la temporada.</p>
-          </article>
-          <article class="bg-ink p-9 md:p-11" data-stagger-item>
-            <div class="flex items-center justify-between mb-6"><span class="font-mono text-xs text-emerald-400">03</span><i class="fas fa-file-pdf text-zinc-600 text-lg" aria-hidden="true"></i></div>
-            <h3 class="font-display text-2xl md:text-3xl text-white leading-tight mb-2.5" data-i18n="p.pdf.t">Reportes PDF</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed font-body" data-i18n="p.pdf.d">Plantillas listas de partido, jugador y scouting. Compartí informes profesionales con el cuerpo técnico en un click.</p>
-          </article>
-          <article class="bg-ink p-9 md:p-11" data-stagger-item>
-            <div class="flex items-center justify-between mb-6"><span class="font-mono text-xs text-emerald-400">04</span><i class="fas fa-cloud text-zinc-600 text-lg" aria-hidden="true"></i></div>
-            <h3 class="font-display text-2xl md:text-3xl text-white leading-tight mb-2.5" data-i18n="p.cloud.t">Biblioteca en la nube</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed font-body" data-i18n="p.cloud.d">Guardá tus proyectos y accedé a ellos desde cualquier dispositivo. Tu temporada entera, sincronizada.</p>
-          </article>
-          <article class="bg-ink p-9 md:p-11" data-stagger-item>
-            <div class="flex items-center justify-between mb-6"><span class="font-mono text-xs text-emerald-400">05</span><i class="fas fa-wand-magic-sparkles text-zinc-600 text-lg" aria-hidden="true"></i></div>
-            <h3 class="font-display text-2xl md:text-3xl text-white leading-tight mb-2.5" data-i18n="p.insights.t">Insights con IA</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed font-body" data-i18n="p.insights.d">Resúmenes automáticos del partido y lectura de patrones, para llegar a la charla con el equipo con todo masticado.</p>
-          </article>
-          <article class="bg-ink p-9 md:p-11" data-stagger-item>
-            <div class="flex items-center justify-between mb-6"><span class="font-mono text-xs text-emerald-400">06</span><i class="fas fa-futbol text-zinc-600 text-lg" aria-hidden="true"></i></div>
-            <h3 class="font-display text-2xl md:text-3xl text-white leading-tight mb-2.5" data-i18n="p.lpf.t">LPF Play + planteles</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed font-body" data-i18n="p.lpf.d">Importá video directo de la liga y cargá planteles predefinidos desde el catálogo de equipos. Menos carga manual.</p>
-          </article>
+            <!-- 01 Taggeás con hotkeys — Gratis -->
+            <div class="feat-item border-b border-white/10 py-20 md:py-28" data-feat="1">
+              <div class="md:hidden mb-6 rounded-sm overflow-hidden flex flex-col items-center justify-center gap-3" style="aspect-ratio:16/10;background:#0f0f0f;border:1px solid rgba(255,255,255,0.07)">
+                <i class="fas fa-keyboard text-emerald-400" style="font-size:1.75rem" aria-hidden="true"></i>
+                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
+              </div>
+              <div class="flex items-center justify-between gap-4 mb-5">
+                <span class="font-mono text-emerald-400 text-xs tracking-widest" data-i18n="fv.1.num">01</span>
+                <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-400/70 border border-emerald-400/30 px-2.5 py-0.5 rounded-full" data-i18n="fv.1.badge">Gratis</span>
+              </div>
+              <h3 class="font-display text-white leading-tight mb-4" style="font-size:clamp(1.75rem,3.2vw,2.75rem)" data-i18n="fv.1.t">Taggeás con hotkeys</h3>
+              <p class="text-zinc-400 font-body text-base md:text-lg leading-relaxed" data-i18n="fv.1.d">Configurá tus propias teclas. Una tecla = un evento táctico registrado, sin pausar el video. Goles, tiros, pérdidas — todo con su minuto.</p>
+            </div>
+
+            <!-- 02 Dibujás sobre el video — Gratis -->
+            <div class="feat-item border-b border-white/10 py-12 md:py-16" data-feat="2">
+              <div class="md:hidden mb-6 rounded-sm overflow-hidden flex flex-col items-center justify-center gap-3" style="aspect-ratio:16/10;background:#0f0f0f;border:1px solid rgba(255,255,255,0.07)">
+                <i class="fas fa-pen-nib text-emerald-400" style="font-size:1.75rem" aria-hidden="true"></i>
+                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
+              </div>
+              <div class="flex items-center justify-between gap-4 mb-5">
+                <span class="font-mono text-emerald-400 text-xs tracking-widest" data-i18n="fv.2.num">02</span>
+                <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-400/70 border border-emerald-400/30 px-2.5 py-0.5 rounded-full" data-i18n="fv.2.badge">Gratis</span>
+              </div>
+              <h3 class="font-display text-white leading-tight mb-4" style="font-size:clamp(1.75rem,3.2vw,2.75rem)" data-i18n="fv.2.t">Dibujás sobre el video</h3>
+              <p class="text-zinc-400 font-body text-base md:text-lg leading-relaxed" data-i18n="fv.2.d">11 herramientas de dibujo con animación: flechas, zonas, spotlight, rectas y texto. Señalá lo que importa sobre el frame exacto.</p>
+            </div>
+
+            <!-- 03 Verificás el offside — Gratis -->
+            <div class="feat-item border-b border-white/10 py-12 md:py-16" data-feat="3">
+              <div class="md:hidden mb-6 rounded-sm overflow-hidden flex flex-col items-center justify-center gap-3" style="aspect-ratio:16/10;background:#0f0f0f;border:1px solid rgba(255,255,255,0.07)">
+                <i class="fas fa-ruler-combined text-emerald-400" style="font-size:1.75rem" aria-hidden="true"></i>
+                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
+              </div>
+              <div class="flex items-center justify-between gap-4 mb-5">
+                <span class="font-mono text-emerald-400 text-xs tracking-widest" data-i18n="fv.3.num">03</span>
+                <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-400/70 border border-emerald-400/30 px-2.5 py-0.5 rounded-full" data-i18n="fv.3.badge">Gratis</span>
+              </div>
+              <h3 class="font-display text-white leading-tight mb-4" style="font-size:clamp(1.75rem,3.2vw,2.75rem)" data-i18n="fv.3.t">Verificás el offside</h3>
+              <p class="text-zinc-400 font-body text-base md:text-lg leading-relaxed" data-i18n="fv.3.d">Línea de perspectiva geométrica por homografía — el mismo principio que usa el VAR profesional. Único en esta categoría de precio.</p>
+            </div>
+
+            <!-- 04 IA Integrada — Pro -->
+            <div class="feat-item border-b border-white/10 py-12 md:py-16" data-feat="4">
+              <div class="md:hidden mb-6 rounded-sm overflow-hidden flex flex-col items-center justify-center gap-3" style="aspect-ratio:16/10;background:#0f0f0f;border:1px solid rgba(255,255,255,0.07)">
+                <i class="fas fa-wand-magic-sparkles text-emerald-400" style="font-size:1.75rem" aria-hidden="true"></i>
+                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
+              </div>
+              <div class="flex items-center justify-between gap-4 mb-5">
+                <span class="font-mono text-emerald-400 text-xs tracking-widest" data-i18n="fv.4.num">04</span>
+                <span class="tag-pro font-mono text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full" data-i18n="fv.4.badge">Pro</span>
+              </div>
+              <h3 class="font-display text-white leading-tight mb-4" style="font-size:clamp(1.75rem,3.2vw,2.75rem)" data-i18n="fv.4.t">IA Integrada (Gemini)</h3>
+              <p class="text-zinc-400 font-body text-base md:text-lg leading-relaxed" data-i18n="fv.4.d">Generá tags desde lenguaje natural. Análisis de patrones, sugerencias automáticas de eventos e insights del partido para llegar preparado a la charla técnica.</p>
+            </div>
+
+            <!-- 05 Producís para redes — Pro -->
+            <div class="feat-item border-b border-white/10 py-12 md:py-16" data-feat="5">
+              <div class="md:hidden mb-6 rounded-sm overflow-hidden flex flex-col items-center justify-center gap-3" style="aspect-ratio:16/10;background:#0f0f0f;border:1px solid rgba(255,255,255,0.07)">
+                <i class="fas fa-mobile-screen-button text-emerald-400" style="font-size:1.75rem" aria-hidden="true"></i>
+                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
+              </div>
+              <div class="flex items-center justify-between gap-4 mb-5">
+                <span class="font-mono text-emerald-400 text-xs tracking-widest" data-i18n="fv.5.num">05</span>
+                <span class="tag-pro font-mono text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full" data-i18n="fv.5.badge">Pro</span>
+              </div>
+              <h3 class="font-display text-white leading-tight mb-4" style="font-size:clamp(1.75rem,3.2vw,2.75rem)" data-i18n="fv.5.t">Producís para redes</h3>
+              <p class="text-zinc-400 font-body text-base md:text-lg leading-relaxed" data-i18n="fv.5.d">Highlights en 9:16 con seguimiento de la jugada, listos para Instagram. También exportás a MP4 o FCP XML para tu editor de video.</p>
+            </div>
+
+            <!-- 06 Tu temporada, ordenada — Pro -->
+            <div class="feat-item py-12 md:py-16" data-feat="6">
+              <div class="md:hidden mb-6 rounded-sm overflow-hidden flex flex-col items-center justify-center gap-3" style="aspect-ratio:16/10;background:#0f0f0f;border:1px solid rgba(255,255,255,0.07)">
+                <i class="fas fa-cloud text-emerald-400" style="font-size:1.75rem" aria-hidden="true"></i>
+                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
+              </div>
+              <div class="flex items-center justify-between gap-4 mb-5">
+                <span class="font-mono text-emerald-400 text-xs tracking-widest" data-i18n="fv.6.num">06</span>
+                <span class="tag-pro font-mono text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full" data-i18n="fv.6.badge">Pro</span>
+              </div>
+              <h3 class="font-display text-white leading-tight mb-4" style="font-size:clamp(1.75rem,3.2vw,2.75rem)" data-i18n="fv.6.t">Tu temporada, ordenada</h3>
+              <p class="text-zinc-400 font-body text-base md:text-lg leading-relaxed" data-i18n="fv.6.d">Biblioteca en la nube, análisis de temporada, reportes PDF y LPF Play con planteles. Todo sincronizado — y 100% offline cuando no tenés señal.</p>
+            </div>
+
+          </div><!-- /feat-list -->
         </div>
       </div>
     </section>
@@ -1270,6 +1324,19 @@
         "features.coreLabel": `El núcleo`,
         "features.coreFree": `Gratis para siempre`,
         "features.proLabel": `Temporada y producción`,
+        "fv.mediaHint": `Captura próximamente`,
+        "fv.1.num": `01`, "fv.1.t": `Taggeás con hotkeys`, "fv.1.badge": `Gratis`,
+        "fv.1.d": `Configurá tus propias teclas. Una tecla = un evento táctico registrado, sin pausar el video. Goles, tiros, pérdidas — todo con su minuto.`,
+        "fv.2.num": `02`, "fv.2.t": `Dibujás sobre el video`, "fv.2.badge": `Gratis`,
+        "fv.2.d": `11 herramientas de dibujo con animación: flechas, zonas, spotlight, rectas y texto. Señalá lo que importa sobre el frame exacto.`,
+        "fv.3.num": `03`, "fv.3.t": `Verificás el offside`, "fv.3.badge": `Gratis`,
+        "fv.3.d": `Línea de perspectiva geométrica por homografía — el mismo principio que usa el VAR profesional. Único en esta categoría de precio.`,
+        "fv.4.num": `04`, "fv.4.t": `IA Integrada (Gemini)`, "fv.4.badge": `Pro`,
+        "fv.4.d": `Generá tags desde lenguaje natural. Análisis de patrones, sugerencias automáticas de eventos e insights del partido para llegar preparado a la charla técnica.`,
+        "fv.5.num": `05`, "fv.5.t": `Producís para redes`, "fv.5.badge": `Pro`,
+        "fv.5.d": `Highlights en 9:16 con seguimiento de la jugada, listos para Instagram. También exportás a MP4 o FCP XML para tu editor de video.`,
+        "fv.6.num": `06`, "fv.6.t": `Tu temporada, ordenada`, "fv.6.badge": `Pro`,
+        "fv.6.d": `Biblioteca en la nube, análisis de temporada, reportes PDF y LPF Play con planteles. Todo sincronizado — y 100% offline cuando no tenés señal.`,
         "f.hotkeys.t": `Tagging con Hotkeys`,
         "f.hotkeys.d": `Configurá tus propias teclas. Una tecla = un evento táctico registrado, sin pausar el video.`,
         "f.telestrator.t": `Telestrator Completo`,
@@ -1406,6 +1473,19 @@
         "features.coreLabel": `The core`,
         "features.coreFree": `Free forever`,
         "features.proLabel": `Season & production`,
+        "fv.mediaHint": `Screenshot coming soon`,
+        "fv.1.num": `01`, "fv.1.t": `Tag with hotkeys`, "fv.1.badge": `Free`,
+        "fv.1.d": `Set your own keys. One key = one tactical event logged, without pausing the video. Goals, shots, turnovers — all with their minute.`,
+        "fv.2.num": `02`, "fv.2.t": `Draw on video`, "fv.2.badge": `Free`,
+        "fv.2.d": `11 animated drawing tools: arrows, zones, spotlight, lines and text. Mark what matters on the exact frame.`,
+        "fv.3.num": `03`, "fv.3.t": `Verify offside`, "fv.3.badge": `Free`,
+        "fv.3.d": `Geometric perspective line via homography — the same principle professional VAR uses. Unique at this price point.`,
+        "fv.4.num": `04`, "fv.4.t": `Built-in AI (Gemini)`, "fv.4.badge": `Pro`,
+        "fv.4.d": `Generate tags from natural language. Pattern analysis, automatic event suggestions and match insights so you arrive at the team talk fully prepared.`,
+        "fv.5.num": `05`, "fv.5.t": `Produce for social`, "fv.5.badge": `Pro`,
+        "fv.5.d": `9:16 highlights with action tracking, ready for Instagram. Also export to MP4 or FCP XML for your video editor.`,
+        "fv.6.num": `06`, "fv.6.t": `Your season, organized`, "fv.6.badge": `Pro`,
+        "fv.6.d": `Cloud library, season analysis, PDF reports and LPF Play with squads. All synced — and 100% offline when you have no signal.`,
         "f.hotkeys.t": `Hotkey Tagging`,
         "f.hotkeys.d": `Set your own keys. One key = one tactical event logged, without pausing the video.`,
         "f.telestrator.t": `Full Telestrator`,
@@ -1542,6 +1622,19 @@
         "features.coreLabel": `Il nucleo`,
         "features.coreFree": `Gratis per sempre`,
         "features.proLabel": `Stagione e produzione`,
+        "fv.mediaHint": `Schermata in arrivo`,
+        "fv.1.num": `01`, "fv.1.t": `Taggi con le hotkey`, "fv.1.badge": `Gratis`,
+        "fv.1.d": `Imposta i tuoi tasti. Un tasto = un evento tattico registrato, senza mettere in pausa. Gol, tiri, palle perse — tutto col suo minuto.`,
+        "fv.2.num": `02`, "fv.2.t": `Disegni sul video`, "fv.2.badge": `Gratis`,
+        "fv.2.d": `11 strumenti di disegno animati: frecce, zone, spotlight, linee e testo. Evidenzia ciò che conta sul frame esatto.`,
+        "fv.3.num": `03`, "fv.3.t": `Verifica il fuorigioco`, "fv.3.badge": `Gratis`,
+        "fv.3.d": `Linea prospettica geometrica tramite omografia — lo stesso principio del VAR professionale. Unico in questa fascia di prezzo.`,
+        "fv.4.num": `04`, "fv.4.t": `IA Integrata (Gemini)`, "fv.4.badge": `Pro`,
+        "fv.4.d": `Genera tag dal linguaggio naturale. Analisi dei pattern, suggerimenti automatici di eventi e insight della partita per arrivare preparato al briefing tecnico.`,
+        "fv.5.num": `05`, "fv.5.t": `Produci per i social`, "fv.5.badge": `Pro`,
+        "fv.5.d": `Highlight in 9:16 con tracking dell'azione, pronti per Instagram. Esporta anche in MP4 o FCP XML per il tuo editor video.`,
+        "fv.6.num": `06`, "fv.6.t": `La tua stagione, organizzata`, "fv.6.badge": `Pro`,
+        "fv.6.d": `Libreria cloud, analisi di stagione, report PDF e LPF Play con rose. Tutto sincronizzato — e 100% offline senza segnale.`,
         "f.hotkeys.t": `Tagging con Hotkey`,
         "f.hotkeys.d": `Imposta i tuoi tasti. Un tasto = un evento tattico registrato, senza mettere in pausa il video.`,
         "f.telestrator.t": `Telestrator completo`,
