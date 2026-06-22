@@ -86,6 +86,21 @@
     @keyframes auraB { to { transform:translate(-110px,-70px) scale(1.12); } }
     @media (prefers-reduced-motion: reduce) { .hero-aura::before, .hero-aura::after { animation:none; } }
 
+    /* Cursor custom (solo desktop con puntero fino) */
+    #cursor, #cursor-ring { display: none; }
+    @media (hover: hover) and (pointer: fine) {
+      body { cursor: none; }
+      a, button, select, input, label, .faq-trigger, [data-billing] { cursor: none; }
+      #cursor { display:block; position:fixed; top:0; left:0; width:7px; height:7px; border-radius:50%; background:#f0ebe1; pointer-events:none; z-index:10000; mix-blend-mode:difference; will-change:transform; }
+      #cursor-ring { display:block; position:fixed; top:0; left:0; width:34px; height:34px; border:1px solid rgba(240,235,225,0.45); border-radius:50%; pointer-events:none; z-index:9999; will-change:transform; transition:width .25s ease, height .25s ease, background-color .25s ease, border-color .25s ease; }
+      #cursor-ring.is-hover { width:60px; height:60px; background:rgba(52,211,153,0.10); border-color:rgba(52,211,153,0.6); }
+    }
+    @media (prefers-reduced-motion: reduce) { body { cursor:auto !important; } #cursor, #cursor-ring { display:none !important; } }
+
+    /* Hero: motivo de cancha de fondo (parallax con mouse) */
+    .hero-pitch { position:absolute; inset:0; pointer-events:none; opacity:.5; }
+    .hero-pitch svg { position:absolute; left:50%; top:50%; width:min(120vh,1100px); height:auto; transform:translate(-50%,-50%); }
+
     /* Motion (GSAP / Lenis) — con GSAP activo, el estado natural es visible (GSAP anima desde 0) */
     .anim-ready .reveal { opacity: 1; transform: none; transition: none !important; }
     html.lenis, html.lenis body { height: auto; }
@@ -313,10 +328,18 @@
   <main id="main-content">
 
     <!-- HERO -->
-    <section class="min-h-screen flex items-center pt-14 relative overflow-hidden" aria-labelledby="hero-heading">
+    <section id="hero" class="min-h-screen flex items-center pt-14 relative overflow-hidden" aria-labelledby="hero-heading">
       <!-- Fondo animado -->
       <div class="hero-aura" aria-hidden="true"></div>
-      <div class="absolute inset-0 pitch-bg opacity-50" aria-hidden="true"></div>
+      <div class="absolute inset-0 pitch-bg opacity-40" aria-hidden="true"></div>
+      <div class="hero-pitch" aria-hidden="true" data-hero-parallax>
+        <svg viewBox="0 0 600 600" fill="none" stroke="rgba(240,235,225,0.09)" stroke-width="1.2">
+          <circle cx="300" cy="300" r="150" />
+          <circle cx="300" cy="300" r="2.5" fill="rgba(240,235,225,0.12)" />
+          <line x1="300" y1="40" x2="300" y2="560" />
+          <path d="M300 110 A150 150 0 0 1 300 490" />
+        </svg>
+      </div>
 
       <div class="relative z-10 max-w-7xl mx-auto px-6 py-24 text-center w-full">
 
@@ -378,14 +401,15 @@
 
     <!-- DE LA JUGADA AL DATO (problema + jugada, fusionados) -->
     <section id="story" class="relative min-h-screen flex items-center overflow-hidden border-t border-white/5 py-16">
-      <div class="max-w-7xl mx-auto px-6 w-full">
-        <div class="story-head text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      <div class="w-full px-4 md:px-10">
+        <div class="story-head text-center max-w-3xl mx-auto mb-10 md:mb-14">
           <span class="eyebrow" data-i18n="story.eyebrow">El problema, resuelto</span>
           <h2 class="font-display text-white text-5xl md:text-7xl mt-4 leading-[0.95] text-balance" data-i18n="story.h2">Cada jugada se vuelve un dato.</h2>
           <p class="text-zinc-400 font-body mt-4 text-pretty text-lg" data-i18n="story.sub">Antes: 4 horas en Premiere o una licencia impagable. Ahora: una tecla y queda registrado. Scrolleá la jugada.</p>
         </div>
 
-        <div id="story-board" class="relative max-w-5xl mx-auto">
+        <div id="story-stage" class="relative max-w-[1500px] mx-auto">
+          <div id="story-board" class="relative w-full md:w-[44%]">
           <svg id="story-svg" viewBox="0 0 1080 728" role="img" data-i18n-aria="story.svgAria"
                aria-label="Pizarra táctica: la secuencia de pases del gol de Di María en la final de Qatar 2022, registrada como datos.">
             <!-- Cancha -->
@@ -455,15 +479,17 @@
             </div>
           </div>
 
-          <!-- Video real (aparece al final del scroll) -->
-          <div id="story-video" class="absolute inset-0 flex items-center justify-center pointer-events-none">
+        </div><!-- /#story-board -->
+
+          <!-- Video real: a la derecha en PC, abajo en móvil; aparece al final del scroll -->
+          <div id="story-video" class="mt-6 md:mt-0 md:absolute md:top-1/2 md:right-0 md:-translate-y-1/2 md:w-[52%] pointer-events-none">
             <div class="w-full bg-zinc-900 border border-white/10 rounded-xl overflow-hidden shadow-2xl shadow-black/60">
               <video class="w-full aspect-video block bg-zinc-950" autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg" aria-hidden="true">
                 <source src="assets/hero-demo.mp4" type="video/mp4" />
               </video>
             </div>
           </div>
-        </div>
+        </div><!-- /#story-stage -->
       </div>
     </section>
 
@@ -920,6 +946,10 @@
   <!-- Live region for screen readers -->
   <div aria-live="polite" aria-atomic="true" class="sr-only" id="announcer"></div>
 
+  <!-- Cursor custom -->
+  <div id="cursor-ring" aria-hidden="true"></div>
+  <div id="cursor" aria-hidden="true"></div>
+
   <!-- Animación: GSAP + ScrollTrigger + Lenis (smooth scroll) -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
@@ -927,6 +957,30 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
 
   <script>
+    // ---- Cursor custom (desktop): el punto sigue exacto, el anillo con lerp ----
+    (function () {
+      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const dot = document.getElementById('cursor');
+      const ring = document.getElementById('cursor-ring');
+      if (!dot || !ring) return;
+      let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
+      window.addEventListener('mousemove', (e) => {
+        mx = e.clientX; my = e.clientY;
+        dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+      });
+      (function loop() {
+        rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+        ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+        requestAnimationFrame(loop);
+      })();
+      const setHover = (on) => () => ring.classList.toggle('is-hover', on);
+      document.querySelectorAll('a, button, select, .faq-trigger, [data-billing]').forEach((el) => {
+        el.addEventListener('mouseenter', setHover(true));
+        el.addEventListener('mouseleave', setHover(false));
+      });
+    })();
+
     // FAQ accordion with ARIA
     document.querySelectorAll('.faq-trigger').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -980,13 +1034,32 @@
         });
       }
 
-      // Reveals: cada .reveal entra al scrollear (fade + subida)
+      // Reveals: cada .reveal entra al scrollear (fade + subida) — salvo el hero
       gsap.utils.toArray('.reveal').forEach((el) => {
+        if (el.closest('#hero')) return;
         gsap.from(el, {
           opacity: 0, y: 36, duration: 0.95, ease: 'power3.out',
           scrollTrigger: { trigger: el, start: 'top 88%', once: true }
         });
       });
+
+      // Entrada épica del hero (al cargar)
+      const heroTl = gsap.timeline({ delay: 0.2, defaults: { ease: 'power3.out' } });
+      heroTl
+        .from('#hero-heading', { yPercent: 14, autoAlpha: 0, duration: 1.2, ease: 'power4.out' }, 0)
+        .from('#hero .reveal', { y: 38, autoAlpha: 0, duration: 1, stagger: 0.12 }, 0.25);
+
+      // Parallax del fondo del hero con el mouse
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        const aura = document.querySelector('.hero-aura');
+        const motif = document.querySelector('[data-hero-parallax]');
+        window.addEventListener('mousemove', (e) => {
+          const dx = e.clientX / window.innerWidth - 0.5;
+          const dy = e.clientY / window.innerHeight - 0.5;
+          if (aura) gsap.to(aura, { x: dx * 45, y: dy * 45, duration: 0.9, ease: 'power2.out' });
+          if (motif) gsap.to(motif, { x: dx * -28, y: dy * -28, duration: 0.9, ease: 'power2.out' });
+        });
+      }
 
       // Stagger dentro de [data-stagger] (hijos con [data-stagger-item])
       gsap.utils.toArray('[data-stagger]').forEach((group) => {
@@ -1036,7 +1109,7 @@
         gsap.set('#story-svg .ripple', { transformOrigin: '50% 50%', scale: 0.2, autoAlpha: 0 });
         gsap.set('#gol-label', { autoAlpha: 0, scale: 0.6, transformOrigin: '50% 50%' });
         gsap.set('#event-tag', { autoAlpha: 0, y: 10 });
-        gsap.set('#story-video', { autoAlpha: 0 });
+        // #story-video queda visible desde el inicio, junto a la cancha
         passes.concat('#shot').forEach((sel) => {
           const el = svg.querySelector(sel); if (!el) return;
           const L = el.getTotalLength();
@@ -1046,7 +1119,7 @@
         const tl = gsap.timeline({
           defaults: { ease: 'none' },
           scrollTrigger: {
-            trigger: '#story', start: 'top top', end: '+=2000',
+            trigger: '#story', start: 'top top', end: '+=2800',
             scrub: 0.6, pin: true, anticipatePin: 1, invalidateOnRefresh: true
           }
         });
@@ -1090,12 +1163,8 @@
         tl.to('#event-tag', { autoAlpha: 1, y: 0, duration: 0.07 }, ts + 0.16);
 
         // reveal del video real
-        tl.to('#story-svg', { autoAlpha: 0.12, duration: 0.12 }, ts + 0.30);
-        tl.to('#story-clock', { autoAlpha: 0, duration: 0.10 }, ts + 0.30);
-        // al aparecer el video, el encabezado se desvanece y el board sube para centrar
-        tl.to('.story-head', { autoAlpha: 0, duration: 0.12 }, ts + 0.28);
-        tl.to('#story-board', { y: -70, duration: 0.16, ease: 'power2.out' }, ts + 0.28);
-        tl.to('#story-video', { autoAlpha: 1, duration: 0.14 }, ts + 0.32);
+        // video + cancha visibles juntos desde el inicio; al final, un hold para mirar el cierre (GOL + evento)
+        tl.to({}, { duration: 0.6 });
 
         // Reveal de cabecera al entrar
         gsap.from('#story .story-head > *', {
