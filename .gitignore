@@ -1,0 +1,9 @@
+# Archivos fuente pesados (se versiona solo el MP4 optimizado)
+assets/*.mov
+assets/*.MOV
+
+# Artefactos de build local
+vite.config.ts.timestamp-*.mjs
+
+# Herramientas de autoría locales (editor de jugada)
+tools/
