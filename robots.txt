@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nacholiporace.github.io/goal-labs-releases/sitemap.xml

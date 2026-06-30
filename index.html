@@ -132,12 +132,50 @@
     #precios [aria-label^="Plan"] { transition: transform .3s ease, border-color .3s ease; }
     #precios [aria-label^="Plan"]:hover { transform: translateY(-4px); }
 
-    /* ---- Grano / textura sutil ---- */
+    /* ---- Grano / textura sutil (animada estilo bam83) ---- */
     .grain {
-      position: fixed; inset: 0; z-index: 9000; pointer-events: none; opacity: .05;
+      position: fixed; inset: -150%; z-index: 9000; pointer-events: none; opacity: .06;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      animation: grainNoise 8s steps(10) infinite;
     }
-    @media (prefers-reduced-motion: reduce) { .grain { opacity: .03; } }
+    @keyframes grainNoise {
+      0%, 100% { transform: translate(0, 0); }
+      10% { transform: translate(-5%, -10%); }
+      20% { transform: translate(-15%, 5%); }
+      30% { transform: translate(7%, -25%); }
+      40% { transform: translate(-5%, 25%); }
+      50% { transform: translate(-15%, 10%); }
+      60% { transform: translate(15%, 0%); }
+      70% { transform: translate(0%, 15%); }
+      80% { transform: translate(3%, 35%); }
+      90% { transform: translate(-10%, 10%); }
+    }
+    @media (prefers-reduced-motion: reduce) { .grain { animation: none; opacity: .03; transform: translate(0,0); inset: 0; } }
+
+    /* ---- Precios: carousel en mobile (<768px) ---- */
+    @media (max-width: 767px) {
+      /* overflow:clip permite que el grid rompa el px-6 del padre sin crear scroll horizontal en la página */
+      #precios > div { overflow: clip; }
+      #precios .price-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        /* Rompe el px-6 (1.5rem) del contenedor para ocupar ancho completo */
+        margin-inline: -1.5rem;
+        padding: 0.5rem 5vw 1.25rem;
+        gap: 0.875rem;
+        scrollbar-width: none;
+        scroll-padding-inline: 5vw;
+      }
+      #precios .price-grid::-webkit-scrollbar { display: none; }
+      #precios .price-grid > [aria-label^="Plan"] {
+        flex: 0 0 82vw;
+        max-width: 82vw;
+        scroll-snap-align: start;
+        min-width: 0;
+      }
+    }
 
     /* Motion (GSAP / Lenis) — con GSAP activo, el estado natural es visible (GSAP anima desde 0) */
     .anim-ready .reveal { opacity: 1; transform: none; transition: none !important; }
@@ -322,6 +360,104 @@
 </head>
 <body class="bg-zinc-950 text-zinc-200 antialiased">
 
+  <!-- Preloader Narrativo (Estilo Cinematic UI) -->
+  <div id="preloader" class="fixed inset-0 z-[99999] bg-zinc-950 flex flex-col items-center justify-center pointer-events-none overflow-hidden">
+    
+    <!-- UI Elements flotantes (Simulación de la App) -->
+    <div id="preloader-ui-container" class="absolute inset-0 w-full h-full max-w-7xl mx-auto pointer-events-none">
+      
+      <!-- TOP LEFT: Tag Button 1 -->
+      <div class="preloader-ui absolute top-[5%] left-[2%] md:top-[12%] md:left-[15%] w-20 md:w-32 bg-[#ef4444] rounded-lg shadow-xl border-b-4 border-black/30 p-2 md:p-3 flex flex-col items-center transform scale-0 opacity-0">
+        <span class="font-bold text-white drop-shadow-md text-[9px] md:text-sm">Ataque</span>
+        <span class="text-[7px] md:text-[10px] text-white/80 mt-1 font-mono uppercase tracking-tight">-5s / +5s</span>
+        <span class="absolute top-1 right-1.5 font-mono opacity-60 bg-black/20 px-1 rounded text-[7px] md:text-[8px] text-white">A</span>
+      </div>
+
+      <!-- TOP RIGHT: Event Row 1 -->
+      <div class="preloader-ui absolute top-[8%] right-[2%] md:top-[15%] md:right-[15%] w-36 md:w-56 bg-zinc-900 border border-zinc-800 rounded-sm p-1.5 md:p-2 shadow-2xl transform scale-0 opacity-0">
+        <div class="flex items-center gap-1.5 md:gap-2 mb-1.5 md:mb-2">
+          <div class="w-1.5 h-1.5 md:w-2.5 md:h-2.5 rounded-sm shadow-sm shrink-0 bg-[#10b981]"></div>
+          <span class="font-bold text-[8px] md:text-xs text-white">Recuperación</span>
+        </div>
+        <div class="flex gap-1.5 md:gap-2 text-[6px] md:text-[10px]">
+          <div class="flex-1">
+            <label class="text-zinc-600 block mb-[1px] uppercase tracking-tighter font-sans">IN</label>
+            <div class="bg-black rounded-sm border border-zinc-700 p-0.5 text-center text-zinc-300 font-mono">14:03</div>
+          </div>
+          <div class="flex-1">
+            <label class="text-zinc-600 block mb-[1px] uppercase tracking-tighter font-sans">OUT</label>
+            <div class="bg-black rounded-sm border border-zinc-700 p-0.5 text-center text-zinc-300 font-mono">14:15</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MIDDLE LEFT: Mini Pitch (Hidden on mobile) -->
+      <div class="preloader-ui hidden md:flex absolute top-[40%] left-[8%] w-40 aspect-[1.5] bg-emerald-900/20 border border-emerald-500/30 rounded-sm p-1 shadow-2xl transform scale-0 opacity-0 items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-1 border border-white/20"></div>
+        <div class="absolute left-1/2 top-1 bottom-1 w-px bg-white/20 -translate-x-1/2"></div>
+        <div class="absolute left-1/2 top-1/2 w-4 h-4 border border-white/20 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute top-[40%] left-[60%] w-2 h-2 bg-red-500 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.8)] animate-pulse"></div>
+        <div class="absolute top-[30%] left-[30%] w-1.5 h-1.5 bg-yellow-400 rounded-full shadow-[0_0_6px_rgba(250,204,21,0.8)]"></div>
+        <div class="absolute top-[60%] left-[70%] w-1 h-1 bg-white rounded-full shadow-[0_0_6px_rgba(255,255,255,0.8)]"></div>
+      </div>
+
+      <!-- MIDDLE RIGHT: Stat Graphic (Hidden on mobile) -->
+      <div class="preloader-ui hidden md:flex absolute top-[45%] right-[8%] w-36 bg-zinc-900 border border-zinc-800 rounded-sm p-2 shadow-2xl transform scale-0 opacity-0 flex-col gap-1.5">
+        <div class="text-[10px] text-zinc-400 font-mono uppercase tracking-widest mb-1 border-b border-zinc-800 pb-1">Stats</div>
+        <div class="flex items-center gap-2">
+          <div class="w-1.5 h-1.5 rounded-sm bg-[#ef4444]"></div>
+          <div class="h-1.5 bg-zinc-800 rounded-full flex-1 overflow-hidden">
+             <div class="h-full bg-[#ef4444]" style="width: 75%"></div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-1.5 h-1.5 rounded-sm bg-[#3b82f6]"></div>
+          <div class="h-1.5 bg-zinc-800 rounded-full flex-1 overflow-hidden">
+             <div class="h-full bg-[#3b82f6]" style="width: 45%"></div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-1.5 h-1.5 rounded-sm bg-[#10b981]"></div>
+          <div class="h-1.5 bg-zinc-800 rounded-full flex-1 overflow-hidden">
+             <div class="h-full bg-[#10b981]" style="width: 60%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM LEFT: Tag Button 2 -->
+      <div class="preloader-ui absolute bottom-[10%] left-[2%] md:bottom-[15%] md:left-[22%] w-16 md:w-28 bg-[#3b82f6] rounded-lg shadow-xl border-b-4 border-black/30 p-1.5 md:p-2 flex flex-col items-center transform scale-0 opacity-0">
+        <span class="font-bold text-white drop-shadow-md text-[9px] md:text-sm">Pase</span>
+        <span class="text-[7px] md:text-[10px] text-white/80 mt-1 font-mono uppercase tracking-tight">Punto</span>
+        <span class="absolute top-1 right-1 font-mono opacity-60 bg-black/20 px-0.5 md:px-1 rounded text-[7px] md:text-[8px] text-white">P</span>
+      </div>
+
+      <!-- BOTTOM RIGHT: Event Row 2 -->
+      <div class="preloader-ui absolute bottom-[5%] right-[2%] md:bottom-[12%] md:right-[20%] w-36 md:w-56 bg-zinc-900 border border-zinc-800 rounded-sm p-1.5 md:p-2 shadow-2xl transform scale-0 opacity-0">
+        <div class="flex items-center gap-1.5 md:gap-2 mb-1.5 md:mb-2">
+          <div class="w-1.5 h-1.5 md:w-2.5 md:h-2.5 rounded-sm shadow-sm shrink-0 bg-[#f59e0b]"></div>
+          <span class="font-bold text-[8px] md:text-xs text-white">Falta</span>
+          <span class="ml-auto text-[6px] md:text-[9px] bg-zinc-800 px-1 md:px-1.5 py-0.5 rounded border border-zinc-700 text-zinc-400">#5 Paredes</span>
+        </div>
+        <div class="flex gap-1.5 md:gap-2 text-[6px] md:text-[10px]">
+          <div class="flex-1">
+            <label class="text-zinc-600 block mb-[1px] uppercase tracking-tighter font-sans">IN</label>
+            <div class="bg-black rounded-sm border border-zinc-700 p-0.5 text-center text-zinc-300 font-mono">32:14</div>
+          </div>
+          <div class="flex-1">
+            <label class="text-zinc-600 block mb-[1px] uppercase tracking-tighter font-sans">OUT</label>
+            <div class="bg-black rounded-sm border border-zinc-700 p-0.5 text-center text-zinc-300 font-mono">32:21</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Central Text -->
+    <div id="preloader-content" class="text-center relative z-10 flex flex-col items-center justify-center">
+      <div id="preloader-text-1" data-i18n="preloader.line1" class="font-display text-white text-4xl md:text-6xl absolute opacity-0 whitespace-nowrap">El estándar profesional...</div>
+      <div id="preloader-text-2" data-i18n="preloader.line2" class="font-display text-emerald-400 text-4xl md:text-6xl absolute opacity-0 whitespace-nowrap italic">...ahora al alcance de todos.</div>
+    </div>
+  </div>
+
   <!-- Skip link (accessibility) -->
   <a href="#main-content" class="skip-link focus-ring" data-i18n="skip">Ir al contenido principal</a>
 
@@ -415,7 +551,7 @@
             <span data-i18n="hero.seeFeatures">Ver qué incluye</span> <i class="fas fa-arrow-down text-[10px]" aria-hidden="true"></i>
           </a>
         </div>
-        <p class="eyebrow reveal" data-i18n="hero.noAccount">Sin cuenta · Sin tarjeta · Windows 10/11</p>
+        <p class="eyebrow reveal" data-i18n="hero.noAccount">Sin tarjeta de crédito · Windows 10/11</p>
 
         <!-- Indicador de scroll -->
         <div class="mt-20 reveal flex justify-center" aria-hidden="true">
@@ -528,155 +664,245 @@
       </div>
     </section>
 
-    <!-- FUNCIONALIDADES -->
-    <section id="funcionalidades" class="border-t border-white/10" aria-labelledby="funcionalidades-heading">
+    <!-- FUNCIONALIDADES: Horizontal Scroll (bam83 style) -->
+    <section id="funcionalidades" class="border-t border-white/10 overflow-hidden bg-black relative" aria-labelledby="funcionalidades-heading">
+      
+      <!-- =============================================
+           MOBILE CAROUSEL (md:hidden)
+           6 slides individuales, scroll-snap nativo
+           ============================================= -->
+      <div id="feat-mobile" class="md:hidden bg-black">
 
-      <!-- Header -->
-      <div class="max-w-7xl mx-auto px-6 pt-24 md:pt-32 pb-16 md:pb-20">
-        <div class="max-w-3xl reveal">
-          <span class="eyebrow" data-i18n="nav.features">Funcionalidades</span>
-          <h2 id="funcionalidades-heading" class="font-display text-white text-5xl md:text-7xl mt-4 leading-[0.95] text-balance" data-i18n="features.h2">
-            Todo lo que necesitás en una sola pantalla.
-          </h2>
-          <p class="text-zinc-400 text-lg font-body mt-5 text-pretty" data-i18n="features.sub">Sin saltar entre apps. Sin flujos rotos.</p>
+        <!-- Título: bloque propio ANTES del video, fondo negro puro -->
+        <div class="px-5 pt-10 pb-6 bg-black border-b border-white/5">
+          <p class="font-mono text-[10px] text-emerald-400 uppercase tracking-[0.25em] mb-3" data-i18n="nav.features">Funcionalidades</p>
+          <h2 class="font-display text-white leading-[0.95]" style="font-size:clamp(1.75rem,8vw,2.5rem)" data-i18n="features.h2">Todo lo que necesitás en una sola pantalla.</h2>
         </div>
-      </div>
 
-      <!-- Sticky-scroll stage -->
-      <div id="feat-stage" class="max-w-[1400px] mx-auto px-6 pb-24 md:pb-32">
-        <div class="md:flex md:items-start">
+        <!-- Video sticky (contexto visual, aparece DEBAJO del título) -->
+        <div class="sticky top-0 z-0 h-[38vh] pointer-events-none overflow-hidden">
+          <video id="fmv-0" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-500" autoplay muted loop playsinline preload="auto">
+            <source src="assets/botonera-config.mp4" type="video/mp4" />
+          </video>
+          <video id="fmv-1" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-500 opacity-0" autoplay muted loop playsinline preload="auto">
+            <source src="assets/dibujos.mp4" type="video/mp4" />
+          </video>
+          <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black pointer-events-none"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none"></div>
+        </div>
 
-          <!-- Left: sticky media panel (desktop only) -->
-          <div class="hidden md:block md:w-[46%] md:sticky md:top-24 md:self-start">
-            <div id="feat-media-wrap" class="relative overflow-hidden rounded-sm" style="aspect-ratio:16/10;background:#0f0f0f;border:1px solid rgba(255,255,255,0.07)">
-              <div class="feat-media absolute inset-0 flex flex-col items-center justify-center gap-4" data-feat="1">
-                <i class="fas fa-keyboard text-emerald-400" style="font-size:2.5rem" aria-hidden="true"></i>
-                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
+        <!-- Track de slides (6 snap) -->
+        <div id="feat-mob-track" class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide -mt-2 relative z-10 pb-2">
+
+          <!-- Slide 01: Taggeás con hotkeys — Gratis -->
+          <div class="feat-mob-slide snap-center snap-always shrink-0 w-full px-5 pt-4 pb-6 flex flex-col" data-vid="0">
+            <div class="bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-5 flex flex-col gap-3 shadow-2xl">
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-emerald-400 text-xs tracking-widest font-semibold" data-i18n="fv.1.num">01</span>
+                <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-400/90 border border-emerald-400/40 bg-emerald-400/10 px-2.5 py-0.5 rounded-full" data-i18n="fv.1.badge">Gratis</span>
               </div>
-              <div class="feat-media absolute inset-0 flex flex-col items-center justify-center gap-4" data-feat="2" style="opacity:0;pointer-events:none">
-                <i class="fas fa-pen-nib text-emerald-400" style="font-size:2.5rem" aria-hidden="true"></i>
-                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
-              </div>
-              <div class="feat-media absolute inset-0 flex flex-col items-center justify-center gap-4" data-feat="3" style="opacity:0;pointer-events:none">
-                <i class="fas fa-ruler-combined text-emerald-400" style="font-size:2.5rem" aria-hidden="true"></i>
-                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
-              </div>
-              <div class="feat-media absolute inset-0 flex flex-col items-center justify-center gap-4" data-feat="4" style="opacity:0;pointer-events:none">
-                <i class="fas fa-wand-magic-sparkles text-emerald-400" style="font-size:2.5rem" aria-hidden="true"></i>
-                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
-              </div>
-              <div class="feat-media absolute inset-0 flex flex-col items-center justify-center gap-4" data-feat="5" style="opacity:0;pointer-events:none">
-                <i class="fas fa-film text-emerald-400" style="font-size:2.5rem" aria-hidden="true"></i>
-                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
-              </div>
-              <div class="feat-media absolute inset-0 flex flex-col items-center justify-center gap-4" data-feat="6" style="opacity:0;pointer-events:none">
-                <i class="fas fa-cloud text-emerald-400" style="font-size:2.5rem" aria-hidden="true"></i>
-                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
-              </div>
-            </div>
-            <!-- Progress -->
-            <div class="flex items-center gap-3 mt-4" aria-hidden="true">
-              <span class="font-mono text-xs text-zinc-600"><span id="feat-num">01</span><span class="text-zinc-700"> / 06</span></span>
-              <div class="flex-1 h-px bg-white/10 relative overflow-hidden rounded-full">
-                <div id="feat-bar" class="absolute inset-y-0 left-0 bg-emerald-400/50 rounded-full transition-all duration-500" style="width:16.67%"></div>
-              </div>
+              <h3 class="font-display text-white text-2xl leading-tight" data-i18n="fv.1.t">Taggeás con hotkeys</h3>
+              <p class="text-zinc-300 font-body text-sm leading-relaxed" data-i18n="fv.1.d">Configurá tus propias teclas o generá los tags con IA desde una frase. Una tecla = un evento táctico registrado, sin pausar el video. Goles, tiros, pérdidas — todo con su minuto.</p>
             </div>
           </div>
 
-          <!-- Right: scrolling feature list -->
-          <div class="md:w-[54%] md:pl-16 lg:pl-20">
-
-            <!-- 01 Taggeás con hotkeys — Gratis -->
-            <div class="feat-item border-b border-white/10 py-12 md:py-16" data-feat="1">
-              <div class="md:hidden mb-6 rounded-sm overflow-hidden flex flex-col items-center justify-center gap-3" style="aspect-ratio:16/10;background:#0f0f0f;border:1px solid rgba(255,255,255,0.07)">
-                <i class="fas fa-keyboard text-emerald-400" style="font-size:1.75rem" aria-hidden="true"></i>
-                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
+          <!-- Slide 02: Dibujás sobre el video — Gratis -->
+          <div class="feat-mob-slide snap-center snap-always shrink-0 w-full px-5 pt-4 pb-6 flex flex-col" data-vid="0">
+            <div class="bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-5 flex flex-col gap-3 shadow-2xl">
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-emerald-400 text-xs tracking-widest font-semibold" data-i18n="fv.2.num">02</span>
+                <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-400/90 border border-emerald-400/40 bg-emerald-400/10 px-2.5 py-0.5 rounded-full" data-i18n="fv.2.badge">Gratis</span>
               </div>
-              <div class="flex items-center justify-between gap-4 mb-5">
-                <span class="font-mono text-emerald-400 text-xs tracking-widest" data-i18n="fv.1.num">01</span>
-                <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-400/70 border border-emerald-400/30 px-2.5 py-0.5 rounded-full" data-i18n="fv.1.badge">Gratis</span>
-              </div>
-              <h3 class="font-display text-white leading-tight mb-4" style="font-size:clamp(1.75rem,3.2vw,2.75rem)" data-i18n="fv.1.t">Taggeás con hotkeys</h3>
-              <p class="text-zinc-400 font-body text-base md:text-lg leading-relaxed" data-i18n="fv.1.d">Configurá tus propias teclas. Una tecla = un evento táctico registrado, sin pausar el video. Goles, tiros, pérdidas — todo con su minuto.</p>
+              <h3 class="font-display text-white text-2xl leading-tight" data-i18n="fv.2.t">Dibujás sobre el video</h3>
+              <p class="text-zinc-300 font-body text-sm leading-relaxed" data-i18n="fv.2.d">11 herramientas de dibujo con animación: flechas, zonas, spotlight, rectas y texto. Señalá lo que importa sobre el frame exacto — y proyectalo en una segunda pantalla para la charla técnica.</p>
             </div>
+          </div>
 
-            <!-- 02 Dibujás sobre el video — Gratis -->
-            <div class="feat-item border-b border-white/10 py-12 md:py-16" data-feat="2">
-              <div class="md:hidden mb-6 rounded-sm overflow-hidden flex flex-col items-center justify-center gap-3" style="aspect-ratio:16/10;background:#0f0f0f;border:1px solid rgba(255,255,255,0.07)">
-                <i class="fas fa-pen-nib text-emerald-400" style="font-size:1.75rem" aria-hidden="true"></i>
-                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
+          <!-- Slide 03: Verificás el offside — Gratis -->
+          <div class="feat-mob-slide snap-center snap-always shrink-0 w-full px-5 pt-4 pb-6 flex flex-col" data-vid="0">
+            <div class="bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-5 flex flex-col gap-3 shadow-2xl">
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-emerald-400 text-xs tracking-widest font-semibold" data-i18n="fv.3.num">03</span>
+                <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-400/90 border border-emerald-400/40 bg-emerald-400/10 px-2.5 py-0.5 rounded-full" data-i18n="fv.3.badge">Gratis</span>
               </div>
-              <div class="flex items-center justify-between gap-4 mb-5">
-                <span class="font-mono text-emerald-400 text-xs tracking-widest" data-i18n="fv.2.num">02</span>
-                <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-400/70 border border-emerald-400/30 px-2.5 py-0.5 rounded-full" data-i18n="fv.2.badge">Gratis</span>
-              </div>
-              <h3 class="font-display text-white leading-tight mb-4" style="font-size:clamp(1.75rem,3.2vw,2.75rem)" data-i18n="fv.2.t">Dibujás sobre el video</h3>
-              <p class="text-zinc-400 font-body text-base md:text-lg leading-relaxed" data-i18n="fv.2.d">11 herramientas de dibujo con animación: flechas, zonas, spotlight, rectas y texto. Señalá lo que importa sobre el frame exacto.</p>
+              <h3 class="font-display text-white text-2xl leading-tight" data-i18n="fv.3.t">Verificás el offside</h3>
+              <p class="text-zinc-300 font-body text-sm leading-relaxed" data-i18n="fv.3.d">Línea de perspectiva geométrica por homografía — el mismo principio que usa el VAR profesional. Único en esta categoría de precio.</p>
             </div>
+          </div>
 
-            <!-- 03 Verificás el offside — Gratis -->
-            <div class="feat-item border-b border-white/10 py-12 md:py-16" data-feat="3">
-              <div class="md:hidden mb-6 rounded-sm overflow-hidden flex flex-col items-center justify-center gap-3" style="aspect-ratio:16/10;background:#0f0f0f;border:1px solid rgba(255,255,255,0.07)">
-                <i class="fas fa-ruler-combined text-emerald-400" style="font-size:1.75rem" aria-hidden="true"></i>
-                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
-              </div>
-              <div class="flex items-center justify-between gap-4 mb-5">
-                <span class="font-mono text-emerald-400 text-xs tracking-widest" data-i18n="fv.3.num">03</span>
-                <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-400/70 border border-emerald-400/30 px-2.5 py-0.5 rounded-full" data-i18n="fv.3.badge">Gratis</span>
-              </div>
-              <h3 class="font-display text-white leading-tight mb-4" style="font-size:clamp(1.75rem,3.2vw,2.75rem)" data-i18n="fv.3.t">Verificás el offside</h3>
-              <p class="text-zinc-400 font-body text-base md:text-lg leading-relaxed" data-i18n="fv.3.d">Línea de perspectiva geométrica por homografía — el mismo principio que usa el VAR profesional. Único en esta categoría de precio.</p>
-            </div>
-
-            <!-- 04 IA Integrada — Pro -->
-            <div class="feat-item border-b border-white/10 py-12 md:py-16" data-feat="4">
-              <div class="md:hidden mb-6 rounded-sm overflow-hidden flex flex-col items-center justify-center gap-3" style="aspect-ratio:16/10;background:#0f0f0f;border:1px solid rgba(255,255,255,0.07)">
-                <i class="fas fa-wand-magic-sparkles text-emerald-400" style="font-size:1.75rem" aria-hidden="true"></i>
-                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
-              </div>
-              <div class="flex items-center justify-between gap-4 mb-5">
-                <span class="font-mono text-emerald-400 text-xs tracking-widest" data-i18n="fv.4.num">04</span>
+          <!-- Slide 04: Insights con IA — Pro -->
+          <div class="feat-mob-slide snap-center snap-always shrink-0 w-full px-5 pt-4 pb-6 flex flex-col" data-vid="1">
+            <div class="bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-5 flex flex-col gap-3 shadow-2xl">
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-emerald-400 text-xs tracking-widest font-semibold" data-i18n="fv.4.num">04</span>
                 <span class="tag-pro font-mono text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full" data-i18n="fv.4.badge">Pro</span>
               </div>
-              <h3 class="font-display text-white leading-tight mb-4" style="font-size:clamp(1.75rem,3.2vw,2.75rem)" data-i18n="fv.4.t">IA Integrada (Gemini)</h3>
-              <p class="text-zinc-400 font-body text-base md:text-lg leading-relaxed" data-i18n="fv.4.d">Generá tags desde lenguaje natural. Análisis de patrones, sugerencias automáticas de eventos e insights del partido para llegar preparado a la charla técnica.</p>
+              <h3 class="font-display text-white text-2xl leading-tight" data-i18n="fv.4.t">Insights con IA (Gemini)</h3>
+              <p class="text-zinc-300 font-body text-sm leading-relaxed" data-i18n="fv.4.d">Análisis de patrones, sugerencias automáticas de notas e insights del partido para llegar preparado a la charla técnica. La IA lee tus eventos y resume lo que pasó.</p>
             </div>
+          </div>
 
-            <!-- 05 Exportás el análisis — Pro -->
-            <div class="feat-item border-b border-white/10 py-12 md:py-16" data-feat="5">
-              <div class="md:hidden mb-6 rounded-sm overflow-hidden flex flex-col items-center justify-center gap-3" style="aspect-ratio:16/10;background:#0f0f0f;border:1px solid rgba(255,255,255,0.07)">
-                <i class="fas fa-film text-emerald-400" style="font-size:1.75rem" aria-hidden="true"></i>
-                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
-              </div>
-              <div class="flex items-center justify-between gap-4 mb-5">
-                <span class="font-mono text-emerald-400 text-xs tracking-widest" data-i18n="fv.5.num">05</span>
+          <!-- Slide 05: Exportás el análisis — Pro -->
+          <div class="feat-mob-slide snap-center snap-always shrink-0 w-full px-5 pt-4 pb-6 flex flex-col" data-vid="1">
+            <div class="bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-5 flex flex-col gap-3 shadow-2xl">
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-emerald-400 text-xs tracking-widest font-semibold" data-i18n="fv.5.num">05</span>
                 <span class="tag-pro font-mono text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full" data-i18n="fv.5.badge">Pro</span>
               </div>
-              <h3 class="font-display text-white leading-tight mb-4" style="font-size:clamp(1.75rem,3.2vw,2.75rem)" data-i18n="fv.5.t">Exportás el análisis</h3>
-              <p class="text-zinc-400 font-body text-base md:text-lg leading-relaxed" data-i18n="fv.5.d">Cortá clips por patrón táctico, armá playlists de acciones y exportá en MP4, CSV o FCP XML para Premiere y DaVinci. Del taggeo al briefing técnico sin salir de la app.</p>
+              <h3 class="font-display text-white text-2xl leading-tight" data-i18n="fv.5.t">Exportás el análisis</h3>
+              <p class="text-zinc-300 font-body text-sm leading-relaxed" data-i18n="fv.5.d">Cortá clips por patrón táctico, armá playlists de acciones y exportá en MP4, CSV o FCP XML para Premiere y DaVinci. Del taggeo al briefing técnico sin salir de la app.</p>
             </div>
+          </div>
 
-            <!-- 06 Tu temporada, ordenada — Pro -->
-            <div class="feat-item py-12 md:py-16" data-feat="6">
-              <div class="md:hidden mb-6 rounded-sm overflow-hidden flex flex-col items-center justify-center gap-3" style="aspect-ratio:16/10;background:#0f0f0f;border:1px solid rgba(255,255,255,0.07)">
-                <i class="fas fa-cloud text-emerald-400" style="font-size:1.75rem" aria-hidden="true"></i>
-                <span class="font-mono text-xs text-zinc-600 tracking-widest uppercase" data-i18n="fv.mediaHint">Captura próximamente</span>
-              </div>
-              <div class="flex items-center justify-between gap-4 mb-5">
-                <span class="font-mono text-emerald-400 text-xs tracking-widest" data-i18n="fv.6.num">06</span>
+          <!-- Slide 06: Tu temporada, ordenada — Pro -->
+          <div class="feat-mob-slide snap-center snap-always shrink-0 w-full px-5 pt-4 pb-6 flex flex-col" data-vid="1">
+            <div class="bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-5 flex flex-col gap-3 shadow-2xl">
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-emerald-400 text-xs tracking-widest font-semibold" data-i18n="fv.6.num">06</span>
                 <span class="tag-pro font-mono text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full" data-i18n="fv.6.badge">Pro</span>
               </div>
-              <h3 class="font-display text-white leading-tight mb-4" style="font-size:clamp(1.75rem,3.2vw,2.75rem)" data-i18n="fv.6.t">Tu temporada, ordenada</h3>
-              <p class="text-zinc-400 font-body text-base md:text-lg leading-relaxed" data-i18n="fv.6.d">Biblioteca en la nube, análisis de temporada, reportes PDF y LPF Play con planteles. Todo sincronizado — y 100% offline cuando no tenés señal.</p>
+              <h3 class="font-display text-white text-2xl leading-tight" data-i18n="fv.6.t">Tu temporada, ordenada</h3>
+              <p class="text-zinc-300 font-body text-sm leading-relaxed" data-i18n="fv.6.d">Biblioteca en la nube, análisis de temporada, reportes PDF y LPF Play con planteles. Todo sincronizado — y 100% offline cuando no tenés señal.</p>
+            </div>
+          </div>
+
+        </div><!-- /feat-mob-track -->
+
+        <!-- Dots indicadores -->
+        <div id="feat-mob-dots" class="flex justify-center items-center gap-2 pb-8 pt-1 relative z-10" aria-hidden="true">
+          <button class="feat-mob-dot w-5 h-1.5 rounded-full bg-emerald-400 transition-all duration-300" data-idx="0"></button>
+          <button class="feat-mob-dot w-1.5 h-1.5 rounded-full bg-white/25 transition-all duration-300" data-idx="1"></button>
+          <button class="feat-mob-dot w-1.5 h-1.5 rounded-full bg-white/25 transition-all duration-300" data-idx="2"></button>
+          <button class="feat-mob-dot w-1.5 h-1.5 rounded-full bg-white/25 transition-all duration-300" data-idx="3"></button>
+          <button class="feat-mob-dot w-1.5 h-1.5 rounded-full bg-white/25 transition-all duration-300" data-idx="4"></button>
+          <button class="feat-mob-dot w-1.5 h-1.5 rounded-full bg-white/25 transition-all duration-300" data-idx="5"></button>
+        </div>
+
+      </div><!-- /feat-mobile -->
+
+      <!-- =============================================
+           DESKTOP: Horizontal Scroll pineado (hidden en mobile)
+           ============================================= -->
+      <!-- Pinned full-screen container -->
+      <div id="feat-pin-container" class="hidden md:flex md:flex-col relative h-screen w-full pt-24 pb-12 bg-black">
+        
+        <!-- Background Videos (On mobile, restricted to top half. On desktop, full screen) -->
+        <div class="absolute top-20 md:top-0 left-0 right-0 h-[40vh] md:inset-0 md:h-full md:w-full z-0 flex items-center justify-center pointer-events-none">
+          <!-- Videos (fading based on active card) -->
+          <div class="feat-vid absolute inset-0 w-full h-full transition-opacity duration-700 opacity-100" data-index="0">
+            <video class="w-full h-full object-contain" autoplay muted loop playsinline preload="auto">
+              <source src="assets/botonera-config.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div class="feat-vid absolute inset-0 w-full h-full transition-opacity duration-700 opacity-0" data-index="1">
+            <video class="w-full h-full object-contain" autoplay muted loop playsinline preload="auto">
+              <source src="assets/dibujos.mp4" type="video/mp4" />
+            </video>
+          </div>
+          
+          <!-- Subtle gradient overlay to ensure text readability -->
+          <div class="absolute inset-0 bg-gradient-to-b from-black/90 via-transparent to-black/90 pointer-events-none md:via-black/20"></div>
+        </div>
+
+        <!-- Fixed Title Section (Top, floating above video) -->
+        <div class="ui-element w-full px-6 md:px-[8vw] shrink-0 z-20 relative transition-opacity duration-300 bg-black/40 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none rounded-b-xl py-2">
+          <span class="eyebrow" data-i18n="nav.features">Funcionalidades</span>
+          <h2 id="funcionalidades-heading" class="font-display text-white text-3xl md:text-5xl lg:text-6xl mt-2 md:mt-3 leading-[0.95]" data-i18n="features.h2">
+            Todo lo que necesitás en una sola pantalla.
+          </h2>
+          <p class="text-zinc-300 text-xs md:text-base font-body mt-2 md:mt-4 max-w-xl text-pretty drop-shadow-md hidden md:block" data-i18n="features.sub">
+            Sin saltar entre apps. Sin flujos rotos. Scrolleá para ver las herramientas en acción.
+          </p>
+        </div>
+
+        <!-- Spacer to push cards to the bottom half of the screen -->
+        <div class="flex-grow min-h-[5vh] md:min-h-[10vh]"></div>
+
+        <!-- Navigation Arrows (Floating - Hidden on Mobile) -->
+        <div class="ui-element absolute inset-y-0 left-0 right-0 pointer-events-none z-30 hidden md:flex items-center justify-between px-2 md:px-6 transition-opacity duration-300">
+          <button id="feat-prev" class="pointer-events-auto w-14 h-14 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-white/70 hover:text-emerald-400 hover:bg-black/80 hover:scale-110 transition-all opacity-0 invisible" aria-label="Anterior">
+            <i class="fas fa-chevron-left text-xl"></i>
+          </button>
+          <button id="feat-next" class="pointer-events-auto w-14 h-14 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-white/70 hover:text-emerald-400 hover:bg-black/80 hover:scale-110 transition-all" aria-label="Siguiente">
+            <i class="fas fa-chevron-right text-xl"></i>
+          </button>
+        </div>
+
+        <!-- Horizontal scroll track for Glassmorphic text cards (Bottom) -->
+        <div class="ui-element relative z-20 w-full shrink-0 flex items-center md:mb-10 transition-opacity duration-300 mt-auto md:mt-0">
+          <div id="feat-track" class="flex items-stretch pl-[7.5vw] pr-[3.5vw] md:pl-[12vw] md:pr-[12vw]">
+            
+            <!-- Feature Group 1: Gratis -->
+            <div class="feat-card w-[85vw] md:w-[70vw] lg:w-[60vw] max-h-[50vh] md:max-h-none overflow-y-auto md:overflow-visible shrink-0 mr-[4vw] md:mr-[6vw] bg-black/40 md:bg-black/30 backdrop-blur-xl border border-white/10 p-5 md:p-10 rounded-2xl shadow-2xl flex flex-col justify-start md:justify-center transition-colors hover:bg-black/50 hover:border-emerald-500/30 scrollbar-hide" data-index="0">
+              <div class="flex flex-col md:flex-row md:items-center justify-start gap-2 md:gap-4 mb-4 md:mb-8 border-b border-white/10 pb-3 md:pb-4 shrink-0 sticky top-0 bg-black/60 md:bg-transparent backdrop-blur-md md:backdrop-blur-none z-10 pt-4 md:pt-0 -mt-4 md:mt-0 rounded-t-2xl md:rounded-none">
+                <h3 class="font-display text-white text-xl md:text-3xl" data-i18n="features.coreLabel">El núcleo</h3>
+                <span class="font-mono text-[9px] md:text-[10px] uppercase tracking-wider text-emerald-400/90 border border-emerald-400/40 bg-emerald-400/10 px-2 py-0.5 rounded-full w-fit" data-i18n="free.badge">Disponible ahora</span>
+              </div>
+              
+              <div class="grid md:grid-cols-3 gap-4 md:gap-8">
+                <div class="flex flex-col md:block">
+                  <div class="flex items-center md:block gap-3 mb-1 md:mb-2">
+                    <span class="font-mono text-emerald-400 text-xs tracking-widest font-semibold" data-i18n="fv.1.num">01</span>
+                    <h4 class="font-display text-white text-sm md:text-xl leading-tight" data-i18n="fv.1.t">Taggeás con hotkeys</h4>
+                  </div>
+                  <p class="text-zinc-300 font-body text-[11px] md:text-sm leading-relaxed" data-i18n="fv.1.d">Configurá tus propias teclas o generá los tags con IA desde una frase. Una tecla = un evento táctico registrado, sin pausar el video.</p>
+                </div>
+                <div class="flex flex-col md:block">
+                  <div class="flex items-center md:block gap-3 mb-1 md:mb-2">
+                    <span class="font-mono text-emerald-400 text-xs tracking-widest font-semibold" data-i18n="fv.2.num">02</span>
+                    <h4 class="font-display text-white text-sm md:text-xl leading-tight" data-i18n="fv.2.t">Dibujás sobre el video</h4>
+                  </div>
+                  <p class="text-zinc-300 font-body text-[11px] md:text-sm leading-relaxed" data-i18n="fv.2.d">11 herramientas de dibujo con animación: flechas, zonas, spotlight, rectas y texto. Señalá lo que importa sobre el frame exacto.</p>
+                </div>
+                <div class="flex flex-col md:block">
+                  <div class="flex items-center md:block gap-3 mb-1 md:mb-2">
+                    <span class="font-mono text-emerald-400 text-xs tracking-widest font-semibold" data-i18n="fv.3.num">03</span>
+                    <h4 class="font-display text-white text-sm md:text-xl leading-tight" data-i18n="fv.3.t">Verificás el offside</h4>
+                  </div>
+                  <p class="text-zinc-300 font-body text-[11px] md:text-sm leading-relaxed" data-i18n="fv.3.d">Línea de perspectiva geométrica por homografía — el mismo principio que usa el VAR profesional. Único en esta categoría de precio.</p>
+                </div>
+              </div>
             </div>
 
-          </div><!-- /feat-list -->
+            <!-- Feature Group 2: Pro -->
+            <div class="feat-card w-[85vw] md:w-[70vw] lg:w-[60vw] max-h-[50vh] md:max-h-none overflow-y-auto md:overflow-visible shrink-0 mr-[10vw] bg-black/40 md:bg-black/30 backdrop-blur-xl border border-white/10 p-5 md:p-10 rounded-2xl shadow-2xl flex flex-col justify-start md:justify-center transition-colors hover:bg-black/50 hover:border-emerald-500/30 scrollbar-hide" data-index="1">
+              <div class="flex flex-col md:flex-row md:items-center justify-start gap-2 md:gap-4 mb-4 md:mb-8 border-b border-white/10 pb-3 md:pb-4 shrink-0 sticky top-0 bg-black/60 md:bg-transparent backdrop-blur-md md:backdrop-blur-none z-10 pt-4 md:pt-0 -mt-4 md:mt-0 rounded-t-2xl md:rounded-none">
+                <h3 class="font-display text-white text-xl md:text-3xl" data-i18n="features.proLabel">Temporada y producción</h3>
+                <span class="tag-pro font-mono text-[9px] md:text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full w-fit" data-i18n="pro.badge">Prueba 15 días gratis</span>
+              </div>
+              
+              <div class="grid md:grid-cols-3 gap-4 md:gap-8">
+                <div class="flex flex-col md:block">
+                  <div class="flex items-center md:block gap-3 mb-1 md:mb-2">
+                    <span class="font-mono text-emerald-400 text-xs tracking-widest font-semibold" data-i18n="fv.4.num">04</span>
+                    <h4 class="font-display text-white text-sm md:text-xl leading-tight" data-i18n="fv.4.t">Insights con IA</h4>
+                  </div>
+                  <p class="text-zinc-300 font-body text-[11px] md:text-sm leading-relaxed" data-i18n="fv.4.d">Análisis de patrones, sugerencias automáticas de notas e insights del partido para llegar preparado a la charla técnica.</p>
+                </div>
+                <div class="flex flex-col md:block">
+                  <div class="flex items-center md:block gap-3 mb-1 md:mb-2">
+                    <span class="font-mono text-emerald-400 text-xs tracking-widest font-semibold" data-i18n="fv.5.num">05</span>
+                    <h4 class="font-display text-white text-sm md:text-xl leading-tight" data-i18n="fv.5.t">Exportás el análisis</h4>
+                  </div>
+                  <p class="text-zinc-300 font-body text-[11px] md:text-sm leading-relaxed" data-i18n="fv.5.d">Cortá clips por patrón táctico, armá playlists de acciones y exportá en MP4, CSV o FCP XML para Premiere y DaVinci.</p>
+                </div>
+                <div class="flex flex-col md:block">
+                  <div class="flex items-center md:block gap-3 mb-1 md:mb-2">
+                    <span class="font-mono text-emerald-400 text-xs tracking-widest font-semibold" data-i18n="fv.6.num">06</span>
+                    <h4 class="font-display text-white text-sm md:text-xl leading-tight" data-i18n="fv.6.t">Temporada ordenada</h4>
+                  </div>
+                  <p class="text-zinc-300 font-body text-[11px] md:text-sm leading-relaxed" data-i18n="fv.6.d">Biblioteca en la nube, análisis de temporada, reportes PDF y LPF Play con planteles. 100% offline cuando no tenés señal.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- FLUJO: DEL PARTIDO AL REEL -->
-    <section class="py-24 md:py-32 border-t border-white/10" aria-labelledby="flujo-heading">
+    <!-- FLUJO: DEL PARTIDO AL REEL (Oculto temporalmente) -->
+    <section class="hidden py-24 md:py-32 border-t border-white/10" aria-labelledby="flujo-heading">
       <div class="max-w-7xl mx-auto px-6">
         <div class="max-w-3xl mb-16 reveal">
           <h2 id="flujo-heading" data-i18n-html="flow.h2" class="font-display text-white text-5xl md:text-7xl leading-[0.95] text-balance">
@@ -706,25 +932,6 @@
     </section>
 
     <!-- BANDA DE CONTEXTO REAL -->
-    <section class="relative border-t border-zinc-800/50 overflow-hidden" aria-labelledby="contexto-heading">
-      <div class="relative h-[55vh] min-h-[360px] md:h-[65vh] bg-zinc-900">
-        <img src="assets/stadium-laptop.jpg"
-             data-i18n-alt="ctx.alt"
-             alt="Notebook con Goal Labs analizando un partido al borde de la cancha de un club argentino al atardecer"
-             class="absolute inset-0 w-full h-full object-cover"
-             width="1366" height="768" loading="lazy"
-             onerror="this.style.display='none';" />
-        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/55 to-zinc-950/20" aria-hidden="true"></div>
-        <div class="absolute inset-0 bg-gradient-to-r from-zinc-950/70 to-transparent" aria-hidden="true"></div>
-        <div class="absolute inset-0 flex items-end">
-          <div class="max-w-7xl mx-auto px-6 pb-10 md:pb-14 w-full reveal">
-            <h2 id="contexto-heading" class="font-display text-4xl md:text-6xl text-white text-balance max-w-2xl leading-[0.95]" data-i18n="ctx.h2">Hecho para el fútbol de verdad.</h2>
-            <p class="text-zinc-300 text-lg mt-4 font-body max-w-xl text-pretty" data-i18n="ctx.sub">Del potrero al club: el mismo análisis profesional, sin la licencia profesional.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- COMPARACIÓN -->
     <section id="comparacion" class="py-24 border-t border-zinc-800/50" aria-labelledby="comparacion-heading">
       <div class="max-w-5xl mx-auto px-6">
@@ -801,13 +1008,32 @@
       </div>
     </section>
 
+    <section class="relative border-t border-zinc-800/50 overflow-hidden" aria-labelledby="contexto-heading">
+      <div class="relative h-[55vh] min-h-[360px] md:h-[65vh] bg-zinc-900">
+        <img src="assets/stadium-laptop.jpg"
+             data-i18n-alt="ctx.alt"
+             alt="Notebook con Goal Labs analizando un partido al borde de la cancha de un club argentino al atardecer"
+             class="absolute inset-0 w-full h-full object-cover"
+             width="1366" height="768" loading="lazy"
+             onerror="this.style.display='none';" />
+        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/55 to-zinc-950/20" aria-hidden="true"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-zinc-950/70 to-transparent" aria-hidden="true"></div>
+        <div class="absolute inset-0 flex items-end">
+          <div class="max-w-7xl mx-auto px-6 pb-10 md:pb-14 w-full reveal">
+            <h2 id="contexto-heading" class="font-display text-4xl md:text-6xl text-white text-balance max-w-2xl leading-[0.95]" data-i18n="ctx.h2">Hecho para el fútbol de verdad.</h2>
+            <p class="text-zinc-300 text-lg mt-4 font-body max-w-xl text-pretty" data-i18n="ctx.sub">Del potrero al club: el mismo análisis profesional, sin la licencia profesional.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- PRECIOS -->
     <section id="precios" class="py-24 md:py-32 border-t border-white/10" aria-labelledby="precios-heading">
       <div class="max-w-5xl mx-auto px-6">
         <div class="text-center max-w-2xl mx-auto mb-12 reveal">
           <span class="eyebrow" data-i18n="nav.pricing">Precios</span>
           <h2 id="precios-heading" class="font-display text-white text-5xl md:text-7xl mt-4 leading-[0.95] text-balance" data-i18n="pricing.h2">
-            Gratis para siempre. Sin letra chica.
+            Gratis. Sin letra chica.
           </h2>
           <p class="text-zinc-400 text-lg font-body mt-5 text-pretty" data-i18n="pricing.sub">El análisis que necesitás para el partido del domingo está en el plan gratuito.</p>
         </div>
@@ -833,17 +1059,18 @@
           </label>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-6">
+        <div class="price-grid grid md:grid-cols-2 gap-6">
           <!-- Free -->
           <div class="bg-zinc-900/60 border border-emerald-500/40 rounded-2xl p-8 relative reveal reveal-d1" aria-label="Plan Free">
             <div class="absolute -top-3 left-6 bg-cream text-ink text-xs font-bold px-3 py-1 rounded-full" data-i18n="free.badge">Disponible ahora</div>
             <h3 class="font-display text-2xl font-black text-white mb-1">Free</h3>
             <div class="text-5xl font-display font-black text-white mb-1 tabular-nums">$0</div>
-            <p class="text-zinc-500 text-sm mb-6 font-body" data-i18n="free.tagline">Para siempre. Sin límite de proyectos.</p>
+            <p class="text-zinc-500 text-sm mb-6 font-body" data-i18n="free.tagline">Sin límite de proyectos.</p>
             <ul class="space-y-3 mb-8" data-i18n-aria="free.ulAria" aria-label="Funcionalidades incluidas en el plan Free">
               <li class="flex items-center gap-3 text-sm text-zinc-300 font-body"><i class="fas fa-check text-emerald-400 w-4" aria-hidden="true"></i><span data-i18n="free.f1">Tagging con hotkeys configurables</span></li>
               <li class="flex items-center gap-3 text-sm text-zinc-300 font-body"><i class="fas fa-check text-emerald-400 w-4" aria-hidden="true"></i><span data-i18n="free.f2">Telestrator con 11 herramientas</span></li>
               <li class="flex items-center gap-3 text-sm text-zinc-300 font-body"><i class="fas fa-check text-emerald-400 w-4" aria-hidden="true"></i><span data-i18n="free.f3">Verificador de offside con perspectiva</span></li>
+              <li class="flex items-center gap-3 text-sm text-zinc-300 font-body"><i class="fas fa-check text-emerald-400 w-4" aria-hidden="true"></i><span data-i18n="free.f9">Modo presentación en segunda pantalla</span></li>
               <li class="flex items-center gap-3 text-sm text-zinc-300 font-body"><i class="fas fa-check text-emerald-400 w-4" aria-hidden="true"></i><span data-i18n="free.f4">IA integrada para generación de tags</span></li>
               <li class="flex items-center gap-3 text-sm text-zinc-300 font-body"><i class="fas fa-check text-emerald-400 w-4" aria-hidden="true"></i><span data-i18n="free.f5">Exportación MP4 de clips</span></li>
               <li class="flex items-center gap-3 text-sm text-zinc-300 font-body"><i class="fas fa-check text-emerald-400 w-4" aria-hidden="true"></i><span data-i18n="free.f6">Estadísticas por jugador y equipo</span></li>
@@ -889,8 +1116,14 @@
           </div>
         </div>
 
+        <!-- Dots del carousel de precios (solo mobile) -->
+        <div id="price-dots" class="md:hidden flex justify-center items-center gap-2 mt-5" aria-hidden="true">
+          <button class="price-dot w-5 h-1.5 rounded-full bg-emerald-400 transition-all duration-300" data-idx="0"></button>
+          <button class="price-dot w-1.5 h-1.5 rounded-full bg-white/25 transition-all duration-300" data-idx="1"></button>
+        </div>
+
         <p class="text-center text-zinc-600 text-sm mt-8 max-w-xl mx-auto font-body" data-i18n="pricing.footnote">
-          El núcleo de Goal Labs es gratis y siempre lo va a ser. No es una demo de 14 días. No tiene funciones deshabilitadas para empujarte a pagar. Pro suma herramientas para toda la temporada — nunca te quita lo que ya tenés.
+          El plan gratuito tiene todo lo que necesitás para analizar partidos. Pro suma las herramientas diseñadas para el trabajo de toda la temporada.
         </p>
       </div>
     </section>
@@ -943,7 +1176,7 @@
             </button>
             <div class="faq-content" id="faq-gratis" role="region">
               <div class="px-6 pb-5">
-                <p class="text-zinc-400 text-sm leading-relaxed font-body" data-i18n="faq.a3">El core es gratis para siempre. No es una demo de 14 días ni una versión recortada. Podés tagguear partidos, usar el telestrator, verificar offsides y exportar clips sin pagar un peso — hoy, en seis meses, y en dos años. El plan Pro suma features adicionales (temporada, nube, reels, PDF), pero nunca te quita lo que ya tenés.</p>
+                <p class="text-zinc-400 text-sm leading-relaxed font-body" data-i18n="faq.a3">El core es gratis. No es una demo de 14 días ni una versión recortada. Podés tagguear partidos, usar el telestrator, verificar offsides y exportar clips sin pagar un peso — hoy, en seis meses, y en dos años. El plan Pro suma features adicionales (temporada, nube, reels, PDF), pero nunca te quita lo que ya tenés.</p>
               </div>
             </div>
           </div>
@@ -999,16 +1232,16 @@
         <h2 id="cta-heading" data-i18n-html="cta.h2" class="font-display text-white text-6xl md:text-8xl mb-6 leading-[0.95] text-balance">
           El análisis táctico que el<br />fútbol argentino se merecía.
         </h2>
-        <p class="text-zinc-400 text-lg mb-10 font-body" data-i18n="cta.sub">Gratis. Sin cuenta. Sin internet. Hecho por alguien del fútbol.</p>
+        <p class="text-zinc-400 text-lg mb-10 font-body" data-i18n="cta.sub">Gratis. Sin tarjeta. Sin internet. Hecho por alguien del fútbol.</p>
         <a href="https://github.com/nacholiporace/goal-labs-releases/releases/latest"
            data-download
            class="btn-primary inline-flex items-center gap-3 bg-cream hover:bg-white text-ink font-body font-semibold px-10 py-4 rounded-full text-lg transition-colors focus-ring"
            data-i18n-aria="cta.downloadAria"
-           aria-label="Descargar Goal Labs para Windows — gratis, sin cuenta requerida">
+           aria-label="Descargar Goal Labs para Windows — gratis">
           <i class="fas fa-download text-sm" aria-hidden="true"></i>
           <span data-i18n="cta.downloadWindows">Descargar para Windows</span>
         </a>
-        <p id="version-text" class="text-zinc-600 text-sm mt-4 font-body tabular-nums"><span id="version-num">v1.2.1</span> <span data-i18n="versionSuffix">· Windows 10/11 · Actualización automática incluida</span></p>
+        <p id="version-text" class="text-zinc-600 text-sm mt-4 font-body tabular-nums"><span id="version-num">v1.3.0</span> <span data-i18n="versionSuffix">· Windows 10/11 · Actualización automática incluida</span></p>
       </div>
     </section>
 
@@ -1098,6 +1331,12 @@
 
       // Fallback: si GSAP no cargó (o reduced-motion), mostrar todo sin animar
       if (!hasGSAP || reduce) {
+        // Sin GSAP o con reduce-motion: nunca corre la narrativa, así que el
+        // preloader (overlay opaco) hay que removerlo a mano o tapa todo el sitio.
+        const pre = document.getElementById('preloader');
+        if (pre) pre.remove();
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
         document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
         return;
       }
@@ -1118,7 +1357,10 @@
         document.querySelectorAll('a[href^="#"]').forEach((a) => {
           a.addEventListener('click', (e) => {
             const id = a.getAttribute('href');
-            if (id.length > 1) {
+            if (id === '#hero' || id === '#top') {
+              e.preventDefault();
+              lenis.scrollTo(0); // Forzar al píxel 0 exacto
+            } else if (id.length > 1) {
               const target = document.querySelector(id);
               if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: -70 }); }
             }
@@ -1136,10 +1378,78 @@
       });
 
       // Entrada épica del hero (al cargar)
-      const heroTl = gsap.timeline({ delay: 0.2, defaults: { ease: 'power3.out' } });
+      const heroTl = gsap.timeline({ paused: true, delay: 0.1, defaults: { ease: 'power3.out' } });
       heroTl
         .from('#hero-heading', { yPercent: 14, autoAlpha: 0, duration: 1.2, ease: 'power4.out' }, 0)
         .from('#hero .reveal', { y: 38, autoAlpha: 0, duration: 1, stagger: 0.12 }, 0.25);
+
+      // ---- Preloader Narrativo (Estilo Cinematic UI) ----
+      const preloader = document.getElementById('preloader');
+      const preloaderSeen = (() => {
+        try { return sessionStorage.getItem('gl_preloader_seen') === '1'; } catch (e) { return false; }
+      })();
+      if (preloader && !preloaderSeen) {
+        try { sessionStorage.setItem('gl_preloader_seen', '1'); } catch (e) {}
+        const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+        document.body.style.overflow = 'hidden';
+        if (scrollbarWidth > 0) {
+          document.body.style.paddingRight = scrollbarWidth + 'px';
+        }
+        
+        const uiElements = gsap.utils.toArray('.preloader-ui');
+        const text1 = document.getElementById('preloader-text-1');
+        const text2 = document.getElementById('preloader-text-2');
+        
+        let tlPre = gsap.timeline({
+          onComplete: () => {
+            gsap.to(preloader, { autoAlpha: 0, duration: 0.8, ease: "power2.inOut" });
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
+            heroTl.play(); 
+            // Fix layout bug: refresh ScrollTrigger after hero unhides
+            setTimeout(() => { ScrollTrigger.refresh(); }, 50);
+          }
+        });
+
+        // 1. Pop-in de los UI Elements (staggered rápido)
+        tlPre.to(uiElements, { 
+          scale: 1, autoAlpha: 1, duration: 0.4, 
+          stagger: 0.06, ease: "back.out(1.5)" 
+        }, "+=0.1");
+
+        // 2. Aparece la primera frase ("El estándar profesional...")
+        tlPre.to(text1, { 
+          autoAlpha: 1, y: -20, duration: 0.6, ease: "power3.out" 
+        }, "-=0.3");
+
+        // 3. Float de los UI elements (micro-interacción)
+        tlPre.to(uiElements, {
+          y: -10, duration: 0.8, stagger: 0.05, yoyo: true, repeat: 1, ease: "sine.inOut"
+        }, "-=0.4");
+
+        // 4. Implosionan los UI Elements y desaparece la primera frase
+        tlPre.to(uiElements, { 
+          scale: 0, autoAlpha: 0, duration: 0.4, stagger: 0.05, ease: "back.in(2)" 
+        }, "-=0.2");
+        
+        tlPre.to(text1, { autoAlpha: 0, y: -40, duration: 0.4 }, "<");
+        
+        // 5. Segunda frase ("...ahora al alcance de todos.")
+        tlPre.fromTo(text2, 
+          { autoAlpha: 0, scale: 0.9, filter: "blur(10px)" }, 
+          { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 0.6, ease: "power3.out" },
+          "-=0.1"
+        );
+
+        // 6. Final hold (mucho más corto)
+        tlPre.to({}, { duration: 0.7 });
+      } else {
+        // Sin preloader, o ya visto en esta sesión: mostrar el sitio directo.
+        if (preloader) preloader.remove();
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+        heroTl.play();
+      }
 
       // Parallax del fondo del hero con el mouse
       if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
@@ -1208,9 +1518,11 @@
           gsap.set(el, { strokeDasharray: L, strokeDashoffset: L });
         });
 
+        const isMobile = window.innerWidth < 768;
         const tl = gsap.timeline({
           defaults: { ease: 'none' },
-          scrollTrigger: {
+          // En desktop: scroll-scrub con pin. En mobile: autoplay (sin pin, sin scrub).
+          scrollTrigger: isMobile ? undefined : {
             trigger: '#story', start: 'top top', end: '+=1600',
             scrub: 0.6, pin: true, anticipatePin: 1, invalidateOnRefresh: true
           }
@@ -1254,9 +1566,24 @@
         }, ts + 0.10);
         tl.to('#event-tag', { autoAlpha: 1, y: 0, duration: 0.07 }, ts + 0.16);
 
-        // reveal del video real
         // video + cancha visibles juntos desde el inicio; al final, un hold para mirar el cierre (GOL + evento)
         tl.to({}, { duration: 0.6 });
+
+        // En mobile: autoplay al entrar en viewport (sin pin, sin scrub)
+        if (isMobile) {
+          tl.pause(0);
+          tl.timeScale(0.22); // ~5s totales para que sea legible
+          const storyEl = document.getElementById('story');
+          if (storyEl) {
+            const obs = new IntersectionObserver(([entry]) => {
+              if (entry.isIntersecting) {
+                tl.play(0);
+                obs.disconnect();
+              }
+            }, { threshold: 0.35 });
+            obs.observe(storyEl);
+          }
+        }
 
         // Reveal de cabecera al entrar
         gsap.from('#story .story-head > *', {
@@ -1265,95 +1592,281 @@
         });
       })();
 
-      // ---- Funcionalidades: sticky scroll (GSAP ScrollTrigger + height sync + snap) ----
+      // ---- Funcionalidades: Horizontal Scroll (Estilo bam83) ----
       (function () {
-        var featItems = document.querySelectorAll('.feat-item');
-        var featMedias = document.querySelectorAll('.feat-media');
-        var bar = document.getElementById('feat-bar');
-        var numEl = document.getElementById('feat-num');
-        var mediaWrap = document.getElementById('feat-media-wrap');
-        var stageEl = document.getElementById('feat-stage');
-        if (!featItems.length) return;
+        const pinContainer = document.getElementById('feat-pin-container');
+        const track = document.getElementById('feat-track');
+        if (!pinContainer || !track) return;
+        
+        const vids = document.querySelectorAll('.feat-vid');
+        const cards = document.querySelectorAll('.feat-card');
+        const uiElements = document.querySelectorAll('.ui-element');
+        const btnPrev = document.getElementById('feat-prev');
+        const btnNext = document.getElementById('feat-next');
+        
+        // --- 1. Lógica de "Peek" y Visibilidad de UI durante Scroll ---
+        let isMouseOverUI = false;
+        let isMouseInsideContainer = false;
+        let scrollTimeout;
 
-        function activateFeat(n) {
-          var idx = parseInt(n, 10) - 1;
-          featMedias.forEach(function (m, i) {
-            var on = i === idx;
-            gsap.to(m, { opacity: on ? 1 : 0, duration: 0.35, ease: 'power2.inOut',
-              onStart: on ? function () { m.style.pointerEvents = 'auto'; } : undefined,
-              onComplete: on ? undefined : function () { m.style.pointerEvents = 'none'; }
-            });
-          });
-          featItems.forEach(function (it, i) {
-            it.classList.toggle('feat-item--active', i === idx);
-          });
-          if (bar) bar.style.width = ((idx + 1) / 6 * 100).toFixed(2) + '%';
-          if (numEl) numEl.textContent = String(parseInt(n, 10)).padStart(2, '0');
+        function updateUIVisibility(forceVisible = false) {
+          if (forceVisible || !isMouseInsideContainer || isMouseOverUI) {
+            uiElements.forEach(el => gsap.to(el, { opacity: 1, duration: 0.3, overwrite: "auto" }));
+          } else {
+            // Cuando el mouse está sobre el video, la UI se vuelve 100% transparente
+            uiElements.forEach(el => gsap.to(el, { opacity: 0, duration: 0.3, overwrite: "auto" }));
+          }
         }
 
-        // Match each feat-item's min-height to the media panel
-        function syncHeights() {
-          if (!mediaWrap) return;
-          var h = mediaWrap.offsetHeight;
-          if (h < 80) return;
-          featItems.forEach(function (item) { item.style.minHeight = h + 'px'; });
-        }
-
-        // Cache each item's document-Y for snap calculation
-        function cacheSnapY() {
-          var sy = window.scrollY || 0;
-          featItems.forEach(function (item) {
-            item._snapY = item.getBoundingClientRect().top + sy;
-          });
-        }
-
-        function init() { syncHeights(); cacheSnapY(); }
-        init();
-        window.addEventListener('resize', function () { init(); ScrollTrigger.refresh(); });
-
-        activateFeat('1');
-
-        // ScrollTrigger: activate on scroll
-        featItems.forEach(function (item) {
-          ScrollTrigger.create({
-            trigger: item,
-            start: 'top 20%',
-            end: 'bottom 20%',
-            onEnter: function () { activateFeat(item.dataset.feat); },
-            onEnterBack: function () { activateFeat(item.dataset.feat); },
-            invalidateOnRefresh: true,
-          });
+        pinContainer.addEventListener('mouseenter', () => { isMouseInsideContainer = true; updateUIVisibility(); });
+        pinContainer.addEventListener('mouseleave', () => { isMouseInsideContainer = false; updateUIVisibility(); });
+        pinContainer.addEventListener('mousemove', (e) => {
+          isMouseOverUI = !!e.target.closest('.ui-element');
+          // Update visibility only if not currently scrolling
+          if (!scrollTimeout || scrollTimeout._called) {
+             updateUIVisibility();
+          }
         });
 
-        // Snap to each item's top position within feat-stage
-        if (stageEl) {
-          ScrollTrigger.create({
-            trigger: stageEl,
-            start: 'top top',
-            end: 'bottom bottom',
-            snap: {
-              snapTo: function (p, self) {
-                var range = self.end - self.start;
-                if (range <= 0) return p;
-                var currentPos = self.start + p * range;
-                var nearest = currentPos, minDist = Infinity;
-                featItems.forEach(function (item) {
-                  var s = item._snapY || 0;
-                  var d = Math.abs(s - currentPos);
-                  if (d < minDist) { minDist = d; nearest = s; }
-                });
-                return Math.max(0, Math.min(1, (nearest - self.start) / range));
-              },
-              duration: { min: 0.2, max: 0.4 },
-              delay: 0.05,
-              ease: 'power1.inOut',
-            },
+
+        // --- 2. Lógica del Scroll Horizontal ---
+        let activeIndex = 0;
+        
+        function updateArrows() {
+          if (!btnPrev || !btnNext) return;
+          if (activeIndex === 0) {
+            gsap.to(btnPrev, { autoAlpha: 0, scale: 0.8, duration: 0.3 });
+          } else {
+            gsap.to(btnPrev, { autoAlpha: 1, scale: 1, duration: 0.3 });
+          }
+          if (activeIndex === cards.length - 1) {
+            gsap.to(btnNext, { autoAlpha: 0, scale: 0.8, duration: 0.3 });
+          } else {
+            gsap.to(btnNext, { autoAlpha: 1, scale: 1, duration: 0.3 });
+          }
+        }
+
+        // Inicializar opacidades y estilos
+        gsap.set(vids, { opacity: (i) => i === 0 ? 1 : 0 });
+        gsap.set(cards, { 
+          opacity: (i) => i === 0 ? 1 : 0.4,
+          scale: (i) => i === 0 ? 1 : 0.95,
+          borderColor: (i) => i === 0 ? "rgba(52, 211, 153, 0.5)" : "rgba(255, 255, 255, 0.1)",
+          backgroundColor: (i) => i === 0 ? "rgba(0, 0, 0, 0.25)" : "rgba(0, 0, 0, 0.12)",
+          cursor: "pointer" // Make cards clearly clickable
+        });
+        updateArrows();
+
+        function getScrollAmount() {
+          return track.scrollWidth - window.innerWidth;
+        }
+
+        // Creamos un Timeline para agregar un "stop" al principio y al final
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: "#funcionalidades",
+            start: "top top",
+            // Agregamos window.innerHeight al final para dar margen de scroll
+            end: () => `+=${getScrollAmount() + window.innerHeight}`,
+            pin: true,
+            scrub: 1,
             invalidateOnRefresh: true,
+            onUpdate: () => {
+              // 1. Forzar UI visible durante el scroll
+              updateUIVisibility(true);
+              clearTimeout(scrollTimeout);
+              scrollTimeout = setTimeout(() => {
+                // Volver a evaluar visibilidad cuando termina de scrollear
+                scrollTimeout._called = true;
+                updateUIVisibility();
+              }, 250);
+              scrollTimeout._called = false;
+
+              // 2. Buscar la tarjeta más cercana a la "línea objetivo" (Centro de la pantalla)
+              let newActive = 0;
+              let minDistance = Infinity;
+              const targetLine = window.innerWidth * 0.5; 
+              
+              cards.forEach((card, idx) => {
+                const rect = card.getBoundingClientRect();
+                const cardCenter = rect.left + rect.width / 2;
+                const distance = Math.abs(targetLine - cardCenter);
+                
+                if (distance < minDistance) {
+                  minDistance = distance;
+                  newActive = idx;
+                }
+              });
+
+              // 3. Animar si cambió la tarjeta
+              if (newActive !== activeIndex) {
+                activeIndex = newActive;
+                updateArrows();
+                
+                // Crossfade videos
+                vids.forEach((v, i) => {
+                  gsap.to(v, { opacity: i === activeIndex ? 1 : 0, duration: 0.6, overwrite: "auto" });
+                });
+                
+                // Resaltar tarjeta activa y atenuar las demás
+                cards.forEach((card, i) => {
+                  if (i === activeIndex) {
+                    gsap.to(card, { 
+                      opacity: 1, scale: 1, 
+                      borderColor: "rgba(52, 211, 153, 0.5)", 
+                      backgroundColor: "rgba(0, 0, 0, 0.25)",
+                      duration: 0.4, overwrite: "auto" 
+                    });
+                  } else {
+                    gsap.to(card, { 
+                      opacity: 0.4, scale: 0.95, 
+                      borderColor: "rgba(255, 255, 255, 0.1)", 
+                      backgroundColor: "rgba(0, 0, 0, 0.12)", 
+                      duration: 0.4, overwrite: "auto" 
+                    });
+                  }
+                });
+              }
+            }
+          }
+        });
+
+        // Configuración del Timeline con "Mínimo Stop" (10% al inicio y final)
+        tl.to({}, { duration: 0.1 }) // Pausa inicial
+          .to(track, { x: () => -getScrollAmount(), ease: "none", duration: 0.8 }) // Scroll horizontal
+          .to({}, { duration: 0.1 }); // Pausa final
+
+        // --- 3. Click para ir a una Tarjeta / Navegación con Flechas ---
+        function scrollToCard(idx) {
+          if (idx < 0 || idx >= cards.length) return;
+          const maxTranslation = getScrollAmount();
+          const targetLine = window.innerWidth * 0.5;
+          const card = cards[idx];
+          
+          // Calculamos cuánto debería estar trasladado el track
+          const cardCenterIfTrackAtZero = card.offsetLeft + card.offsetWidth / 2;
+          let requiredTranslation = cardCenterIfTrackAtZero - targetLine;
+          
+          // Limitamos a los bordes posibles
+          if (requiredTranslation < 0) requiredTranslation = 0;
+          if (requiredTranslation > maxTranslation) requiredTranslation = maxTranslation;
+          
+          // Convertimos la traslación a progreso del timeline (el movimiento ocurre entre 0.1 y 0.9)
+          const translationProgress = requiredTranslation / maxTranslation;
+          const overallProgress = 0.1 + (translationProgress * 0.8);
+          
+          // Obtenemos el scroll físico real usando el progreso general
+          const st = tl.scrollTrigger;
+          const targetScroll = st.start + (st.end - st.start) * overallProgress;
+          
+          // Navegamos suavemente
+          window.scrollTo({
+            top: targetScroll,
+            behavior: 'smooth'
           });
         }
+
+        cards.forEach((card, idx) => {
+          card.addEventListener('click', () => scrollToCard(idx));
+        });
+        
+        if (btnPrev) btnPrev.addEventListener('click', () => scrollToCard(activeIndex - 1));
+        if (btnNext) btnNext.addEventListener('click', () => scrollToCard(activeIndex + 1));
+
       })();
 
       ScrollTrigger.refresh();
+    })();
+
+    // ---- Funcionalidades: Mobile Carousel (scroll-snap nativo, sin GSAP) ----
+    (function () {
+      const mobTrack = document.getElementById('feat-mob-track');
+      if (!mobTrack) return;
+
+      const slides = mobTrack.querySelectorAll('.feat-mob-slide');
+      const dots   = document.querySelectorAll('.feat-mob-dot');
+      const vid0   = document.getElementById('fmv-0');
+      const vid1   = document.getElementById('fmv-1');
+
+      let activeIdx = 0;
+
+      function activateDot(idx) {
+        dots.forEach((d, i) => {
+          const active = i === idx;
+          d.style.width      = active ? '1.25rem' : '0.375rem';
+          d.style.background = active ? 'rgb(52 211 153)' : 'rgba(255,255,255,0.25)';
+        });
+      }
+
+      function activateVideo(vidIdx) {
+        if (!vid0 || !vid1) return;
+        vid0.style.opacity = vidIdx === 0 ? '1' : '0';
+        vid1.style.opacity = vidIdx === 1 ? '1' : '0';
+      }
+
+      // Dots → scroll al slide correspondiente
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          slides[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        });
+      });
+
+      // IntersectionObserver: detecta qué slide es más visible
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.intersectionRatio >= 0.5) {
+            const idx    = [...slides].indexOf(entry.target);
+            const vidIdx = parseInt(entry.target.dataset.vid || '0', 10);
+            if (idx !== activeIdx) {
+              activeIdx = idx;
+              activateDot(idx);
+              activateVideo(vidIdx);
+            }
+          }
+        });
+      }, { root: mobTrack, threshold: 0.5 });
+
+      slides.forEach(s => observer.observe(s));
+
+      // Estado inicial
+      activateDot(0);
+      activateVideo(0);
+    })();
+
+    // ---- Precios: dots del carousel mobile ----
+    (function () {
+      const grid = document.querySelector('#precios .price-grid');
+      const dots = document.querySelectorAll('.price-dot');
+      if (!grid || !dots.length) return;
+
+      const cards = grid.querySelectorAll('[aria-label^="Plan"]');
+
+      function activatePriceDot(idx) {
+        dots.forEach((d, i) => {
+          d.style.width      = i === idx ? '1.25rem' : '0.375rem';
+          d.style.background = i === idx ? 'rgb(52 211 153)' : 'rgba(255,255,255,0.25)';
+        });
+      }
+
+      // Tap en dot → scroll al card
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          cards[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        });
+      });
+
+      // IntersectionObserver: detecta qué card está visible
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.intersectionRatio >= 0.5) {
+            const idx = [...cards].indexOf(entry.target);
+            if (idx !== -1) activatePriceDot(idx);
+          }
+        });
+      }, { root: grid, threshold: 0.5 });
+
+      cards.forEach(c => obs.observe(c));
+      activatePriceDot(0);
     })();
 
     // Direct download: fetch latest release asset URL from GitHub API
@@ -1392,6 +1905,8 @@
         "meta.title": `Goal Labs — Análisis Táctico de Fútbol Gratis | Software Offline para Argentina`,
         "meta.description": `Software de videoanálisis táctico para el fútbol argentino. Tagueá partidos con hotkeys, usá el telestrator, verificá offsides con perspectiva. Gratis. Sin internet. Para Windows.`,
         "skip": `Ir al contenido principal`,
+        "preloader.line1": `El estándar profesional...`,
+        "preloader.line2": `...ahora al alcance de todos.`,
         "nav.features": `Funcionalidades`,
         "nav.compare": `Vs. alternativas`,
         "nav.pricing": `Precios`,
@@ -1405,7 +1920,7 @@
         "hero.ctaDownloadAria": `Descargar Goal Labs para Windows — gratis`,
         "hero.seeFeatures": `Ver qué incluye`,
         "hero.seeFeaturesAria": `Ver funcionalidades de Goal Labs`,
-        "hero.noAccount": `Sin cuenta · Sin tarjeta · Windows 10/11`,
+        "hero.noAccount": `Sin tarjeta de crédito · Windows 10/11`,
         "hero.mockAria": `Captura de pantalla simulada de la interfaz de Goal Labs mostrando el reproductor de video con tags y el registro de eventos`,
         "problem.h2": `Esto te suena familiar.`,
         "problem.p1": `Terminás el partido. Tenés el video. Pero para tener 10 minutos de clips útiles para el entreno del lunes, necesitás 4 horas en Premiere — o pagar una licencia que tu club no puede costear.`,
@@ -1414,17 +1929,16 @@
         "features.h2": `Todo lo que necesitás en una sola pantalla.`,
         "features.sub": `Sin saltar entre apps. Sin flujos rotos.`,
         "features.coreLabel": `El núcleo`,
-        "features.coreFree": `Gratis para siempre`,
+        "features.coreFree": `Gratis`,
         "features.proLabel": `Temporada y producción`,
-        "fv.mediaHint": `Captura próximamente`,
         "fv.1.num": `01`, "fv.1.t": `Taggeás con hotkeys`, "fv.1.badge": `Gratis`,
-        "fv.1.d": `Configurá tus propias teclas. Una tecla = un evento táctico registrado, sin pausar el video. Goles, tiros, pérdidas — todo con su minuto.`,
+        "fv.1.d": `Configurá tus propias teclas o generá los tags con IA desde una frase. Una tecla = un evento táctico registrado, sin pausar el video. Goles, tiros, pérdidas — todo con su minuto.`,
         "fv.2.num": `02`, "fv.2.t": `Dibujás sobre el video`, "fv.2.badge": `Gratis`,
-        "fv.2.d": `11 herramientas de dibujo con animación: flechas, zonas, spotlight, rectas y texto. Señalá lo que importa sobre el frame exacto.`,
+        "fv.2.d": `11 herramientas de dibujo con animación: flechas, zonas, spotlight, rectas y texto. Señalá lo que importa sobre el frame exacto — y proyectalo en una segunda pantalla para la charla técnica.`,
         "fv.3.num": `03`, "fv.3.t": `Verificás el offside`, "fv.3.badge": `Gratis`,
         "fv.3.d": `Línea de perspectiva geométrica por homografía — el mismo principio que usa el VAR profesional. Único en esta categoría de precio.`,
-        "fv.4.num": `04`, "fv.4.t": `IA Integrada (Gemini)`, "fv.4.badge": `Pro`,
-        "fv.4.d": `Generá tags desde lenguaje natural. Análisis de patrones, sugerencias automáticas de eventos e insights del partido para llegar preparado a la charla técnica.`,
+        "fv.4.num": `04`, "fv.4.t": `Insights con IA (Gemini)`, "fv.4.badge": `Pro`,
+        "fv.4.d": `Análisis de patrones, sugerencias automáticas de notas e insights del partido para llegar preparado a la charla técnica. La IA lee tus eventos y resume lo que pasó.`,
         "fv.5.num": `05`, "fv.5.t": `Exportás el análisis`, "fv.5.badge": `Pro`,
         "fv.5.d": `Cortá clips por patrón táctico, armá playlists de acciones y exportá en MP4, CSV o FCP XML para Premiere y DaVinci. Del taggeo al briefing técnico sin salir de la app.`,
         "fv.6.num": `06`, "fv.6.t": `Tu temporada, ordenada`, "fv.6.badge": `Pro`,
@@ -1484,11 +1998,11 @@
         "compare.curve.hudl": `Media`,
         "common.yes": `Sí`,
         "common.no": `No`,
-        "pricing.h2": `Gratis para siempre. Sin letra chica.`,
+        "pricing.h2": `Gratis. Sin letra chica.`,
         "pricing.sub": `El análisis que necesitás para el partido del domingo está en el plan gratuito.`,
-        "pricing.footnote": `El núcleo de Goal Labs es gratis y siempre lo va a ser. No es una demo de 14 días. No tiene funciones deshabilitadas para empujarte a pagar. Pro suma herramientas para toda la temporada — nunca te quita lo que ya tenés.`,
+        "pricing.footnote": `El plan gratuito tiene todo lo que necesitás para analizar partidos. Pro suma las herramientas diseñadas para el trabajo de toda la temporada.`,
         "free.badge": `Disponible ahora`,
-        "free.tagline": `Para siempre. Sin límite de proyectos.`,
+        "free.tagline": `Sin límite de proyectos.`,
         "free.ulAria": `Funcionalidades incluidas en el plan Free`,
         "free.f1": `Tagging con hotkeys configurables`,
         "free.f2": `Telestrator con 11 herramientas`,
@@ -1498,6 +2012,7 @@
         "free.f6": `Estadísticas por jugador y equipo`,
         "free.f7": `Proyectos ilimitados`,
         "free.f8": `100% offline`,
+        "free.f9": `Modo presentación en segunda pantalla`,
         "free.cta": `Descargar gratis`,
         "free.ctaAria": `Descargar Goal Labs gratis`,
         "pro.badge": `Prueba 15 días gratis`,
@@ -1523,7 +2038,7 @@
         "faq.q2": `¿Funciona con cualquier video?`,
         "faq.a2": `Sí. Goal Labs abre cualquier video que podés reproducir en un navegador o en VLC: MP4, MOV, AVI, MKV y más. No necesitás convertir nada antes. FFmpeg nativo se encarga de la exportación de clips.`,
         "faq.q3": `¿Es realmente gratis? ¿No tiene fecha de vencimiento?`,
-        "faq.a3": `El core es gratis para siempre. No es una demo de 14 días ni una versión recortada. Podés tagguear partidos, usar el telestrator, verificar offsides y exportar clips sin pagar un peso — hoy, en seis meses, y en dos años. El plan Pro suma features adicionales (temporada, nube, reels, PDF), pero nunca te quita lo que ya tenés.`,
+        "faq.a3": `El core es gratis. No es una demo de 14 días ni una versión recortada. Podés tagguear partidos, usar el telestrator, verificar offsides y exportar clips sin pagar un peso — hoy, en seis meses, y en dos años. El plan Pro suma features adicionales (temporada, nube, reels, PDF), pero nunca te quita lo que ya tenés.`,
         "faq.q4": `¿Qué es Goal Labs Pro y cómo pruebo los 15 días?`,
         "faq.a4": `Pro desbloquea el trabajo de toda la temporada: biblioteca en la nube, análisis de temporada, reels por jugador con export 9:16, reportes PDF, insights con IA, panel de estadísticas avanzado y LPF Play. Para probarlo, descargá la app gratis y activá la prueba de <strong class="text-zinc-300">15 días sin tarjeta</strong> desde <strong class="text-zinc-300">Ver planes</strong> dentro de cualquier función Pro. Cuando termina la prueba, seguís usando todo el plan gratuito sin perder nada.`,
         "faq.q5": `¿Cuánto tiempo lleva aprender a usarlo?`,
@@ -1531,9 +2046,9 @@
         "faq.q6": `¿Qué pasa con mis datos si no tengo internet?`,
         "faq.a6": `Todo se guarda localmente en tu computadora como archivos .json. No hay nada en ningún servidor. Autosave automático en cada acción. Si querés tener backup en la nube, podés activarlo opcionalmente — pero no es obligatorio para nada.`,
         "cta.h2": `El análisis táctico que el<br>fútbol argentino se merecía.`,
-        "cta.sub": `Gratis. Sin cuenta. Sin internet. Hecho por alguien del fútbol.`,
+        "cta.sub": `Gratis. Sin tarjeta. Sin internet. Hecho por alguien del fútbol.`,
         "cta.downloadWindows": `Descargar para Windows`,
-        "cta.downloadAria": `Descargar Goal Labs para Windows — gratis, sin cuenta requerida`,
+        "cta.downloadAria": `Descargar Goal Labs para Windows — gratis`,
         "footer.madeIn": `— Hecho en Argentina`,
         "versionSuffix": `· Windows 10/11 · Actualización automática incluida`
       },
@@ -1541,6 +2056,8 @@
         "meta.title": `Goal Labs — Free Tactical Football Analysis | Offline Software for Windows`,
         "meta.description": `Tactical video analysis software for football. Tag matches with hotkeys, use the telestrator, check offsides with perspective. Free. Offline. For Windows.`,
         "skip": `Skip to main content`,
+        "preloader.line1": `The professional standard...`,
+        "preloader.line2": `...now within everyone's reach.`,
         "nav.features": `Features`,
         "nav.compare": `Vs. alternatives`,
         "nav.pricing": `Pricing`,
@@ -1563,17 +2080,16 @@
         "features.h2": `Everything you need on a single screen.`,
         "features.sub": `No app-switching. No broken workflows.`,
         "features.coreLabel": `The core`,
-        "features.coreFree": `Free forever`,
+        "features.coreFree": `Free`,
         "features.proLabel": `Season & production`,
-        "fv.mediaHint": `Screenshot coming soon`,
         "fv.1.num": `01`, "fv.1.t": `Tag with hotkeys`, "fv.1.badge": `Free`,
-        "fv.1.d": `Set your own keys. One key = one tactical event logged, without pausing the video. Goals, shots, turnovers — all with their minute.`,
+        "fv.1.d": `Set your own keys — or generate the tags with AI from a sentence. One key = one tactical event logged, without pausing the video. Goals, shots, turnovers — all with their minute.`,
         "fv.2.num": `02`, "fv.2.t": `Draw on video`, "fv.2.badge": `Free`,
-        "fv.2.d": `11 animated drawing tools: arrows, zones, spotlight, lines and text. Mark what matters on the exact frame.`,
+        "fv.2.d": `11 animated drawing tools: arrows, zones, spotlight, lines and text. Mark what matters on the exact frame — and project it on a second screen for the team talk.`,
         "fv.3.num": `03`, "fv.3.t": `Verify offside`, "fv.3.badge": `Free`,
         "fv.3.d": `Geometric perspective line via homography — the same principle professional VAR uses. Unique at this price point.`,
-        "fv.4.num": `04`, "fv.4.t": `Built-in AI (Gemini)`, "fv.4.badge": `Pro`,
-        "fv.4.d": `Generate tags from natural language. Pattern analysis, automatic event suggestions and match insights so you arrive at the team talk fully prepared.`,
+        "fv.4.num": `04`, "fv.4.t": `AI Insights (Gemini)`, "fv.4.badge": `Pro`,
+        "fv.4.d": `Pattern analysis, automatic note suggestions and match insights so you arrive at the team talk fully prepared. The AI reads your events and summarizes what happened.`,
         "fv.5.num": `05`, "fv.5.t": `Export the analysis`, "fv.5.badge": `Pro`,
         "fv.5.d": `Cut clips by tactical pattern, build action playlists and export to MP4, CSV or FCP XML for Premiere and DaVinci. From tagging to technical briefing without leaving the app.`,
         "fv.6.num": `06`, "fv.6.t": `Your season, organized`, "fv.6.badge": `Pro`,
@@ -1633,11 +2149,11 @@
         "compare.curve.hudl": `Medium`,
         "common.yes": `Yes`,
         "common.no": `No`,
-        "pricing.h2": `Free forever. No fine print.`,
+        "pricing.h2": `Free. No fine print.`,
         "pricing.sub": `The analysis you need for Sunday's match is in the free plan.`,
-        "pricing.footnote": `Goal Labs' core is free and always will be. It's not a 14-day demo. It has no disabled features to push you to pay. Pro adds tools for the whole season — it never takes away what you already have.`,
+        "pricing.footnote": `The free plan has everything you need to analyze matches. Pro adds the tools designed for a full season of work.`,
         "free.badge": `Available now`,
-        "free.tagline": `Forever. No project limit.`,
+        "free.tagline": `No project limit.`,
         "free.ulAria": `Features included in the Free plan`,
         "free.f1": `Configurable hotkey tagging`,
         "free.f2": `Telestrator with 11 tools`,
@@ -1647,6 +2163,7 @@
         "free.f6": `Per-player and team stats`,
         "free.f7": `Unlimited projects`,
         "free.f8": `100% offline`,
+        "free.f9": `Presentation mode on a second screen`,
         "free.cta": `Download free`,
         "free.ctaAria": `Download Goal Labs free`,
         "pro.badge": `15-day free trial`,
@@ -1690,6 +2207,8 @@
         "meta.title": `Goal Labs — Analisi Tattica di Calcio Gratis | Software Offline per Windows`,
         "meta.description": `Software di videoanalisi tattica per il calcio. Tagga le partite con hotkey, usa il telestrator, verifica i fuorigioco con prospettiva. Gratis. Offline. Per Windows.`,
         "skip": `Vai al contenuto principale`,
+        "preloader.line1": `Lo standard professionale...`,
+        "preloader.line2": `...ora alla portata di tutti.`,
         "nav.features": `Funzionalità`,
         "nav.compare": `Vs. alternative`,
         "nav.pricing": `Prezzi`,
@@ -1712,17 +2231,16 @@
         "features.h2": `Tutto ciò che ti serve in una sola schermata.`,
         "features.sub": `Senza saltare tra app. Senza flussi interrotti.`,
         "features.coreLabel": `Il nucleo`,
-        "features.coreFree": `Gratis per sempre`,
+        "features.coreFree": `Gratuito`,
         "features.proLabel": `Stagione e produzione`,
-        "fv.mediaHint": `Schermata in arrivo`,
         "fv.1.num": `01`, "fv.1.t": `Taggi con le hotkey`, "fv.1.badge": `Gratis`,
-        "fv.1.d": `Imposta i tuoi tasti. Un tasto = un evento tattico registrato, senza mettere in pausa. Gol, tiri, palle perse — tutto col suo minuto.`,
+        "fv.1.d": `Imposta i tuoi tasti — o genera i tag con l'IA da una frase. Un tasto = un evento tattico registrato, senza mettere in pausa. Gol, tiri, palle perse — tutto col suo minuto.`,
         "fv.2.num": `02`, "fv.2.t": `Disegni sul video`, "fv.2.badge": `Gratis`,
-        "fv.2.d": `11 strumenti di disegno animati: frecce, zone, spotlight, linee e testo. Evidenzia ciò che conta sul frame esatto.`,
+        "fv.2.d": `11 strumenti di disegno animati: frecce, zone, spotlight, linee e testo. Evidenzia ciò che conta sul frame esatto — e proiettalo su un secondo schermo per il briefing tecnico.`,
         "fv.3.num": `03`, "fv.3.t": `Verifica il fuorigioco`, "fv.3.badge": `Gratis`,
         "fv.3.d": `Linea prospettica geometrica tramite omografia — lo stesso principio del VAR professionale. Unico in questa fascia di prezzo.`,
-        "fv.4.num": `04`, "fv.4.t": `IA Integrata (Gemini)`, "fv.4.badge": `Pro`,
-        "fv.4.d": `Genera tag dal linguaggio naturale. Analisi dei pattern, suggerimenti automatici di eventi e insight della partita per arrivare preparato al briefing tecnico.`,
+        "fv.4.num": `04`, "fv.4.t": `Insight con IA (Gemini)`, "fv.4.badge": `Pro`,
+        "fv.4.d": `Analisi dei pattern, suggerimenti automatici di note e insight della partita per arrivare preparato al briefing tecnico. L'IA legge i tuoi eventi e riassume ciò che è successo.`,
         "fv.5.num": `05`, "fv.5.t": `Esporti l'analisi`, "fv.5.badge": `Pro`,
         "fv.5.d": `Taglia clip per pattern tattico, costruisci playlist di azioni ed esporta in MP4, CSV o FCP XML per Premiere e DaVinci. Dal tag al briefing tecnico senza uscire dall'app.`,
         "fv.6.num": `06`, "fv.6.t": `La tua stagione, organizzata`, "fv.6.badge": `Pro`,
@@ -1782,11 +2300,11 @@
         "compare.curve.hudl": `Media`,
         "common.yes": `Sì`,
         "common.no": `No`,
-        "pricing.h2": `Gratis per sempre. Senza sorprese.`,
+        "pricing.h2": `Gratis. Senza sorprese.`,
         "pricing.sub": `L'analisi che ti serve per la partita di domenica è nel piano gratuito.`,
-        "pricing.footnote": `Il nucleo di Goal Labs è gratis e lo sarà sempre. Non è una demo di 14 giorni. Non ha funzioni disattivate per spingerti a pagare. Pro aggiunge strumenti per tutta la stagione — non ti toglie mai ciò che hai già.`,
+        "pricing.footnote": `Il piano gratuito ha tutto ciò che ti serve per analizzare le partite. Pro aggiunge gli strumenti pensati per un'intera stagione di lavoro.`,
         "free.badge": `Disponibile ora`,
-        "free.tagline": `Per sempre. Senza limiti di progetti.`,
+        "free.tagline": `Senza limiti di progetti.`,
         "free.ulAria": `Funzionalità incluse nel piano Free`,
         "free.f1": `Tagging con hotkey configurabili`,
         "free.f2": `Telestrator con 11 strumenti`,
@@ -1796,6 +2314,7 @@
         "free.f6": `Statistiche per giocatore e squadra`,
         "free.f7": `Progetti illimitati`,
         "free.f8": `100% offline`,
+        "free.f9": `Modalità presentazione su secondo schermo`,
         "free.cta": `Scarica gratis`,
         "free.ctaAria": `Scarica Goal Labs gratis`,
         "pro.badge": `Prova gratis 15 giorni`,
@@ -2147,7 +2666,7 @@
         "name": "¿Es realmente gratis? ¿No tiene fecha de vencimiento?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "El core es gratis para siempre. No es una demo de 14 días ni una versión recortada. El plan Pro suma features de temporada, pero nunca te quita lo que ya tenés."
+          "text": "El core es gratis. No es una demo de 14 días ni una versión recortada. El plan Pro suma features de temporada, pero nunca te quita lo que ya tenés."
         }
       },
       {
