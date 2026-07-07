@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nacholiporace.github.io/goal-labs-releases/sitemap.xml
+Sitemap: https://goallabs.com.ar/sitemap.xml

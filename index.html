@@ -11,24 +11,24 @@
   <meta property="og:title" content="Goal Labs — Análisis Táctico de Fútbol Gratis" />
   <meta property="og:description" content="Tagueá tu próximo partido en 45 minutos. Gratis. Offline. Para Windows." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://nacholiporace.github.io/goal-labs-releases/" />
+  <meta property="og:url" content="https://goallabs.com.ar/" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Goal Labs — Análisis Táctico de Fútbol Gratis" />
   <meta name="twitter:description" content="Tagueá tu próximo partido en 45 minutos. Gratis. Offline. Para Windows." />
 
   <!-- Canonical -->
-  <link rel="canonical" href="https://nacholiporace.github.io/goal-labs-releases/" />
+  <link rel="canonical" href="https://goallabs.com.ar/" />
 
-  <!-- Social share image (TODO: subir assets/og-image.png — 1200x630) -->
-  <meta property="og:image" content="https://nacholiporace.github.io/goal-labs-releases/assets/og-image.png" />
+  <!-- Social share image -->
+  <meta property="og:image" content="https://goallabs.com.ar/assets/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Goal Labs — software de videoanálisis táctico de fútbol" />
   <meta property="og:locale" content="es_AR" />
   <meta property="og:site_name" content="Goal Labs" />
-  <meta name="twitter:image" content="https://nacholiporace.github.io/goal-labs-releases/assets/og-image.png" />
+  <meta name="twitter:image" content="https://goallabs.com.ar/assets/og-image.png" />
 
-  <!-- Favicon (TODO: subir assets/favicon.svg + assets/apple-touch-icon.png) -->
+  <!-- Favicon -->
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 
@@ -357,6 +357,12 @@
     }
     .btn-primary:hover::after { transform: translateX(100%); }
   </style>
+
+  <!-- Analytics: GoatCounter (cookieless, sin banner de cookies).
+       Reemplazar "goallabs" por tu site code real de https://www.goatcounter.com/ (cuenta gratis).
+       Para ver de dónde viene cada visita (partner/influencer/analista), en GoatCounter →
+       Settings → Campaign parameters agregá: utm_source, utm_campaign -->
+  <script data-goatcounter="https://goallabs.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body class="bg-zinc-950 text-zinc-200 antialiased">
 
@@ -1240,7 +1246,23 @@
           <i class="fas fa-download text-sm" aria-hidden="true"></i>
           <span data-i18n="cta.downloadWindows">Descargar para Windows</span>
         </a>
-        <p id="version-text" class="text-zinc-600 text-sm mt-4 font-body tabular-nums"><span id="version-num">v1.3.0</span> <span data-i18n="versionSuffix">· Windows 10/11 · Actualización automática incluida</span></p>
+        <p id="version-text" class="text-zinc-600 text-sm mt-4 font-body tabular-nums"><span id="version-num">v1.4.1</span> <span data-i18n="versionSuffix">· Windows 10/11 · Actualización automática incluida</span></p>
+      </div>
+    </section>
+
+    <!-- CREADORES DE CONTENIDO / MICROINFLUENCERS -->
+    <section id="creadores" class="py-20 md:py-28 border-t border-white/10" aria-labelledby="creadores-heading">
+      <div class="max-w-3xl mx-auto px-6 text-center reveal">
+        <span class="eyebrow" data-i18n="creators.eyebrow">Para creadores de contenido</span>
+        <h2 id="creadores-heading" class="font-display text-white text-4xl md:text-6xl mt-4 mb-5 leading-[0.95] text-balance" data-i18n="creators.h2">¿Creás contenido de fútbol?</h2>
+        <p class="text-zinc-400 text-base md:text-lg mb-8 font-body max-w-2xl mx-auto" data-i18n="creators.sub">Offsides polémicos, reels de jugadores, telestrator en vivo — Goal Labs es la herramienta real detrás de ese contenido. Te damos acceso Pro para probarlo y mostrarlo.</p>
+        <a href="mailto:hola@goallabs.com.ar?subject=Colaboraci%C3%B3n%20como%20creador%20de%20contenido"
+           class="inline-flex items-center gap-3 border border-emerald-500/40 hover:border-emerald-400 text-emerald-300 hover:text-emerald-200 font-body font-semibold px-8 py-3.5 rounded-full text-sm transition-colors focus-ring"
+           data-i18n-aria="creators.ctaAria"
+           aria-label="Escribinos para colaborar como creador de contenido">
+          <i class="fas fa-video text-sm" aria-hidden="true"></i>
+          <span data-i18n="creators.cta">Sumate al kit de creadores</span>
+        </a>
       </div>
     </section>
 
@@ -1921,10 +1943,6 @@
         "hero.seeFeaturesAria": `Ver funcionalidades de Goal Labs`,
         "hero.noAccount": `Sin tarjeta de crédito · Windows 10/11`,
         "hero.mockAria": `Captura de pantalla simulada de la interfaz de Goal Labs mostrando el reproductor de video con tags y el registro de eventos`,
-        "problem.h2": `Esto te suena familiar.`,
-        "problem.p1": `Terminás el partido. Tenés el video. Pero para tener 10 minutos de clips útiles para el entreno del lunes, necesitás 4 horas en Premiere — o pagar una licencia que tu club no puede costear.`,
-        "problem.p2": `El análisis táctico en video lleva años siendo exclusivo de quienes pueden pagar Hudl o Nacsport. Para el resto: notas en papel, capturas de pantalla y hojas de cálculo sin contexto visual.`,
-        "problem.p3": `Goal Labs cambia eso.`,
         "features.h2": `Todo lo que necesitás en una sola pantalla.`,
         "features.sub": `Sin saltar entre apps. Sin flujos rotos.`,
         "features.coreLabel": `El núcleo`,
@@ -1942,30 +1960,6 @@
         "fv.5.d": `Cortá clips por patrón táctico, armá playlists de acciones y exportá en MP4, CSV o FCP XML para Premiere y DaVinci. Del taggeo al briefing técnico sin salir de la app.`,
         "fv.6.num": `06`, "fv.6.t": `Tu temporada, ordenada`, "fv.6.badge": `Pro`,
         "fv.6.d": `Biblioteca en la nube, análisis de temporada, reportes PDF y LPF Play con planteles. Todo sincronizado — y 100% offline cuando no tenés señal.`,
-        "f.hotkeys.t": `Tagging con Hotkeys`,
-        "f.hotkeys.d": `Configurá tus propias teclas. Una tecla = un evento táctico registrado, sin pausar el video.`,
-        "f.telestrator.t": `Telestrator Completo`,
-        "f.telestrator.d": `11 herramientas de dibujo con animación sobre el video — flechas, zonas, spotlight, texto y más.`,
-        "f.offside.t": `Offside con Perspectiva`,
-        "f.offside.d": `Verificación geométrica por homografía — el mismo principio que usa el VAR profesional. Único en este precio.`,
-        "f.ai.t": `IA Integrada (Gemini)`,
-        "f.ai.d": `Generá tags desde lenguaje natural. Análisis de patrones y sugerencias automáticas de eventos.`,
-        "f.export.t": `Exportación a tu editor`,
-        "f.export.d": `Clips MP4 vía FFmpeg nativo. FCP XML para Premiere y DaVinci. CSV y JSON de estadísticas.`,
-        "f.offline.t": `100% Offline`,
-        "f.offline.d": `Funciona en cualquier cancha, sin wifi, sin servidores. Tus proyectos se guardan como archivos .json en tu computadora.`,
-        "p.reels.t": `Reels verticales 9:16`,
-        "p.reels.d": `Armá highlights por jugador y exportá en 9:16 con seguimiento de la jugada — listos para Instagram y TikTok. También 16:9.`,
-        "p.season.t": `Análisis de Temporada`,
-        "p.season.d": `Estadísticas agregadas de todos los partidos y los momentos destacados de cada jugador a lo largo de la temporada.`,
-        "p.pdf.t": `Reportes PDF`,
-        "p.pdf.d": `Plantillas listas de partido, jugador y scouting. Compartí informes profesionales con el cuerpo técnico en un click.`,
-        "p.cloud.t": `Biblioteca en la nube`,
-        "p.cloud.d": `Guardá tus proyectos y accedé a ellos desde cualquier dispositivo. Tu temporada entera, sincronizada.`,
-        "p.insights.t": `Insights con IA`,
-        "p.insights.d": `Resúmenes automáticos del partido y lectura de patrones, para llegar a la charla con el equipo con todo masticado.`,
-        "p.lpf.t": `LPF Play + planteles`,
-        "p.lpf.d": `Importá video directo de la liga y cargá planteles predefinidos desde el catálogo de equipos. Menos carga manual.`,
         "flow.h2": `Del partido al <span class="gradient-text-green">reel</span> en tres pasos.`,
         "flow.sub": `Del video crudo a un clip listo para redes — sin salir de la app.`,
         "flow.olAria": `Cómo funciona Goal Labs en tres pasos`,
@@ -2016,7 +2010,6 @@
         "free.ctaAria": `Descargar Goal Labs gratis`,
         "pro.badge": `Prueba 15 días gratis`,
         "pro.price": `15 días gratis`,
-        "pro.tagline": `Sin tarjeta. Para clubes y analistas que trabajan toda la temporada.`,
         "pro.ulAria": `Funcionalidades del plan Pro`,
         "pro.f1": `Todo lo del plan gratuito`,
         "pro.f2": `Reels por jugador + export 9:16 y 16:9`,
@@ -2050,7 +2043,12 @@
         "cta.downloadWindows": `Descargar para Windows`,
         "cta.downloadAria": `Descargar Goal Labs para Windows — gratis`,
         "footer.madeIn": `— Hecho en Argentina`,
-        "versionSuffix": `· Windows 10/11 · Actualización automática incluida`
+        "versionSuffix": `· Windows 10/11 · Actualización automática incluida`,
+        "creators.eyebrow": `Para creadores de contenido`,
+        "creators.h2": `¿Creás contenido de fútbol?`,
+        "creators.sub": `Offsides polémicos, reels de jugadores, telestrator en vivo — Goal Labs es la herramienta real detrás de ese contenido. Te damos acceso Pro para probarlo y mostrarlo.`,
+        "creators.cta": `Sumate al kit de creadores`,
+        "creators.ctaAria": `Escribinos para colaborar como creador de contenido`
       },
       en: {
         "meta.title": `Goal Labs — Free Tactical Football Analysis | Offline Software for Windows`,
@@ -2073,10 +2071,6 @@
         "hero.seeFeaturesAria": `See Goal Labs features`,
         "hero.noAccount": `No account · No card · Windows 10/11`,
         "hero.mockAria": `Simulated screenshot of the Goal Labs interface showing the video player with tags and the event log`,
-        "problem.h2": `Sound familiar?`,
-        "problem.p1": `The match ends. You've got the footage. But to get 10 minutes of useful clips for Monday's training, you need 4 hours in Premiere — or a license your club can't afford.`,
-        "problem.p2": `Tactical video analysis has been the exclusive domain of those who can pay for Hudl or Nacsport for years. For everyone else: paper notes, screenshots and spreadsheets with no visual context.`,
-        "problem.p3": `Goal Labs changes that.`,
         "features.h2": `Everything you need on a single screen.`,
         "features.sub": `No app-switching. No broken workflows.`,
         "features.coreLabel": `The core`,
@@ -2094,30 +2088,6 @@
         "fv.5.d": `Cut clips by tactical pattern, build action playlists and export to MP4, CSV or FCP XML for Premiere and DaVinci. From tagging to technical briefing without leaving the app.`,
         "fv.6.num": `06`, "fv.6.t": `Your season, organized`, "fv.6.badge": `Pro`,
         "fv.6.d": `Cloud library, season analysis, PDF reports and LPF Play with squads. All synced — and 100% offline when you have no signal.`,
-        "f.hotkeys.t": `Hotkey Tagging`,
-        "f.hotkeys.d": `Set your own keys. One key = one tactical event logged, without pausing the video.`,
-        "f.telestrator.t": `Full Telestrator`,
-        "f.telestrator.d": `11 animated drawing tools over the video — arrows, zones, spotlight, text and more.`,
-        "f.offside.t": `Offside with Perspective`,
-        "f.offside.d": `Geometric verification via homography — the same principle the professional VAR uses. Unique at this price.`,
-        "f.ai.t": `Built-in AI (Gemini)`,
-        "f.ai.d": `Generate tags from natural language. Pattern analysis and automatic event suggestions.`,
-        "f.export.t": `Export to your editor`,
-        "f.export.d": `MP4 clips via native FFmpeg. FCP XML for Premiere and DaVinci. CSV and JSON stats.`,
-        "f.offline.t": `100% Offline`,
-        "f.offline.d": `Works on any pitch, with no wifi, no servers. Your projects are saved as .json files on your computer.`,
-        "p.reels.t": `Vertical 9:16 Reels`,
-        "p.reels.d": `Build per-player highlights and export in 9:16 with action tracking — ready for Instagram and TikTok. 16:9 too.`,
-        "p.season.t": `Season Analysis`,
-        "p.season.d": `Aggregated stats across every match and each player's highlights throughout the season.`,
-        "p.pdf.t": `PDF Reports`,
-        "p.pdf.d": `Ready-made match, player and scouting templates. Share professional reports with the coaching staff in one click.`,
-        "p.cloud.t": `Cloud Library`,
-        "p.cloud.d": `Save your projects and access them from any device. Your whole season, synced.`,
-        "p.insights.t": `AI Insights`,
-        "p.insights.d": `Automatic match summaries and pattern reading, so you reach the team talk with everything ready.`,
-        "p.lpf.t": `LPF Play + squads`,
-        "p.lpf.d": `Import video straight from the league and load preset squads from the team catalog. Less manual work.`,
         "flow.h2": `From match to <span class="gradient-text-green">reel</span> in three steps.`,
         "flow.sub": `From raw footage to a social-ready clip — without leaving the app.`,
         "flow.olAria": `How Goal Labs works in three steps`,
@@ -2168,7 +2138,6 @@
         "free.ctaAria": `Download Goal Labs free`,
         "pro.badge": `15-day free trial`,
         "pro.price": `15 days free`,
-        "pro.tagline": `No card. For clubs and analysts working the whole season.`,
         "pro.ulAria": `Features of the Pro plan`,
         "pro.f1": `Everything in the free plan`,
         "pro.f2": `Per-player reels + 9:16 and 16:9 export`,
@@ -2202,7 +2171,12 @@
         "cta.downloadWindows": `Download for Windows`,
         "cta.downloadAria": `Download Goal Labs for Windows — free, no account required`,
         "footer.madeIn": `— Made in Argentina`,
-        "versionSuffix": `· Windows 10/11 · Auto-update included`
+        "versionSuffix": `· Windows 10/11 · Auto-update included`,
+        "creators.eyebrow": `For content creators`,
+        "creators.h2": `Do you make football content?`,
+        "creators.sub": `Controversial offsides, player reels, live telestrator breakdowns — Goal Labs is the real tool behind that content. We'll give you Pro access to try it and show it.`,
+        "creators.cta": `Join the creator kit`,
+        "creators.ctaAria": `Email us to collaborate as a content creator`
       },
       it: {
         "meta.title": `Goal Labs — Analisi Tattica di Calcio Gratis | Software Offline per Windows`,
@@ -2225,10 +2199,6 @@
         "hero.seeFeaturesAria": `Scopri le funzionalità di Goal Labs`,
         "hero.noAccount": `Nessun account · Nessuna carta · Windows 10/11`,
         "hero.mockAria": `Screenshot simulato dell'interfaccia di Goal Labs che mostra il lettore video con i tag e il registro eventi`,
-        "problem.h2": `Ti suona familiare?`,
-        "problem.p1": `La partita finisce. Hai il video. Ma per avere 10 minuti di clip utili per l'allenamento del lunedì ti servono 4 ore in Premiere — o una licenza che il tuo club non può permettersi.`,
-        "problem.p2": `L'analisi tattica in video è stata per anni appannaggio esclusivo di chi può pagare Hudl o Nacsport. Per tutti gli altri: appunti su carta, screenshot e fogli di calcolo senza contesto visivo.`,
-        "problem.p3": `Goal Labs cambia tutto questo.`,
         "features.h2": `Tutto ciò che ti serve in una sola schermata.`,
         "features.sub": `Senza saltare tra app. Senza flussi interrotti.`,
         "features.coreLabel": `Il nucleo`,
@@ -2246,30 +2216,6 @@
         "fv.5.d": `Taglia clip per pattern tattico, costruisci playlist di azioni ed esporta in MP4, CSV o FCP XML per Premiere e DaVinci. Dal tag al briefing tecnico senza uscire dall'app.`,
         "fv.6.num": `06`, "fv.6.t": `La tua stagione, organizzata`, "fv.6.badge": `Pro`,
         "fv.6.d": `Libreria cloud, analisi di stagione, report PDF e LPF Play con rose. Tutto sincronizzato — e 100% offline senza segnale.`,
-        "f.hotkeys.t": `Tagging con Hotkey`,
-        "f.hotkeys.d": `Imposta i tuoi tasti. Un tasto = un evento tattico registrato, senza mettere in pausa il video.`,
-        "f.telestrator.t": `Telestrator completo`,
-        "f.telestrator.d": `11 strumenti di disegno animati sul video — frecce, zone, spotlight, testo e altro.`,
-        "f.offside.t": `Fuorigioco con prospettiva`,
-        "f.offside.d": `Verifica geometrica tramite omografia — lo stesso principio del VAR professionale. Unico a questo prezzo.`,
-        "f.ai.t": `IA integrata (Gemini)`,
-        "f.ai.d": `Genera tag dal linguaggio naturale. Analisi dei pattern e suggerimenti automatici di eventi.`,
-        "f.export.t": `Esportazione verso il tuo editor`,
-        "f.export.d": `Clip MP4 con FFmpeg nativo. FCP XML per Premiere e DaVinci. CSV e JSON delle statistiche.`,
-        "f.offline.t": `100% Offline`,
-        "f.offline.d": `Funziona su qualsiasi campo, senza wifi, senza server. I tuoi progetti vengono salvati come file .json sul tuo computer.`,
-        "p.reels.t": `Reel verticali 9:16`,
-        "p.reels.d": `Crea highlights per giocatore ed esporta in 9:16 con tracking dell'azione — pronti per Instagram e TikTok. Anche 16:9.`,
-        "p.season.t": `Analisi della stagione`,
-        "p.season.d": `Statistiche aggregate di tutte le partite e i momenti salienti di ogni giocatore lungo la stagione.`,
-        "p.pdf.t": `Report PDF`,
-        "p.pdf.d": `Modelli pronti di partita, giocatore e scouting. Condividi report professionali con lo staff tecnico in un click.`,
-        "p.cloud.t": `Libreria nel cloud`,
-        "p.cloud.d": `Salva i tuoi progetti e accedi da qualsiasi dispositivo. Tutta la tua stagione, sincronizzata.`,
-        "p.insights.t": `Insights con IA`,
-        "p.insights.d": `Riepiloghi automatici della partita e lettura dei pattern, per arrivare al confronto con la squadra con tutto pronto.`,
-        "p.lpf.t": `LPF Play + rose`,
-        "p.lpf.d": `Importa il video direttamente dalla lega e carica rose predefinite dal catalogo squadre. Meno lavoro manuale.`,
         "flow.h2": `Dalla partita al <span class="gradient-text-green">reel</span> in tre passi.`,
         "flow.sub": `Dal video grezzo a una clip pronta per i social — senza uscire dall'app.`,
         "flow.olAria": `Come funziona Goal Labs in tre passi`,
@@ -2320,7 +2266,6 @@
         "free.ctaAria": `Scarica Goal Labs gratis`,
         "pro.badge": `Prova gratis 15 giorni`,
         "pro.price": `15 giorni gratis`,
-        "pro.tagline": `Senza carta. Per club e analisti che lavorano tutta la stagione.`,
         "pro.ulAria": `Funzionalità del piano Pro`,
         "pro.f1": `Tutto il piano gratuito`,
         "pro.f2": `Reel per giocatore + export 9:16 e 16:9`,
@@ -2354,7 +2299,12 @@
         "cta.downloadWindows": `Scarica per Windows`,
         "cta.downloadAria": `Scarica Goal Labs per Windows — gratis, nessun account richiesto`,
         "footer.madeIn": `— Fatto in Argentina`,
-        "versionSuffix": `· Windows 10/11 · Aggiornamento automatico incluso`
+        "versionSuffix": `· Windows 10/11 · Aggiornamento automatico incluso`,
+        "creators.eyebrow": `Per creator di contenuti`,
+        "creators.h2": `Crei contenuti di calcio?`,
+        "creators.sub": `Fuorigioco discussi, reel dei giocatori, telestrator dal vivo — Goal Labs è lo strumento reale dietro quel contenuto. Ti diamo accesso Pro per provarlo e mostrarlo.`,
+        "creators.cta": `Unisciti al kit creator`,
+        "creators.ctaAria": `Scrivici per collaborare come creator di contenuti`
       }
     };
 
@@ -2369,31 +2319,15 @@
         "pricing.currency": `Moneda`,
         "pricing.cycleAria": `Ciclo de facturación`,
         "pro.tagline": `15 días gratis, sin tarjeta. Después seguís con Pro para todo el trabajo de temporada.`,
-        "offside.tag": `Demo interactivo`,
-        "offside.h2": `Trazá el offside vos mismo.`,
-        "offside.sub": `Arrastrá la línea sobre la jugada. Así de directo es verificar un offside con corrección de perspectiva en Goal Labs.`,
-        "offside.note": `En la app la línea se ajusta a la cancha real con homografía — el mismo principio del VAR.`,
-        "offside.dragHint": `Arrastrá la línea ←→`,
-        "offside.lastDefender": `Última línea defensiva`,
-        "offside.attacker": `Atacante`,
-        "offside.verdictOnside": `HABILITADO`,
-        "offside.verdictOffside": `OFFSIDE`,
-        "offside.stageAria": `Demo interactivo de offside: arrastrá la línea para ver si el atacante está habilitado o en posición adelantada.`,
-        "hero.heroImgAlt": `Visualización del análisis de offside con corrección de perspectiva sobre una cancha`,
-        "hero.videoAria": `Video de Goal Labs en funcionamiento: tagging, telestrator y exportación`,
         "ctx.h2": `Hecho para el fútbol de verdad.`,
         "ctx.sub": `Del potrero al club: el mismo análisis profesional, sin la licencia profesional.`,
         "ctx.alt": `Notebook con Goal Labs analizando un partido al borde de la cancha de un club argentino al atardecer`,
         "story.eyebrow": `El problema, resuelto`,
         "story.h2": `Cada jugada se vuelve un dato.`,
         "story.sub": `Antes: 4 horas en Premiere o una licencia impagable. Ahora: una tecla y queda registrado. Scrolleá la jugada.`,
-        "story.tag1": `Pase`,
-        "story.tag2": `Conducción`,
-        "story.tag3": `Remate`,
         "story.event": `Evento registrado`,
         "story.actPase": `Pase`,
         "story.actGol": `Gol`,
-        "story.match": `Final · Qatar 2022`,
         "story.svgAria": `Pizarra táctica: la secuencia de pases del gol de Di María en la final de Qatar 2022, registrada como datos.`
       },
       en: {
@@ -2405,31 +2339,15 @@
         "pricing.currency": `Currency`,
         "pricing.cycleAria": `Billing cycle`,
         "pro.tagline": `15 days free, no card. After that you keep Pro for the whole season's work.`,
-        "offside.tag": `Interactive demo`,
-        "offside.h2": `Draw the offside yourself.`,
-        "offside.sub": `Drag the line over the play. That's how direct checking an offside with perspective correction is in Goal Labs.`,
-        "offside.note": `In the app the line snaps to the real pitch with homography — the same principle as VAR.`,
-        "offside.dragHint": `Drag the line ←→`,
-        "offside.lastDefender": `Last defender`,
-        "offside.attacker": `Attacker`,
-        "offside.verdictOnside": `ONSIDE`,
-        "offside.verdictOffside": `OFFSIDE`,
-        "offside.stageAria": `Interactive offside demo: drag the line to see whether the attacker is onside or offside.`,
-        "hero.heroImgAlt": `Visualization of offside analysis with perspective correction over a pitch`,
-        "hero.videoAria": `Goal Labs in action: tagging, telestrator and export`,
         "ctx.h2": `Built for real football.`,
         "ctx.sub": `From the local pitch to the club: the same pro analysis, without the pro license.`,
         "ctx.alt": `Laptop running Goal Labs analyzing a match at the edge of an Argentine club pitch at dusk`,
         "story.eyebrow": `The problem, solved`,
         "story.h2": `Every play becomes data.`,
         "story.sub": `Before: 4 hours in Premiere or a license you can't afford. Now: one key and it's logged. Scroll the play.`,
-        "story.tag1": `Pass`,
-        "story.tag2": `Carry`,
-        "story.tag3": `Shot`,
         "story.event": `Event logged`,
         "story.actPase": `Pass`,
         "story.actGol": `Goal`,
-        "story.match": `Final · Qatar 2022`,
         "story.svgAria": `Tactical board: the passing sequence of Di María's goal in the Qatar 2022 final, logged as data.`
       },
       it: {
@@ -2441,31 +2359,15 @@
         "pricing.currency": `Valuta`,
         "pricing.cycleAria": `Ciclo di fatturazione`,
         "pro.tagline": `15 giorni gratis, senza carta. Poi continui con Pro per tutto il lavoro della stagione.`,
-        "offside.tag": `Demo interattivo`,
-        "offside.h2": `Traccia il fuorigioco tu stesso.`,
-        "offside.sub": `Trascina la linea sull'azione. Ecco quanto è diretto verificare un fuorigioco con correzione prospettica in Goal Labs.`,
-        "offside.note": `Nell'app la linea si adatta al campo reale con l'omografia — lo stesso principio del VAR.`,
-        "offside.dragHint": `Trascina la linea ←→`,
-        "offside.lastDefender": `Ultimo difensore`,
-        "offside.attacker": `Attaccante`,
-        "offside.verdictOnside": `REGOLARE`,
-        "offside.verdictOffside": `FUORIGIOCO`,
-        "offside.stageAria": `Demo interattivo di fuorigioco: trascina la linea per vedere se l'attaccante è regolare o in fuorigioco.`,
-        "hero.heroImgAlt": `Visualizzazione dell'analisi del fuorigioco con correzione prospettica su un campo`,
-        "hero.videoAria": `Goal Labs in funzione: tagging, telestrator ed esportazione`,
         "ctx.h2": `Fatto per il calcio vero.`,
         "ctx.sub": `Dal campetto al club: la stessa analisi professionale, senza la licenza professionale.`,
         "ctx.alt": `Laptop con Goal Labs che analizza una partita a bordo campo di un club argentino al tramonto`,
         "story.eyebrow": `Il problema, risolto`,
         "story.h2": `Ogni azione diventa un dato.`,
         "story.sub": `Prima: 4 ore in Premiere o una licenza impagabile. Ora: un tasto e resta registrato. Scorri l'azione.`,
-        "story.tag1": `Passaggio`,
-        "story.tag2": `Conduzione`,
-        "story.tag3": `Tiro`,
         "story.event": `Evento registrato`,
         "story.actPase": `Passaggio`,
         "story.actGol": `Gol`,
-        "story.match": `Finale · Qatar 2022`,
         "story.svgAria": `Lavagna tattica: la sequenza di passaggi del gol di Di María nella finale di Qatar 2022, registrata come dati.`
       }
     };
@@ -2626,8 +2528,8 @@
     "applicationSubCategory": "Análisis táctico de fútbol",
     "operatingSystem": "Windows 10, Windows 11",
     "inLanguage": ["es", "en", "it"],
-    "url": "https://nacholiporace.github.io/goal-labs-releases/",
-    "image": "https://nacholiporace.github.io/goal-labs-releases/assets/og-image.png",
+    "url": "https://goallabs.com.ar/",
+    "image": "https://goallabs.com.ar/assets/og-image.png",
     "description": "Software de videoanálisis táctico para el fútbol. Tagging con hotkeys, telestrator, verificador de offside con perspectiva, reels verticales 9:16 e IA. Gratis y offline para Windows.",
     "offers": {
       "@type": "Offer",
