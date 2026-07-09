@@ -356,6 +356,23 @@
       transition: transform 0.4s ease;
     }
     .btn-primary:hover::after { transform: translateX(100%); }
+
+    /* Cinta "quién está detrás": dos filas de fotos en contra-scroll infinito */
+    .glcinta{position:relative;width:100%;height:clamp(300px,42vw,460px);background:#09090b;overflow:hidden;border-radius:14px;border:1px solid rgba(255,255,255,.1)}
+    .glcinta-zoom{position:absolute;inset:clamp(10px,1.8%,16px);display:flex;flex-direction:column;gap:10px;animation:glcinta-breathe 26s ease-in-out infinite alternate}
+    .glcinta-row{height:calc((100% - 10px)/2);overflow:hidden;position:relative}
+    .glcinta-track{display:flex;height:100%;width:max-content;animation:glcinta-left var(--dur,50s) linear infinite}
+    .glcinta-rev .glcinta-track{animation-name:glcinta-right}
+    .glcinta-set{display:flex;gap:10px;padding-right:10px;height:100%}
+    .glcinta-set img{height:100%;width:auto;flex:none;display:block;border-radius:10px;filter:grayscale(35%) brightness(.9) contrast(1.1) saturate(.95)}
+    .glcinta-fade{position:absolute;top:0;bottom:0;width:clamp(50px,12%,140px);z-index:2;pointer-events:none}
+    .glcinta-fade-l{left:0;background:linear-gradient(90deg,#09090b,transparent)}
+    .glcinta-fade-r{right:0;background:linear-gradient(270deg,#09090b,transparent)}
+    .glcinta-vig{position:absolute;inset:0;z-index:3;pointer-events:none;background:radial-gradient(120% 120% at 50% 50%,transparent 60%,rgba(9,9,11,.45) 100%)}
+    @keyframes glcinta-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    @keyframes glcinta-right{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+    @keyframes glcinta-breathe{from{transform:scale(1)}to{transform:scale(1.04)}}
+    @media (prefers-reduced-motion:reduce){.glcinta-track,.glcinta-zoom{animation:none}}
   </style>
 
   <!-- Analytics: GoatCounter (cookieless, sin banner de cookies).
@@ -1033,6 +1050,67 @@
       </div>
     </section>
 
+    <!-- FUNDADOR -->
+    <section id="fundador" class="py-24 md:py-32 border-t border-white/10" aria-labelledby="fundador-heading">
+      <div class="max-w-5xl mx-auto px-6">
+        <!-- Cinta animada "quién está detrás": dos filas de fotos de la carrera en contra-scroll infinito -->
+        <div class="mb-12 md:mb-16 reveal">
+          <div class="glcinta" aria-hidden="true">
+            <div class="glcinta-zoom">
+              <div class="glcinta-row">
+                <div class="glcinta-track" data-speed="55">
+                  <div class="glcinta-set">
+                    <img src="assets/carrera/sanmiguel1.jpg" alt="" loading="lazy">
+                    <img src="assets/carrera/aaaj1.jpg" alt="" loading="lazy">
+                    <img src="assets/carrera/adrogue1.jpg" alt="" loading="lazy">
+                    <img src="assets/carrera/uai1.jpg" alt="" loading="lazy">
+                    <img src="assets/carrera/rafaela1.jpg" alt="" loading="lazy">
+                    <img src="assets/carrera/rafaela2.jpg" alt="" loading="lazy">
+                    <img src="assets/carrera/samb1.jpg" alt="" loading="lazy">
+                    <img src="assets/carrera/samb3.jpg" alt="" loading="lazy">
+                    <img src="assets/carrera/europa1.jpg" alt="" loading="lazy">
+                  </div>
+                </div>
+              </div>
+              <div class="glcinta-row glcinta-rev">
+                <div class="glcinta-track" data-speed="43">
+                  <div class="glcinta-set">
+                    <img src="assets/carrera/sanmiguel2.jpg" alt="" loading="lazy">
+                    <img src="assets/carrera/rafaela3.jpg" alt="" loading="lazy">
+                    <img src="assets/carrera/samb2.jpg" alt="" loading="lazy">
+                    <img src="assets/carrera/samb4.jpg" alt="" loading="lazy">
+                    <img src="assets/carrera/samb5.jpg" alt="" loading="lazy">
+                    <img src="assets/carrera/pana1.jpg" alt="" loading="lazy">
+                    <img src="assets/carrera/pana2.jpg" alt="" loading="lazy">
+                    <img src="assets/carrera/pana3.jpg" alt="" loading="lazy">
+                    <img src="assets/carrera/kalamata1.jpg" alt="" loading="lazy">
+                    <img src="assets/carrera/giout1.jpg" alt="" loading="lazy">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="glcinta-fade glcinta-fade-l"></div>
+            <div class="glcinta-fade glcinta-fade-r"></div>
+            <div class="glcinta-vig"></div>
+          </div>
+        </div>
+
+        <div class="max-w-3xl reveal">
+            <span class="eyebrow" data-i18n="founder.eyebrow">Quién está detrás de Goal Labs</span>
+            <h2 id="fundador-heading" class="font-display text-white text-4xl md:text-6xl mt-4 mb-6 leading-[0.95] text-balance" data-i18n="founder.h2">Hecho por un jugador, para toda la comunidad del fútbol.</h2>
+            <p class="text-zinc-300 font-body leading-relaxed mb-4" data-i18n="founder.p1">Soy Ignacio Liporace. Me formé en las inferiores de Boca Juniors y Argentinos Juniors, y después jugué profesionalmente en varios países, del ascenso a primera división en Europa. Ese recorrido me confirmó algo que como argentinos ya sabemos: en cada división, de cada país del mundo, hay un argentino jugando. Nuestra cultura futbolística se exporta sola — y esa misma comunidad necesita ayudarse entre sí, no solo el que puede pagar una licencia en dólares.</p>
+            <p class="text-zinc-300 font-body leading-relaxed mb-4" data-i18n="founder.p2">Soy Licenciado en Educación Física y Deportes, con una Diplomatura en Coaching Deportivo, y hoy curso la Licencia de Entrenador en la Escuela Menotti Maradona y la Licencia PRO de Director Deportivo, avalada por AFA y certificada por la UNTREF.</p>
+            <p class="text-zinc-300 font-body leading-relaxed" data-i18n="founder.p3">En cada período de traspasos editaba yo mismo mis jugadas con los programas de siempre, y ahí entendí de primera mano lo que le faltaba a esas herramientas para el fútbol real — el de todas las divisiones, no solo el de arriba. Goal Labs es esa herramienta: pensada para jugadores, analistas, cuerpos técnicos e instituciones que quieren un análisis profesional sin que el precio decida quién puede entrenar mejor. La construimos junto a los cuerpos técnicos y analistas que la usan cada semana — el fútbol se potencia ayudándose entre todos.</p>
+            <div class="flex flex-wrap gap-2 mt-6">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-400/90 border border-emerald-400/40 bg-emerald-400/10 px-2.5 py-1 rounded-full" data-i18n="founder.badge1">Formado en Boca y Argentinos</span>
+              <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-400/90 border border-emerald-400/40 bg-emerald-400/10 px-2.5 py-1 rounded-full" data-i18n="founder.badge2">Jugador profesional, del ascenso a primera división europea</span>
+              <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-400/90 border border-emerald-400/40 bg-emerald-400/10 px-2.5 py-1 rounded-full" data-i18n="founder.badge3">Lic. en Educación Física y Deportes</span>
+              <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-400/90 border border-emerald-400/40 bg-emerald-400/10 px-2.5 py-1 rounded-full" data-i18n="founder.badge4">Cursando Director Deportivo PRO (AFA/UNTREF)</span>
+            </div>
+        </div>
+      </div>
+    </section>
+
     <!-- PRECIOS -->
     <section id="precios" class="py-24 md:py-32 border-t border-white/10" aria-labelledby="precios-heading">
       <div class="max-w-5xl mx-auto px-6">
@@ -1278,6 +1356,9 @@
         <span class="text-zinc-600 text-xs ml-3 font-mono" data-i18n="footer.madeIn">— Hecho en Argentina</span>
       </div>
       <div class="flex items-center gap-6 text-zinc-500 text-xs font-mono uppercase tracking-wider">
+        <a href="partners/" class="hover:text-cream transition-colors focus-ring" data-i18n="footer.partners">Partners</a>
+        <a href="creadores/" class="hover:text-cream transition-colors focus-ring" data-i18n="footer.creators">Creadores</a>
+        <a href="analistas/" class="hover:text-cream transition-colors focus-ring" data-i18n="footer.analysts">Analistas</a>
         <span aria-label="Copyright 2026 Nacho Liporace">© 2026 Nacho Liporace</span>
       </div>
     </div>
@@ -2045,7 +2126,19 @@
         "creators.h2": `¿Creás contenido de fútbol?`,
         "creators.sub": `Offsides polémicos, reels de jugadores, telestrator en vivo — Goal Labs es la herramienta real detrás de ese contenido. Te damos acceso Pro para probarlo y mostrarlo.`,
         "creators.cta": `Sumate al kit de creadores`,
-        "creators.ctaAria": `Escribinos para colaborar como creador de contenido`
+        "creators.ctaAria": `Escribinos para colaborar como creador de contenido`,
+        "founder.eyebrow": `Quién está detrás de Goal Labs`,
+        "founder.h2": `Hecho por un jugador, para toda la comunidad del fútbol.`,
+        "founder.p1": `Soy Ignacio Liporace. Me formé en las inferiores de Boca Juniors y Argentinos Juniors, y después jugué profesionalmente en varios países, del ascenso a primera división en Europa. Ese recorrido me confirmó algo que como argentinos ya sabemos: en cada división, de cada país del mundo, hay un argentino jugando. Nuestra cultura futbolística se exporta sola — y esa misma comunidad necesita ayudarse entre sí, no solo el que puede pagar una licencia en dólares.`,
+        "founder.p2": `Soy Licenciado en Educación Física y Deportes, con una Diplomatura en Coaching Deportivo, y hoy curso la Licencia de Entrenador en la Escuela Menotti Maradona y la Licencia PRO de Director Deportivo, avalada por AFA y certificada por la UNTREF.`,
+        "founder.p3": `En cada período de traspasos editaba yo mismo mis jugadas con los programas de siempre, y ahí entendí de primera mano lo que le faltaba a esas herramientas para el fútbol real — el de todas las divisiones, no solo el de arriba. Goal Labs es esa herramienta: pensada para jugadores, analistas, cuerpos técnicos e instituciones que quieren un análisis profesional sin que el precio decida quién puede entrenar mejor. La construimos junto a los cuerpos técnicos y analistas que la usan cada semana — el fútbol se potencia ayudándose entre todos.`,
+        "founder.badge1": `Formado en Boca y Argentinos`,
+        "founder.badge2": `Jugador profesional, del ascenso a primera división europea`,
+        "founder.badge3": `Lic. en Educación Física y Deportes`,
+        "founder.badge4": `Cursando Director Deportivo PRO (AFA/UNTREF)`,
+        "footer.partners": `Partners`,
+        "footer.creators": `Creadores`,
+        "footer.analysts": `Analistas`
       },
       en: {
         "meta.title": `Goal Labs — Free Tactical Football Analysis | Offline Software for Windows`,
@@ -2173,7 +2266,19 @@
         "creators.h2": `Do you make football content?`,
         "creators.sub": `Controversial offsides, player reels, live telestrator breakdowns — Goal Labs is the real tool behind that content. We'll give you Pro access to try it and show it.`,
         "creators.cta": `Join the creator kit`,
-        "creators.ctaAria": `Email us to collaborate as a content creator`
+        "creators.ctaAria": `Email us to collaborate as a content creator`,
+        "founder.eyebrow": `Who's behind Goal Labs`,
+        "founder.h2": `Built by a player, for the whole football community.`,
+        "founder.p1": `I'm Ignacio Liporace. I came up through the youth academies of Boca Juniors and Argentinos Juniors, then played professionally in several countries — from the lower divisions up to Europe's top flight. That journey showed me something football makes obvious once you've lived it: wherever you go, whatever the division, there's the same need — good analysis shouldn't depend on what a club can afford.`,
+        "founder.p2": `I hold a degree in Physical Education and Sports Science, a postgraduate diploma in Sports Coaching, and I'm currently completing my coaching license at the Menotti Maradona School and the PRO Sporting Director license backed by AFA and certified by UNTREF.`,
+        "founder.p3": `Every transfer window, I edited my own match highlights myself, using the same tools everyone does — and that's where I saw firsthand what was missing for football, at every level, not just at the top. Goal Labs is that tool: built for players, analysts, coaching staffs, and institutions who want professional analysis without price deciding who trains better. We build it together with the coaching staffs and analysts who use it every week — football gets better when we help each other.`,
+        "founder.badge1": `Trained at Boca & Argentinos`,
+        "founder.badge2": `Professional player, lower divisions to Europe's top flight`,
+        "founder.badge3": `B.Sc. Physical Education & Sports Science`,
+        "founder.badge4": `Completing PRO Sporting Director license (AFA/UNTREF)`,
+        "footer.partners": `Partners`,
+        "footer.creators": `Creators`,
+        "footer.analysts": `Analysts`
       },
       it: {
         "meta.title": `Goal Labs — Analisi Tattica di Calcio Gratis | Software Offline per Windows`,
@@ -2301,7 +2406,19 @@
         "creators.h2": `Crei contenuti di calcio?`,
         "creators.sub": `Fuorigioco discussi, reel dei giocatori, telestrator dal vivo — Goal Labs è lo strumento reale dietro quel contenuto. Ti diamo accesso Pro per provarlo e mostrarlo.`,
         "creators.cta": `Unisciti al kit creator`,
-        "creators.ctaAria": `Scrivici per collaborare come creator di contenuti`
+        "creators.ctaAria": `Scrivici per collaborare come creator di contenuti`,
+        "founder.eyebrow": `Chi c'è dietro Goal Labs`,
+        "founder.h2": `Fatto da un giocatore, per tutta la comunità del calcio.`,
+        "founder.p1": `Sono Ignacio Liporace. Mi sono formato nei settori giovanili di Boca Juniors e Argentinos Juniors, poi ho giocato professionalmente in diversi paesi — dalle serie minori fino alla massima serie in Europa. Quel percorso mi ha mostrato una cosa che il calcio rende evidente quando lo vivi davvero: ovunque tu vada, in qualsiasi categoria, c'è la stessa necessità — un'analisi seria non dovrebbe dipendere da quanto può spendere un club.`,
+        "founder.p2": `Sono laureato in Educazione Fisica e Scienze dello Sport, ho un master in Coaching Sportivo, e sto completando la licenza da allenatore alla Escuela Menotti Maradona e la licenza PRO da Direttore Sportivo, avallata dall'AFA e certificata dall'UNTREF.`,
+        "founder.p3": `A ogni finestra di mercato montavo da solo i miei momenti migliori, con gli stessi strumenti che usano tutti — ed è lì che ho capito in prima persona cosa mancava al calcio, a ogni livello, non solo ai vertici. Goal Labs è quello strumento: pensato per giocatori, analisti, staff tecnici e istituzioni che vogliono un'analisi professionale senza che il prezzo decida chi si allena meglio. Lo costruiamo insieme agli staff tecnici e agli analisti che lo usano ogni settimana — il calcio migliora quando ci aiutiamo a vicenda.`,
+        "founder.badge1": `Cresciuto a Boca e Argentinos`,
+        "founder.badge2": `Calciatore professionista, dalle serie minori alla massima serie europea`,
+        "founder.badge3": `Laurea in Educazione Fisica e Scienze dello Sport`,
+        "founder.badge4": `Sta completando la licenza PRO da Direttore Sportivo (AFA/UNTREF)`,
+        "footer.partners": `Partners`,
+        "footer.creators": `Creator`,
+        "footer.analysts": `Analisti`
       }
     };
 
@@ -2596,6 +2713,25 @@
       }
     ]
   }
+  </script>
+
+  <script>
+  (function(){
+    document.querySelectorAll('.glcinta .glcinta-track').forEach(function(track){
+      if(track.children.length===1){track.appendChild(track.firstElementChild.cloneNode(true));}
+      var speed=parseFloat(track.getAttribute('data-speed'))||55;
+      var setDur=function(){
+        var w=track.firstElementChild.offsetWidth;
+        if(!w)return;
+        var dur=w/speed;
+        var prev=parseFloat(track.style.getPropertyValue('--dur'))||0;
+        if(!prev||Math.abs(dur-prev)/dur>0.05){track.style.setProperty('--dur',dur.toFixed(2)+'s');}
+      };
+      if(window.ResizeObserver){new ResizeObserver(setDur).observe(track.firstElementChild);}
+      window.addEventListener('load',setDur);
+      setDur();
+    });
+  })();
   </script>
 </body>
 </html>

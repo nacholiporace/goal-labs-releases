@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es" style="color-scheme: dark;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#09090b" />
+  <title>Goal Labs — Guía Rápida para Analistas y Cuerpos Técnicos</title>
+  <meta name="description" content="Guía rápida del flujo real de trabajo en Goal Labs: hotkeys, telestrator, offside, exportación. Llegá al primer partido tagueado en minutos." />
+
+  <meta property="og:title" content="Goal Labs — Guía Rápida para Analistas" />
+  <meta property="og:description" content="Del video crudo al informe, sin salir de una pantalla. Hotkeys por defecto, novedades y flujo completo." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://goallabs.com.ar/analistas" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:image" content="https://goallabs.com.ar/assets/og-image.png" />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="Goal Labs" />
+
+  <link rel="canonical" href="https://goallabs.com.ar/analistas" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      fontFamily: { display: ['"Instrument Serif"', 'Georgia', 'serif'], mono: ['"DM Mono"', 'ui-monospace', 'monospace'], sans: ['"Barlow Condensed"', 'sans-serif'], body: ['Outfit', 'sans-serif'] },
+      colors: { zinc: { 950: '#0a0a0a' }, ink: '#0a0a0a', cream: '#f0ebe1' }
+    } } }
+  </script>
+  <link rel="stylesheet" href="../assets/site.css" />
+
+  <script data-goatcounter="https://goallabs.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body class="bg-zinc-950 text-white antialiased">
+
+<a href="#main-content" class="skip-link focus-ring" data-i18n="skip">Ir al contenido principal</a>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/60 bg-zinc-950/90 backdrop-blur-md" aria-label="Navegación principal">
+  <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+    <a href="../index.html" class="flex items-center gap-2.5 select-none focus-ring" aria-label="Goal Labs — Inicio">
+      <span class="w-7 h-7 rounded-md bg-cream flex items-center justify-center shrink-0" aria-hidden="true"><i class="fas fa-futbol text-ink text-sm"></i></span>
+      <span translate="no" class="text-white font-mono font-medium text-sm tracking-[0.25em] uppercase">Goal</span>
+      <span translate="no" class="text-zinc-500 font-mono text-sm tracking-[0.35em] uppercase">Labs</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8" role="list">
+      <a href="../index.html#funcionalidades" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.features">Funcionalidades</a>
+      <a href="../index.html#precios" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.pricing">Precios</a>
+      <a href="../partners/" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.partners">Partners</a>
+      <a href="../creadores/" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.creators">Creadores</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <label class="sr-only" for="lang-select" data-i18n="nav.langLabel">Idioma</label>
+      <select id="lang-select" class="bg-zinc-900 border border-zinc-700 text-zinc-300 text-xs font-semibold rounded-lg pl-2 pr-1 py-1.5 focus-ring hover:border-zinc-600 transition-colors cursor-pointer" aria-label="Idioma / Language / Lingua">
+        <option value="es">ES</option><option value="en">EN</option><option value="it">IT</option>
+      </select>
+      <a href="https://github.com/nacholiporace/goal-labs-releases/releases/latest" data-download class="btn-primary bg-cream hover:bg-white text-ink text-xs font-body font-semibold px-4 py-2 rounded-full transition-colors flex items-center gap-2 focus-ring">
+        <i class="fas fa-download text-[11px]" aria-hidden="true"></i>
+        <span data-i18n="nav.downloadCta">Descargar gratis</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <!-- HERO -->
+  <section class="relative pt-40 pb-20 md:pt-52 md:pb-28 border-b border-white/10 overflow-hidden">
+    <img src="../assets/hero-poster.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-25" loading="eager" onerror="this.style.display='none';" />
+    <div class="absolute inset-0 bg-gradient-to-b from-zinc-950/40 via-zinc-950/85 to-zinc-950"></div>
+    <div class="relative max-w-4xl mx-auto px-6 reveal">
+      <span class="eyebrow" data-i18n="hero.eyebrow">Quick-start para analistas y cuerpos técnicos</span>
+      <h1 class="font-display text-white text-5xl md:text-7xl mt-4 mb-6 leading-[0.95] text-balance" data-i18n-html="hero.h1">Del video crudo al informe,<br/>sin salir de <em style="font-style:italic;color:#34d399;">una pantalla.</em></h1>
+      <p class="text-zinc-300 text-lg font-body max-w-2xl leading-relaxed" data-i18n="hero.sub">Guía rápida del flujo real de trabajo en Goal Labs — para que llegues al primer partido tagueado en minutos, no en un manual de 200 páginas.</p>
+    </div>
+  </section>
+
+  <!-- FLUJO 4 PASOS -->
+  <section class="py-20 md:py-28 border-b border-white/10">
+    <div class="max-w-5xl mx-auto px-6">
+      <span class="eyebrow reveal" data-i18n="flow.eyebrow">El flujo, en 4 pasos</span>
+      <div class="grid md:grid-cols-4 gap-4 mt-8">
+        <div class="border border-zinc-800 rounded-xl p-5 bg-zinc-900/40 reveal">
+          <span class="font-mono text-emerald-400 text-sm">01</span>
+          <h3 class="font-display text-xl text-white mt-2 mb-2" data-i18n="flow.s1.t">Tagueás</h3>
+          <p class="text-zinc-400 font-body text-sm leading-relaxed" data-i18n="flow.s1.d">Configurás tus tags con hotkeys. Una tecla = un evento registrado, sin pausar el video.</p>
+        </div>
+        <div class="border border-zinc-800 rounded-xl p-5 bg-zinc-900/40 reveal reveal-d1">
+          <span class="font-mono text-emerald-400 text-sm">02</span>
+          <h3 class="font-display text-xl text-white mt-2 mb-2" data-i18n="flow.s2.t">Dibujás / verificás</h3>
+          <p class="text-zinc-400 font-body text-sm leading-relaxed" data-i18n="flow.s2.d">Telestrator con 11 herramientas sobre el frame exacto. Línea de offside por homografía cuando hace falta.</p>
+        </div>
+        <div class="border border-zinc-800 rounded-xl p-5 bg-zinc-900/40 reveal reveal-d2">
+          <span class="font-mono text-emerald-400 text-sm">03</span>
+          <h3 class="font-display text-xl text-white mt-2 mb-2" data-i18n="flow.s3.t">Analizás</h3>
+          <p class="text-zinc-400 font-body text-sm leading-relaxed" data-i18n="flow.s3.d">Estadísticas por jugador y equipo, momentos destacados, insights con IA sobre lo que pasó en el partido.</p>
+        </div>
+        <div class="border border-zinc-800 rounded-xl p-5 bg-zinc-900/40 reveal reveal-d3">
+          <span class="font-mono text-emerald-400 text-sm">04</span>
+          <h3 class="font-display text-xl text-white mt-2 mb-2" data-i18n="flow.s4.t">Exportás / informás</h3>
+          <p class="text-zinc-400 font-body text-sm leading-relaxed" data-i18n="flow.s4.d">Clips MP4, reels 9:16 por jugador, FCP XML para tu editor, o un reporte PDF listo para el cuerpo técnico.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOTKEYS -->
+  <section class="py-20 md:py-28 border-b border-white/10">
+    <div class="max-w-4xl mx-auto px-6">
+      <span class="eyebrow reveal" data-i18n="hotkeys.eyebrow">Hotkeys por defecto (100% configurables)</span>
+      <div class="grid grid-cols-4 gap-2.5 mt-8">
+        <div class="border border-zinc-800 rounded-lg p-3 text-center bg-zinc-900/40 reveal"><span class="font-mono text-lg font-semibold text-emerald-400 bg-emerald-400/10 rounded px-2.5 py-0.5">1</span><div class="text-xs text-zinc-400 font-body mt-2" data-i18n="hk.1">Gol</div></div>
+        <div class="border border-zinc-800 rounded-lg p-3 text-center bg-zinc-900/40 reveal"><span class="font-mono text-lg font-semibold text-emerald-400 bg-emerald-400/10 rounded px-2.5 py-0.5">2</span><div class="text-xs text-zinc-400 font-body mt-2" data-i18n="hk.2">Tiro</div></div>
+        <div class="border border-zinc-800 rounded-lg p-3 text-center bg-zinc-900/40 reveal"><span class="font-mono text-lg font-semibold text-emerald-400 bg-emerald-400/10 rounded px-2.5 py-0.5">3</span><div class="text-xs text-zinc-400 font-body mt-2" data-i18n="hk.3">Pérdida</div></div>
+        <div class="border border-zinc-800 rounded-lg p-3 text-center bg-zinc-900/40 reveal"><span class="font-mono text-lg font-semibold text-emerald-400 bg-emerald-400/10 rounded px-2.5 py-0.5">4</span><div class="text-xs text-zinc-400 font-body mt-2" data-i18n="hk.4">Recuperación</div></div>
+        <div class="border border-zinc-800 rounded-lg p-3 text-center bg-zinc-900/40 reveal"><span class="font-mono text-lg font-semibold text-emerald-400 bg-emerald-400/10 rounded px-2.5 py-0.5">5</span><div class="text-xs text-zinc-400 font-body mt-2" data-i18n="hk.5">Transición Def-Ata</div></div>
+        <div class="border border-zinc-800 rounded-lg p-3 text-center bg-zinc-900/40 reveal"><span class="font-mono text-lg font-semibold text-emerald-400 bg-emerald-400/10 rounded px-2.5 py-0.5">6</span><div class="text-xs text-zinc-400 font-body mt-2" data-i18n="hk.6">Presión Alta</div></div>
+        <div class="border border-zinc-800 rounded-lg p-3 text-center bg-zinc-900/40 reveal"><span class="font-mono text-lg font-semibold text-emerald-400 bg-emerald-400/10 rounded px-2.5 py-0.5">7</span><div class="text-xs text-zinc-400 font-body mt-2" data-i18n="hk.7">Tiro de Esquina</div></div>
+        <div class="border border-zinc-800 rounded-lg p-3 text-center bg-zinc-900/40 reveal"><span class="font-mono text-lg font-semibold text-emerald-400 bg-emerald-400/10 rounded px-2.5 py-0.5">8</span><div class="text-xs text-zinc-400 font-body mt-2" data-i18n="hk.8">Salida de Balón</div></div>
+      </div>
+      <p class="text-zinc-500 font-body text-xs mt-4 reveal" data-i18n="hotkeys.note">Esta es la configuración de fábrica. Cada tag es editable y podés crear los tuyos con la tecla que quieras — el criterio es el tuyo, no el nuestro.</p>
+
+      <div class="mt-8 border border-emerald-400/25 bg-emerald-400/10 rounded-xl p-6 reveal">
+        <span class="eyebrow text-emerald-400" data-i18n-html="whatsnew.eyebrow">Novedad · v1.4.1</span>
+        <h3 class="font-display text-xl text-white mt-2 mb-2" data-i18n="whatsnew.h3">Seguimiento automático en el telestrator</h3>
+        <p class="text-zinc-300 font-body text-sm leading-relaxed" data-i18n="whatsnew.p">El spotlight/círculo ahora puede seguir a un jugador solo: dibujás una caja sobre él en un frame pausado y el sistema genera el recorrido automáticamente — sin animar cada keyframe a mano.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FREE VS PRO -->
+  <section class="py-20 md:py-28 border-b border-white/10">
+    <div class="max-w-5xl mx-auto px-6">
+      <span class="eyebrow reveal" data-i18n="fp.eyebrow">Free vs. Pro para tu flujo de trabajo</span>
+      <h2 class="font-display text-white text-3xl md:text-5xl mt-4 mb-10 leading-[0.95] text-balance reveal" data-i18n="fp.h2">Todo lo que necesitás en una sola pantalla.</h2>
+      <div class="grid md:grid-cols-2 gap-0 border border-zinc-800 rounded-xl overflow-hidden">
+        <div class="p-6 border-b md:border-r border-zinc-800 reveal">
+          <div class="flex items-center justify-between mb-2"><span class="font-mono text-emerald-400 text-xs">01</span><span class="font-mono text-[10px] uppercase text-emerald-400/90 border border-emerald-400/40 bg-emerald-400/10 px-2 py-0.5 rounded-full" data-i18n="tag.free">Gratis</span></div>
+          <h3 class="font-display text-xl text-white mb-1" data-i18n="fp1.t">Tagging con hotkeys</h3>
+          <p class="text-zinc-400 font-body text-sm" data-i18n="fp1.d">Configurá tus propias teclas. Goles, tiros, pérdidas — todo con su minuto exacto.</p>
+        </div>
+        <div class="p-6 border-b border-zinc-800 reveal reveal-d1">
+          <div class="flex items-center justify-between mb-2"><span class="font-mono text-emerald-400 text-xs">02</span><span class="font-mono text-[10px] uppercase text-emerald-400/90 border border-emerald-400/40 bg-emerald-400/10 px-2 py-0.5 rounded-full" data-i18n="tag.free">Gratis</span></div>
+          <h3 class="font-display text-xl text-white mb-1" data-i18n="fp2.t">Telestrator completo</h3>
+          <p class="text-zinc-400 font-body text-sm" data-i18n="fp2.d">11 herramientas de dibujo con animación: flechas, zonas, spotlight, líneas y texto.</p>
+        </div>
+        <div class="p-6 border-b md:border-r border-zinc-800 reveal reveal-d2">
+          <div class="flex items-center justify-between mb-2"><span class="font-mono text-emerald-400 text-xs">03</span><span class="font-mono text-[10px] uppercase text-emerald-400/90 border border-emerald-400/40 bg-emerald-400/10 px-2 py-0.5 rounded-full" data-i18n="tag.free">Gratis</span></div>
+          <h3 class="font-display text-xl text-white mb-1" data-i18n="fp3.t">Offside con perspectiva</h3>
+          <p class="text-zinc-400 font-body text-sm" data-i18n="fp3.d">Línea geométrica por homografía — el mismo principio que usa el VAR profesional.</p>
+        </div>
+        <div class="p-6 border-b border-zinc-800 reveal reveal-d3">
+          <div class="flex items-center justify-between mb-2"><span class="font-mono text-emerald-400 text-xs">04</span><span class="font-mono text-[10px] uppercase text-amber-900 bg-gradient-to-br from-amber-300 to-amber-500 px-2 py-0.5 rounded-full font-semibold" data-i18n="tag.pro">Pro</span></div>
+          <h3 class="font-display text-xl text-white mb-1" data-i18n="fp4.t">Insights + estadísticas con IA</h3>
+          <p class="text-zinc-400 font-body text-sm" data-i18n="fp4.d">Generación de etiquetas, análisis de patrones y estadísticas avanzadas por jugador y equipo.</p>
+        </div>
+        <div class="p-6 md:border-r border-zinc-800 reveal reveal-d4">
+          <div class="flex items-center justify-between mb-2"><span class="font-mono text-emerald-400 text-xs">05</span><span class="font-mono text-[10px] uppercase text-amber-900 bg-gradient-to-br from-amber-300 to-amber-500 px-2 py-0.5 rounded-full font-semibold" data-i18n="tag.pro">Pro</span></div>
+          <h3 class="font-display text-xl text-white mb-1" data-i18n="fp5.t">Reels + export a tu editor</h3>
+          <p class="text-zinc-400 font-body text-sm" data-i18n="fp5.d">Reels 9:16/16:9 por jugador con seguimiento de la jugada y FCP XML para Premiere/DaVinci. El export MP4 de clips es gratis.</p>
+        </div>
+        <div class="p-6 reveal reveal-d4">
+          <div class="flex items-center justify-between mb-2"><span class="font-mono text-emerald-400 text-xs">06</span><span class="font-mono text-[10px] uppercase text-amber-900 bg-gradient-to-br from-amber-300 to-amber-500 px-2 py-0.5 rounded-full font-semibold" data-i18n="tag.pro">Pro</span></div>
+          <h3 class="font-display text-xl text-white mb-1" data-i18n="fp6.t">Biblioteca + PDF + LPF Play</h3>
+          <p class="text-zinc-400 font-body text-sm" data-i18n="fp6.d">Nube multi-dispositivo, reportes PDF (partido/jugador/scouting) y planteles predefinidos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSER -->
+  <section class="py-20 md:py-28">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="bg-zinc-900 rounded-2xl p-10 md:p-14 reveal">
+        <h2 class="font-display text-3xl md:text-5xl text-white mb-4 leading-[1.02]" data-i18n-html="closer.h2">Probá Pro 15 días,<br/><em style="font-style:italic;color:#34d399;">sin tarjeta.</em></h2>
+        <p class="text-zinc-400 font-body text-lg max-w-xl mb-8" data-i18n="closer.p">Se activa desde "Ver planes" dentro de cualquier función Pro de la app. Si tenés dudas sobre tu flujo de trabajo, escribinos.</p>
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="https://github.com/nacholiporace/goal-labs-releases/releases/latest" data-download class="btn-primary bg-cream hover:bg-white text-ink font-body font-semibold px-8 py-3.5 rounded-full text-sm transition-colors focus-ring inline-flex items-center gap-2">
+            <i class="fas fa-download text-xs"></i><span data-i18n="closer.cta">Descargar gratis para Windows</span>
+          </a>
+          <span class="font-mono text-xs text-zinc-500 tabular-nums"><span id="version-num">v1.4.1</span> · Win 10/11</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="border-t border-white/10 py-12" role="contentinfo">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2.5">
+      <span class="w-6 h-6 rounded bg-cream flex items-center justify-center shrink-0" aria-hidden="true"><i class="fas fa-futbol text-ink text-xs"></i></span>
+      <span translate="no" class="text-white font-mono text-sm tracking-[0.25em] uppercase">Goal</span>
+      <span translate="no" class="text-zinc-500 font-mono text-sm tracking-[0.35em] uppercase">Labs</span>
+      <span class="text-zinc-600 text-xs ml-3 font-mono" data-i18n="footer.madeIn">— Hecho en Argentina</span>
+    </div>
+    <div class="flex items-center gap-6 text-zinc-500 text-xs font-mono uppercase tracking-wider">
+      <a href="../partners/" class="hover:text-cream transition-colors focus-ring" data-i18n="footer.partners">Partners</a>
+      <a href="../creadores/" class="hover:text-cream transition-colors focus-ring" data-i18n="footer.creators">Creadores</a>
+      <span aria-label="Copyright 2026 Nacho Liporace">© 2026 Nacho Liporace</span>
+    </div>
+  </div>
+</footer>
+
+<div class="grain" aria-hidden="true"></div>
+
+<script>
+window.I18N = {
+  es: {
+    "meta.title": "Goal Labs — Guía Rápida para Analistas y Cuerpos Técnicos",
+    "meta.description": "Guía rápida del flujo real de trabajo en Goal Labs: hotkeys, telestrator, offside, exportación.",
+    "skip": "Ir al contenido principal",
+    "nav.features": "Funcionalidades", "nav.pricing": "Precios", "nav.partners": "Partners", "nav.creators": "Creadores",
+    "nav.langLabel": "Idioma", "nav.downloadCta": "Descargar gratis",
+    "hero.eyebrow": "Quick-start para analistas y cuerpos técnicos",
+    "hero.h1": "Del video crudo al informe,<br/>sin salir de <em style=\"font-style:italic;color:#34d399;\">una pantalla.</em>",
+    "hero.sub": "Guía rápida del flujo real de trabajo en Goal Labs — para que llegues al primer partido tagueado en minutos, no en un manual de 200 páginas.",
+    "flow.eyebrow": "El flujo, en 4 pasos",
+    "flow.s1.t": "Tagueás", "flow.s1.d": "Configurás tus tags con hotkeys. Una tecla = un evento registrado, sin pausar el video.",
+    "flow.s2.t": "Dibujás / verificás", "flow.s2.d": "Telestrator con 11 herramientas sobre el frame exacto. Línea de offside por homografía cuando hace falta.",
+    "flow.s3.t": "Analizás", "flow.s3.d": "Estadísticas por jugador y equipo, momentos destacados, insights con IA sobre lo que pasó en el partido.",
+    "flow.s4.t": "Exportás / informás", "flow.s4.d": "Clips MP4, reels 9:16 por jugador, FCP XML para tu editor, o un reporte PDF listo para el cuerpo técnico.",
+    "hotkeys.eyebrow": "Hotkeys por defecto (100% configurables)",
+    "hk.1": "Gol", "hk.2": "Tiro", "hk.3": "Pérdida", "hk.4": "Recuperación", "hk.5": "Transición Def-Ata", "hk.6": "Presión Alta", "hk.7": "Tiro de Esquina", "hk.8": "Salida de Balón",
+    "hotkeys.note": "Esta es la configuración de fábrica. Cada tag es editable y podés crear los tuyos con la tecla que quieras — el criterio es el tuyo, no el nuestro.",
+    "whatsnew.eyebrow": "Novedad · v1.4.1", "whatsnew.h3": "Seguimiento automático en el telestrator",
+    "whatsnew.p": "El spotlight/círculo ahora puede seguir a un jugador solo: dibujás una caja sobre él en un frame pausado y el sistema genera el recorrido automáticamente — sin animar cada keyframe a mano.",
+    "fp.eyebrow": "Free vs. Pro para tu flujo de trabajo", "fp.h2": "Todo lo que necesitás en una sola pantalla.",
+    "tag.free": "Gratis", "tag.pro": "Pro",
+    "fp1.t": "Tagging con hotkeys", "fp1.d": "Configurá tus propias teclas. Goles, tiros, pérdidas — todo con su minuto exacto.",
+    "fp2.t": "Telestrator completo", "fp2.d": "11 herramientas de dibujo con animación: flechas, zonas, spotlight, líneas y texto.",
+    "fp3.t": "Offside con perspectiva", "fp3.d": "Línea geométrica por homografía — el mismo principio que usa el VAR profesional.",
+    "fp4.t": "Insights + estadísticas con IA", "fp4.d": "Generación de etiquetas, análisis de patrones y estadísticas avanzadas por jugador y equipo.",
+    "fp5.t": "Reels + export a tu editor", "fp5.d": "Reels 9:16/16:9 por jugador con seguimiento de la jugada y FCP XML para Premiere/DaVinci. El export MP4 de clips es gratis.",
+    "fp6.t": "Biblioteca + PDF + LPF Play", "fp6.d": "Nube multi-dispositivo, reportes PDF (partido/jugador/scouting) y planteles predefinidos.",
+    "closer.h2": "Probá Pro 15 días,<br/><em style=\"font-style:italic;color:#34d399;\">sin tarjeta.</em>",
+    "closer.p": "Se activa desde \"Ver planes\" dentro de cualquier función Pro de la app. Si tenés dudas sobre tu flujo de trabajo, escribinos.",
+    "closer.cta": "Descargar gratis para Windows",
+    "footer.madeIn": "— Hecho en Argentina", "footer.partners": "Partners", "footer.creators": "Creadores"
+  },
+  en: {
+    "meta.title": "Goal Labs — Quick-start for Analysts & Coaching Staffs",
+    "meta.description": "A quick guide to the real Goal Labs workflow: hotkeys, telestrator, offside, export.",
+    "skip": "Skip to main content",
+    "nav.features": "Features", "nav.pricing": "Pricing", "nav.partners": "Partners", "nav.creators": "Creators",
+    "nav.langLabel": "Language", "nav.downloadCta": "Download free",
+    "hero.eyebrow": "Quick-start for analysts & coaching staffs",
+    "hero.h1": "From raw footage to a report,<br/>without leaving <em style=\"font-style:italic;color:#34d399;\">one screen.</em>",
+    "hero.sub": "A quick guide to the real Goal Labs workflow — so you get your first match tagged in minutes, not a 200-page manual.",
+    "flow.eyebrow": "The workflow, in 4 steps",
+    "flow.s1.t": "Tag", "flow.s1.d": "Set up your tags with hotkeys. One key = one event logged, without pausing the video.",
+    "flow.s2.t": "Draw / verify", "flow.s2.d": "Telestrator with 11 tools over the exact frame. Homography-corrected offside line when you need it.",
+    "flow.s3.t": "Analyze", "flow.s3.d": "Per-player and team stats, key moments, AI insights on what happened in the match.",
+    "flow.s4.t": "Export / report", "flow.s4.d": "MP4 clips, 9:16 player reels, FCP XML for your editor, or a PDF report ready for the coaching staff.",
+    "hotkeys.eyebrow": "Default hotkeys (100% configurable)",
+    "hk.1": "Goal", "hk.2": "Shot", "hk.3": "Turnover", "hk.4": "Recovery", "hk.5": "Def-Att Transition", "hk.6": "High Press", "hk.7": "Corner Kick", "hk.8": "Build-up",
+    "hotkeys.note": "This is the factory setup. Every tag is editable and you can create your own with whatever key you want — it's your criteria, not ours.",
+    "whatsnew.eyebrow": "New · v1.4.1", "whatsnew.h3": "Automatic tracking in the telestrator",
+    "whatsnew.p": "The spotlight/circle can now follow a player on its own: draw a box over them on a paused frame and the system generates the path automatically — no manual keyframing.",
+    "fp.eyebrow": "Free vs. Pro for your workflow", "fp.h2": "Everything you need on a single screen.",
+    "tag.free": "Free", "tag.pro": "Pro",
+    "fp1.t": "Hotkey tagging", "fp1.d": "Set your own keys. Goals, shots, turnovers — all with their exact minute.",
+    "fp2.t": "Full telestrator", "fp2.d": "11 animated drawing tools: arrows, zones, spotlight, lines and text.",
+    "fp3.t": "Perspective-corrected offside", "fp3.d": "Geometric line via homography — the same principle professional VAR uses.",
+    "fp4.t": "AI insights + stats", "fp4.d": "Tag generation, pattern analysis, and advanced per-player and team stats.",
+    "fp5.t": "Reels + export to your editor", "fp5.d": "9:16/16:9 per-player reels with play tracking and FCP XML for Premiere/DaVinci. MP4 clip export is free.",
+    "fp6.t": "Library + PDF + LPF Play", "fp6.d": "Multi-device cloud, PDF reports (match/player/scouting), and preset squads.",
+    "closer.h2": "Try Pro for 15 days,<br/><em style=\"font-style:italic;color:#34d399;\">no card.</em>",
+    "closer.p": "Activate it from \"See plans\" inside any Pro feature in the app. If you have questions about your workflow, write to us.",
+    "closer.cta": "Download free for Windows",
+    "footer.madeIn": "— Made in Argentina", "footer.partners": "Partners", "footer.creators": "Creators"
+  },
+  it: {
+    "meta.title": "Goal Labs — Guida Rapida per Analisti e Staff Tecnici",
+    "meta.description": "Guida rapida al flusso di lavoro reale di Goal Labs: hotkey, telestrator, fuorigioco, esportazione.",
+    "skip": "Vai al contenuto principale",
+    "nav.features": "Funzionalità", "nav.pricing": "Prezzi", "nav.partners": "Partners", "nav.creators": "Creator",
+    "nav.langLabel": "Lingua", "nav.downloadCta": "Scarica gratis",
+    "hero.eyebrow": "Guida rapida per analisti e staff tecnici",
+    "hero.h1": "Dal video grezzo al report,<br/>senza uscire da <em style=\"font-style:italic;color:#34d399;\">una schermata.</em>",
+    "hero.sub": "Guida rapida al flusso di lavoro reale di Goal Labs — per taggare la tua prima partita in pochi minuti, non con un manuale di 200 pagine.",
+    "flow.eyebrow": "Il flusso, in 4 passi",
+    "flow.s1.t": "Tagga", "flow.s1.d": "Configuri i tuoi tag con gli hotkey. Un tasto = un evento registrato, senza mettere in pausa il video.",
+    "flow.s2.t": "Disegna / verifica", "flow.s2.d": "Telestrator con 11 strumenti sul frame esatto. Linea di fuorigioco con omografia quando serve.",
+    "flow.s3.t": "Analizza", "flow.s3.d": "Statistiche per giocatore e squadra, momenti salienti, insights IA su cosa è successo in partita.",
+    "flow.s4.t": "Esporta / riporta", "flow.s4.d": "Clip MP4, reel 9:16 per giocatore, FCP XML per il tuo editor, o un report PDF pronto per lo staff tecnico.",
+    "hotkeys.eyebrow": "Hotkey di default (100% configurabili)",
+    "hk.1": "Gol", "hk.2": "Tiro", "hk.3": "Palla persa", "hk.4": "Recupero", "hk.5": "Transizione Dif-Att", "hk.6": "Pressing Alto", "hk.7": "Calcio d'angolo", "hk.8": "Costruzione dal basso",
+    "hotkeys.note": "Questa è la configurazione di fabbrica. Ogni tag è modificabile e puoi crearne di tuoi con il tasto che vuoi — il criterio è il tuo, non il nostro.",
+    "whatsnew.eyebrow": "Novità · v1.4.1", "whatsnew.h3": "Tracking automatico nel telestrator",
+    "whatsnew.p": "Lo spotlight/cerchio ora può seguire un giocatore da solo: disegni un riquadro su di lui su un frame in pausa e il sistema genera il percorso automaticamente — senza animare ogni keyframe a mano.",
+    "fp.eyebrow": "Free vs. Pro per il tuo flusso di lavoro", "fp.h2": "Tutto quello che ti serve in un'unica schermata.",
+    "tag.free": "Gratis", "tag.pro": "Pro",
+    "fp1.t": "Tagging con hotkey", "fp1.d": "Configura i tuoi tasti. Gol, tiri, palle perse — tutto con il minuto esatto.",
+    "fp2.t": "Telestrator completo", "fp2.d": "11 strumenti di disegno animati: frecce, zone, spotlight, linee e testo.",
+    "fp3.t": "Fuorigioco con prospettiva", "fp3.d": "Linea geometrica tramite omografia — lo stesso principio del VAR professionale.",
+    "fp4.t": "Insights IA + statistiche", "fp4.d": "Generazione di tag, analisi dei pattern e statistiche avanzate per giocatore e squadra.",
+    "fp5.t": "Reel + export verso il tuo editor", "fp5.d": "Reel 9:16/16:9 per giocatore con tracking dell'azione e FCP XML per Premiere/DaVinci. L'export MP4 delle clip è gratis.",
+    "fp6.t": "Libreria + PDF + LPF Play", "fp6.d": "Cloud multi-dispositivo, report PDF (partita/giocatore/scouting) e rose predefinite.",
+    "closer.h2": "Prova Pro 15 giorni,<br/><em style=\"font-style:italic;color:#34d399;\">senza carta.</em>",
+    "closer.p": "Si attiva da \"Vedi piani\" all'interno di qualsiasi funzione Pro dell'app. Se hai dubbi sul tuo flusso di lavoro, scrivici.",
+    "closer.cta": "Scarica gratis per Windows",
+    "footer.madeIn": "— Fatto in Argentina", "footer.partners": "Partners", "footer.creators": "Creator"
+  }
+};
+</script>
+<script src="../assets/site-i18n.js"></script>
+</body>
+</html>
