@@ -34,6 +34,29 @@
     } } }
   </script>
   <link rel="stylesheet" href="../assets/site.css" />
+  <style>
+    /* Fondo animado del hero — aura + círculo central */
+    .glbg-aura { position: absolute; inset: 0; overflow: hidden; pointer-events: none; background: #0a0a0a; }
+    .glbg-aura::before, .glbg-aura::after { content: ''; position: absolute; border-radius: 50%; filter: blur(90px); }
+    .glbg-aura::before { width: 640px; height: 640px; background: radial-gradient(circle, rgba(16,185,129,.20), transparent 70%); top: -12%; left: -6%; animation: glbgAuraA 19s ease-in-out infinite alternate; }
+    .glbg-aura::after { width: 560px; height: 560px; background: radial-gradient(circle, rgba(240,235,225,.07), transparent 70%); bottom: -16%; right: -6%; animation: glbgAuraB 23s ease-in-out infinite alternate; }
+    @keyframes glbgAuraA { to { transform: translate(140px,90px) scale(1.18); } }
+    @keyframes glbgAuraB { to { transform: translate(-110px,-70px) scale(1.12); } }
+    .glbg-aura .glbg-pitch { position: absolute; left: 50%; top: 50%; width: min(120vh, 1100px); transform: translate(-50%,-50%); opacity: .5; animation: glbgBreathe 26s ease-in-out infinite alternate; }
+    @keyframes glbgBreathe { from { transform: translate(-50%,-50%) scale(1); } to { transform: translate(-50%,-50%) scale(1.05); } }
+    .glbg-grain { position: absolute; inset: -150%; pointer-events: none; opacity: .06;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      animation: glbgGrain 8s steps(10) infinite; }
+    @keyframes glbgGrain {
+      0%, 100% { transform: translate(0,0); } 10% { transform: translate(-5%,-10%); } 20% { transform: translate(-15%,5%); }
+      30% { transform: translate(7%,-25%); } 40% { transform: translate(-5%,25%); } 50% { transform: translate(-15%,10%); }
+      60% { transform: translate(15%,0%); } 70% { transform: translate(0%,15%); } 80% { transform: translate(3%,35%); } 90% { transform: translate(-10%,10%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .glbg-aura::before, .glbg-aura::after, .glbg-aura .glbg-pitch { animation: none; }
+      .glbg-grain { animation: none; opacity: .03; inset: 0; }
+    }
+  </style>
 
   <script data-goatcounter="https://goallabs.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -85,7 +108,15 @@
 <main id="main-content">
   <!-- HERO -->
   <section class="relative pt-40 pb-20 md:pt-52 md:pb-28 border-b border-white/10 overflow-hidden">
-    <img src="../assets/tactics-board.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-20" loading="eager" onerror="this.style.display='none';" />
+    <div class="glbg-aura" aria-hidden="true">
+      <svg class="glbg-pitch" viewBox="0 0 600 600" fill="none" stroke="rgba(240,235,225,0.09)" stroke-width="1.2">
+        <circle cx="300" cy="300" r="150"></circle>
+        <circle cx="300" cy="300" r="2.5" fill="rgba(240,235,225,0.12)"></circle>
+        <line x1="300" y1="40" x2="300" y2="560"></line>
+        <path d="M300 110 A150 150 0 0 1 300 490"></path>
+      </svg>
+      <div class="glbg-grain"></div>
+    </div>
     <div class="absolute inset-0 bg-gradient-to-b from-zinc-950/40 via-zinc-950/85 to-zinc-950"></div>
     <div class="relative max-w-4xl mx-auto px-6 reveal">
       <span class="eyebrow" data-i18n="hero.eyebrow">Kit de colaboración para streamers y creadores — TikTok, Instagram, X y Twitch/YouTube</span>

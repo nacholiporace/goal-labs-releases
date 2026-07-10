@@ -34,6 +34,28 @@
     } } }
   </script>
   <link rel="stylesheet" href="../assets/site.css" />
+  <style>
+    /* Fondo animado del hero — media cancha con aura verde */
+    .glbg-half { position: absolute; inset: 0; overflow: hidden; pointer-events: none; background: #0a0a0a; }
+    .glbg-half::before { content: ''; position: absolute; width: 700px; height: 700px; border-radius: 50%; filter: blur(100px); background: radial-gradient(circle, rgba(16,185,129,.16), transparent 70%); top: -30%; right: -14%; animation: glbgAuraC 21s ease-in-out infinite alternate; }
+    @keyframes glbgAuraC { to { transform: translate(-90px,70px) scale(1.15); } }
+    .glbg-half .glbg-pitch { position: absolute; right: -15%; top: 50%; width: min(110vh, 900px); transform: translateY(-54%); animation: glbgBreatheB 26s ease-in-out infinite alternate; }
+    @keyframes glbgBreatheB { from { transform: translateY(-54%) scale(1); } to { transform: translateY(-54%) scale(1.06); } }
+    .glbg-half .glbg-dot { animation: glbgPulse 3.5s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+    @keyframes glbgPulse { 0%, 100% { opacity: .7; } 50% { opacity: .25; } }
+    .glbg-grain { position: absolute; inset: -150%; pointer-events: none; opacity: .06;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      animation: glbgGrain 8s steps(10) infinite; }
+    @keyframes glbgGrain {
+      0%, 100% { transform: translate(0,0); } 10% { transform: translate(-5%,-10%); } 20% { transform: translate(-15%,5%); }
+      30% { transform: translate(7%,-25%); } 40% { transform: translate(-5%,25%); } 50% { transform: translate(-15%,10%); }
+      60% { transform: translate(15%,0%); } 70% { transform: translate(0%,15%); } 80% { transform: translate(3%,35%); } 90% { transform: translate(-10%,10%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .glbg-half::before, .glbg-half .glbg-pitch, .glbg-half .glbg-dot { animation: none; }
+      .glbg-grain { animation: none; opacity: .03; inset: 0; }
+    }
+  </style>
 
   <script data-goatcounter="https://goallabs.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -85,7 +107,15 @@
 <main id="main-content">
   <!-- HERO -->
   <section class="relative pt-40 pb-20 md:pt-52 md:pb-28 border-b border-white/10 overflow-hidden">
-    <img src="../assets/hero-poster.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-25" loading="eager" onerror="this.style.display='none';" />
+    <div class="glbg-half" aria-hidden="true">
+      <svg class="glbg-pitch" viewBox="0 0 600 600" fill="none" stroke="rgba(240,235,225,0.14)" stroke-width="1.4">
+        <circle cx="300" cy="300" r="190"></circle>
+        <circle class="glbg-dot" cx="300" cy="300" r="3" fill="rgba(52,211,153,0.7)"></circle>
+        <line x1="300" y1="10" x2="300" y2="590"></line>
+        <path d="M300 92 A208 208 0 0 1 300 508"></path>
+      </svg>
+      <div class="glbg-grain"></div>
+    </div>
     <div class="absolute inset-0 bg-gradient-to-b from-zinc-950/40 via-zinc-950/85 to-zinc-950"></div>
     <div class="relative max-w-4xl mx-auto px-6 reveal">
       <span class="eyebrow" data-i18n="hero.eyebrow">Para jugadores</span>

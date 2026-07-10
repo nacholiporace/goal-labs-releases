@@ -1425,12 +1425,24 @@
       window.scrollTo(0, 0);
       function scrollToPendingHash() {
         if (!pendingHash || pendingHash.length < 2) return;
-        const target = document.querySelector(pendingHash);
-        if (!target) return;
-        requestAnimationFrame(() => {
-          if (lenis) lenis.scrollTo(target, { offset: -70 });
-          else target.scrollIntoView();
-        });
+        // Esperamos a que termine de cargar TODO (imágenes/videos de la sección pineada
+        // de funcionalidades incluidos): si scrolleamos antes, ScrollTrigger recalcula el
+        // alto de los pines al terminar de cargar y el contenido se corre — dejando el
+        // scroll ya fijo en una posición vieja, más arriba de donde debía caer.
+        function doScroll() {
+          const target = document.querySelector(pendingHash);
+          if (!target) return;
+          ScrollTrigger.refresh();
+          requestAnimationFrame(() => {
+            if (lenis) lenis.scrollTo(target, { offset: -70 });
+            else target.scrollIntoView();
+          });
+        }
+        if (document.readyState === 'complete') {
+          setTimeout(doScroll, 300);
+        } else {
+          window.addEventListener('load', () => setTimeout(doScroll, 300));
+        }
       }
 
       // Smooth scroll (Lenis) sincronizado con ScrollTrigger

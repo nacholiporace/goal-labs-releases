@@ -34,6 +34,31 @@
     } } }
   </script>
   <link rel="stylesheet" href="../assets/site.css" />
+  <style>
+    /* Fondo animado del hero — pizarra táctica con línea de pase */
+    .glbg-board { position: absolute; inset: 0; overflow: hidden; pointer-events: none; background: #09090b; }
+    .glbg-board svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .glbg-pass { stroke-dasharray: 7 8; animation: glbgDash 30s linear infinite; }
+    @keyframes glbgDash { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -600; } }
+    .glbg-node { animation: glbgPulse 3.5s ease-in-out infinite; }
+    .glbg-node:nth-of-type(2) { animation-delay: 1.2s; }
+    @keyframes glbgPulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+    .glbg-target { animation: glbgRing 3.5s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+    @keyframes glbgRing { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.35); opacity: .5; } }
+    .glbg-scrim { position: absolute; inset: 0; background: radial-gradient(90% 90% at 38% 50%, rgba(9,9,11,0.88) 0%, rgba(9,9,11,0.45) 55%, rgba(9,9,11,0.1) 100%); }
+    .glbg-grain { position: absolute; inset: -150%; pointer-events: none; opacity: .06;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      animation: glbgGrain 8s steps(10) infinite; }
+    @keyframes glbgGrain {
+      0%, 100% { transform: translate(0,0); } 10% { transform: translate(-5%,-10%); } 20% { transform: translate(-15%,5%); }
+      30% { transform: translate(7%,-25%); } 40% { transform: translate(-5%,25%); } 50% { transform: translate(-15%,10%); }
+      60% { transform: translate(15%,0%); } 70% { transform: translate(0%,15%); } 80% { transform: translate(3%,35%); } 90% { transform: translate(-10%,10%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .glbg-pass, .glbg-node, .glbg-target { animation: none; }
+      .glbg-grain { animation: none; opacity: .03; inset: 0; }
+    }
+  </style>
 
   <script data-goatcounter="https://goallabs.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -85,7 +110,26 @@
 <main id="main-content">
   <!-- HERO -->
   <section class="relative pt-40 pb-20 md:pt-52 md:pb-28 border-b border-white/10 overflow-hidden">
-    <img src="../assets/hero-poster.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-25" loading="eager" onerror="this.style.display='none';" />
+    <div class="glbg-board" aria-hidden="true">
+      <svg viewBox="0 0 1200 630" preserveAspectRatio="xMidYMid slice" fill="none">
+        <g stroke="rgba(240,235,225,0.10)" stroke-width="1.4">
+          <rect x="60" y="50" width="1080" height="530"></rect>
+          <line x1="600" y1="50" x2="600" y2="580"></line>
+          <circle cx="600" cy="315" r="92"></circle>
+          <circle cx="600" cy="315" r="3" fill="rgba(240,235,225,0.28)" stroke="none"></circle>
+          <rect x="60" y="180" width="150" height="270"></rect>
+          <rect x="990" y="180" width="150" height="270"></rect>
+          <rect x="60" y="245" width="55" height="140"></rect>
+          <rect x="1085" y="245" width="55" height="140"></rect>
+        </g>
+        <path class="glbg-pass" d="M330 470 C 480 420, 620 400, 760 300 S 980 220, 1050 250" stroke="rgba(52,211,153,0.55)" stroke-width="2"></path>
+        <circle class="glbg-node" cx="330" cy="470" r="7" fill="#34d399"></circle>
+        <circle class="glbg-node" cx="760" cy="300" r="7" fill="#34d399"></circle>
+        <circle class="glbg-target" cx="1050" cy="250" r="9" stroke="#34d399" stroke-width="2"></circle>
+      </svg>
+      <div class="glbg-scrim"></div>
+      <div class="glbg-grain"></div>
+    </div>
     <div class="absolute inset-0 bg-gradient-to-b from-zinc-950/40 via-zinc-950/85 to-zinc-950"></div>
     <div class="relative max-w-4xl mx-auto px-6 reveal">
       <span class="eyebrow" data-i18n="hero.eyebrow">Quick-start para analistas y cuerpos técnicos</span>
