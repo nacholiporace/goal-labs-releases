@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="es" style="color-scheme: dark;">
 <head>
+  <script>
+    // Debe correr lo antes posible: si se setea tarde, el navegador ya puede haber
+    // encolado su propia restauración de scroll (al recargar) o el salto nativo al
+    // #hash de la URL, y eso le gana la carrera a Lenis/GSAP más abajo en la página
+    // (ver el fix en el bloque de animación, cerca del final del <body>).
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#09090b" />
@@ -25,6 +33,8 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Goal Labs — software de videoanálisis táctico de fútbol" />
   <meta property="og:locale" content="es_AR" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="it_IT" />
   <meta property="og:site_name" content="Goal Labs" />
   <meta name="twitter:image" content="https://goallabs.com.ar/assets/og-image.png" />
 
@@ -495,7 +505,7 @@
         <span translate="no" class="text-white font-mono font-medium text-sm tracking-[0.25em] uppercase">Goal</span>
         <span translate="no" class="text-zinc-500 font-mono text-sm tracking-[0.35em] uppercase">Labs</span>
       </a>
-      <div class="hidden md:flex items-center gap-8" role="list">
+      <div class="hidden lg:flex items-center gap-8" role="list">
         <a href="#funcionalidades" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.features">Funcionalidades</a>
         <a href="#comparacion" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.compare">Vs. alternativas</a>
         <a href="#precios" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.pricing">Precios</a>
@@ -516,8 +526,22 @@
            data-i18n-aria="nav.downloadFreeAria"
            aria-label="Descargar Goal Labs gratis para Windows">
           <i class="fas fa-download text-xs" aria-hidden="true"></i>
-          <span data-i18n="nav.downloadFree">Descargar gratis</span>
+          <span class="hidden sm:inline" data-i18n="nav.downloadFree">Descargar gratis</span>
         </a>
+        <button type="button" data-mobile-menu-toggle aria-controls="mobile-menu" aria-expanded="false"
+                class="lg:hidden w-9 h-9 shrink-0 flex items-center justify-center rounded-lg border border-zinc-700 text-zinc-300 hover:text-cream hover:border-zinc-600 transition-colors focus-ring"
+                data-i18n-aria="nav.menuToggleAria" aria-label="Abrir menú">
+          <i class="icon-open fas fa-bars text-sm" aria-hidden="true"></i>
+          <i class="icon-close hidden fas fa-xmark text-sm" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-zinc-800/60 bg-zinc-950/95 backdrop-blur-md">
+      <div class="max-w-7xl mx-auto px-6 py-3 flex flex-col" role="list">
+        <a href="#funcionalidades" class="py-3 border-b border-zinc-800/60 font-mono text-xs uppercase tracking-[0.15em] text-zinc-300 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.features">Funcionalidades</a>
+        <a href="#comparacion" class="py-3 border-b border-zinc-800/60 font-mono text-xs uppercase tracking-[0.15em] text-zinc-300 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.compare">Vs. alternativas</a>
+        <a href="#precios" class="py-3 border-b border-zinc-800/60 font-mono text-xs uppercase tracking-[0.15em] text-zinc-300 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.pricing">Precios</a>
+        <a href="#faq" class="py-3 font-mono text-xs uppercase tracking-[0.15em] text-zinc-300 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.faq">FAQ</a>
       </div>
     </div>
   </nav>
@@ -687,6 +711,42 @@
       </div>
     </section>
 
+    <!-- PARA QUIÉN -->
+    <section id="para-quien" class="py-20 md:py-28 border-t border-white/10" aria-labelledby="para-quien-heading">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-2xl mb-10 reveal">
+          <span class="eyebrow" data-i18n="aud.eyebrow">Para cada rol del cuerpo técnico</span>
+          <h2 id="para-quien-heading" class="font-display text-white text-4xl md:text-6xl mt-4 leading-[0.95] text-balance" data-i18n="aud.h2">Hecho para tu lugar en el juego.</h2>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <a href="jugadores/" class="group border border-zinc-800 rounded-xl p-6 bg-zinc-900/40 hover:border-emerald-500/50 transition-colors reveal focus-ring">
+            <i class="fas fa-person-running text-emerald-400 mb-3 block text-lg" aria-hidden="true"></i>
+            <h3 class="font-display text-xl text-white mb-1" data-i18n="aud.c1.t">Jugador</h3>
+            <p class="text-zinc-400 font-body text-sm leading-relaxed mb-3" data-i18n="aud.c1.d">Armá tus reels y mostrá tu nivel con seguimiento de la jugada.</p>
+            <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-400 inline-block group-hover:translate-x-1 transition-transform" data-i18n="aud.go">Ver más →</span>
+          </a>
+          <a href="analistas/" class="group border border-zinc-800 rounded-xl p-6 bg-zinc-900/40 hover:border-emerald-500/50 transition-colors reveal reveal-d1 focus-ring">
+            <i class="fas fa-chart-line text-emerald-400 mb-3 block text-lg" aria-hidden="true"></i>
+            <h3 class="font-display text-xl text-white mb-1" data-i18n="aud.c2.t">Analista o DT</h3>
+            <p class="text-zinc-400 font-body text-sm leading-relaxed mb-3" data-i18n="aud.c2.d">El flujo completo: tagging, telestrator e informes para el cuerpo técnico.</p>
+            <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-400 inline-block group-hover:translate-x-1 transition-transform" data-i18n="aud.go">Ver más →</span>
+          </a>
+          <a href="clubes/" class="group border border-zinc-800 rounded-xl p-6 bg-zinc-900/40 hover:border-emerald-500/50 transition-colors reveal reveal-d2 focus-ring">
+            <i class="fas fa-building text-emerald-400 mb-3 block text-lg" aria-hidden="true"></i>
+            <h3 class="font-display text-xl text-white mb-1" data-i18n="aud.c3.t">Club o institución</h3>
+            <p class="text-zinc-400 font-body text-sm leading-relaxed mb-3" data-i18n="aud.c3.d">Estandarizá el análisis en todas tus categorías, de Primera a las inferiores.</p>
+            <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-400 inline-block group-hover:translate-x-1 transition-transform" data-i18n="aud.go">Ver más →</span>
+          </a>
+          <a href="creadores/" class="group border border-zinc-800 rounded-xl p-6 bg-zinc-900/40 hover:border-emerald-500/50 transition-colors reveal reveal-d3 focus-ring">
+            <i class="fas fa-video text-emerald-400 mb-3 block text-lg" aria-hidden="true"></i>
+            <h3 class="font-display text-xl text-white mb-1" data-i18n="aud.c4.t">Creador de contenido</h3>
+            <p class="text-zinc-400 font-body text-sm leading-relaxed mb-3" data-i18n="aud.c4.d">Contenido de fútbol táctico para tu audiencia, con acceso Pro.</p>
+            <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-400 inline-block group-hover:translate-x-1 transition-transform" data-i18n="aud.go">Ver más →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- FUNCIONALIDADES: Horizontal Scroll (bam83 style) -->
     <section id="funcionalidades" class="border-t border-white/10 overflow-hidden bg-black relative" aria-labelledby="funcionalidades-heading">
       
@@ -785,7 +845,7 @@
                 <span class="tag-pro font-mono text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full" data-i18n="fv.6.badge">Pro</span>
               </div>
               <h3 class="font-display text-white text-2xl leading-tight" data-i18n="fv.6.t">Tu temporada, ordenada</h3>
-              <p class="text-zinc-300 font-body text-sm leading-relaxed" data-i18n="fv.6.d">Biblioteca en la nube, análisis de temporada, reportes PDF y LPF Play con planteles. Todo sincronizado — y 100% offline cuando no tenés señal.</p>
+              <p class="text-zinc-300 font-body text-sm leading-relaxed" data-i18n="fv.6.d">Biblioteca en la nube, análisis de temporada, reportes PDF y planteles predefinidos. Todo sincronizado — y 100% offline cuando no tenés señal.</p>
             </div>
           </div>
 
@@ -914,7 +974,7 @@
                     <span class="font-mono text-emerald-400 text-xs tracking-widest font-semibold" data-i18n="fv.6.num">06</span>
                     <h4 class="font-display text-white text-sm md:text-xl leading-tight" data-i18n="fv.6.t">Temporada ordenada</h4>
                   </div>
-                  <p class="text-zinc-300 font-body text-[11px] md:text-sm leading-relaxed" data-i18n="fv.6.d">Biblioteca en la nube, análisis de temporada, reportes PDF y LPF Play con planteles. 100% offline cuando no tenés señal.</p>
+                  <p class="text-zinc-300 font-body text-[11px] md:text-sm leading-relaxed" data-i18n="fv.6.d">Biblioteca en la nube, análisis de temporada, reportes PDF y planteles predefinidos. 100% offline cuando no tenés señal.</p>
                 </div>
               </div>
             </div>
@@ -924,128 +984,59 @@
       </div>
     </section>
 
-    <!-- FLUJO: DEL PARTIDO AL REEL (Oculto temporalmente) -->
-    <section class="hidden py-24 md:py-32 border-t border-white/10" aria-labelledby="flujo-heading">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="max-w-3xl mb-16 reveal">
-          <h2 id="flujo-heading" data-i18n-html="flow.h2" class="font-display text-white text-5xl md:text-7xl leading-[0.95] text-balance">
-            Del partido al <span class="gradient-text-green">reel</span> en tres pasos.
-          </h2>
-          <p class="text-zinc-400 text-lg font-body mt-5 text-pretty" data-i18n="flow.sub">Del video crudo a un clip listo para redes — sin salir de la app.</p>
-        </div>
-
-        <ol class="grid sm:grid-cols-3 gap-px bg-white/10 border-x border-b border-white/10" data-i18n-aria="flow.olAria" aria-label="Cómo funciona Goal Labs en tres pasos" data-stagger>
-          <li class="bg-ink p-7 md:p-8" data-stagger-item>
-            <div class="flex items-center justify-between mb-6"><span class="font-mono text-xs text-emerald-400">01</span><i class="fas fa-keyboard text-zinc-600 text-lg" aria-hidden="true"></i></div>
-            <h3 class="font-display text-2xl md:text-3xl text-white leading-tight mb-2.5" data-i18n="flow.s1.t">Taggeás el partido</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed font-body" data-i18n="flow.s1.d">Una tecla por evento, sin pausar el video. Goles, tiros, pérdidas, offsides — todo queda registrado con su minuto.</p>
-          </li>
-          <li class="bg-ink p-7 md:p-8" data-stagger-item>
-            <div class="flex items-center justify-between mb-6"><span class="font-mono text-xs text-emerald-400">02</span><i class="fas fa-clapperboard text-zinc-600 text-lg" aria-hidden="true"></i></div>
-            <h3 class="font-display text-2xl md:text-3xl text-white leading-tight mb-2.5" data-i18n="flow.s2.t">Elegís los momentos</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed font-body" data-i18n="flow.s2.d">Revisá clip por clip con atajos de teclado y armá el reel de cada jugador con sus mejores acciones de la temporada.</p>
-          </li>
-          <li class="bg-ink p-7 md:p-8" data-stagger-item>
-            <div class="flex items-center justify-between mb-6"><span class="font-mono text-xs text-emerald-400">03</span><i class="fas fa-share-nodes text-zinc-600 text-lg" aria-hidden="true"></i></div>
-            <h3 class="font-display text-2xl md:text-3xl text-white leading-tight mb-2.5" data-i18n="flow.s3.t">Exportás para redes</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed font-body" data-i18n="flow.s3.d">9:16 vertical con seguimiento de la jugada o 16:9 clásico. Listo para Instagram, TikTok o el grupo del club.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- BANDA DE CONTEXTO REAL -->
     <!-- COMPARACIÓN -->
     <section id="comparacion" class="py-24 border-t border-zinc-800/50" aria-labelledby="comparacion-heading">
       <div class="max-w-5xl mx-auto px-6">
         <div class="max-w-3xl mb-12 reveal">
-          <span class="eyebrow" data-i18n="nav.compare">Vs. alternativas</span>
+          <span class="eyebrow" data-i18n="nav.compare">Por qué Goal Labs</span>
           <h2 id="comparacion-heading" class="font-display text-white text-5xl md:text-7xl mt-4 leading-[0.95] text-balance" data-i18n="compare.h2">
-            Alternativa gratuita a Nacsport y Hudl.
+            La alternativa gratuita al software tradicional de videoanálisis.
           </h2>
-          <p class="text-zinc-400 text-lg font-body mt-5 text-pretty" data-i18n="compare.sub">Las mismas herramientas de análisis, sin la licencia de EUR 1.000/año.</p>
+          <p class="text-zinc-400 text-lg font-body mt-5 text-pretty" data-i18n="compare.sub">Las mismas herramientas de análisis, sin licencias de cientos o miles de dólares al año.</p>
         </div>
 
         <div class="overflow-x-auto reveal reveal-d1">
-          <table class="w-full text-sm border-collapse" aria-label="Comparación de Goal Labs vs Nacsport vs Hudl">
+          <table class="w-full text-sm border-collapse" aria-label="Comparación de Goal Labs frente al software tradicional de videoanálisis">
             <thead>
               <tr class="border-b border-white/15">
                 <th scope="col" class="text-left py-4 px-4 eyebrow" data-i18n="compare.criterion">Criterio</th>
                 <th scope="col" class="py-4 px-4 text-emerald-400 font-mono text-sm text-center" translate="no">Goal Labs</th>
-                <th scope="col" class="py-4 px-4 text-zinc-400 font-mono text-xs uppercase tracking-wider text-center" translate="no">Nacsport</th>
-                <th scope="col" class="py-4 px-4 text-zinc-400 font-mono text-xs uppercase tracking-wider text-center" translate="no">Hudl</th>
+                <th scope="col" class="py-4 px-4 text-zinc-400 font-mono text-xs uppercase tracking-wider text-center" data-i18n="compare.col.trad">Software tradicional</th>
               </tr>
             </thead>
             <tbody class="font-body">
               <tr class="border-b border-zinc-900 hover:bg-zinc-900/50 transition-colors">
                 <td class="py-3 px-4 text-zinc-400" data-i18n="compare.row.price">Precio</td>
                 <td class="py-3 px-4 text-center font-semibold text-emerald-400 tabular-nums">$0</td>
-                <td class="py-3 px-4 text-center text-zinc-500 tabular-nums" data-i18n="compare.price.nacsport">EUR 700–2.000/año</td>
-                <td class="py-3 px-4 text-center text-zinc-500 tabular-nums" data-i18n="compare.price.hudl">USD 2.000+/año</td>
+                <td class="py-3 px-4 text-center text-zinc-500" data-i18n="compare.trad.price">Licencias de cientos a miles de USD/año</td>
               </tr>
               <tr class="border-b border-zinc-900 hover:bg-zinc-900/50 transition-colors">
                 <td class="py-3 px-4 text-zinc-400" data-i18n="compare.row.language">Idioma</td>
                 <td class="py-3 px-4 text-center text-emerald-400" data-i18n="compare.lang.gl">Español nativo</td>
-                <td class="py-3 px-4 text-center text-zinc-500" data-i18n="compare.lang.nacsport">Traducción</td>
-                <td class="py-3 px-4 text-center text-zinc-500" data-i18n="compare.lang.hudl">Inglés</td>
+                <td class="py-3 px-4 text-center text-zinc-500" data-i18n="compare.trad.lang">Inglés o traducción parcial</td>
               </tr>
               <tr class="border-b border-zinc-900 hover:bg-zinc-900/50 transition-colors">
                 <td class="py-3 px-4 text-zinc-400" data-i18n="compare.row.offside">Offside con perspectiva</td>
                 <td class="py-3 px-4 text-center text-emerald-400"><i class="fas fa-check" aria-hidden="true"></i><span class="sr-only" data-i18n="common.yes">Sí</span></td>
-                <td class="py-3 px-4 text-center text-zinc-600"><i class="fas fa-xmark" aria-hidden="true"></i><span class="sr-only" data-i18n="common.no">No</span></td>
-                <td class="py-3 px-4 text-center text-zinc-600"><i class="fas fa-xmark" aria-hidden="true"></i><span class="sr-only" data-i18n="common.no">No</span></td>
-              </tr>
-              <tr class="border-b border-zinc-900 hover:bg-zinc-900/50 transition-colors">
-                <td class="py-3 px-4 text-zinc-400" data-i18n="compare.row.ai">IA integrada</td>
-                <td class="py-3 px-4 text-center text-emerald-400"><i class="fas fa-check" aria-hidden="true"></i><span class="sr-only">Sí (Gemini)</span></td>
-                <td class="py-3 px-4 text-center text-zinc-600"><i class="fas fa-xmark" aria-hidden="true"></i><span class="sr-only" data-i18n="common.no">No</span></td>
-                <td class="py-3 px-4 text-center text-zinc-500" data-i18n="compare.partial">Parcial</td>
+                <td class="py-3 px-4 text-center text-zinc-500" data-i18n="compare.trad.offside">Poco común</td>
               </tr>
               <tr class="border-b border-zinc-900 hover:bg-zinc-900/50 transition-colors">
                 <td class="py-3 px-4 text-zinc-400" data-i18n="compare.row.offline">Funciona offline</td>
                 <td class="py-3 px-4 text-center text-emerald-400"><i class="fas fa-check" aria-hidden="true"></i><span class="sr-only" data-i18n="common.yes">Sí</span></td>
-                <td class="py-3 px-4 text-center text-emerald-400"><i class="fas fa-check" aria-hidden="true"></i><span class="sr-only" data-i18n="common.yes">Sí</span></td>
-                <td class="py-3 px-4 text-center text-zinc-600"><i class="fas fa-xmark" aria-hidden="true"></i><span class="sr-only" data-i18n="common.no">No</span></td>
+                <td class="py-3 px-4 text-center text-zinc-500" data-i18n="compare.trad.offline">Según el plan</td>
               </tr>
               <tr class="border-b border-zinc-900 hover:bg-zinc-900/50 transition-colors">
                 <td class="py-3 px-4 text-zinc-400" data-i18n="compare.row.reels">Reels verticales 9:16 (redes)</td>
                 <td class="py-3 px-4 text-center text-emerald-400"><i class="fas fa-check" aria-hidden="true"></i><span class="sr-only" data-i18n="common.yes">Sí</span></td>
-                <td class="py-3 px-4 text-center text-zinc-600"><i class="fas fa-xmark" aria-hidden="true"></i><span class="sr-only" data-i18n="common.no">No</span></td>
-                <td class="py-3 px-4 text-center text-zinc-500" data-i18n="compare.partial">Parcial</td>
-              </tr>
-              <tr class="border-b border-zinc-900 hover:bg-zinc-900/50 transition-colors">
-                <td class="py-3 px-4 text-zinc-400" data-i18n="compare.row.lpf">Import directo de la liga (LPF)</td>
-                <td class="py-3 px-4 text-center text-emerald-400"><i class="fas fa-check" aria-hidden="true"></i><span class="sr-only" data-i18n="common.yes">Sí</span></td>
-                <td class="py-3 px-4 text-center text-zinc-600"><i class="fas fa-xmark" aria-hidden="true"></i><span class="sr-only" data-i18n="common.no">No</span></td>
-                <td class="py-3 px-4 text-center text-zinc-600"><i class="fas fa-xmark" aria-hidden="true"></i><span class="sr-only" data-i18n="common.no">No</span></td>
+                <td class="py-3 px-4 text-center text-zinc-500" data-i18n="compare.trad.reels">Requiere editor externo</td>
               </tr>
               <tr class="hover:bg-zinc-900/50 transition-colors">
                 <td class="py-3 px-4 text-zinc-400" data-i18n="compare.row.curve">Curva de aprendizaje</td>
                 <td class="py-3 px-4 text-center text-emerald-400" data-i18n="compare.curve.gl">Baja</td>
-                <td class="py-3 px-4 text-center text-zinc-500" data-i18n="compare.curve.nacsport">Alta</td>
-                <td class="py-3 px-4 text-center text-zinc-500" data-i18n="compare.curve.hudl">Media</td>
+                <td class="py-3 px-4 text-center text-zinc-500" data-i18n="compare.trad.curve">Formación previa habitual</td>
               </tr>
             </tbody>
           </table>
-        </div>
-      </div>
-    </section>
-
-    <section class="relative border-t border-zinc-800/50 overflow-hidden" aria-labelledby="contexto-heading">
-      <div class="relative h-[55vh] min-h-[360px] md:h-[65vh] bg-zinc-900">
-        <img src="assets/stadium-laptop.jpg"
-             data-i18n-alt="ctx.alt"
-             alt="Notebook con Goal Labs analizando un partido al borde de la cancha de un club argentino al atardecer"
-             class="absolute inset-0 w-full h-full object-cover"
-             width="1366" height="768" loading="lazy"
-             onerror="this.style.display='none';" />
-        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/55 to-zinc-950/20" aria-hidden="true"></div>
-        <div class="absolute inset-0 bg-gradient-to-r from-zinc-950/70 to-transparent" aria-hidden="true"></div>
-        <div class="absolute inset-0 flex items-end">
-          <div class="max-w-7xl mx-auto px-6 pb-10 md:pb-14 w-full reveal">
-            <h2 id="contexto-heading" class="font-display text-4xl md:text-6xl text-white text-balance max-w-2xl leading-[0.95]" data-i18n="ctx.h2">Hecho para el fútbol de verdad.</h2>
-            <p class="text-zinc-300 text-lg mt-4 font-body max-w-xl text-pretty" data-i18n="ctx.sub">Del potrero al club: el mismo análisis profesional, sin la licencia profesional.</p>
-          </div>
         </div>
       </div>
     </section>
@@ -1098,8 +1089,7 @@
         <div class="max-w-3xl reveal">
             <span class="eyebrow" data-i18n="founder.eyebrow">Quién está detrás de Goal Labs</span>
             <h2 id="fundador-heading" class="font-display text-white text-4xl md:text-6xl mt-4 mb-6 leading-[0.95] text-balance" data-i18n="founder.h2">Hecho por un jugador, para toda la comunidad del fútbol.</h2>
-            <p class="text-zinc-300 font-body leading-relaxed mb-4" data-i18n="founder.p1">Soy Ignacio Liporace. Me formé en las inferiores de Boca Juniors y Argentinos Juniors, y después jugué profesionalmente en varios países, del ascenso a primera división en Europa. Ese recorrido me confirmó algo que como argentinos ya sabemos: en cada división, de cada país del mundo, hay un argentino jugando. Nuestra cultura futbolística se exporta sola — y esa misma comunidad necesita ayudarse entre sí, no solo el que puede pagar una licencia en dólares.</p>
-            <p class="text-zinc-300 font-body leading-relaxed mb-4" data-i18n="founder.p2">Soy Licenciado en Educación Física y Deportes, con una Diplomatura en Coaching Deportivo, y hoy curso la Licencia de Entrenador en la Escuela Menotti Maradona y la Licencia PRO de Director Deportivo, avalada por AFA y certificada por la UNTREF.</p>
+            <p class="text-zinc-300 font-body leading-relaxed mb-4" data-i18n="founder.p1">Soy Ignacio Liporace. Me formé en las inferiores de Boca Juniors y Argentinos Juniors, y después jugué profesionalmente en varios países, del ascenso a primera división en Europa. Esa experiencia me confirmó algo simple: el fútbol necesita ayudarse entre sí, no solo el que puede pagar una licencia en dólares.</p>
             <p class="text-zinc-300 font-body leading-relaxed" data-i18n="founder.p3">En cada período de traspasos editaba yo mismo mis jugadas con los programas de siempre, y ahí entendí de primera mano lo que le faltaba a esas herramientas para el fútbol real — el de todas las divisiones, no solo el de arriba. Goal Labs es esa herramienta: pensada para jugadores, analistas, cuerpos técnicos e instituciones que quieren un análisis profesional sin que el precio decida quién puede entrenar mejor. La construimos junto a los cuerpos técnicos y analistas que la usan cada semana — el fútbol se potencia ayudándose entre todos.</p>
             <div class="flex flex-wrap gap-2 mt-6">
               <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-400/90 border border-emerald-400/40 bg-emerald-400/10 px-2.5 py-1 rounded-full" data-i18n="founder.badge1">Formado en Boca y Argentinos</span>
@@ -1120,27 +1110,6 @@
             Gratis. Sin letra chica.
           </h2>
           <p class="text-zinc-400 text-lg font-body mt-5 text-pretty" data-i18n="pricing.sub">El análisis que necesitás para el partido del domingo está en el plan gratuito.</p>
-        </div>
-
-        <!-- Controles de precio: ciclo + moneda -->
-        <div class="flex flex-col items-center gap-4 mb-10 reveal">
-          <div class="inline-flex items-center bg-zinc-900 border border-zinc-800 rounded-full p-1" role="group" data-i18n-aria="pricing.cycleAria" aria-label="Ciclo de facturación">
-            <button type="button" data-billing="monthly" aria-pressed="true" class="bill-btn px-5 py-1.5 rounded-full text-sm font-semibold focus-ring">
-              <span data-i18n="pricing.monthly">Mensual</span>
-            </button>
-            <button type="button" data-billing="annual" aria-pressed="false" class="bill-btn px-5 py-1.5 rounded-full text-sm font-semibold focus-ring flex items-center gap-1.5">
-              <span data-i18n="pricing.annual">Anual</span>
-              <span class="text-[10px] tag-pro px-1.5 py-0.5 rounded-full uppercase" data-i18n="pro.twoFree">2 meses gratis</span>
-            </button>
-          </div>
-          <label class="flex items-center gap-2 text-xs text-zinc-500 font-body">
-            <span data-i18n="pricing.currency">Moneda</span>
-            <select id="currency-select" class="bg-zinc-900 border border-zinc-700 text-zinc-300 rounded-lg px-2 py-1 focus-ring cursor-pointer hover:border-zinc-600 transition-colors">
-              <option value="ARS">ARS $</option>
-              <option value="EUR">EUR €</option>
-              <option value="USD">USD $</option>
-            </select>
-          </label>
         </div>
 
         <div class="price-grid grid md:grid-cols-2 gap-6">
@@ -1173,10 +1142,8 @@
             <div class="absolute -top-3 left-6 tag-pro text-xs px-3 py-1 rounded-full uppercase" data-i18n="pro.badge">Prueba 15 días gratis</div>
             <h3 class="font-display text-2xl font-black text-white mb-1">Pro</h3>
             <div class="flex items-end gap-1.5 mb-1">
-              <span id="pro-price-amount" class="text-4xl font-display font-black gradient-text-green tabular-nums">AR$ 20.000</span>
-              <span id="pro-price-period" class="text-zinc-500 text-base font-body mb-1.5">/mes</span>
+              <span class="text-4xl font-display font-black gradient-text-green" data-i18n="pro.priceSoon">Próximamente</span>
             </div>
-            <p id="pro-annual-note" class="text-emerald-400 text-xs font-semibold mb-2 hidden"></p>
             <p class="text-zinc-500 text-sm mb-6 font-body" data-i18n="pro.tagline">15 días gratis, sin tarjeta. Después seguís con Pro para todo el trabajo de temporada.</p>
             <ul class="space-y-3 mb-8" data-i18n-aria="pro.ulAria" aria-label="Funcionalidades del plan Pro">
               <li class="flex items-center gap-3 text-sm text-zinc-300 font-body"><i class="fas fa-check text-emerald-400 w-4" aria-hidden="true"></i><span data-i18n="pro.f1">Todo lo del plan gratuito</span></li>
@@ -1186,7 +1153,7 @@
               <li class="flex items-center gap-3 text-sm text-zinc-300 font-body"><i class="fas fa-file-pdf text-emerald-400 w-4" aria-hidden="true"></i><span data-i18n="pro.f5">Reportes PDF (partido, jugador, scouting)</span></li>
               <li class="flex items-center gap-3 text-sm text-zinc-300 font-body"><i class="fas fa-wand-magic-sparkles text-emerald-400 w-4" aria-hidden="true"></i><span data-i18n="pro.f6">Generación de etiquetas e insights con IA (Gemini)</span></li>
               <li class="flex items-center gap-3 text-sm text-zinc-300 font-body"><i class="fas fa-chart-simple text-emerald-400 w-4" aria-hidden="true"></i><span data-i18n="pro.f8">Estadísticas por jugador y equipo + panel avanzado</span></li>
-              <li class="flex items-center gap-3 text-sm text-zinc-300 font-body"><i class="fas fa-futbol text-emerald-400 w-4" aria-hidden="true"></i><span data-i18n="pro.f7">LPF Play + planteles predefinidos</span></li>
+              <li class="flex items-center gap-3 text-sm text-zinc-300 font-body"><i class="fas fa-futbol text-emerald-400 w-4" aria-hidden="true"></i><span data-i18n="pro.f7">Planteles predefinidos por categoría</span></li>
             </ul>
             <a href="https://github.com/nacholiporace/goal-labs-releases/releases/latest"
                data-download
@@ -1271,7 +1238,7 @@
             </button>
             <div class="faq-content" id="faq-pro" role="region">
               <div class="px-6 pb-5">
-                <p class="text-zinc-400 text-sm leading-relaxed font-body" data-i18n-html="faq.a4">Pro desbloquea el trabajo de toda la temporada: biblioteca en la nube, análisis de temporada, reels por jugador con export 9:16, reportes PDF, insights con IA, panel de estadísticas avanzado y LPF Play. Para probarlo, descargá la app gratis y activá la prueba de <strong class="text-zinc-300">15 días sin tarjeta</strong> desde <strong class="text-zinc-300">Ver planes</strong> dentro de cualquier función Pro. Cuando termina la prueba, seguís usando todo el plan gratuito sin perder nada.</p>
+                <p class="text-zinc-400 text-sm leading-relaxed font-body" data-i18n-html="faq.a4">Pro desbloquea el trabajo de toda la temporada: biblioteca en la nube, análisis de temporada, reels por jugador con export 9:16, reportes PDF, insights con IA, panel de estadísticas avanzado y planteles predefinidos. Para probarlo, descargá la app gratis y activá la prueba de <strong class="text-zinc-300">15 días sin tarjeta</strong> desde <strong class="text-zinc-300">Ver planes</strong> dentro de cualquier función Pro. Cuando termina la prueba, seguís usando todo el plan gratuito sin perder nada.</p>
               </div>
             </div>
           </div>
@@ -1334,13 +1301,13 @@
         <span class="eyebrow" data-i18n="creators.eyebrow">Para creadores de contenido</span>
         <h2 id="creadores-heading" class="font-display text-white text-4xl md:text-6xl mt-4 mb-5 leading-[0.95] text-balance" data-i18n="creators.h2">¿Creás contenido de fútbol?</h2>
         <p class="text-zinc-400 text-base md:text-lg mb-8 font-body max-w-2xl mx-auto" data-i18n="creators.sub">Offsides polémicos, reels de jugadores, telestrator en vivo — Goal Labs es la herramienta real detrás de ese contenido. Te damos acceso Pro para probarlo y mostrarlo.</p>
-        <a href="mailto:nacholiporace@goallabs.com.ar?subject=Colaboraci%C3%B3n%20como%20creador%20de%20contenido"
+        <button type="button" data-contact-open data-contact-form="creator" data-contact-subject="Colaboración como creador de contenido"
            class="inline-flex items-center gap-3 border border-emerald-500/40 hover:border-emerald-400 text-emerald-300 hover:text-emerald-200 font-body font-semibold px-8 py-3.5 rounded-full text-sm transition-colors focus-ring"
            data-i18n-aria="creators.ctaAria"
            aria-label="Escribinos para colaborar como creador de contenido">
           <i class="fas fa-video text-sm" aria-hidden="true"></i>
           <span data-i18n="creators.cta">Sumate al kit de creadores</span>
-        </a>
+        </button>
       </div>
     </section>
 
@@ -1356,6 +1323,8 @@
         <span class="text-zinc-600 text-xs ml-3 font-mono" data-i18n="footer.madeIn">— Hecho en Argentina</span>
       </div>
       <div class="flex items-center gap-6 text-zinc-500 text-xs font-mono uppercase tracking-wider">
+        <a href="jugadores/" class="hover:text-cream transition-colors focus-ring" data-i18n="footer.players">Jugadores</a>
+        <a href="clubes/" class="hover:text-cream transition-colors focus-ring" data-i18n="footer.clubs">Clubes</a>
         <a href="partners/" class="hover:text-cream transition-colors focus-ring" data-i18n="footer.partners">Partners</a>
         <a href="creadores/" class="hover:text-cream transition-colors focus-ring" data-i18n="footer.creators">Creadores</a>
         <a href="analistas/" class="hover:text-cream transition-colors focus-ring" data-i18n="footer.analysts">Analistas</a>
@@ -1444,6 +1413,26 @@
       if (window.MotionPathPlugin) gsap.registerPlugin(MotionPathPlugin);
       document.documentElement.classList.add('anim-ready');
 
+      // Fix: si la URL llega con #hash (ej. desde partners/creadores/analistas → index.html#funcionalidades)
+      // o si el navegador restaura el scroll de una sesión anterior al recargar, ese salto/restauración
+      // nativa corre en paralelo a la inicialización de Lenis (que arranca su propio scroll interno en 0)
+      // y a los pines de ScrollTrigger (que calculan mal su posición si no arrancan desde arriba). Es una
+      // carrera: a veces gana el navegador y se ve bien, a veces gana Lenis y queda todo superpuesto/roto.
+      // Forzamos scroll a 0 ahora (eliminamos la carrera) y reproducimos el salto al ancla real recién al
+      // final, cuando ScrollTrigger ya recalculó todo con el layout estable.
+      const pendingHash = location.hash;
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);
+      function scrollToPendingHash() {
+        if (!pendingHash || pendingHash.length < 2) return;
+        const target = document.querySelector(pendingHash);
+        if (!target) return;
+        requestAnimationFrame(() => {
+          if (lenis) lenis.scrollTo(target, { offset: -70 });
+          else target.scrollIntoView();
+        });
+      }
+
       // Smooth scroll (Lenis) sincronizado con ScrollTrigger
       let lenis = null;
       if (window.Lenis) {
@@ -1487,7 +1476,8 @@
       const preloaderSeen = (() => {
         try { return sessionStorage.getItem('gl_preloader_seen') === '1'; } catch (e) { return false; }
       })();
-      if (preloader && !preloaderSeen) {
+      const showingPreloader = !!(preloader && !preloaderSeen);
+      if (showingPreloader) {
         try { sessionStorage.setItem('gl_preloader_seen', '1'); } catch (e) {}
         const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
         document.body.style.overflow = 'hidden';
@@ -1504,9 +1494,9 @@
             gsap.to(preloader, { autoAlpha: 0, duration: 0.8, ease: "power2.inOut" });
             document.body.style.overflow = '';
             document.body.style.paddingRight = '';
-            heroTl.play(); 
+            heroTl.play();
             // Fix layout bug: refresh ScrollTrigger after hero unhides
-            setTimeout(() => { ScrollTrigger.refresh(); }, 50);
+            setTimeout(() => { ScrollTrigger.refresh(); scrollToPendingHash(); }, 50);
           }
         });
 
@@ -1875,6 +1865,7 @@
       })();
 
       ScrollTrigger.refresh();
+      if (!showingPreloader) scrollToPendingHash();
     })();
 
     // ---- Funcionalidades: Mobile Carousel (scroll-snap nativo, sin GSAP) ----
@@ -2007,12 +1998,13 @@
         "preloader.line1": `El estándar profesional...`,
         "preloader.line2": `...ahora al alcance de todos.`,
         "nav.features": `Funcionalidades`,
-        "nav.compare": `Vs. alternativas`,
+        "nav.compare": `Por qué Goal Labs`,
         "nav.pricing": `Precios`,
         "nav.faq": `FAQ`,
         "nav.langLabel": `Idioma`,
         "nav.downloadFree": `Descargar gratis`,
         "nav.downloadFreeAria": `Descargar Goal Labs gratis para Windows`,
+        "nav.menuToggleAria": `Abrir menú`,
         "hero.badge": `Gratis · Offline · Solo para Windows`,
         "hero.h1": `Analizá tu próximo partido.<br><span class="gradient-text serif-italic">Gratis.</span>`,
         "hero.sub": `Software de videoanálisis táctico.`,
@@ -2037,36 +2029,25 @@
         "fv.5.num": `05`, "fv.5.t": `Exportás el análisis`, "fv.5.badge": `Pro`,
         "fv.5.d": `Cortá clips por patrón táctico, armá playlists de acciones y exportá en CSV o FCP XML para Premiere y DaVinci. Del taggeo al briefing técnico sin salir de la app.`,
         "fv.6.num": `06`, "fv.6.t": `Tu temporada, ordenada`, "fv.6.badge": `Pro`,
-        "fv.6.d": `Biblioteca en la nube, análisis de temporada, reportes PDF y LPF Play con planteles. Todo sincronizado — y 100% offline cuando no tenés señal.`,
-        "flow.h2": `Del partido al <span class="gradient-text-green">reel</span> en tres pasos.`,
-        "flow.sub": `Del video crudo a un clip listo para redes — sin salir de la app.`,
-        "flow.olAria": `Cómo funciona Goal Labs en tres pasos`,
-        "flow.s1.t": `Taggeás el partido`,
-        "flow.s1.d": `Una tecla por evento, sin pausar el video. Goles, tiros, pérdidas, offsides — todo queda registrado con su minuto.`,
-        "flow.s2.t": `Elegís los momentos`,
-        "flow.s2.d": `Revisá clip por clip con atajos de teclado y armá el reel de cada jugador con sus mejores acciones de la temporada.`,
-        "flow.s3.t": `Exportás para redes`,
-        "flow.s3.d": `9:16 vertical con seguimiento de la jugada o 16:9 clásico. Listo para Instagram, TikTok o el grupo del club.`,
-        "compare.h2": `Alternativa gratuita a Nacsport y Hudl.`,
-        "compare.sub": `Las mismas herramientas de análisis, sin la licencia de EUR 1.000/año.`,
+        "fv.6.d": `Biblioteca en la nube, análisis de temporada, reportes PDF y planteles predefinidos. Todo sincronizado — y 100% offline cuando no tenés señal.`,
+        "compare.h2": `La alternativa gratuita al software tradicional de videoanálisis.`,
+        "compare.sub": `Las mismas herramientas de análisis, sin licencias de cientos o miles de dólares al año.`,
         "compare.criterion": `Criterio`,
+        "compare.col.trad": `Software tradicional`,
         "compare.row.price": `Precio`,
-        "compare.price.nacsport": `EUR 700–2.000/año`,
-        "compare.price.hudl": `USD 2.000+/año`,
+        "compare.trad.price": `Licencias de cientos a miles de USD/año`,
         "compare.row.language": `Idioma`,
         "compare.lang.gl": `Español nativo`,
-        "compare.lang.nacsport": `Traducción`,
-        "compare.lang.hudl": `Inglés`,
+        "compare.trad.lang": `Inglés o traducción parcial`,
         "compare.row.offside": `Offside con perspectiva`,
-        "compare.row.ai": `IA integrada`,
-        "compare.partial": `Parcial`,
+        "compare.trad.offside": `Poco común`,
         "compare.row.offline": `Funciona offline`,
+        "compare.trad.offline": `Según el plan`,
         "compare.row.reels": `Reels verticales 9:16 (redes)`,
-        "compare.row.lpf": `Import directo de la liga (LPF)`,
+        "compare.trad.reels": `Requiere editor externo`,
         "compare.row.curve": `Curva de aprendizaje`,
         "compare.curve.gl": `Baja`,
-        "compare.curve.nacsport": `Alta`,
-        "compare.curve.hudl": `Media`,
+        "compare.trad.curve": `Formación previa habitual`,
         "common.yes": `Sí`,
         "common.no": `No`,
         "pricing.h2": `Gratis. Sin letra chica.`,
@@ -2096,7 +2077,7 @@
         "pro.f5": `Reportes PDF (partido, jugador, scouting)`,
         "pro.f6": `Generación de etiquetas e insights con IA (Gemini)`,
         "pro.f8": `Estadísticas por jugador y equipo + panel avanzado`,
-        "pro.f7": `LPF Play + planteles predefinidos`,
+        "pro.f7": `Planteles predefinidos por categoría`,
         "pro.cta": `Probar Pro gratis`,
         "pro.ctaAria": `Descargar Goal Labs y probar Pro gratis 15 días`,
         "pro.note": `Activá la prueba desde <strong class="text-zinc-500">Ver planes</strong> dentro de la app.`,
@@ -2111,7 +2092,7 @@
         "faq.q3": `¿Es realmente gratis? ¿No tiene fecha de vencimiento?`,
         "faq.a3": `El core es gratis. No es una demo de 14 días ni una versión recortada. Podés tagguear partidos, usar el telestrator, verificar offsides y exportar clips sin pagar un peso — hoy, en seis meses, y en dos años. El plan Pro suma features adicionales (temporada, nube, reels, PDF), pero nunca te quita lo que ya tenés.`,
         "faq.q4": `¿Qué es Goal Labs Pro y cómo pruebo los 15 días?`,
-        "faq.a4": `Pro desbloquea el trabajo de toda la temporada: biblioteca en la nube, análisis de temporada, reels por jugador con export 9:16, reportes PDF, insights con IA, panel de estadísticas avanzado y LPF Play. Para probarlo, descargá la app gratis y activá la prueba de <strong class="text-zinc-300">15 días sin tarjeta</strong> desde <strong class="text-zinc-300">Ver planes</strong> dentro de cualquier función Pro. Cuando termina la prueba, seguís usando todo el plan gratuito sin perder nada.`,
+        "faq.a4": `Pro desbloquea el trabajo de toda la temporada: biblioteca en la nube, análisis de temporada, reels por jugador con export 9:16, reportes PDF, insights con IA, panel de estadísticas avanzado y planteles predefinidos. Para probarlo, descargá la app gratis y activá la prueba de <strong class="text-zinc-300">15 días sin tarjeta</strong> desde <strong class="text-zinc-300">Ver planes</strong> dentro de cualquier función Pro. Cuando termina la prueba, seguís usando todo el plan gratuito sin perder nada.`,
         "faq.q5": `¿Cuánto tiempo lleva aprender a usarlo?`,
         "faq.a5": `Tu primer partido lo analizás el mismo día que instalás la app. Configurás los hotkeys en 2 minutos, cargás el video, y arrancás. No hay formación previa. No hay manual de 200 páginas. Si sabés lo que es un corner, sabés usar Goal Labs.`,
         "faq.q6": `¿Qué pasa con mis datos si no tengo internet?`,
@@ -2129,16 +2110,28 @@
         "creators.ctaAria": `Escribinos para colaborar como creador de contenido`,
         "founder.eyebrow": `Quién está detrás de Goal Labs`,
         "founder.h2": `Hecho por un jugador, para toda la comunidad del fútbol.`,
-        "founder.p1": `Soy Ignacio Liporace. Me formé en las inferiores de Boca Juniors y Argentinos Juniors, y después jugué profesionalmente en varios países, del ascenso a primera división en Europa. Ese recorrido me confirmó algo que como argentinos ya sabemos: en cada división, de cada país del mundo, hay un argentino jugando. Nuestra cultura futbolística se exporta sola — y esa misma comunidad necesita ayudarse entre sí, no solo el que puede pagar una licencia en dólares.`,
-        "founder.p2": `Soy Licenciado en Educación Física y Deportes, con una Diplomatura en Coaching Deportivo, y hoy curso la Licencia de Entrenador en la Escuela Menotti Maradona y la Licencia PRO de Director Deportivo, avalada por AFA y certificada por la UNTREF.`,
+        "founder.p1": `Soy Ignacio Liporace. Me formé en las inferiores de Boca Juniors y Argentinos Juniors, y después jugué profesionalmente en varios países, del ascenso a primera división en Europa. Esa experiencia me confirmó algo simple: el fútbol necesita ayudarse entre sí, no solo el que puede pagar una licencia en dólares.`,
         "founder.p3": `En cada período de traspasos editaba yo mismo mis jugadas con los programas de siempre, y ahí entendí de primera mano lo que le faltaba a esas herramientas para el fútbol real — el de todas las divisiones, no solo el de arriba. Goal Labs es esa herramienta: pensada para jugadores, analistas, cuerpos técnicos e instituciones que quieren un análisis profesional sin que el precio decida quién puede entrenar mejor. La construimos junto a los cuerpos técnicos y analistas que la usan cada semana — el fútbol se potencia ayudándose entre todos.`,
         "founder.badge1": `Formado en Boca y Argentinos`,
         "founder.badge2": `Jugador profesional, del ascenso a primera división europea`,
         "founder.badge3": `Lic. en Educación Física y Deportes`,
         "founder.badge4": `Cursando Director Deportivo PRO (AFA/UNTREF)`,
+        "footer.players": `Jugadores`,
+        "footer.clubs": `Clubes`,
         "footer.partners": `Partners`,
         "footer.creators": `Creadores`,
-        "footer.analysts": `Analistas`
+        "footer.analysts": `Analistas`,
+        "aud.eyebrow": `Para cada rol del cuerpo técnico`,
+        "aud.h2": `Hecho para tu lugar en el juego.`,
+        "aud.c1.t": `Jugador`,
+        "aud.c1.d": `Armá tus reels y mostrá tu nivel con seguimiento de la jugada.`,
+        "aud.c2.t": `Analista o DT`,
+        "aud.c2.d": `El flujo completo: tagging, telestrator e informes para el cuerpo técnico.`,
+        "aud.c3.t": `Club o institución`,
+        "aud.c3.d": `Estandarizá el análisis en todas tus categorías, de Primera a las inferiores.`,
+        "aud.c4.t": `Creador de contenido`,
+        "aud.c4.d": `Contenido de fútbol táctico para tu audiencia, con acceso Pro.`,
+        "aud.go": `Ver más →`
       },
       en: {
         "meta.title": `Goal Labs — Free Tactical Football Analysis | Offline Software for Windows`,
@@ -2147,12 +2140,13 @@
         "preloader.line1": `The professional standard...`,
         "preloader.line2": `...now within everyone's reach.`,
         "nav.features": `Features`,
-        "nav.compare": `Vs. alternatives`,
+        "nav.compare": `Why Goal Labs`,
         "nav.pricing": `Pricing`,
         "nav.faq": `FAQ`,
         "nav.langLabel": `Language`,
         "nav.downloadFree": `Download free`,
         "nav.downloadFreeAria": `Download Goal Labs free for Windows`,
+        "nav.menuToggleAria": `Open menu`,
         "hero.badge": `Free · Offline · Windows only`,
         "hero.h1": `Analyze your next match.<br><span class="gradient-text serif-italic">Free.</span>`,
         "hero.sub": `Tactical video analysis software.`,
@@ -2177,36 +2171,25 @@
         "fv.5.num": `05`, "fv.5.t": `Export the analysis`, "fv.5.badge": `Pro`,
         "fv.5.d": `Cut clips by tactical pattern, build action playlists and export to CSV or FCP XML for Premiere and DaVinci. From tagging to technical briefing without leaving the app.`,
         "fv.6.num": `06`, "fv.6.t": `Your season, organized`, "fv.6.badge": `Pro`,
-        "fv.6.d": `Cloud library, season analysis, PDF reports and LPF Play with squads. All synced — and 100% offline when you have no signal.`,
-        "flow.h2": `From match to <span class="gradient-text-green">reel</span> in three steps.`,
-        "flow.sub": `From raw footage to a social-ready clip — without leaving the app.`,
-        "flow.olAria": `How Goal Labs works in three steps`,
-        "flow.s1.t": `Tag the match`,
-        "flow.s1.d": `One key per event, without pausing the video. Goals, shots, turnovers, offsides — all logged with their minute.`,
-        "flow.s2.t": `Pick the moments`,
-        "flow.s2.d": `Review clip by clip with keyboard shortcuts and build each player's reel with their best actions of the season.`,
-        "flow.s3.t": `Export for social`,
-        "flow.s3.d": `Vertical 9:16 with action tracking or classic 16:9. Ready for Instagram, TikTok or the club group chat.`,
-        "compare.h2": `A free alternative to Nacsport and Hudl.`,
-        "compare.sub": `The same analysis tools, without the €1,000/year license.`,
+        "fv.6.d": `Cloud library, season analysis, PDF reports and preset squads. All synced — and 100% offline when you have no signal.`,
+        "compare.h2": `A free alternative to traditional video-analysis software.`,
+        "compare.sub": `The same analysis tools, without licenses that cost hundreds or thousands a year.`,
         "compare.criterion": `Criteria`,
+        "compare.col.trad": `Traditional software`,
         "compare.row.price": `Price`,
-        "compare.price.nacsport": `€700–2,000/yr`,
-        "compare.price.hudl": `USD 2,000+/yr`,
+        "compare.trad.price": `Licenses costing hundreds to thousands USD/yr`,
         "compare.row.language": `Language`,
-        "compare.lang.gl": `Native Spanish`,
-        "compare.lang.nacsport": `Translation`,
-        "compare.lang.hudl": `English`,
+        "compare.lang.gl": `In your language (EN/ES/IT)`,
+        "compare.trad.lang": `English, or partial translation`,
         "compare.row.offside": `Offside with perspective`,
-        "compare.row.ai": `Built-in AI`,
-        "compare.partial": `Partial`,
+        "compare.trad.offside": `Uncommon`,
         "compare.row.offline": `Works offline`,
+        "compare.trad.offline": `Depends on the plan`,
         "compare.row.reels": `Vertical 9:16 reels (social)`,
-        "compare.row.lpf": `Direct league import (LPF)`,
+        "compare.trad.reels": `Needs an external editor`,
         "compare.row.curve": `Learning curve`,
         "compare.curve.gl": `Low`,
-        "compare.curve.nacsport": `High`,
-        "compare.curve.hudl": `Medium`,
+        "compare.trad.curve": `Prior training usually required`,
         "common.yes": `Yes`,
         "common.no": `No`,
         "pricing.h2": `Free. No fine print.`,
@@ -2236,7 +2219,7 @@
         "pro.f5": `PDF reports (match, player, scouting)`,
         "pro.f6": `AI tag generation & insights (Gemini)`,
         "pro.f8": `Per-player and team stats + advanced panel`,
-        "pro.f7": `LPF Play + preset squads`,
+        "pro.f7": `Preset squads by category`,
         "pro.cta": `Try Pro free`,
         "pro.ctaAria": `Download Goal Labs and try Pro free for 15 days`,
         "pro.note": `Activate the trial from <strong class="text-zinc-500">View plans</strong> inside the app.`,
@@ -2251,7 +2234,7 @@
         "faq.q3": `Is it really free? No expiry date?`,
         "faq.a3": `The core is free forever. It's not a 14-day demo or a cut-down version. You can tag matches, use the telestrator, check offsides and export clips without paying a cent — today, in six months, and in two years. The Pro plan adds extra features (season, cloud, reels, PDF), but it never takes away what you already have.`,
         "faq.q4": `What is Goal Labs Pro and how do I try the 15 days?`,
-        "faq.a4": `Pro unlocks the whole-season workflow: cloud library, season analysis, per-player reels with 9:16 export, PDF reports, AI insights, an advanced stats panel and LPF Play. To try it, download the app for free and activate the <strong class="text-zinc-300">15-day trial, no card</strong> from <strong class="text-zinc-300">View plans</strong> inside any Pro feature. When the trial ends, you keep using the entire free plan without losing anything.`,
+        "faq.a4": `Pro unlocks the whole-season workflow: cloud library, season analysis, per-player reels with 9:16 export, PDF reports, AI insights, an advanced stats panel and preset squads. To try it, download the app for free and activate the <strong class="text-zinc-300">15-day trial, no card</strong> from <strong class="text-zinc-300">View plans</strong> inside any Pro feature. When the trial ends, you keep using the entire free plan without losing anything.`,
         "faq.q5": `How long does it take to learn?`,
         "faq.a5": `You'll analyze your first match the same day you install the app. Set up the hotkeys in 2 minutes, load the video, and go. No prior training. No 200-page manual. If you know what a corner is, you know how to use Goal Labs.`,
         "faq.q6": `What happens to my data with no internet?`,
@@ -2269,30 +2252,43 @@
         "creators.ctaAria": `Email us to collaborate as a content creator`,
         "founder.eyebrow": `Who's behind Goal Labs`,
         "founder.h2": `Built by a player, for the whole football community.`,
-        "founder.p1": `I'm Ignacio Liporace. I came up through the youth academies of Boca Juniors and Argentinos Juniors, then played professionally in several countries — from the lower divisions up to Europe's top flight. That journey showed me something football makes obvious once you've lived it: wherever you go, whatever the division, there's the same need — good analysis shouldn't depend on what a club can afford.`,
-        "founder.p2": `I hold a degree in Physical Education and Sports Science, a postgraduate diploma in Sports Coaching, and I'm currently completing my coaching license at the Menotti Maradona School and the PRO Sporting Director license backed by AFA and certified by UNTREF.`,
+        "founder.p1": `I'm Ignacio Liporace. I came up through the youth academies of Boca Juniors and Argentinos Juniors, then played professionally in several countries — from the lower divisions up to Europe's top flight. That experience taught me something simple: football needs to help itself, not just whoever can afford a license.`,
         "founder.p3": `Every transfer window, I edited my own match highlights myself, using the same tools everyone does — and that's where I saw firsthand what was missing for football, at every level, not just at the top. Goal Labs is that tool: built for players, analysts, coaching staffs, and institutions who want professional analysis without price deciding who trains better. We build it together with the coaching staffs and analysts who use it every week — football gets better when we help each other.`,
         "founder.badge1": `Trained at Boca & Argentinos`,
         "founder.badge2": `Professional player, lower divisions to Europe's top flight`,
         "founder.badge3": `B.Sc. Physical Education & Sports Science`,
         "founder.badge4": `Completing PRO Sporting Director license (AFA/UNTREF)`,
+        "footer.players": `Players`,
+        "footer.clubs": `Clubs`,
         "footer.partners": `Partners`,
         "footer.creators": `Creators`,
-        "footer.analysts": `Analysts`
+        "footer.analysts": `Analysts`,
+        "aud.eyebrow": `For every role on the coaching staff`,
+        "aud.h2": `Built for your place in the game.`,
+        "aud.c1.t": `Player`,
+        "aud.c1.d": `Build your reels and show your level, with play tracking.`,
+        "aud.c2.t": `Analyst or Coach`,
+        "aud.c2.d": `The full workflow: tagging, telestrator and reports for the coaching staff.`,
+        "aud.c3.t": `Club or institution`,
+        "aud.c3.d": `Standardize analysis across every category, from the first team to the youth ranks.`,
+        "aud.c4.t": `Content creator`,
+        "aud.c4.d": `Tactical football content for your audience, with Pro access.`,
+        "aud.go": `See more →`
       },
       it: {
         "meta.title": `Goal Labs — Analisi Tattica di Calcio Gratis | Software Offline per Windows`,
-        "meta.description": `Software di videoanalisi tattica per il calcio. Tagga le partite con hotkey, usa il telestrator, verifica i fuorigioco con prospettiva. Gratis. Offline. Per Windows.`,
+        "meta.description": `Software di videoanalisi tattica per il calcio italiano, dalla Serie D al settore giovanile. Tagga le partite con hotkey, usa il telestrator, verifica i fuorigioco con prospettiva. Gratis. Offline. Per Windows.`,
         "skip": `Vai al contenuto principale`,
         "preloader.line1": `Lo standard professionale...`,
         "preloader.line2": `...ora alla portata di tutti.`,
         "nav.features": `Funzionalità`,
-        "nav.compare": `Vs. alternative`,
+        "nav.compare": `Perché Goal Labs`,
         "nav.pricing": `Prezzi`,
         "nav.faq": `FAQ`,
         "nav.langLabel": `Lingua`,
         "nav.downloadFree": `Scarica gratis`,
         "nav.downloadFreeAria": `Scarica Goal Labs gratis per Windows`,
+        "nav.menuToggleAria": `Apri il menu`,
         "hero.badge": `Gratis · Offline · Solo per Windows`,
         "hero.h1": `Analizza la tua prossima partita.<br><span class="gradient-text serif-italic">Gratis.</span>`,
         "hero.sub": `Software di videoanalisi tattica.`,
@@ -2317,36 +2313,25 @@
         "fv.5.num": `05`, "fv.5.t": `Esporti l'analisi`, "fv.5.badge": `Pro`,
         "fv.5.d": `Taglia clip per pattern tattico, costruisci playlist di azioni ed esporta in CSV o FCP XML per Premiere e DaVinci. Dal tag al briefing tecnico senza uscire dall'app.`,
         "fv.6.num": `06`, "fv.6.t": `La tua stagione, organizzata`, "fv.6.badge": `Pro`,
-        "fv.6.d": `Libreria cloud, analisi di stagione, report PDF e LPF Play con rose. Tutto sincronizzato — e 100% offline senza segnale.`,
-        "flow.h2": `Dalla partita al <span class="gradient-text-green">reel</span> in tre passi.`,
-        "flow.sub": `Dal video grezzo a una clip pronta per i social — senza uscire dall'app.`,
-        "flow.olAria": `Come funziona Goal Labs in tre passi`,
-        "flow.s1.t": `Tagga la partita`,
-        "flow.s1.d": `Un tasto per evento, senza mettere in pausa il video. Gol, tiri, palle perse, fuorigioco — tutto registrato con il suo minuto.`,
-        "flow.s2.t": `Scegli i momenti`,
-        "flow.s2.d": `Rivedi clip per clip con le scorciatoie da tastiera e crea il reel di ogni giocatore con le sue azioni migliori della stagione.`,
-        "flow.s3.t": `Esporta per i social`,
-        "flow.s3.d": `9:16 verticale con tracking dell'azione o 16:9 classico. Pronto per Instagram, TikTok o la chat del club.`,
-        "compare.h2": `Un'alternativa gratuita a Nacsport e Hudl.`,
-        "compare.sub": `Gli stessi strumenti di analisi, senza la licenza da 1.000 €/anno.`,
+        "fv.6.d": `Libreria cloud, analisi di stagione, report PDF e rose predefinite. Tutto sincronizzato — e 100% offline senza segnale.`,
+        "compare.h2": `L'alternativa gratuita al software tradizionale di videoanalisi.`,
+        "compare.sub": `Gli stessi strumenti di analisi, senza licenze da centinaia o migliaia di dollari all'anno.`,
         "compare.criterion": `Criterio`,
+        "compare.col.trad": `Software tradizionale`,
         "compare.row.price": `Prezzo`,
-        "compare.price.nacsport": `700–2.000 €/anno`,
-        "compare.price.hudl": `USD 2.000+/anno`,
+        "compare.trad.price": `Licenze da centinaia a migliaia di USD/anno`,
         "compare.row.language": `Lingua`,
-        "compare.lang.gl": `Spagnolo nativo`,
-        "compare.lang.nacsport": `Traduzione`,
-        "compare.lang.hudl": `Inglese`,
+        "compare.lang.gl": `In italiano`,
+        "compare.trad.lang": `Inglese o traduzione parziale`,
         "compare.row.offside": `Fuorigioco con prospettiva`,
-        "compare.row.ai": `IA integrata`,
-        "compare.partial": `Parziale`,
+        "compare.trad.offside": `Poco comune`,
         "compare.row.offline": `Funziona offline`,
+        "compare.trad.offline": `Dipende dal piano`,
         "compare.row.reels": `Reel verticali 9:16 (social)`,
-        "compare.row.lpf": `Import diretto dalla lega (LPF)`,
+        "compare.trad.reels": `Richiede un editor esterno`,
         "compare.row.curve": `Curva di apprendimento`,
         "compare.curve.gl": `Bassa`,
-        "compare.curve.nacsport": `Alta`,
-        "compare.curve.hudl": `Media`,
+        "compare.trad.curve": `Richiede formazione preliminare`,
         "common.yes": `Sì`,
         "common.no": `No`,
         "pricing.h2": `Gratis. Senza sorprese.`,
@@ -2376,7 +2361,7 @@
         "pro.f5": `Report PDF (partita, giocatore, scouting)`,
         "pro.f6": `Generazione tag e insights con IA (Gemini)`,
         "pro.f8": `Statistiche per giocatore e squadra + pannello avanzato`,
-        "pro.f7": `LPF Play + rose predefinite`,
+        "pro.f7": `Rose predefinite per categoria`,
         "pro.cta": `Prova Pro gratis`,
         "pro.ctaAria": `Scarica Goal Labs e prova Pro gratis 15 giorni`,
         "pro.note": `Attiva la prova da <strong class="text-zinc-500">Vedi piani</strong> all'interno dell'app.`,
@@ -2391,7 +2376,7 @@
         "faq.q3": `È davvero gratis? Non ha una data di scadenza?`,
         "faq.a3": `Il nucleo è gratis per sempre. Non è una demo di 14 giorni né una versione ridotta. Puoi taggare le partite, usare il telestrator, verificare i fuorigioco ed esportare clip senza pagare un centesimo — oggi, tra sei mesi e tra due anni. Il piano Pro aggiunge funzioni extra (stagione, cloud, reel, PDF), ma non ti toglie mai ciò che hai già.`,
         "faq.q4": `Cos'è Goal Labs Pro e come provo i 15 giorni?`,
-        "faq.a4": `Pro sblocca il lavoro di tutta la stagione: libreria nel cloud, analisi della stagione, reel per giocatore con export 9:16, report PDF, insights con IA, pannello statistiche avanzato e LPF Play. Per provarlo, scarica l'app gratis e attiva la <strong class="text-zinc-300">prova di 15 giorni senza carta</strong> da <strong class="text-zinc-300">Vedi piani</strong> all'interno di qualsiasi funzione Pro. Al termine della prova continui a usare tutto il piano gratuito senza perdere nulla.`,
+        "faq.a4": `Pro sblocca il lavoro di tutta la stagione: libreria nel cloud, analisi della stagione, reel per giocatore con export 9:16, report PDF, insights con IA, pannello statistiche avanzato e rose predefinite. Per provarlo, scarica l'app gratis e attiva la <strong class="text-zinc-300">prova di 15 giorni senza carta</strong> da <strong class="text-zinc-300">Vedi piani</strong> all'interno di qualsiasi funzione Pro. Al termine della prova continui a usare tutto il piano gratuito senza perdere nulla.`,
         "faq.q5": `Quanto tempo ci vuole per imparare a usarlo?`,
         "faq.a5": `Analizzi la tua prima partita lo stesso giorno in cui installi l'app. Imposti le hotkey in 2 minuti, carichi il video e parti. Nessuna formazione preliminare. Nessun manuale di 200 pagine. Se sai cos'è un corner, sai usare Goal Labs.`,
         "faq.q6": `Cosa succede ai miei dati senza internet?`,
@@ -2409,33 +2394,36 @@
         "creators.ctaAria": `Scrivici per collaborare come creator di contenuti`,
         "founder.eyebrow": `Chi c'è dietro Goal Labs`,
         "founder.h2": `Fatto da un giocatore, per tutta la comunità del calcio.`,
-        "founder.p1": `Sono Ignacio Liporace. Mi sono formato nei settori giovanili di Boca Juniors e Argentinos Juniors, poi ho giocato professionalmente in diversi paesi — dalle serie minori fino alla massima serie in Europa. Quel percorso mi ha mostrato una cosa che il calcio rende evidente quando lo vivi davvero: ovunque tu vada, in qualsiasi categoria, c'è la stessa necessità — un'analisi seria non dovrebbe dipendere da quanto può spendere un club.`,
-        "founder.p2": `Sono laureato in Educazione Fisica e Scienze dello Sport, ho un master in Coaching Sportivo, e sto completando la licenza da allenatore alla Escuela Menotti Maradona e la licenza PRO da Direttore Sportivo, avallata dall'AFA e certificata dall'UNTREF.`,
+        "founder.p1": `Sono Ignacio Liporace. Mi sono formato nei settori giovanili di Boca Juniors e Argentinos Juniors, poi ho giocato professionalmente in diversi paesi — dalle serie minori fino alla massima serie in Europa. Quell'esperienza mi ha insegnato una cosa semplice: il calcio ha bisogno di aiutarsi da solo, non solo chi può permettersi una licenza.`,
         "founder.p3": `A ogni finestra di mercato montavo da solo i miei momenti migliori, con gli stessi strumenti che usano tutti — ed è lì che ho capito in prima persona cosa mancava al calcio, a ogni livello, non solo ai vertici. Goal Labs è quello strumento: pensato per giocatori, analisti, staff tecnici e istituzioni che vogliono un'analisi professionale senza che il prezzo decida chi si allena meglio. Lo costruiamo insieme agli staff tecnici e agli analisti che lo usano ogni settimana — il calcio migliora quando ci aiutiamo a vicenda.`,
         "founder.badge1": `Cresciuto a Boca e Argentinos`,
         "founder.badge2": `Calciatore professionista, dalle serie minori alla massima serie europea`,
         "founder.badge3": `Laurea in Educazione Fisica e Scienze dello Sport`,
         "founder.badge4": `Sta completando la licenza PRO da Direttore Sportivo (AFA/UNTREF)`,
+        "footer.players": `Giocatori`,
+        "footer.clubs": `Club`,
         "footer.partners": `Partners`,
         "footer.creators": `Creator`,
-        "footer.analysts": `Analisti`
+        "footer.analysts": `Analisti`,
+        "aud.eyebrow": `Per ogni ruolo dello staff tecnico`,
+        "aud.h2": `Fatto per il tuo posto nel gioco.`,
+        "aud.c1.t": `Giocatore`,
+        "aud.c1.d": `Crea i tuoi reel e mostra il tuo livello, con tracking dell'azione.`,
+        "aud.c2.t": `Analista o allenatore`,
+        "aud.c2.d": `Il flusso completo: tagging, telestrator e report per lo staff tecnico.`,
+        "aud.c3.t": `Club o istituzione`,
+        "aud.c3.d": `Standardizza l'analisi in tutte le categorie, dalla prima squadra al settore giovanile.`,
+        "aud.c4.t": `Creator di contenuti`,
+        "aud.c4.d": `Contenuti tattici di calcio per il tuo pubblico, con accesso Pro.`,
+        "aud.go": `Scopri di più →`
       }
     };
 
     // Extra: precio Pro mensual + demo de offside (se fusionan en I18N para mantener un solo origen)
     const EXTRA = {
       es: {
-        "pro.perMonth": `/mes`,
-        "pro.perYear": `/año`,
-        "pro.twoFree": `2 meses gratis`,
-        "pricing.monthly": `Mensual`,
-        "pricing.annual": `Anual`,
-        "pricing.currency": `Moneda`,
-        "pricing.cycleAria": `Ciclo de facturación`,
+        "pro.priceSoon": `Próximamente`,
         "pro.tagline": `15 días gratis, sin tarjeta. Después seguís con Pro para todo el trabajo de temporada.`,
-        "ctx.h2": `Hecho para el fútbol de verdad.`,
-        "ctx.sub": `Del potrero al club: el mismo análisis profesional, sin la licencia profesional.`,
-        "ctx.alt": `Notebook con Goal Labs analizando un partido al borde de la cancha de un club argentino al atardecer`,
         "story.eyebrow": `El problema, resuelto`,
         "story.h2": `Cada jugada se vuelve un dato.`,
         "story.sub": `Antes: 4 horas en Premiere o una licencia impagable. Ahora: una tecla y queda registrado. Scrolleá la jugada.`,
@@ -2445,17 +2433,8 @@
         "story.svgAria": `Pizarra táctica: la secuencia de pases del gol de Di María en la final de Qatar 2022, registrada como datos.`
       },
       en: {
-        "pro.perMonth": `/mo`,
-        "pro.perYear": `/yr`,
-        "pro.twoFree": `2 months free`,
-        "pricing.monthly": `Monthly`,
-        "pricing.annual": `Annual`,
-        "pricing.currency": `Currency`,
-        "pricing.cycleAria": `Billing cycle`,
+        "pro.priceSoon": `Coming soon`,
         "pro.tagline": `15 days free, no card. After that you keep Pro for the whole season's work.`,
-        "ctx.h2": `Built for real football.`,
-        "ctx.sub": `From the local pitch to the club: the same pro analysis, without the pro license.`,
-        "ctx.alt": `Laptop running Goal Labs analyzing a match at the edge of an Argentine club pitch at dusk`,
         "story.eyebrow": `The problem, solved`,
         "story.h2": `Every play becomes data.`,
         "story.sub": `Before: 4 hours in Premiere or a license you can't afford. Now: one key and it's logged. Scroll the play.`,
@@ -2465,17 +2444,8 @@
         "story.svgAria": `Tactical board: the passing sequence of Di María's goal in the Qatar 2022 final, logged as data.`
       },
       it: {
-        "pro.perMonth": `/mese`,
-        "pro.perYear": `/anno`,
-        "pro.twoFree": `2 mesi gratis`,
-        "pricing.monthly": `Mensile`,
-        "pricing.annual": `Annuale`,
-        "pricing.currency": `Valuta`,
-        "pricing.cycleAria": `Ciclo di fatturazione`,
+        "pro.priceSoon": `Prossimamente`,
         "pro.tagline": `15 giorni gratis, senza carta. Poi continui con Pro per tutto il lavoro della stagione.`,
-        "ctx.h2": `Fatto per il calcio vero.`,
-        "ctx.sub": `Dal campetto al club: la stessa analisi professionale, senza la licenza professionale.`,
-        "ctx.alt": `Laptop con Goal Labs che analizza una partita a bordo campo di un club argentino al tramonto`,
         "story.eyebrow": `Il problema, risolto`,
         "story.h2": `Ogni azione diventa un dato.`,
         "story.sub": `Prima: 4 ore in Premiere o una licenza impagabile. Ora: un tasto e resta registrato. Scorri l'azione.`,
@@ -2555,80 +2525,6 @@
       });
     }
 
-    // ---- Precio Pro: moneda (ARS/EUR/USD) + ciclo (mensual/anual, 2 meses gratis) ----
-    const PRICES = {
-      ARS: { monthly: 'AR$ 20.000', annual: 'AR$ 200.000', perMo: 'AR$ 16.667' },
-      EUR: { monthly: '€15',        annual: '€150',         perMo: '€12,50' },
-      USD: { monthly: 'US$ 15',     annual: 'US$ 150',      perMo: 'US$ 12.50' }
-    };
-    const CUR_KEY = 'gl_currency', BILL_KEY = 'gl_billing';
-
-    function detectCurrency() {
-      try {
-        const saved = localStorage.getItem(CUR_KEY);
-        if (saved && PRICES[saved]) return saved;
-      } catch (e) {}
-      let tz = '';
-      try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
-      if (/Argentina|Buenos_Aires|Catamarca|Cordoba|Jujuy|La_Rioja|Mendoza|Rio_Gallegos|Salta|San_Juan|San_Luis|Tucuman|Ushuaia/i.test(tz)) return 'ARS';
-      if (tz.indexOf('Europe/') === 0) return 'EUR';
-      const EUR_REGIONS = ['ES','IT','FR','DE','PT','NL','BE','IE','AT','GR','FI','SK','SI','LU','LV','LT','EE','CY','MT','HR'];
-      const langs = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || ''];
-      for (let i = 0; i < langs.length; i++) {
-        const reg = ((langs[i] || '').split('-')[1] || '').toUpperCase();
-        if (reg === 'AR') return 'ARS';
-        if (EUR_REGIONS.indexOf(reg) !== -1) return 'EUR';
-      }
-      return 'USD';
-    }
-
-    function tt(k, fb) { try { const v = window.GLi18n && window.GLi18n.t(k); return v != null ? v : fb; } catch (e) { return fb; } }
-
-    let currency = detectCurrency();
-    let billing = 'monthly';
-    try { const b = localStorage.getItem(BILL_KEY); if (b === 'annual' || b === 'monthly') billing = b; } catch (e) {}
-
-    const amountEl = document.getElementById('pro-price-amount');
-    const periodEl = document.getElementById('pro-price-period');
-    const noteEl   = document.getElementById('pro-annual-note');
-
-    function renderPrice() {
-      const p = PRICES[currency] || PRICES.EUR;
-      const annual = billing === 'annual';
-      if (amountEl) amountEl.textContent = annual ? p.annual : p.monthly;
-      if (periodEl) periodEl.textContent = annual ? tt('pro.perYear', '/año') : tt('pro.perMonth', '/mes');
-      if (noteEl) {
-        if (annual) {
-          noteEl.textContent = tt('pro.twoFree', '2 meses gratis') + ' · ≈ ' + p.perMo + tt('pro.perMonth', '/mes');
-          noteEl.classList.remove('hidden');
-        } else {
-          noteEl.classList.add('hidden');
-        }
-      }
-      document.querySelectorAll('[data-billing]').forEach(function (b) {
-        b.setAttribute('aria-pressed', b.getAttribute('data-billing') === billing ? 'true' : 'false');
-      });
-      const cs = document.getElementById('currency-select');
-      if (cs) cs.value = currency;
-    }
-
-    document.querySelectorAll('[data-billing]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        billing = btn.getAttribute('data-billing');
-        try { localStorage.setItem(BILL_KEY, billing); } catch (e) {}
-        renderPrice();
-      });
-    });
-    const curSel = document.getElementById('currency-select');
-    if (curSel) {
-      curSel.addEventListener('change', function () {
-        currency = curSel.value;
-        try { localStorage.setItem(CUR_KEY, currency); } catch (e) {}
-        renderPrice();
-      });
-    }
-    window.addEventListener('gl:langchange', renderPrice);
-    renderPrice();
   })();
   </script>
 
@@ -2692,7 +2588,7 @@
         "name": "¿Qué es Goal Labs Pro y cómo pruebo los 15 días?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Pro desbloquea biblioteca en la nube, análisis de temporada, reels por jugador con export 9:16, reportes PDF, insights con IA y LPF Play. Descargá la app gratis y activá la prueba de 15 días sin tarjeta desde 'Ver planes' dentro de cualquier función Pro."
+          "text": "Pro desbloquea biblioteca en la nube, análisis de temporada, reels por jugador con export 9:16, reportes PDF, insights con IA y planteles predefinidos. Descargá la app gratis y activá la prueba de 15 días sin tarjeta desde 'Ver planes' dentro de cualquier función Pro."
         }
       },
       {
@@ -2714,6 +2610,9 @@
     ]
   }
   </script>
+
+  <script src="assets/contact-form.js" defer></script>
+  <script src="assets/mobile-nav.js" defer></script>
 
   <script>
   (function(){

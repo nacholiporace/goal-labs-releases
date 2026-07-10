@@ -14,6 +14,8 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta property="og:image" content="https://goallabs.com.ar/assets/og-image.png" />
   <meta property="og:locale" content="es_AR" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="it_IT" />
   <meta property="og:site_name" content="Goal Labs" />
 
   <link rel="canonical" href="https://goallabs.com.ar/creadores" />
@@ -47,10 +49,10 @@
       <span translate="no" class="text-white font-mono font-medium text-sm tracking-[0.25em] uppercase">Goal</span>
       <span translate="no" class="text-zinc-500 font-mono text-sm tracking-[0.35em] uppercase">Labs</span>
     </a>
-    <div class="hidden md:flex items-center gap-8" role="list">
+    <div class="hidden lg:flex items-center gap-8" role="list">
       <a href="../index.html#funcionalidades" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.features">Funcionalidades</a>
       <a href="../index.html#precios" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.pricing">Precios</a>
-      <a href="../partners/" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.partners">Partners</a>
+      <a href="../clubes/" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.clubs">Clubes</a>
       <a href="../analistas/" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.analysts">Analistas</a>
     </div>
     <div class="flex items-center gap-3">
@@ -58,10 +60,24 @@
       <select id="lang-select" class="bg-zinc-900 border border-zinc-700 text-zinc-300 text-xs font-semibold rounded-lg pl-2 pr-1 py-1.5 focus-ring hover:border-zinc-600 transition-colors cursor-pointer" aria-label="Idioma / Language / Lingua">
         <option value="es">ES</option><option value="en">EN</option><option value="it">IT</option>
       </select>
-      <a href="mailto:nacholiporace@goallabs.com.ar?subject=Colaboraci%C3%B3n%20creador%20de%20contenido" class="btn-primary bg-cream hover:bg-white text-ink text-xs font-body font-semibold px-4 py-2 rounded-full transition-colors flex items-center gap-2 focus-ring">
+      <button type="button" data-contact-open data-contact-form="creator" data-contact-subject="Colaboración creador de contenido" class="btn-primary bg-cream hover:bg-white text-ink text-xs font-body font-semibold px-4 py-2 rounded-full transition-colors flex items-center gap-2 focus-ring">
         <i class="fas fa-envelope text-[11px]" aria-hidden="true"></i>
-        <span data-i18n="nav.contactCta">Sumate</span>
-      </a>
+        <span class="hidden sm:inline" data-i18n="nav.contactCta">Sumate</span>
+      </button>
+      <button type="button" data-mobile-menu-toggle aria-controls="mobile-menu" aria-expanded="false"
+              class="lg:hidden w-9 h-9 shrink-0 flex items-center justify-center rounded-lg border border-zinc-700 text-zinc-300 hover:text-cream hover:border-zinc-600 transition-colors focus-ring"
+              data-i18n-aria="nav.menuToggleAria" aria-label="Abrir menú">
+        <i class="icon-open fas fa-bars text-sm" aria-hidden="true"></i>
+        <i class="icon-close hidden fas fa-xmark text-sm" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-zinc-800/60 bg-zinc-950/95 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-6 py-3 flex flex-col" role="list">
+      <a href="../index.html#funcionalidades" class="py-3 border-b border-zinc-800/60 font-mono text-xs uppercase tracking-[0.15em] text-zinc-300 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.features">Funcionalidades</a>
+      <a href="../index.html#precios" class="py-3 border-b border-zinc-800/60 font-mono text-xs uppercase tracking-[0.15em] text-zinc-300 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.pricing">Precios</a>
+      <a href="../clubes/" class="py-3 border-b border-zinc-800/60 font-mono text-xs uppercase tracking-[0.15em] text-zinc-300 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.clubs">Clubes</a>
+      <a href="../analistas/" class="py-3 font-mono text-xs uppercase tracking-[0.15em] text-zinc-300 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.analysts">Analistas</a>
     </div>
   </div>
 </nav>
@@ -149,8 +165,8 @@
       <span class="eyebrow reveal" data-i18n="captions.eyebrow">Ideas de captions — adaptalas a tu voz</span>
       <div class="mt-6 divide-y divide-zinc-800 border border-zinc-800 rounded-xl bg-zinc-900/40 reveal">
         <p class="p-5 text-zinc-300 font-body text-sm leading-relaxed" data-i18n="captions.c1">"¿Offside o no? Con Goal Labs trazo la línea igual que el VAR — y es gratis. Bajalo en goallabs.com.ar"</p>
-        <p class="p-5 text-zinc-300 font-body text-sm leading-relaxed" data-i18n="captions.c2">"El análisis táctico que el fútbol argentino se merecía, y no cuesta 2 mil dólares al año como Hudl. Se llama Goal Labs."</p>
-        <p class="p-5 text-zinc-300 font-body text-sm leading-relaxed" data-i18n="captions.c3">"Así se taggea un partido entero en minutos, no en horas de Premiere. Una tecla = un evento."</p>
+        <p class="p-5 text-zinc-300 font-body text-sm leading-relaxed" data-i18n="captions.c2">"El análisis táctico que el fútbol argentino se merecía, gratis y en tu idioma. Se llama Goal Labs."</p>
+        <p class="p-5 text-zinc-300 font-body text-sm leading-relaxed" data-i18n="captions.c3">"Así se taggea un partido entero en minutos, no en horas de edición. Una tecla = un evento."</p>
       </div>
     </div>
   </section>
@@ -162,9 +178,9 @@
         <h2 class="font-display text-3xl md:text-5xl text-white mb-4 leading-[1.02]" data-i18n-html="closer.h2">Sumate al kit<br/>de <em style="font-style:italic;color:#34d399;">creadores.</em></h2>
         <p class="text-zinc-400 font-body text-lg max-w-xl mb-8" data-i18n="closer.p">Escribinos con tu usuario/canal y arrancamos. Te mandamos el logo, capturas reales de la app y clips de muestra para que armes tu contenido.</p>
         <div class="flex flex-wrap items-center gap-4">
-          <a href="mailto:nacholiporace@goallabs.com.ar?subject=Colaboraci%C3%B3n%20creador%20de%20contenido" class="btn-primary bg-cream hover:bg-white text-ink font-body font-semibold px-8 py-3.5 rounded-full text-sm transition-colors focus-ring inline-flex items-center gap-2">
+          <button type="button" data-contact-open data-contact-form="creator" data-contact-subject="Colaboración creador de contenido" class="btn-primary bg-cream hover:bg-white text-ink font-body font-semibold px-8 py-3.5 rounded-full text-sm transition-colors focus-ring inline-flex items-center gap-2">
             <i class="fas fa-envelope text-xs"></i><span data-i18n="closer.cta">Escribinos</span>
-          </a>
+          </button>
           <a href="../index.html" class="font-mono text-xs uppercase tracking-wider text-zinc-400 hover:text-cream transition-colors focus-ring" data-i18n="closer.seeProduct">Ver el software →</a>
         </div>
       </div>
@@ -182,6 +198,8 @@
       <span class="text-zinc-600 text-xs ml-3 font-mono" data-i18n="footer.madeIn">— Hecho en Argentina</span>
     </div>
     <div class="flex items-center gap-6 text-zinc-500 text-xs font-mono uppercase tracking-wider">
+      <a href="../jugadores/" class="hover:text-cream transition-colors focus-ring" data-i18n="footer.players">Jugadores</a>
+      <a href="../clubes/" class="hover:text-cream transition-colors focus-ring" data-i18n="footer.clubs">Clubes</a>
       <a href="../partners/" class="hover:text-cream transition-colors focus-ring" data-i18n="footer.partners">Partners</a>
       <a href="../analistas/" class="hover:text-cream transition-colors focus-ring" data-i18n="footer.analysts">Analistas</a>
       <span aria-label="Copyright 2026 Nacho Liporace">© 2026 Nacho Liporace</span>
@@ -197,8 +215,8 @@ window.I18N = {
     "meta.title": "Goal Labs — Kit para Creadores y Streamers de Fútbol",
     "meta.description": "Contenido de fútbol táctico que tu audiencia comparte: offsides, reels de jugadores, análisis en vivo.",
     "skip": "Ir al contenido principal",
-    "nav.features": "Funcionalidades", "nav.pricing": "Precios", "nav.partners": "Partners", "nav.analysts": "Analistas",
-    "nav.langLabel": "Idioma", "nav.contactCta": "Sumate",
+    "nav.features": "Funcionalidades", "nav.pricing": "Precios", "nav.clubs": "Clubes", "nav.analysts": "Analistas",
+    "nav.langLabel": "Idioma", "nav.contactCta": "Sumate", "nav.menuToggleAria": "Abrir menú",
     "hero.eyebrow": "Kit de colaboración para streamers y creadores — TikTok, Instagram, X y Twitch/YouTube",
     "hero.h1": "Contenido de fútbol táctico<br/>que <em style=\"font-style:italic;color:#34d399;\">tu audiencia comparte.</em>",
     "hero.sub": "Goal Labs es el software de videoanálisis táctico gratis y en español que hace lo que en la tele hace el VAR: verificar offsides, trazar jugadas, generar reels. Todo eso es contenido.",
@@ -219,23 +237,23 @@ window.I18N = {
     "offer.link.cta": "<b>Nos escribís tu handle</b> y te devolvemos el link armado + el código de descuento para tu audiencia.",
     "captions.eyebrow": "Ideas de captions — adaptalas a tu voz",
     "captions.c1": "\"¿Offside o no? Con Goal Labs trazo la línea igual que el VAR — y es gratis. Bajalo en goallabs.com.ar\"",
-    "captions.c2": "\"El análisis táctico que el fútbol argentino se merecía, y no cuesta 2 mil dólares al año como Hudl. Se llama Goal Labs.\"",
-    "captions.c3": "\"Así se taggea un partido entero en minutos, no en horas de Premiere. Una tecla = un evento.\"",
+    "captions.c2": "\"El análisis táctico que el fútbol argentino se merecía, gratis y en tu idioma. Se llama Goal Labs.\"",
+    "captions.c3": "\"Así se taggea un partido entero en minutos, no en horas de edición. Una tecla = un evento.\"",
     "closer.h2": "Sumate al kit<br/>de <em style=\"font-style:italic;color:#34d399;\">creadores.</em>",
     "closer.p": "Escribinos con tu usuario/canal y arrancamos. Te mandamos el logo, capturas reales de la app y clips de muestra para que armes tu contenido.",
     "closer.cta": "Escribinos", "closer.seeProduct": "Ver el software →",
-    "footer.madeIn": "— Hecho en Argentina", "footer.partners": "Partners", "footer.analysts": "Analistas"
+    "footer.madeIn": "— Hecho en Argentina", "footer.players": "Jugadores", "footer.clubs": "Clubes", "footer.partners": "Partners", "footer.analysts": "Analistas"
   },
   en: {
     "meta.title": "Goal Labs — Kit for Football Creators & Streamers",
     "meta.description": "Tactical football content your audience shares: offsides, player reels, live analysis.",
     "skip": "Skip to main content",
-    "nav.features": "Features", "nav.pricing": "Pricing", "nav.partners": "Partners", "nav.analysts": "Analysts",
-    "nav.langLabel": "Language", "nav.contactCta": "Join in",
+    "nav.features": "Features", "nav.pricing": "Pricing", "nav.clubs": "Clubs", "nav.analysts": "Analysts",
+    "nav.langLabel": "Language", "nav.contactCta": "Join in", "nav.menuToggleAria": "Open menu",
     "hero.eyebrow": "Collaboration kit for streamers & creators — TikTok, Instagram, X and Twitch/YouTube",
     "hero.h1": "Tactical football content<br/>your audience <em style=\"font-style:italic;color:#34d399;\">shares.</em>",
-    "hero.sub": "Goal Labs is the free, Spanish-native tactical video analysis software that does what VAR does on TV: check offsides, trace plays, generate reels. All of that is content.",
-    "why.p": "<b style=\"color:#fff;\">Why it works for your audience:</b> Argentine and Latin American football runs on tactical analysis — controversial offsides, explained plays, player reels. Whether you're a streamer reacting live or a short-form creator for TikTok/Instagram/X, Goal Labs gives you the real tool (not a mockup) to produce that content in minutes, using the same principle professional VAR uses.",
+    "hero.sub": "Goal Labs is the free tactical video analysis software that does what VAR does on TV: check offsides, trace plays, generate reels. All of that is content.",
+    "why.p": "<b style=\"color:#fff;\">Why it works for your audience:</b> football everywhere runs on tactical analysis — controversial offsides, explained plays, player reels. Whether you're a streamer reacting live or a short-form creator for TikTok/Instagram/X, Goal Labs gives you the real tool (not a mockup) to produce that content in minutes, using the same principle professional VAR uses.",
     "ideas.eyebrow": "4 content formats that write themselves",
     "idea1.t": "\"Was that offside?\"", "idea1.d": "Draw the perspective line over a real controversial play and show the verdict — the same format that already works on football analysis accounts.",
     "idea2.t": "9:16 player reel", "idea2.d": "Build a player's highlight reel with play tracking, ready for Instagram, TikTok and X in vertical format.",
@@ -252,23 +270,23 @@ window.I18N = {
     "offer.link.cta": "<b>Send us your handle</b> and we'll send back your ready-made link plus a discount code for your audience.",
     "captions.eyebrow": "Caption ideas — adapt them to your voice",
     "captions.c1": "\"Offside or not? With Goal Labs I draw the line just like VAR — and it's free. Get it at goallabs.com.ar\"",
-    "captions.c2": "\"The tactical analysis football deserved, and it doesn't cost $2,000 a year like Hudl. It's called Goal Labs.\"",
-    "captions.c3": "\"This is how you tag a whole match in minutes, not hours in Premiere. One key = one event.\"",
+    "captions.c2": "\"Pro-level tactical analysis, free, in your language. It's called Goal Labs.\"",
+    "captions.c3": "\"This is how you tag a whole match in minutes, not hours of editing. One key = one event.\"",
     "closer.h2": "Join the<br/><em style=\"font-style:italic;color:#34d399;\">creator kit.</em>",
     "closer.p": "Send us your handle/channel and we'll get started. We'll send the logo, real app screenshots, and sample clips for your content.",
     "closer.cta": "Get in touch", "closer.seeProduct": "See the software →",
-    "footer.madeIn": "— Made in Argentina", "footer.partners": "Partners", "footer.analysts": "Analysts"
+    "footer.madeIn": "— Made in Argentina", "footer.players": "Players", "footer.clubs": "Clubs", "footer.partners": "Partners", "footer.analysts": "Analysts"
   },
   it: {
     "meta.title": "Goal Labs — Kit per Creator e Streamer di Calcio",
     "meta.description": "Contenuti tattici di calcio che il tuo pubblico condivide: fuorigioco, reel dei giocatori, analisi dal vivo.",
     "skip": "Vai al contenuto principale",
-    "nav.features": "Funzionalità", "nav.pricing": "Prezzi", "nav.partners": "Partners", "nav.analysts": "Analisti",
-    "nav.langLabel": "Lingua", "nav.contactCta": "Unisciti",
+    "nav.features": "Funzionalità", "nav.pricing": "Prezzi", "nav.clubs": "Club", "nav.analysts": "Analisti",
+    "nav.langLabel": "Lingua", "nav.contactCta": "Unisciti", "nav.menuToggleAria": "Apri il menu",
     "hero.eyebrow": "Kit di collaborazione per streamer e creator — TikTok, Instagram, X e Twitch/YouTube",
     "hero.h1": "Contenuti tattici di calcio<br/>che il tuo pubblico <em style=\"font-style:italic;color:#34d399;\">condivide.</em>",
-    "hero.sub": "Goal Labs è il software di videoanalisi tattica gratuito e nativo in spagnolo che fa quello che fa il VAR in TV: verificare fuorigioco, tracciare azioni, generare reel. Tutto questo è contenuto.",
-    "why.p": "<b style=\"color:#fff;\">Perché funziona per il tuo pubblico:</b> il calcio argentino e latinoamericano vive di analisi tattica — fuorigioco discussi, azioni spiegate, reel dei giocatori. Che tu sia uno streamer che reagisce dal vivo o un creator di contenuti brevi per TikTok/Instagram/X, Goal Labs ti dà lo strumento reale (non un mockup) per produrre quel contenuto in pochi minuti, con lo stesso principio del VAR professionale.",
+    "hero.sub": "Goal Labs è il software di videoanalisi tattica gratuito che fa quello che fa il VAR in TV: verificare fuorigioco, tracciare azioni, generare reel. Tutto questo è contenuto.",
+    "why.p": "<b style=\"color:#fff;\">Perché funziona per il tuo pubblico:</b> il calcio italiano vive di moviola e analisi tattica — fuorigioco discussi, azioni spiegate, reel dei giocatori. Che tu sia uno streamer che reagisce dal vivo o un creator di contenuti brevi per TikTok/Instagram/X, Goal Labs ti dà lo strumento reale (non un mockup) per produrre quel contenuto in pochi minuti, con lo stesso principio del VAR professionale.",
     "ideas.eyebrow": "4 formati di contenuto che si scrivono da soli",
     "idea1.t": "\"Era fuorigioco o no?\"", "idea1.d": "Traccia la linea di prospettiva su un'azione controversa reale e mostra il verdetto — lo stesso formato che già funziona sugli account di analisi calcistica.",
     "idea2.t": "Reel del giocatore in 9:16", "idea2.d": "Crea l'highlight di un giocatore con tracking dell'azione, pronto per Instagram, TikTok e X in formato verticale.",
@@ -285,15 +303,17 @@ window.I18N = {
     "offer.link.cta": "<b>Scrivici il tuo handle</b> e ti mandiamo il link pronto più il codice sconto per il tuo pubblico.",
     "captions.eyebrow": "Idee per le caption — adattale al tuo tono",
     "captions.c1": "\"Fuorigioco o no? Con Goal Labs traccio la linea proprio come il VAR — ed è gratis. Scaricalo su goallabs.com.ar\"",
-    "captions.c2": "\"L'analisi tattica che il calcio meritava, e non costa 2mila dollari all'anno come Hudl. Si chiama Goal Labs.\"",
-    "captions.c3": "\"Così si tagga una partita intera in pochi minuti, non ore su Premiere. Un tasto = un evento.\"",
+    "captions.c2": "\"L'analisi tattica che il calcio italiano meritava — gratis e in italiano. Si chiama Goal Labs.\"",
+    "captions.c3": "\"Così si tagga una partita intera in pochi minuti, non ore di editing. Un tasto = un evento.\"",
     "closer.h2": "Unisciti al<br/><em style=\"font-style:italic;color:#34d399;\">kit creator.</em>",
     "closer.p": "Scrivici il tuo profilo/canale e iniziamo. Ti mandiamo il logo, screenshot reali dell'app e clip di esempio per il tuo contenuto.",
     "closer.cta": "Scrivici", "closer.seeProduct": "Guarda il software →",
-    "footer.madeIn": "— Fatto in Argentina", "footer.partners": "Partners", "footer.analysts": "Analisti"
+    "footer.madeIn": "— Fatto in Argentina", "footer.players": "Giocatori", "footer.clubs": "Club", "footer.partners": "Partners", "footer.analysts": "Analisti"
   }
 };
 </script>
 <script src="../assets/site-i18n.js"></script>
+<script src="../assets/contact-form.js" defer></script>
+<script src="../assets/mobile-nav.js" defer></script>
 </body>
 </html>

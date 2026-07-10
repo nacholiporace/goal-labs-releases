@@ -20,7 +20,7 @@
 - **Estadísticas automáticas** — distribución por tipo de evento, duración, heatmap temporal y métricas por jugador
 - **Exportación múltiple** — clips MP4 (via FFmpeg nativo), CSV, JSON y XML para Final Cut Pro / DaVinci Resolve / Premiere
 - **IA integrada (Gemini)** — generación de tags desde lenguaje natural, análisis de patrones y sugerencia de notas
-- **Análisis de LPF Play** — descargá y analizá el stream de LPF Play directamente desde la app
+- **Planteles predefinidos** — cargá categorías completas en minutos sin armar el plantel a mano
 - **Funciona 100% offline** — el tagging, telestrator, offside y exportación no requieren internet
 
 ---
@@ -55,17 +55,15 @@ Tiempo promedio para tagguear un partido completo de 90 minutos: **45 a 90 minut
 
 ---
 
-## Alternativa gratuita a Nacsport, Hudl y LongoMatch
+## Alternativa gratuita al software tradicional de videoanálisis
 
-| Criterio | Goal Labs | Nacsport | Hudl |
-|----------|-----------|---------|------|
-| Precio | Gratuito | EUR 700–2.000/año | USD 2.000+/año |
-| Idioma | Español nativo | Traducción | Inglés |
-| Offside con perspectiva | Sí | No | No |
-| IA integrada | Sí (Gemini) | No | Parcial |
-| Funciona offline | Sí | Sí | No |
-| Curva de aprendizaje | Baja | Alta | Media |
-| Mercado objetivo | Latinoamérica | Europa | Global |
+| Criterio | Goal Labs | Software tradicional |
+|----------|-----------|----------------------|
+| Precio | Gratuito | Licencias de cientos a miles de USD/año |
+| Idioma | Español nativo | Inglés o traducción parcial |
+| Offside con perspectiva | Sí | Poco común |
+| Funciona offline | Sí | Según el plan |
+| Curva de aprendizaje | Baja | Formación previa habitual |
 
 ---
 

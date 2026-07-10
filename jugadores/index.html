@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es" style="color-scheme: dark;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#09090b" />
+  <title>Goal Labs — Análisis Individual y Reel de Highlights para Jugadores</title>
+  <meta name="description" content="Armá tu reel de highlights de la temporada, seguí tu rendimiento partido a partido y mostrate a los clubes con Goal Labs — análisis táctico gratis y offline." />
+
+  <meta property="og:title" content="Goal Labs — Para Jugadores" />
+  <meta property="og:description" content="Tu temporada, tu currículum: reel de highlights, análisis partido a partido y contenido para redes." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://goallabs.com.ar/jugadores" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:image" content="https://goallabs.com.ar/assets/og-image.png" />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="it_IT" />
+  <meta property="og:site_name" content="Goal Labs" />
+
+  <link rel="canonical" href="https://goallabs.com.ar/jugadores" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      fontFamily: { display: ['"Instrument Serif"', 'Georgia', 'serif'], mono: ['"DM Mono"', 'ui-monospace', 'monospace'], sans: ['"Barlow Condensed"', 'sans-serif'], body: ['Outfit', 'sans-serif'] },
+      colors: { zinc: { 950: '#0a0a0a' }, ink: '#0a0a0a', cream: '#f0ebe1' }
+    } } }
+  </script>
+  <link rel="stylesheet" href="../assets/site.css" />
+
+  <script data-goatcounter="https://goallabs.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body class="bg-zinc-950 text-white antialiased">
+
+<a href="#main-content" class="skip-link focus-ring" data-i18n="skip">Ir al contenido principal</a>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/60 bg-zinc-950/90 backdrop-blur-md" aria-label="Navegación principal">
+  <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+    <a href="../index.html" class="flex items-center gap-2.5 select-none focus-ring" aria-label="Goal Labs — Inicio">
+      <span class="w-7 h-7 rounded-md bg-cream flex items-center justify-center shrink-0" aria-hidden="true"><i class="fas fa-futbol text-ink text-sm"></i></span>
+      <span translate="no" class="text-white font-mono font-medium text-sm tracking-[0.25em] uppercase">Goal</span>
+      <span translate="no" class="text-zinc-500 font-mono text-sm tracking-[0.35em] uppercase">Labs</span>
+    </a>
+    <div class="hidden lg:flex items-center gap-8" role="list">
+      <a href="../index.html#funcionalidades" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.features">Funcionalidades</a>
+      <a href="../index.html#precios" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.pricing">Precios</a>
+      <a href="../creadores/" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.creators">Creadores</a>
+      <a href="../analistas/" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.analysts">Analistas</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <label class="sr-only" for="lang-select" data-i18n="nav.langLabel">Idioma</label>
+      <select id="lang-select" class="bg-zinc-900 border border-zinc-700 text-zinc-300 text-xs font-semibold rounded-lg pl-2 pr-1 py-1.5 focus-ring hover:border-zinc-600 transition-colors cursor-pointer" aria-label="Idioma / Language / Lingua">
+        <option value="es">ES</option><option value="en">EN</option><option value="it">IT</option>
+      </select>
+      <a href="https://github.com/nacholiporace/goal-labs-releases/releases/latest" data-download class="btn-primary bg-cream hover:bg-white text-ink text-xs font-body font-semibold px-4 py-2 rounded-full transition-colors flex items-center gap-2 focus-ring">
+        <i class="fas fa-download text-[11px]" aria-hidden="true"></i>
+        <span class="hidden sm:inline" data-i18n="nav.downloadCta">Descargar gratis</span>
+      </a>
+      <button type="button" data-mobile-menu-toggle aria-controls="mobile-menu" aria-expanded="false"
+              class="lg:hidden w-9 h-9 shrink-0 flex items-center justify-center rounded-lg border border-zinc-700 text-zinc-300 hover:text-cream hover:border-zinc-600 transition-colors focus-ring"
+              data-i18n-aria="nav.menuToggleAria" aria-label="Abrir menú">
+        <i class="icon-open fas fa-bars text-sm" aria-hidden="true"></i>
+        <i class="icon-close hidden fas fa-xmark text-sm" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-zinc-800/60 bg-zinc-950/95 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-6 py-3 flex flex-col" role="list">
+      <a href="../index.html#funcionalidades" class="py-3 border-b border-zinc-800/60 font-mono text-xs uppercase tracking-[0.15em] text-zinc-300 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.features">Funcionalidades</a>
+      <a href="../index.html#precios" class="py-3 border-b border-zinc-800/60 font-mono text-xs uppercase tracking-[0.15em] text-zinc-300 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.pricing">Precios</a>
+      <a href="../creadores/" class="py-3 border-b border-zinc-800/60 font-mono text-xs uppercase tracking-[0.15em] text-zinc-300 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.creators">Creadores</a>
+      <a href="../analistas/" class="py-3 font-mono text-xs uppercase tracking-[0.15em] text-zinc-300 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.analysts">Analistas</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <!-- HERO -->
+  <section class="relative pt-40 pb-20 md:pt-52 md:pb-28 border-b border-white/10 overflow-hidden">
+    <img src="../assets/hero-poster.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-25" loading="eager" onerror="this.style.display='none';" />
+    <div class="absolute inset-0 bg-gradient-to-b from-zinc-950/40 via-zinc-950/85 to-zinc-950"></div>
+    <div class="relative max-w-4xl mx-auto px-6 reveal">
+      <span class="eyebrow" data-i18n="hero.eyebrow">Para jugadores</span>
+      <h1 class="font-display text-white text-5xl md:text-7xl mt-4 mb-6 leading-[0.95] text-balance" data-i18n-html="hero.h1">Tu temporada,<br/>tu <em style="font-style:italic;color:#34d399;">currículum.</em></h1>
+      <p class="text-zinc-300 text-lg font-body max-w-2xl leading-relaxed" data-i18n="hero.sub">Cada partido que jugás es contenido: un reel de highlights para mostrarte a un club, y un análisis que te ayuda a mejorar. Todo con la misma herramienta.</p>
+    </div>
+  </section>
+
+  <!-- QUÉ PODÉS HACER -->
+  <section class="py-20 md:py-28 border-b border-white/10">
+    <div class="max-w-5xl mx-auto px-6">
+      <span class="eyebrow reveal" data-i18n="what.eyebrow">Todo lo que necesitás para tu temporada</span>
+      <div class="grid md:grid-cols-4 gap-4 mt-8">
+        <div class="border border-zinc-800 rounded-xl p-5 bg-zinc-900/40 reveal">
+          <span class="font-mono text-emerald-400 text-sm">01</span>
+          <h3 class="font-display text-xl text-white mt-2 mb-2" data-i18n="what.s1.t">Tu reel de highlights</h3>
+          <p class="text-zinc-400 font-body text-sm leading-relaxed" data-i18n="what.s1.d">Reels por jugador con seguimiento automático de la jugada, listos para exportar en 9:16 o 16:9.</p>
+        </div>
+        <div class="border border-zinc-800 rounded-xl p-5 bg-zinc-900/40 reveal reveal-d1">
+          <span class="font-mono text-emerald-400 text-sm">02</span>
+          <h3 class="font-display text-xl text-white mt-2 mb-2" data-i18n="what.s2.t">Mostrate en redes</h3>
+          <p class="text-zinc-400 font-body text-sm leading-relaxed" data-i18n="what.s2.d">Recortá tus mejores jugadas y compartilas donde te ve tu comunidad — o un ojeador.</p>
+        </div>
+        <div class="border border-zinc-800 rounded-xl p-5 bg-zinc-900/40 reveal reveal-d2">
+          <span class="font-mono text-emerald-400 text-sm">03</span>
+          <h3 class="font-display text-xl text-white mt-2 mb-2" data-i18n="what.s3.t">Dibujá tu jugada</h3>
+          <p class="text-zinc-400 font-body text-sm leading-relaxed" data-i18n="what.s3.d">Telestrator con 11 herramientas: marcá tu recorrido y tu visión de juego, lo que un video sin editar no muestra.</p>
+        </div>
+        <div class="border border-zinc-800 rounded-xl p-5 bg-zinc-900/40 reveal reveal-d3">
+          <span class="font-mono text-emerald-400 text-sm">04</span>
+          <h3 class="font-display text-xl text-white mt-2 mb-2" data-i18n="what.s4.t">Seguí tu temporada</h3>
+          <p class="text-zinc-400 font-body text-sm leading-relaxed" data-i18n="what.s4.d">Análisis individual partido a partido: identificá patrones en tu juego y llegá con datos concretos a hablar con tu técnico.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FREE VS PRO -->
+  <section class="py-20 md:py-28 border-b border-white/10">
+    <div class="max-w-5xl mx-auto px-6">
+      <span class="eyebrow reveal" data-i18n="fp.eyebrow">Free vs. Pro para tu temporada</span>
+      <h2 class="font-display text-white text-3xl md:text-5xl mt-4 mb-10 leading-[0.95] text-balance reveal" data-i18n="fp.h2">Todo lo que necesitás en una sola pantalla.</h2>
+      <div class="grid md:grid-cols-2 gap-0 border border-zinc-800 rounded-xl overflow-hidden">
+        <div class="p-6 border-b md:border-r border-zinc-800 reveal">
+          <div class="flex items-center justify-between mb-2"><span class="font-mono text-emerald-400 text-xs">01</span><span class="font-mono text-[10px] uppercase text-emerald-400/90 border border-emerald-400/40 bg-emerald-400/10 px-2 py-0.5 rounded-full" data-i18n="tag.free">Gratis</span></div>
+          <h3 class="font-display text-xl text-white mb-1" data-i18n="fp1.t">Tagging con hotkeys</h3>
+          <p class="text-zinc-400 font-body text-sm" data-i18n="fp1.d">Marcá tus goles, asistencias y jugadas clave mientras mirás el partido, sin pausar el video.</p>
+        </div>
+        <div class="p-6 border-b border-zinc-800 reveal reveal-d1">
+          <div class="flex items-center justify-between mb-2"><span class="font-mono text-emerald-400 text-xs">02</span><span class="font-mono text-[10px] uppercase text-emerald-400/90 border border-emerald-400/40 bg-emerald-400/10 px-2 py-0.5 rounded-full" data-i18n="tag.free">Gratis</span></div>
+          <h3 class="font-display text-xl text-white mb-1" data-i18n="fp2.t">Telestrator completo</h3>
+          <p class="text-zinc-400 font-body text-sm" data-i18n="fp2.d">11 herramientas de dibujo con animación: flechas, zonas, spotlight, líneas y texto.</p>
+        </div>
+        <div class="p-6 border-b md:border-r border-zinc-800 reveal reveal-d2">
+          <div class="flex items-center justify-between mb-2"><span class="font-mono text-emerald-400 text-xs">03</span><span class="font-mono text-[10px] uppercase text-emerald-400/90 border border-emerald-400/40 bg-emerald-400/10 px-2 py-0.5 rounded-full" data-i18n="tag.free">Gratis</span></div>
+          <h3 class="font-display text-xl text-white mb-1" data-i18n="fp3.t">Export de clips</h3>
+          <p class="text-zinc-400 font-body text-sm" data-i18n="fp3.d">Cada jugada, exportada en MP4, sin marca de agua.</p>
+        </div>
+        <div class="p-6 border-b border-zinc-800 reveal reveal-d3">
+          <div class="flex items-center justify-between mb-2"><span class="font-mono text-emerald-400 text-xs">04</span><span class="font-mono text-[10px] uppercase text-amber-900 bg-gradient-to-br from-amber-300 to-amber-500 px-2 py-0.5 rounded-full font-semibold" data-i18n="tag.pro">Pro</span></div>
+          <h3 class="font-display text-xl text-white mb-1" data-i18n="fp4.t">Reels + export 9:16 y 16:9</h3>
+          <p class="text-zinc-400 font-body text-sm" data-i18n="fp4.d">Tu reel armado con seguimiento automático de la jugada, listo para redes o para mandar a un club.</p>
+        </div>
+        <div class="p-6 md:border-r border-zinc-800 reveal reveal-d4">
+          <div class="flex items-center justify-between mb-2"><span class="font-mono text-emerald-400 text-xs">05</span><span class="font-mono text-[10px] uppercase text-amber-900 bg-gradient-to-br from-amber-300 to-amber-500 px-2 py-0.5 rounded-full font-semibold" data-i18n="tag.pro">Pro</span></div>
+          <h3 class="font-display text-xl text-white mb-1" data-i18n="fp5.t">Análisis de temporada</h3>
+          <p class="text-zinc-400 font-body text-sm" data-i18n="fp5.d">Seguí tu evolución partido a partido: minutos, acciones y momentos destacados.</p>
+        </div>
+        <div class="p-6 reveal reveal-d4">
+          <div class="flex items-center justify-between mb-2"><span class="font-mono text-emerald-400 text-xs">06</span><span class="font-mono text-[10px] uppercase text-amber-900 bg-gradient-to-br from-amber-300 to-amber-500 px-2 py-0.5 rounded-full font-semibold" data-i18n="tag.pro">Pro</span></div>
+          <h3 class="font-display text-xl text-white mb-1" data-i18n="fp6.t">Biblioteca en la nube</h3>
+          <p class="text-zinc-400 font-body text-sm" data-i18n="fp6.d">Toda tu temporada guardada y accesible desde cualquier dispositivo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSER -->
+  <section class="py-20 md:py-28">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="bg-zinc-900 rounded-2xl p-10 md:p-14 reveal">
+        <h2 class="font-display text-3xl md:text-5xl text-white mb-4 leading-[1.02]" data-i18n-html="closer.h2">Armá el reel<br/><em style="font-style:italic;color:#34d399;">que te representa.</em></h2>
+        <p class="text-zinc-400 font-body text-lg max-w-xl mb-8" data-i18n="closer.p">Descargá gratis, tagueá tu próximo partido, y cuando quieras el reel automático y el análisis de temporada, probá Pro 15 días sin tarjeta.</p>
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="https://github.com/nacholiporace/goal-labs-releases/releases/latest" data-download class="btn-primary bg-cream hover:bg-white text-ink font-body font-semibold px-8 py-3.5 rounded-full text-sm transition-colors focus-ring inline-flex items-center gap-2">
+            <i class="fas fa-download text-xs"></i><span data-i18n="closer.cta">Descargar gratis para Windows</span>
+          </a>
+          <span class="font-mono text-xs text-zinc-500 tabular-nums"><span id="version-num">v1.4.1</span> · Win 10/11</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="border-t border-white/10 py-12" role="contentinfo">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2.5">
+      <span class="w-6 h-6 rounded bg-cream flex items-center justify-center shrink-0" aria-hidden="true"><i class="fas fa-futbol text-ink text-xs"></i></span>
+      <span translate="no" class="text-white font-mono text-sm tracking-[0.25em] uppercase">Goal</span>
+      <span translate="no" class="text-zinc-500 font-mono text-sm tracking-[0.35em] uppercase">Labs</span>
+      <span class="text-zinc-600 text-xs ml-3 font-mono" data-i18n="footer.madeIn">— Hecho en Argentina</span>
+    </div>
+    <div class="flex items-center gap-6 text-zinc-500 text-xs font-mono uppercase tracking-wider">
+      <a href="../clubes/" class="hover:text-cream transition-colors focus-ring" data-i18n="footer.clubs">Clubes</a>
+      <a href="../partners/" class="hover:text-cream transition-colors focus-ring" data-i18n="footer.partners">Partners</a>
+      <a href="../creadores/" class="hover:text-cream transition-colors focus-ring" data-i18n="footer.creators">Creadores</a>
+      <a href="../analistas/" class="hover:text-cream transition-colors focus-ring" data-i18n="footer.analysts">Analistas</a>
+      <span aria-label="Copyright 2026 Nacho Liporace">© 2026 Nacho Liporace</span>
+    </div>
+  </div>
+</footer>
+
+<div class="grain" aria-hidden="true"></div>
+
+<script>
+window.I18N = {
+  es: {
+    "meta.title": "Goal Labs — Análisis Individual y Reel de Highlights para Jugadores",
+    "meta.description": "Armá tu reel de highlights de la temporada, seguí tu rendimiento partido a partido y mostrate a los clubes con Goal Labs.",
+    "skip": "Ir al contenido principal",
+    "nav.features": "Funcionalidades", "nav.pricing": "Precios", "nav.creators": "Creadores", "nav.analysts": "Analistas",
+    "nav.langLabel": "Idioma", "nav.downloadCta": "Descargar gratis", "nav.menuToggleAria": "Abrir menú",
+    "hero.eyebrow": "Para jugadores",
+    "hero.h1": "Tu temporada,<br/>tu <em style=\"font-style:italic;color:#34d399;\">currículum.</em>",
+    "hero.sub": "Cada partido que jugás es contenido: un reel de highlights para mostrarte a un club, y un análisis que te ayuda a mejorar. Todo con la misma herramienta.",
+    "what.eyebrow": "Todo lo que necesitás para tu temporada",
+    "what.s1.t": "Tu reel de highlights", "what.s1.d": "Reels por jugador con seguimiento automático de la jugada, listos para exportar en 9:16 o 16:9.",
+    "what.s2.t": "Mostrate en redes", "what.s2.d": "Recortá tus mejores jugadas y compartilas donde te ve tu comunidad — o un ojeador.",
+    "what.s3.t": "Dibujá tu jugada", "what.s3.d": "Telestrator con 11 herramientas: marcá tu recorrido y tu visión de juego, lo que un video sin editar no muestra.",
+    "what.s4.t": "Seguí tu temporada", "what.s4.d": "Análisis individual partido a partido: identificá patrones en tu juego y llegá con datos concretos a hablar con tu técnico.",
+    "fp.eyebrow": "Free vs. Pro para tu temporada", "fp.h2": "Todo lo que necesitás en una sola pantalla.",
+    "tag.free": "Gratis", "tag.pro": "Pro",
+    "fp1.t": "Tagging con hotkeys", "fp1.d": "Marcá tus goles, asistencias y jugadas clave mientras mirás el partido, sin pausar el video.",
+    "fp2.t": "Telestrator completo", "fp2.d": "11 herramientas de dibujo con animación: flechas, zonas, spotlight, líneas y texto.",
+    "fp3.t": "Export de clips", "fp3.d": "Cada jugada, exportada en MP4, sin marca de agua.",
+    "fp4.t": "Reels + export 9:16 y 16:9", "fp4.d": "Tu reel armado con seguimiento automático de la jugada, listo para redes o para mandar a un club.",
+    "fp5.t": "Análisis de temporada", "fp5.d": "Seguí tu evolución partido a partido: minutos, acciones y momentos destacados.",
+    "fp6.t": "Biblioteca en la nube", "fp6.d": "Toda tu temporada guardada y accesible desde cualquier dispositivo.",
+    "closer.h2": "Armá el reel<br/><em style=\"font-style:italic;color:#34d399;\">que te representa.</em>",
+    "closer.p": "Descargá gratis, tagueá tu próximo partido, y cuando quieras el reel automático y el análisis de temporada, probá Pro 15 días sin tarjeta.",
+    "closer.cta": "Descargar gratis para Windows",
+    "footer.madeIn": "— Hecho en Argentina", "footer.clubs": "Clubes", "footer.partners": "Partners", "footer.creators": "Creadores", "footer.analysts": "Analistas"
+  },
+  en: {
+    "meta.title": "Goal Labs — Individual Analysis & Highlight Reels for Players",
+    "meta.description": "Build your season highlight reel, track your performance match by match, and show clubs what you've got with Goal Labs.",
+    "skip": "Skip to main content",
+    "nav.features": "Features", "nav.pricing": "Pricing", "nav.creators": "Creators", "nav.analysts": "Analysts",
+    "nav.langLabel": "Language", "nav.downloadCta": "Download free", "nav.menuToggleAria": "Open menu",
+    "hero.eyebrow": "For players",
+    "hero.h1": "Your season,<br/>your <em style=\"font-style:italic;color:#34d399;\">résumé.</em>",
+    "hero.sub": "Every match you play is content: a highlight reel to show clubs what you've got, and analysis that helps you improve. All with the same tool.",
+    "what.eyebrow": "Everything you need for your season",
+    "what.s1.t": "Your highlight reel", "what.s1.d": "Per-player reels with automatic play tracking, ready to export in 9:16 or 16:9.",
+    "what.s2.t": "Show up on social", "what.s2.d": "Clip your best plays and share them wherever your community — or a scout — is watching.",
+    "what.s3.t": "Draw your play", "what.s3.d": "Telestrator with 11 tools: mark your run and your reading of the game, what an unedited video can't show.",
+    "what.s4.t": "Track your season", "what.s4.d": "Individual analysis match by match: spot patterns in your game and bring real data to your next talk with your coach.",
+    "fp.eyebrow": "Free vs. Pro for your season", "fp.h2": "Everything you need on a single screen.",
+    "tag.free": "Free", "tag.pro": "Pro",
+    "fp1.t": "Hotkey tagging", "fp1.d": "Tag your goals, assists, and key plays as you watch, without pausing the video.",
+    "fp2.t": "Full telestrator", "fp2.d": "11 animated drawing tools: arrows, zones, spotlight, lines and text.",
+    "fp3.t": "Clip export", "fp3.d": "Every play, exported as MP4, no watermark.",
+    "fp4.t": "Reels + 9:16 and 16:9 export", "fp4.d": "Your reel built with automatic play tracking, ready for social or to send to a club.",
+    "fp5.t": "Season analysis", "fp5.d": "Track your progress match by match: minutes, actions, and key moments.",
+    "fp6.t": "Cloud library", "fp6.d": "Your whole season saved and accessible from any device.",
+    "closer.h2": "Build the reel<br/><em style=\"font-style:italic;color:#34d399;\">that represents you.</em>",
+    "closer.p": "Download for free, tag your next match, and when you want the automatic reel and season analysis, try Pro for 15 days, no card.",
+    "closer.cta": "Download free for Windows",
+    "footer.madeIn": "— Made in Argentina", "footer.clubs": "Clubs", "footer.partners": "Partners", "footer.creators": "Creators", "footer.analysts": "Analysts"
+  },
+  it: {
+    "meta.title": "Goal Labs — Analisi Individuale e Reel di Highlights per Giocatori",
+    "meta.description": "Crea il tuo reel di highlights della stagione, segui il tuo rendimento partita per partita e mostrati ai club con Goal Labs.",
+    "skip": "Vai al contenuto principale",
+    "nav.features": "Funzionalità", "nav.pricing": "Prezzi", "nav.creators": "Creator", "nav.analysts": "Analisti",
+    "nav.langLabel": "Lingua", "nav.downloadCta": "Scarica gratis", "nav.menuToggleAria": "Apri il menu",
+    "hero.eyebrow": "Per giocatori",
+    "hero.h1": "La tua stagione,<br/>il tuo <em style=\"font-style:italic;color:#34d399;\">curriculum.</em>",
+    "hero.sub": "Ogni partita che giochi è contenuto: un reel di highlights per mostrarti a un club, e un'analisi che ti aiuta a migliorare. Tutto con lo stesso strumento.",
+    "what.eyebrow": "Tutto quello che ti serve per la tua stagione",
+    "what.s1.t": "Il tuo reel di highlights", "what.s1.d": "Reel per giocatore con tracking automatico dell'azione, pronti da esportare in 9:16 o 16:9.",
+    "what.s2.t": "Mostrati sui social", "what.s2.d": "Ritaglia le tue migliori giocate e condividile dove ti vede la tua community — o un osservatore.",
+    "what.s3.t": "Disegna la tua giocata", "what.s3.d": "Telestrator con 11 strumenti: segna il tuo movimento e la tua lettura del gioco, ciò che un video non montato non mostra.",
+    "what.s4.t": "Segui la tua stagione", "what.s4.d": "Analisi individuale partita per partita: individua schemi nel tuo gioco e arriva con dati concreti al confronto con il tuo allenatore.",
+    "fp.eyebrow": "Free vs. Pro per la tua stagione", "fp.h2": "Tutto quello che ti serve in un'unica schermata.",
+    "tag.free": "Gratis", "tag.pro": "Pro",
+    "fp1.t": "Tagging con hotkey", "fp1.d": "Segna i tuoi gol, assist e giocate chiave mentre guardi la partita, senza mettere in pausa il video.",
+    "fp2.t": "Telestrator completo", "fp2.d": "11 strumenti di disegno animati: frecce, zone, spotlight, linee e testo.",
+    "fp3.t": "Export delle clip", "fp3.d": "Ogni giocata, esportata in MP4, senza filigrana.",
+    "fp4.t": "Reel + export 9:16 e 16:9", "fp4.d": "Il tuo reel costruito con tracking automatico dell'azione, pronto per i social o da mandare a un club.",
+    "fp5.t": "Analisi di stagione", "fp5.d": "Segui la tua evoluzione partita per partita: minuti, azioni e momenti salienti.",
+    "fp6.t": "Libreria cloud", "fp6.d": "Tutta la tua stagione salvata e accessibile da qualsiasi dispositivo.",
+    "closer.h2": "Costruisci il reel<br/><em style=\"font-style:italic;color:#34d399;\">che ti rappresenta.</em>",
+    "closer.p": "Scarica gratis, tagga la tua prossima partita, e quando vuoi il reel automatico e l'analisi di stagione, prova Pro 15 giorni senza carta.",
+    "closer.cta": "Scarica gratis per Windows",
+    "footer.madeIn": "— Fatto in Argentina", "footer.clubs": "Club", "footer.partners": "Partners", "footer.creators": "Creator", "footer.analysts": "Analisti"
+  }
+};
+</script>
+<script src="../assets/site-i18n.js"></script>
+<script src="../assets/mobile-nav.js" defer></script>
+</body>
+</html>

@@ -14,6 +14,8 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta property="og:image" content="https://goallabs.com.ar/assets/og-image.png" />
   <meta property="og:locale" content="es_AR" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="it_IT" />
   <meta property="og:site_name" content="Goal Labs" />
 
   <link rel="canonical" href="https://goallabs.com.ar/analistas" />
@@ -47,10 +49,10 @@
       <span translate="no" class="text-white font-mono font-medium text-sm tracking-[0.25em] uppercase">Goal</span>
       <span translate="no" class="text-zinc-500 font-mono text-sm tracking-[0.35em] uppercase">Labs</span>
     </a>
-    <div class="hidden md:flex items-center gap-8" role="list">
+    <div class="hidden lg:flex items-center gap-8" role="list">
       <a href="../index.html#funcionalidades" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.features">Funcionalidades</a>
       <a href="../index.html#precios" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.pricing">Precios</a>
-      <a href="../partners/" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.partners">Partners</a>
+      <a href="../clubes/" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.clubs">Clubes</a>
       <a href="../creadores/" class="font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-400 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.creators">Creadores</a>
     </div>
     <div class="flex items-center gap-3">
@@ -60,8 +62,22 @@
       </select>
       <a href="https://github.com/nacholiporace/goal-labs-releases/releases/latest" data-download class="btn-primary bg-cream hover:bg-white text-ink text-xs font-body font-semibold px-4 py-2 rounded-full transition-colors flex items-center gap-2 focus-ring">
         <i class="fas fa-download text-[11px]" aria-hidden="true"></i>
-        <span data-i18n="nav.downloadCta">Descargar gratis</span>
+        <span class="hidden sm:inline" data-i18n="nav.downloadCta">Descargar gratis</span>
       </a>
+      <button type="button" data-mobile-menu-toggle aria-controls="mobile-menu" aria-expanded="false"
+              class="lg:hidden w-9 h-9 shrink-0 flex items-center justify-center rounded-lg border border-zinc-700 text-zinc-300 hover:text-cream hover:border-zinc-600 transition-colors focus-ring"
+              data-i18n-aria="nav.menuToggleAria" aria-label="Abrir menú">
+        <i class="icon-open fas fa-bars text-sm" aria-hidden="true"></i>
+        <i class="icon-close hidden fas fa-xmark text-sm" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-zinc-800/60 bg-zinc-950/95 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-6 py-3 flex flex-col" role="list">
+      <a href="../index.html#funcionalidades" class="py-3 border-b border-zinc-800/60 font-mono text-xs uppercase tracking-[0.15em] text-zinc-300 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.features">Funcionalidades</a>
+      <a href="../index.html#precios" class="py-3 border-b border-zinc-800/60 font-mono text-xs uppercase tracking-[0.15em] text-zinc-300 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.pricing">Precios</a>
+      <a href="../clubes/" class="py-3 border-b border-zinc-800/60 font-mono text-xs uppercase tracking-[0.15em] text-zinc-300 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.clubs">Clubes</a>
+      <a href="../creadores/" class="py-3 font-mono text-xs uppercase tracking-[0.15em] text-zinc-300 hover:text-cream transition-colors focus-ring" role="listitem" data-i18n="nav.creators">Creadores</a>
     </div>
   </div>
 </nav>
@@ -164,7 +180,7 @@
         </div>
         <div class="p-6 reveal reveal-d4">
           <div class="flex items-center justify-between mb-2"><span class="font-mono text-emerald-400 text-xs">06</span><span class="font-mono text-[10px] uppercase text-amber-900 bg-gradient-to-br from-amber-300 to-amber-500 px-2 py-0.5 rounded-full font-semibold" data-i18n="tag.pro">Pro</span></div>
-          <h3 class="font-display text-xl text-white mb-1" data-i18n="fp6.t">Biblioteca + PDF + LPF Play</h3>
+          <h3 class="font-display text-xl text-white mb-1" data-i18n="fp6.t">Biblioteca + PDF + planteles</h3>
           <p class="text-zinc-400 font-body text-sm" data-i18n="fp6.d">Nube multi-dispositivo, reportes PDF (partido/jugador/scouting) y planteles predefinidos.</p>
         </div>
       </div>
@@ -198,6 +214,8 @@
       <span class="text-zinc-600 text-xs ml-3 font-mono" data-i18n="footer.madeIn">— Hecho en Argentina</span>
     </div>
     <div class="flex items-center gap-6 text-zinc-500 text-xs font-mono uppercase tracking-wider">
+      <a href="../jugadores/" class="hover:text-cream transition-colors focus-ring" data-i18n="footer.players">Jugadores</a>
+      <a href="../clubes/" class="hover:text-cream transition-colors focus-ring" data-i18n="footer.clubs">Clubes</a>
       <a href="../partners/" class="hover:text-cream transition-colors focus-ring" data-i18n="footer.partners">Partners</a>
       <a href="../creadores/" class="hover:text-cream transition-colors focus-ring" data-i18n="footer.creators">Creadores</a>
       <span aria-label="Copyright 2026 Nacho Liporace">© 2026 Nacho Liporace</span>
@@ -213,8 +231,8 @@ window.I18N = {
     "meta.title": "Goal Labs — Guía Rápida para Analistas y Cuerpos Técnicos",
     "meta.description": "Guía rápida del flujo real de trabajo en Goal Labs: hotkeys, telestrator, offside, exportación.",
     "skip": "Ir al contenido principal",
-    "nav.features": "Funcionalidades", "nav.pricing": "Precios", "nav.partners": "Partners", "nav.creators": "Creadores",
-    "nav.langLabel": "Idioma", "nav.downloadCta": "Descargar gratis",
+    "nav.features": "Funcionalidades", "nav.pricing": "Precios", "nav.clubs": "Clubes", "nav.creators": "Creadores",
+    "nav.langLabel": "Idioma", "nav.downloadCta": "Descargar gratis", "nav.menuToggleAria": "Abrir menú",
     "hero.eyebrow": "Quick-start para analistas y cuerpos técnicos",
     "hero.h1": "Del video crudo al informe,<br/>sin salir de <em style=\"font-style:italic;color:#34d399;\">una pantalla.</em>",
     "hero.sub": "Guía rápida del flujo real de trabajo en Goal Labs — para que llegues al primer partido tagueado en minutos, no en un manual de 200 páginas.",
@@ -235,18 +253,18 @@ window.I18N = {
     "fp3.t": "Offside con perspectiva", "fp3.d": "Línea geométrica por homografía — el mismo principio que usa el VAR profesional.",
     "fp4.t": "Insights + estadísticas con IA", "fp4.d": "Generación de etiquetas, análisis de patrones y estadísticas avanzadas por jugador y equipo.",
     "fp5.t": "Reels + export a tu editor", "fp5.d": "Reels 9:16/16:9 por jugador con seguimiento de la jugada y FCP XML para Premiere/DaVinci. El export MP4 de clips es gratis.",
-    "fp6.t": "Biblioteca + PDF + LPF Play", "fp6.d": "Nube multi-dispositivo, reportes PDF (partido/jugador/scouting) y planteles predefinidos.",
+    "fp6.t": "Biblioteca + PDF + planteles", "fp6.d": "Nube multi-dispositivo, reportes PDF (partido/jugador/scouting) y planteles predefinidos.",
     "closer.h2": "Probá Pro 15 días,<br/><em style=\"font-style:italic;color:#34d399;\">sin tarjeta.</em>",
     "closer.p": "Se activa desde \"Ver planes\" dentro de cualquier función Pro de la app. Si tenés dudas sobre tu flujo de trabajo, escribinos.",
     "closer.cta": "Descargar gratis para Windows",
-    "footer.madeIn": "— Hecho en Argentina", "footer.partners": "Partners", "footer.creators": "Creadores"
+    "footer.madeIn": "— Hecho en Argentina", "footer.players": "Jugadores", "footer.clubs": "Clubes", "footer.partners": "Partners", "footer.creators": "Creadores"
   },
   en: {
     "meta.title": "Goal Labs — Quick-start for Analysts & Coaching Staffs",
     "meta.description": "A quick guide to the real Goal Labs workflow: hotkeys, telestrator, offside, export.",
     "skip": "Skip to main content",
-    "nav.features": "Features", "nav.pricing": "Pricing", "nav.partners": "Partners", "nav.creators": "Creators",
-    "nav.langLabel": "Language", "nav.downloadCta": "Download free",
+    "nav.features": "Features", "nav.pricing": "Pricing", "nav.clubs": "Clubs", "nav.creators": "Creators",
+    "nav.langLabel": "Language", "nav.downloadCta": "Download free", "nav.menuToggleAria": "Open menu",
     "hero.eyebrow": "Quick-start for analysts & coaching staffs",
     "hero.h1": "From raw footage to a report,<br/>without leaving <em style=\"font-style:italic;color:#34d399;\">one screen.</em>",
     "hero.sub": "A quick guide to the real Goal Labs workflow — so you get your first match tagged in minutes, not a 200-page manual.",
@@ -267,18 +285,18 @@ window.I18N = {
     "fp3.t": "Perspective-corrected offside", "fp3.d": "Geometric line via homography — the same principle professional VAR uses.",
     "fp4.t": "AI insights + stats", "fp4.d": "Tag generation, pattern analysis, and advanced per-player and team stats.",
     "fp5.t": "Reels + export to your editor", "fp5.d": "9:16/16:9 per-player reels with play tracking and FCP XML for Premiere/DaVinci. MP4 clip export is free.",
-    "fp6.t": "Library + PDF + LPF Play", "fp6.d": "Multi-device cloud, PDF reports (match/player/scouting), and preset squads.",
+    "fp6.t": "Library + PDF + squads", "fp6.d": "Multi-device cloud, PDF reports (match/player/scouting), and preset squads.",
     "closer.h2": "Try Pro for 15 days,<br/><em style=\"font-style:italic;color:#34d399;\">no card.</em>",
     "closer.p": "Activate it from \"See plans\" inside any Pro feature in the app. If you have questions about your workflow, write to us.",
     "closer.cta": "Download free for Windows",
-    "footer.madeIn": "— Made in Argentina", "footer.partners": "Partners", "footer.creators": "Creators"
+    "footer.madeIn": "— Made in Argentina", "footer.players": "Players", "footer.clubs": "Clubs", "footer.partners": "Partners", "footer.creators": "Creators"
   },
   it: {
     "meta.title": "Goal Labs — Guida Rapida per Analisti e Staff Tecnici",
     "meta.description": "Guida rapida al flusso di lavoro reale di Goal Labs: hotkey, telestrator, fuorigioco, esportazione.",
     "skip": "Vai al contenuto principale",
-    "nav.features": "Funzionalità", "nav.pricing": "Prezzi", "nav.partners": "Partners", "nav.creators": "Creator",
-    "nav.langLabel": "Lingua", "nav.downloadCta": "Scarica gratis",
+    "nav.features": "Funzionalità", "nav.pricing": "Prezzi", "nav.clubs": "Club", "nav.creators": "Creator",
+    "nav.langLabel": "Lingua", "nav.downloadCta": "Scarica gratis", "nav.menuToggleAria": "Apri il menu",
     "hero.eyebrow": "Guida rapida per analisti e staff tecnici",
     "hero.h1": "Dal video grezzo al report,<br/>senza uscire da <em style=\"font-style:italic;color:#34d399;\">una schermata.</em>",
     "hero.sub": "Guida rapida al flusso di lavoro reale di Goal Labs — per taggare la tua prima partita in pochi minuti, non con un manuale di 200 pagine.",
@@ -299,14 +317,15 @@ window.I18N = {
     "fp3.t": "Fuorigioco con prospettiva", "fp3.d": "Linea geometrica tramite omografia — lo stesso principio del VAR professionale.",
     "fp4.t": "Insights IA + statistiche", "fp4.d": "Generazione di tag, analisi dei pattern e statistiche avanzate per giocatore e squadra.",
     "fp5.t": "Reel + export verso il tuo editor", "fp5.d": "Reel 9:16/16:9 per giocatore con tracking dell'azione e FCP XML per Premiere/DaVinci. L'export MP4 delle clip è gratis.",
-    "fp6.t": "Libreria + PDF + LPF Play", "fp6.d": "Cloud multi-dispositivo, report PDF (partita/giocatore/scouting) e rose predefinite.",
+    "fp6.t": "Libreria + PDF + rose", "fp6.d": "Cloud multi-dispositivo, report PDF (partita/giocatore/scouting) e rose predefinite.",
     "closer.h2": "Prova Pro 15 giorni,<br/><em style=\"font-style:italic;color:#34d399;\">senza carta.</em>",
     "closer.p": "Si attiva da \"Vedi piani\" all'interno di qualsiasi funzione Pro dell'app. Se hai dubbi sul tuo flusso di lavoro, scrivici.",
     "closer.cta": "Scarica gratis per Windows",
-    "footer.madeIn": "— Fatto in Argentina", "footer.partners": "Partners", "footer.creators": "Creator"
+    "footer.madeIn": "— Fatto in Argentina", "footer.players": "Giocatori", "footer.clubs": "Club", "footer.partners": "Partners", "footer.creators": "Creator"
   }
 };
 </script>
 <script src="../assets/site-i18n.js"></script>
+<script src="../assets/mobile-nav.js" defer></script>
 </body>
 </html>
