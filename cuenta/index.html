@@ -13,6 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = { theme: { extend: {
@@ -54,8 +55,13 @@
     </div>
 
     <div class="bg-zinc-900 rounded-lg border border-zinc-800 p-8 shadow-2xl">
-      <h1 class="font-display text-3xl mb-1" data-i18n="title">Mi cuenta</h1>
-      <p class="text-zinc-500 text-sm mb-6" data-i18n="subtitle">Tu plan de Goal Labs, prueba gratis y upgrade a Pro.</p>
+      <div class="flex flex-col items-center mb-6">
+          <div class="w-14 h-14 bg-zinc-100 rounded-lg flex items-center justify-center mb-3 shadow-lg border-2 border-zinc-700">
+              <i class="fas fa-futbol text-2xl text-zinc-900"></i>
+          </div>
+          <h1 class="text-2xl font-black text-white tracking-tight" data-i18n="title">GOAL LABS</h1>
+          <p class="text-zinc-500 font-mono text-[10px] tracking-widest mt-1 uppercase" data-i18n="subtitle">Mi cuenta</p>
+      </div>
 
       <div id="msg" hidden class="mb-4 p-3 rounded text-sm border"></div>
 
@@ -72,13 +78,19 @@
         <form id="form-auth" class="space-y-4" novalidate>
           <div>
             <label class="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-1 block" for="f-email" data-i18n="email">Email</label>
-            <input id="f-email" type="email" autocomplete="email"
-              class="w-full bg-zinc-950 border border-zinc-700 text-white px-3 py-2.5 rounded focus:outline-none focus:border-emerald-500 text-sm" />
+            <div class="relative">
+              <i class="fas fa-envelope absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 text-sm"></i>
+              <input id="f-email" type="email" autocomplete="email"
+                class="w-full bg-zinc-950 border border-zinc-700 text-white pl-10 pr-3 py-2.5 rounded focus:outline-none focus:border-emerald-500 text-sm" />
+            </div>
           </div>
           <div>
             <label class="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-1 block" for="f-pass" data-i18n="password">Contraseña</label>
-            <input id="f-pass" type="password" autocomplete="current-password"
-              class="w-full bg-zinc-950 border border-zinc-700 text-white px-3 py-2.5 rounded focus:outline-none focus:border-emerald-500 text-sm" />
+            <div class="relative">
+              <i class="fas fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 text-sm"></i>
+              <input id="f-pass" type="password" autocomplete="current-password"
+                class="w-full bg-zinc-950 border border-zinc-700 text-white pl-10 pr-3 py-2.5 rounded focus:outline-none focus:border-emerald-500 text-sm" />
+            </div>
           </div>
 
           <div id="signup-extras" hidden class="space-y-4">
@@ -101,6 +113,17 @@
             class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded uppercase tracking-wider text-xs transition-colors focus-ring"
             data-i18n="tabLogin">Ingresar</button>
         </form>
+
+        <div class="my-5 flex items-center gap-3">
+          <div class="h-px bg-zinc-800 flex-1"></div>
+          <span class="text-zinc-600 text-[10px] font-bold uppercase" data-i18n="orContinueWith">o continuar con</span>
+          <div class="h-px bg-zinc-800 flex-1"></div>
+        </div>
+        <button id="btn-google" type="button"
+          class="w-full bg-white hover:bg-zinc-200 text-zinc-900 font-bold py-2.5 rounded text-sm shadow-lg transition-all flex items-center justify-center gap-3 focus-ring">
+          <img src="https://www.google.com/favicon.ico" alt="Google" class="w-4 h-4" />
+          <span>Google</span>
+        </button>
       </section>
 
       <!-- VISTA: con sesión -->
@@ -145,11 +168,12 @@ window.I18N = {
   es: {
     'meta.title': 'Goal Labs — Mi cuenta',
     'nav.back': 'Volver al sitio',
-    'title': 'Mi cuenta', 'subtitle': 'Tu plan de Goal Labs, prueba gratis y upgrade a Pro.',
+    'title': 'GOAL LABS', 'subtitle': 'Mi cuenta',
     'loading': 'Cargando…',
     'tabLogin': 'Ingresar', 'tabSignup': 'Crear cuenta',
     'email': 'Email', 'password': 'Contraseña',
     'roleLabel': '¿Qué sos?', 'optional': '(opcional)', 'refLabel': 'Código de invitación',
+    'orContinueWith': 'o continuar con',
     'role.player': 'Jugador', 'role.analyst': 'Analista', 'role.club': 'Club', 'role.creator': 'Creador', 'role.other': 'Otro',
     'ref.invited': 'Invitación activada:', 'ref.benefit': 'arrancás con 30 días de Pro gratis.',
     'pay.ok': '¡Pago recibido! Tu plan Pro puede tardar unos segundos en reflejarse.', 'pay.refresh': 'Actualizar',
@@ -170,11 +194,12 @@ window.I18N = {
   en: {
     'meta.title': 'Goal Labs — My account',
     'nav.back': 'Back to site',
-    'title': 'My account', 'subtitle': 'Your Goal Labs plan, free trial and Pro upgrade.',
+    'title': 'GOAL LABS', 'subtitle': 'My account',
     'loading': 'Loading…',
     'tabLogin': 'Sign in', 'tabSignup': 'Create account',
     'email': 'Email', 'password': 'Password',
     'roleLabel': 'What are you?', 'optional': '(optional)', 'refLabel': 'Invite code',
+    'orContinueWith': 'or continue with',
     'role.player': 'Player', 'role.analyst': 'Analyst', 'role.club': 'Club', 'role.creator': 'Creator', 'role.other': 'Other',
     'ref.invited': 'Invitation active:', 'ref.benefit': 'you start with 30 days of Pro for free.',
     'pay.ok': 'Payment received! Your Pro plan may take a few seconds to show up.', 'pay.refresh': 'Refresh',
@@ -195,11 +220,12 @@ window.I18N = {
   it: {
     'meta.title': 'Goal Labs — Il mio account',
     'nav.back': 'Torna al sito',
-    'title': 'Il mio account', 'subtitle': 'Il tuo piano Goal Labs, prova gratuita e upgrade a Pro.',
+    'title': 'GOAL LABS', 'subtitle': 'Il mio account',
     'loading': 'Caricamento…',
     'tabLogin': 'Accedi', 'tabSignup': 'Crea account',
     'email': 'Email', 'password': 'Password',
     'roleLabel': 'Chi sei?', 'optional': '(facoltativo)', 'refLabel': 'Codice invito',
+    'orContinueWith': 'o continua con',
     'role.player': 'Giocatore', 'role.analyst': 'Analista', 'role.club': 'Club', 'role.creator': 'Creator', 'role.other': 'Altro',
     'ref.invited': 'Invito attivo:', 'ref.benefit': 'inizi con 30 giorni di Pro gratis.',
     'pay.ok': 'Pagamento ricevuto! Il piano Pro può richiedere qualche secondo.', 'pay.refresh': 'Aggiorna',
@@ -229,6 +255,11 @@ const SUPABASE_ANON_KEY = 'sb_publishable__wCYgrj15N7sg4lkC2mTgg_iXt_YOD8';
 const FN = `${SUPABASE_URL}/functions/v1`;
 const CODE_RE = /^[a-z0-9-]{3,32}$/;
 const ROLES = ['player', 'analyst', 'club', 'creator', 'other'];
+// Ventana de confianza para el caso de signup con Google: el email no se conoce hasta
+// despues del redirect de OAuth, asi que se guarda con email vacio. Se acota el riesgo
+// de fuga entre cuentas permitiendo el match "sin email" solo si se consume dentro de
+// este plazo desde que se escribio (misma logica que utils/referral.ts en la app).
+const GOOGLE_OAUTH_TRUST_WINDOW_MS = 10 * 60 * 1000; // 10 min
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const $ = (id) => document.getElementById(id);
@@ -253,6 +284,14 @@ function getRef() {
   } catch (e) { return null; }
 }
 function clearRef() { try { localStorage.removeItem('gl_ref'); } catch (e) {} }
+// Compara el email guardado (signup por email/password) contra el email de la sesion,
+// o -- si no se guardo email (signup con Google, el email recien se conoce tras el
+// redirect) -- acepta el match si la entrada es reciente (ver GOOGLE_OAUTH_TRUST_WINDOW_MS).
+function emailOrWindowMatches(storedEmail, storedTs, targetEmail) {
+  const normalizedTarget = (targetEmail || '').trim().toLowerCase();
+  if ((storedEmail || '').trim().toLowerCase() === normalizedTarget && normalizedTarget) return true;
+  return !storedEmail && typeof storedTs === 'number' && (Date.now() - storedTs) < GOOGLE_OAUTH_TRUST_WINDOW_MS;
+}
 
 // ---- UI helpers ----
 let mode = 'login';
@@ -364,6 +403,34 @@ $('form-auth').onsubmit = async (e) => {
 };
 $('btn-logout').onclick = async () => { await supabase.auth.signOut(); };
 
+$('btn-google').onclick = async () => {
+  $('btn-google').disabled = true;
+  try {
+    if (mode === 'signup') {
+      const rawRef = $('f-ref').value.trim().toLowerCase();
+      const emailForStamp = $('f-email').value.trim();
+      if (rawRef && CODE_RE.test(rawRef)) {
+        const prev = getRef();
+        try { localStorage.setItem('gl_ref', JSON.stringify({ code: rawRef, name: prev && prev.code === rawRef ? prev.name : undefined, email: emailForStamp, ts: Date.now() })); } catch (e2) {}
+      }
+      if (role) { try { localStorage.setItem('gl_pending_role', JSON.stringify({ role, email: emailForStamp })); } catch (e2) {} }
+    }
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: location.origin + '/cuenta/',
+        scopes: 'openid email profile',
+        queryParams: { access_type: 'offline', prompt: 'select_account' },
+      },
+    });
+    if (error) { msg(t('err.generic'), 'err'); $('btn-google').disabled = false; }
+    // si no hay error, el navegador redirige a Google — no hay mas que hacer aca
+  } catch (e) {
+    msg(t('err.generic'), 'err');
+    $('btn-google').disabled = false;
+  }
+};
+
 // ---- consumo de referido/rol post-login ----
 async function consumePending(session) {
   const sessionEmail = (session.user.email || '').trim().toLowerCase();
@@ -375,7 +442,7 @@ async function consumePending(session) {
     } catch (e) {
       localStorage.removeItem('gl_pending_role'); // formato viejo/invalido, no se puede recuperar
     }
-    if (parsed && parsed.role && (parsed.email || '').trim().toLowerCase() === sessionEmail) {
+    if (parsed && parsed.role && emailOrWindowMatches(parsed.email, parsed.ts, sessionEmail)) {
       try {
         if (!session.user.user_metadata?.role) await supabase.auth.updateUser({ data: { role: parsed.role } });
         localStorage.removeItem('gl_pending_role');
@@ -383,7 +450,7 @@ async function consumePending(session) {
     }
   }
   const r = getRef();
-  if (!r || !r.email || (r.email || '').trim().toLowerCase() !== sessionEmail) return;
+  if (!r || !emailOrWindowMatches(r.email, r.ts, sessionEmail)) return;
   try {
     const res = await fetch(`${FN}/register-referral`, {
       method: 'POST',
