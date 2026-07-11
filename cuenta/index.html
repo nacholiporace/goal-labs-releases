@@ -275,6 +275,15 @@ if (CODE_RE.test(refParam)) {
   const email = (prev && prev.code === refParam) ? prev.email : undefined;
   try { localStorage.setItem('gl_ref', JSON.stringify({ code: refParam, name, email, ts: Date.now() })); } catch (e) {}
 }
+
+// ---- override de idioma via ?lang= (viene del redirect post-pago de la app) ----
+const SUPPORTED_LANGS = ['es', 'en', 'it'];
+const langParam = (qs.get('lang') || '').trim().toLowerCase();
+if (SUPPORTED_LANGS.includes(langParam) && window.GLi18n && window.GLi18n.lang !== langParam) {
+  try { localStorage.setItem('gl_lang', langParam); } catch (e) {}
+  window.GLi18n.apply(langParam);
+}
+
 function getRef() {
   try {
     const r = JSON.parse(localStorage.getItem('gl_ref') || 'null');
