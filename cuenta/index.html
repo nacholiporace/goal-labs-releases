@@ -369,14 +369,17 @@ async function consumePending(session) {
   const sessionEmail = (session.user.email || '').trim().toLowerCase();
   const pendingRoleRaw = localStorage.getItem('gl_pending_role');
   if (pendingRoleRaw) {
+    let parsed = null;
     try {
-      const parsed = JSON.parse(pendingRoleRaw);
-      if (parsed && parsed.role && (parsed.email || '').trim().toLowerCase() === sessionEmail) {
-        if (!session.user.user_metadata?.role) await supabase.auth.updateUser({ data: { role: parsed.role } });
-        localStorage.removeItem('gl_pending_role');
-      }
+      parsed = JSON.parse(pendingRoleRaw);
     } catch (e) {
       localStorage.removeItem('gl_pending_role'); // formato viejo/invalido, no se puede recuperar
+    }
+    if (parsed && parsed.role && (parsed.email || '').trim().toLowerCase() === sessionEmail) {
+      try {
+        if (!session.user.user_metadata?.role) await supabase.auth.updateUser({ data: { role: parsed.role } });
+        localStorage.removeItem('gl_pending_role');
+      } catch (e) { /* reintenta en el proximo render */ }
     }
   }
   const r = getRef();
