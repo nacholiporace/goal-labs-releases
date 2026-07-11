@@ -14,7 +14,7 @@ if (!code || !name || !/^[a-z0-9-]{3,32}$/.test(code)) {
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 const safeName = esc(name);
-const jsName = JSON.stringify(name);
+const jsName = JSON.stringify(name).replace(/</g, '\\u003c');
 
 const html = `<!DOCTYPE html>
 <html lang="es" style="color-scheme: dark;">
