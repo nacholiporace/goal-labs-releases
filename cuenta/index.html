@@ -29,8 +29,8 @@
 <nav class="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/60 bg-zinc-950/90 backdrop-blur-md" aria-label="Navegación principal">
   <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
     <a href="../index.html" class="flex items-center gap-2.5 select-none focus-ring" aria-label="Goal Labs — Inicio">
-      <span class="w-8 h-8 bg-cream rounded flex items-center justify-center"><i class="text-ink" style="font-family:serif">⚽</i></span>
-      <span class="font-mono text-sm tracking-tight">Goal<span class="opacity-60">Labs</span></span>
+      <span class="w-7 h-7 rounded-md bg-cream flex items-center justify-center shrink-0" aria-hidden="true"><i class="fas fa-futbol text-ink text-sm"></i></span>
+      <span translate="no" class="text-white font-mono font-medium text-sm tracking-[0.25em] uppercase">Goal</span><span translate="no" class="text-zinc-500 font-mono text-sm tracking-[0.35em] uppercase">Labs</span>
     </a>
     <a href="../index.html" class="text-sm text-zinc-400 hover:text-white transition-colors focus-ring" data-i18n="nav.back">Volver al sitio</a>
   </div>
@@ -59,7 +59,9 @@
           <div class="w-14 h-14 bg-zinc-100 rounded-lg flex items-center justify-center mb-3 shadow-lg border-2 border-zinc-700">
               <i class="fas fa-futbol text-2xl text-zinc-900"></i>
           </div>
-          <h1 class="text-2xl font-black text-white tracking-tight" data-i18n="title">GOAL LABS</h1>
+          <h1 class="flex items-baseline gap-0.5" aria-label="Goal Labs">
+              <span translate="no" class="text-white font-mono font-medium text-lg tracking-[0.25em] uppercase">Goal</span><span translate="no" class="text-zinc-500 font-mono text-lg tracking-[0.35em] uppercase">Labs</span>
+          </h1>
           <p class="text-zinc-500 font-mono text-[10px] tracking-widest mt-1 uppercase" data-i18n="subtitle">Mi cuenta</p>
       </div>
 
@@ -168,7 +170,7 @@ window.I18N = {
   es: {
     'meta.title': 'Goal Labs — Mi cuenta',
     'nav.back': 'Volver al sitio',
-    'title': 'GOAL LABS', 'subtitle': 'Mi cuenta',
+    'subtitle': 'Mi cuenta',
     'loading': 'Cargando…',
     'tabLogin': 'Ingresar', 'tabSignup': 'Crear cuenta',
     'email': 'Email', 'password': 'Contraseña',
@@ -194,7 +196,7 @@ window.I18N = {
   en: {
     'meta.title': 'Goal Labs — My account',
     'nav.back': 'Back to site',
-    'title': 'GOAL LABS', 'subtitle': 'My account',
+    'subtitle': 'My account',
     'loading': 'Loading…',
     'tabLogin': 'Sign in', 'tabSignup': 'Create account',
     'email': 'Email', 'password': 'Password',
@@ -220,7 +222,7 @@ window.I18N = {
   it: {
     'meta.title': 'Goal Labs — Il mio account',
     'nav.back': 'Torna al sito',
-    'title': 'GOAL LABS', 'subtitle': 'Il mio account',
+    'subtitle': 'Il mio account',
     'loading': 'Caricamento…',
     'tabLogin': 'Accedi', 'tabSignup': 'Crea account',
     'email': 'Email', 'password': 'Password',
