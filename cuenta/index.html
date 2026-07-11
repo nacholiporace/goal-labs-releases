@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="es" style="color-scheme: dark;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#09090b" />
+  <meta name="robots" content="noindex" />
+  <title>Goal Labs — Mi cuenta</title>
+  <meta name="description" content="Cuenta de Goal Labs: plan, prueba gratis y upgrade a Pro." />
+  <link rel="canonical" href="https://goallabs.com.ar/cuenta/" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      fontFamily: { display: ['"Instrument Serif"', 'Georgia', 'serif'], mono: ['"DM Mono"', 'ui-monospace', 'monospace'], sans: ['"Barlow Condensed"', 'sans-serif'], body: ['Outfit', 'sans-serif'] },
+      colors: { zinc: { 950: '#0a0a0a' }, ink: '#0a0a0a', cream: '#f0ebe1' }
+    } } }
+  </script>
+  <link rel="stylesheet" href="../assets/site.css" />
+  <script data-goatcounter="https://goallabs.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body class="bg-zinc-950 text-white antialiased font-body">
+
+<nav class="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/60 bg-zinc-950/90 backdrop-blur-md" aria-label="Navegación principal">
+  <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+    <a href="../index.html" class="flex items-center gap-2.5 select-none focus-ring" aria-label="Goal Labs — Inicio">
+      <span class="w-8 h-8 bg-cream rounded flex items-center justify-center"><i class="text-ink" style="font-family:serif">⚽</i></span>
+      <span class="font-mono text-sm tracking-tight">Goal<span class="opacity-60">Labs</span></span>
+    </a>
+    <a href="../index.html" class="text-sm text-zinc-400 hover:text-white transition-colors focus-ring" data-i18n="nav.back">Volver al sitio</a>
+  </div>
+</nav>
+
+<main id="main-content" class="min-h-screen flex items-center justify-center px-4 pt-20 pb-16">
+  <div class="w-full max-w-md">
+
+    <!-- Banner de invitación -->
+    <div id="ref-banner" hidden class="mb-4 p-3 rounded-lg border border-emerald-800 bg-emerald-900/30 text-emerald-200 text-sm">
+      <span data-i18n="ref.invited">Invitación activada:</span>
+      <b id="ref-name"></b> — <span data-i18n="ref.benefit">arrancás con 30 días de Pro gratis.</span>
+    </div>
+
+    <!-- Banners de pago -->
+    <div id="pay-ok" hidden class="mb-4 p-3 rounded-lg border border-emerald-800 bg-emerald-900/30 text-emerald-200 text-sm">
+      <span data-i18n="pay.ok">¡Pago recibido! Tu plan Pro puede tardar unos segundos en reflejarse.</span>
+      <button id="btn-refresh" class="underline ml-1 focus-ring" data-i18n="pay.refresh">Actualizar</button>
+    </div>
+    <div id="pay-error" hidden class="mb-4 p-3 rounded-lg border border-red-800 bg-red-900/30 text-red-200 text-sm">
+      <span data-i18n="pay.error">El pago no se completó. Podés intentarlo de nuevo cuando quieras.</span>
+    </div>
+
+    <div class="bg-zinc-900 rounded-lg border border-zinc-800 p-8 shadow-2xl">
+      <div class="flex flex-col items-center mb-6">
+          <div class="w-14 h-14 bg-zinc-100 rounded-lg flex items-center justify-center mb-3 shadow-lg border-2 border-zinc-700">
+              <i class="fas fa-futbol text-2xl text-zinc-900"></i>
+          </div>
+          <h1 class="text-2xl font-black text-white tracking-tight" data-i18n="title">GOAL LABS</h1>
+          <p class="text-zinc-500 font-mono text-[10px] tracking-widest mt-1 uppercase" data-i18n="subtitle">Mi cuenta</p>
+      </div>
+
+      <div id="msg" hidden class="mb-4 p-3 rounded text-sm border"></div>
+
+      <!-- VISTA: cargando -->
+      <section id="v-loading"><p class="text-zinc-500 text-sm" data-i18n="loading">Cargando…</p></section>
+
+      <!-- VISTA: sin sesión -->
+      <section id="v-auth" hidden>
+        <div class="flex gap-1 mb-6 bg-zinc-950 rounded p-1">
+          <button id="tab-login" class="flex-1 py-2 rounded text-xs font-bold uppercase tracking-wider focus-ring" data-i18n="tabLogin">Ingresar</button>
+          <button id="tab-signup" class="flex-1 py-2 rounded text-xs font-bold uppercase tracking-wider focus-ring" data-i18n="tabSignup">Crear cuenta</button>
+        </div>
+
+        <form id="form-auth" class="space-y-4" novalidate>
+          <div>
+            <label class="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-1 block" for="f-email" data-i18n="email">Email</label>
+            <div class="relative">
+              <i class="fas fa-envelope absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 text-sm"></i>
+              <input id="f-email" type="email" autocomplete="email"
+                class="w-full bg-zinc-950 border border-zinc-700 text-white pl-10 pr-3 py-2.5 rounded focus:outline-none focus:border-emerald-500 text-sm" />
+            </div>
+          </div>
+          <div>
+            <label class="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-1 block" for="f-pass" data-i18n="password">Contraseña</label>
+            <div class="relative">
+              <i class="fas fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 text-sm"></i>
+              <input id="f-pass" type="password" autocomplete="current-password"
+                class="w-full bg-zinc-950 border border-zinc-700 text-white pl-10 pr-3 py-2.5 rounded focus:outline-none focus:border-emerald-500 text-sm" />
+            </div>
+          </div>
+
+          <div id="signup-extras" hidden class="space-y-4">
+            <div>
+              <label class="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-1 block">
+                <span data-i18n="roleLabel">¿Qué sos?</span> <span class="text-zinc-600 normal-case" data-i18n="optional">(opcional)</span>
+              </label>
+              <div id="role-chips" class="flex flex-wrap gap-2"></div>
+            </div>
+            <div>
+              <label class="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-1 block" for="f-ref">
+                <span data-i18n="refLabel">Código de invitación</span> <span class="text-zinc-600 normal-case" data-i18n="optional">(opcional)</span>
+              </label>
+              <input id="f-ref" type="text" placeholder="ej: nick-tactico"
+                class="w-full bg-zinc-950 border border-zinc-700 text-white px-3 py-2.5 rounded focus:outline-none focus:border-emerald-500 text-sm" />
+            </div>
+          </div>
+
+          <button id="btn-submit" type="submit"
+            class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded uppercase tracking-wider text-xs transition-colors focus-ring"
+            data-i18n="tabLogin">Ingresar</button>
+        </form>
+
+        <div class="my-5 flex items-center gap-3">
+          <div class="h-px bg-zinc-800 flex-1"></div>
+          <span class="text-zinc-600 text-[10px] font-bold uppercase" data-i18n="orContinueWith">o continuar con</span>
+          <div class="h-px bg-zinc-800 flex-1"></div>
+        </div>
+        <button id="btn-google" type="button"
+          class="w-full bg-white hover:bg-zinc-200 text-zinc-900 font-bold py-2.5 rounded text-sm shadow-lg transition-all flex items-center justify-center gap-3 focus-ring">
+          <img src="https://www.google.com/favicon.ico" alt="Google" class="w-4 h-4" />
+          <span>Google</span>
+        </button>
+      </section>
+
+      <!-- VISTA: con sesión -->
+      <section id="v-account" hidden>
+        <div class="mb-6">
+          <p class="text-xs text-zinc-500 uppercase tracking-wider font-bold mb-1" data-i18n="loggedAs">Sesión iniciada como</p>
+          <p id="acc-email" class="text-sm text-zinc-200 font-mono break-all"></p>
+        </div>
+
+        <div class="bg-zinc-950 border border-zinc-800 rounded-lg p-4 mb-6">
+          <p class="text-xs text-zinc-500 uppercase tracking-wider font-bold mb-1" data-i18n="planLabel">Tu plan</p>
+          <p id="acc-plan" class="text-lg font-bold"></p>
+          <p id="acc-until" class="text-xs text-zinc-500 mt-1"></p>
+        </div>
+
+        <div class="space-y-3">
+          <button id="btn-trial" hidden
+            class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded uppercase tracking-wider text-xs transition-colors focus-ring"></button>
+          <button id="btn-mp" hidden
+            class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold py-2.5 rounded uppercase tracking-wider text-xs transition-colors focus-ring"
+            data-i18n="payMp">Pasar a Pro — Mercado Pago (ARS)</button>
+          <button id="btn-stripe" hidden
+            class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded uppercase tracking-wider text-xs transition-colors focus-ring"
+            data-i18n="payStripe">Pasar a Pro — Tarjeta internacional (USD)</button>
+          <a href="../index.html" class="block text-center w-full border border-zinc-700 hover:border-zinc-500 text-zinc-300 font-bold py-2.5 rounded uppercase tracking-wider text-xs transition-colors focus-ring"
+            data-i18n="download">Descargar la app</a>
+          <button id="btn-logout" class="w-full text-zinc-500 hover:text-zinc-300 text-xs underline pt-2 focus-ring" data-i18n="logout">Cerrar sesión</button>
+        </div>
+      </section>
+    </div>
+
+    <div class="mt-4 text-right">
+      <select id="lang-select" class="bg-zinc-900 border border-zinc-800 text-zinc-400 text-xs rounded px-2 py-1 focus-ring" aria-label="Idioma">
+        <option value="es">ES</option><option value="en">EN</option><option value="it">IT</option>
+      </select>
+    </div>
+  </div>
+</main>
+
+<script>
+window.I18N = {
+  es: {
+    'meta.title': 'Goal Labs — Mi cuenta',
+    'nav.back': 'Volver al sitio',
+    'title': 'GOAL LABS', 'subtitle': 'Mi cuenta',
+    'loading': 'Cargando…',
+    'tabLogin': 'Ingresar', 'tabSignup': 'Crear cuenta',
+    'email': 'Email', 'password': 'Contraseña',
+    'roleLabel': '¿Qué sos?', 'optional': '(opcional)', 'refLabel': 'Código de invitación',
+    'orContinueWith': 'o continuar con',
+    'role.player': 'Jugador', 'role.analyst': 'Analista', 'role.club': 'Club', 'role.creator': 'Creador', 'role.other': 'Otro',
+    'ref.invited': 'Invitación activada:', 'ref.benefit': 'arrancás con 30 días de Pro gratis.',
+    'pay.ok': '¡Pago recibido! Tu plan Pro puede tardar unos segundos en reflejarse.', 'pay.refresh': 'Actualizar',
+    'pay.error': 'El pago no se completó. Podés intentarlo de nuevo cuando quieras.',
+    'loggedAs': 'Sesión iniciada como', 'planLabel': 'Tu plan',
+    'plan.free': 'Free', 'plan.trial': 'Prueba Pro', 'plan.pro': 'Pro',
+    'until': 'hasta {date}', 'daysLeft': '{n} días restantes',
+    'trial15': 'Activar prueba gratis — 15 días', 'trial30': 'Activar prueba gratis — 30 días',
+    'payMp': 'Pasar a Pro — Mercado Pago (ARS)', 'payStripe': 'Pasar a Pro — Tarjeta internacional (USD)',
+    'download': 'Descargar la app', 'logout': 'Cerrar sesión',
+    'checkEmail': 'Revisá tu correo para confirmar la cuenta y volvé a esta página.',
+    'trialOk': '¡Prueba activada! Tenés {days} días de Pro.',
+    'trialUsed': 'Ya usaste tu prueba gratis en esta cuenta o dispositivo.',
+    'err.invalidCreds': 'Email o contraseña incorrectos.', 'err.emailInUse': 'Ese email ya está registrado.',
+    'err.refInvalid': 'El código de invitación no tiene un formato válido.',
+    'err.fields': 'Completá email y contraseña.', 'err.generic': 'Algo salió mal. Probá de nuevo.'
+  },
+  en: {
+    'meta.title': 'Goal Labs — My account',
+    'nav.back': 'Back to site',
+    'title': 'GOAL LABS', 'subtitle': 'My account',
+    'loading': 'Loading…',
+    'tabLogin': 'Sign in', 'tabSignup': 'Create account',
+    'email': 'Email', 'password': 'Password',
+    'roleLabel': 'What are you?', 'optional': '(optional)', 'refLabel': 'Invite code',
+    'orContinueWith': 'or continue with',
+    'role.player': 'Player', 'role.analyst': 'Analyst', 'role.club': 'Club', 'role.creator': 'Creator', 'role.other': 'Other',
+    'ref.invited': 'Invitation active:', 'ref.benefit': 'you start with 30 days of Pro for free.',
+    'pay.ok': 'Payment received! Your Pro plan may take a few seconds to show up.', 'pay.refresh': 'Refresh',
+    'pay.error': 'The payment was not completed. You can try again anytime.',
+    'loggedAs': 'Signed in as', 'planLabel': 'Your plan',
+    'plan.free': 'Free', 'plan.trial': 'Pro trial', 'plan.pro': 'Pro',
+    'until': 'until {date}', 'daysLeft': '{n} days left',
+    'trial15': 'Start free trial — 15 days', 'trial30': 'Start free trial — 30 days',
+    'payMp': 'Go Pro — Mercado Pago (ARS)', 'payStripe': 'Go Pro — International card (USD)',
+    'download': 'Download the app', 'logout': 'Sign out',
+    'checkEmail': 'Check your inbox to confirm your account, then come back to this page.',
+    'trialOk': 'Trial activated! You have {days} days of Pro.',
+    'trialUsed': 'You already used your free trial on this account or device.',
+    'err.invalidCreds': 'Wrong email or password.', 'err.emailInUse': 'That email is already registered.',
+    'err.refInvalid': 'The invite code format is not valid.',
+    'err.fields': 'Fill in email and password.', 'err.generic': 'Something went wrong. Please try again.'
+  },
+  it: {
+    'meta.title': 'Goal Labs — Il mio account',
+    'nav.back': 'Torna al sito',
+    'title': 'GOAL LABS', 'subtitle': 'Il mio account',
+    'loading': 'Caricamento…',
+    'tabLogin': 'Accedi', 'tabSignup': 'Crea account',
+    'email': 'Email', 'password': 'Password',
+    'roleLabel': 'Chi sei?', 'optional': '(facoltativo)', 'refLabel': 'Codice invito',
+    'orContinueWith': 'o continua con',
+    'role.player': 'Giocatore', 'role.analyst': 'Analista', 'role.club': 'Club', 'role.creator': 'Creator', 'role.other': 'Altro',
+    'ref.invited': 'Invito attivo:', 'ref.benefit': 'inizi con 30 giorni di Pro gratis.',
+    'pay.ok': 'Pagamento ricevuto! Il piano Pro può richiedere qualche secondo.', 'pay.refresh': 'Aggiorna',
+    'pay.error': 'Il pagamento non è stato completato. Puoi riprovare quando vuoi.',
+    'loggedAs': 'Accesso come', 'planLabel': 'Il tuo piano',
+    'plan.free': 'Free', 'plan.trial': 'Prova Pro', 'plan.pro': 'Pro',
+    'until': 'fino al {date}', 'daysLeft': '{n} giorni rimasti',
+    'trial15': 'Attiva prova gratuita — 15 giorni', 'trial30': 'Attiva prova gratuita — 30 giorni',
+    'payMp': 'Passa a Pro — Mercado Pago (ARS)', 'payStripe': 'Passa a Pro — Carta internazionale (USD)',
+    'download': 'Scarica l’app', 'logout': 'Esci',
+    'checkEmail': 'Controlla la tua email per confermare l’account, poi torna su questa pagina.',
+    'trialOk': 'Prova attivata! Hai {days} giorni di Pro.',
+    'trialUsed': 'Hai già usato la prova gratuita su questo account o dispositivo.',
+    'err.invalidCreds': 'Email o password errati.', 'err.emailInUse': 'Questa email è già registrata.',
+    'err.refInvalid': 'Il formato del codice invito non è valido.',
+    'err.fields': 'Compila email e password.', 'err.generic': 'Qualcosa è andato storto. Riprova.'
+  }
+};
+</script>
+<script src="../assets/site-i18n.js"></script>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+const SUPABASE_URL = 'https://lhxcyjweosoruebjjqnv.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable__wCYgrj15N7sg4lkC2mTgg_iXt_YOD8';
+const FN = `${SUPABASE_URL}/functions/v1`;
+const CODE_RE = /^[a-z0-9-]{3,32}$/;
+const ROLES = ['player', 'analyst', 'club', 'creator', 'other'];
+// Ventana de confianza para el caso de signup con Google: el email no se conoce hasta
+// despues del redirect de OAuth, asi que se guarda con email vacio. Se acota el riesgo
+// de fuga entre cuentas permitiendo el match "sin email" solo si se consume dentro de
+// este plazo desde que se escribio (misma logica que utils/referral.ts en la app).
+const GOOGLE_OAUTH_TRUST_WINDOW_MS = 10 * 60 * 1000; // 10 min
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const $ = (id) => document.getElementById(id);
+const t = (k) => (window.GLi18n && window.GLi18n.t(k)) || k;
+
+// ---- captura de ?ref y gl_ref ----
+const qs = new URLSearchParams(location.search);
+const refParam = (qs.get('ref') || '').trim().toLowerCase();
+if (CODE_RE.test(refParam)) {
+  let prev = null;
+  try { prev = JSON.parse(localStorage.getItem('gl_ref') || 'null'); } catch (e) {}
+  const name = (prev && prev.code === refParam) ? prev.name : undefined;
+  const email = (prev && prev.code === refParam) ? prev.email : undefined;
+  try { localStorage.setItem('gl_ref', JSON.stringify({ code: refParam, name, email, ts: Date.now() })); } catch (e) {}
+}
+
+// ---- override de idioma via ?lang= (viene del redirect post-pago de la app) ----
+const SUPPORTED_LANGS = ['es', 'en', 'it'];
+const langParam = (qs.get('lang') || '').trim().toLowerCase();
+if (SUPPORTED_LANGS.includes(langParam) && window.GLi18n && window.GLi18n.lang !== langParam) {
+  try { localStorage.setItem('gl_lang', langParam); } catch (e) {}
+  window.GLi18n.apply(langParam);
+}
+
+function getRef() {
+  try {
+    const r = JSON.parse(localStorage.getItem('gl_ref') || 'null');
+    if (!r || !CODE_RE.test(r.code || '')) return null;
+    if (Date.now() - (r.ts || 0) > 90 * 864e5) { localStorage.removeItem('gl_ref'); return null; }
+    return r;
+  } catch (e) { return null; }
+}
+function clearRef() { try { localStorage.removeItem('gl_ref'); } catch (e) {} }
+// Compara el email guardado (signup por email/password) contra el email de la sesion,
+// o -- si no se guardo email (signup con Google, el email recien se conoce tras el
+// redirect) -- acepta el match si la entrada es reciente (ver GOOGLE_OAUTH_TRUST_WINDOW_MS).
+function emailOrWindowMatches(storedEmail, storedTs, targetEmail) {
+  const normalizedTarget = (targetEmail || '').trim().toLowerCase();
+  if ((storedEmail || '').trim().toLowerCase() === normalizedTarget && normalizedTarget) return true;
+  return !storedEmail && typeof storedTs === 'number' && (Date.now() - storedTs) < GOOGLE_OAUTH_TRUST_WINDOW_MS;
+}
+
+// ---- UI helpers ----
+let mode = 'login';
+function show(view) {
+  ['v-loading', 'v-auth', 'v-account'].forEach((v) => { $(v).hidden = (v !== `v-${view}`); });
+}
+function msg(text, kind) {
+  const el = $('msg');
+  if (!text) { el.hidden = true; return; }
+  el.textContent = text;
+  el.className = 'mb-4 p-3 rounded text-sm border ' + (kind === 'ok'
+    ? 'bg-emerald-900/30 text-emerald-200 border-emerald-800'
+    : 'bg-red-900/30 text-red-200 border-red-800');
+  el.hidden = false;
+}
+function setMode(m) {
+  mode = m;
+  $('signup-extras').hidden = (m !== 'signup');
+  $('btn-submit').setAttribute('data-i18n', m === 'signup' ? 'tabSignup' : 'tabLogin');
+  $('btn-submit').textContent = t(m === 'signup' ? 'tabSignup' : 'tabLogin');
+  const on = 'flex-1 py-2 rounded text-xs font-bold uppercase tracking-wider focus-ring bg-emerald-600 text-white';
+  const off = 'flex-1 py-2 rounded text-xs font-bold uppercase tracking-wider focus-ring text-zinc-500 hover:text-zinc-300';
+  $('tab-login').className = (m === 'login') ? on : off;
+  $('tab-signup').className = (m === 'signup') ? on : off;
+  msg(null);
+}
+$('tab-login').onclick = () => setMode('login');
+$('tab-signup').onclick = () => setMode('signup');
+
+// role chips
+let role = null;
+ROLES.forEach((r) => {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.dataset.role = r;
+  b.setAttribute('data-i18n', `role.${r}`);
+  b.textContent = t(`role.${r}`);
+  b.onclick = () => {
+    role = (role === r) ? null : r;
+    renderChips();
+  };
+  $('role-chips').appendChild(b);
+});
+function renderChips() {
+  [...$('role-chips').children].forEach((b) => {
+    const on = b.dataset.role === role;
+    b.className = 'px-3 py-1.5 rounded text-xs font-bold border transition-colors focus-ring ' + (on
+      ? 'bg-emerald-600 border-emerald-500 text-white'
+      : 'bg-zinc-950 border-zinc-700 text-zinc-400 hover:text-zinc-200');
+  });
+}
+renderChips();
+
+// banner de invitación
+function renderRefBanner() {
+  const r = getRef();
+  $('ref-banner').hidden = !r;
+  if (r) $('ref-name').textContent = r.name || r.code;
+  if (r) $('f-ref').value = r.code;
+}
+
+// banners de pago
+if (qs.get('pago') === 'ok') $('pay-ok').hidden = false;
+if (qs.get('pago') === 'error') $('pay-error').hidden = false;
+$('btn-refresh').onclick = async () => { await supabase.auth.refreshSession(); render(); };
+
+// ---- auth ----
+$('form-auth').onsubmit = async (e) => {
+  e.preventDefault();
+  const email = $('f-email').value.trim();
+  const pass = $('f-pass').value;
+  if (!email || !pass) { msg(t('err.fields'), 'err'); return; }
+  const btn = $('btn-submit');
+  btn.disabled = true;
+  try {
+    if (mode === 'signup') {
+      const rawRef = $('f-ref').value.trim().toLowerCase();
+      if (rawRef && !CODE_RE.test(rawRef)) { msg(t('err.refInvalid'), 'err'); return; }
+      if (rawRef) {
+        const prev = getRef();
+        try { localStorage.setItem('gl_ref', JSON.stringify({ code: rawRef, name: prev && prev.code === rawRef ? prev.name : undefined, email, ts: Date.now() })); } catch (e2) {}
+      }
+      if (role) { try { localStorage.setItem('gl_pending_role', JSON.stringify({ role, email })); } catch (e2) {} }
+      const { data, error } = await supabase.auth.signUp({
+        email, password: pass,
+        options: {
+          emailRedirectTo: location.origin + '/cuenta/',
+          data: role ? { role } : undefined,
+        },
+      });
+      if (error) throw error;
+      if (!data.session) {
+        msg(t('checkEmail'), 'ok');
+      }
+      // si ya hay sesion (auto-confirm), el listener SIGNED_IN ya se encarga de mostrar la vista de cuenta
+    } else {
+      const { error } = await supabase.auth.signInWithPassword({ email, password: pass });
+      if (error) throw error;
+      msg(null);
+    }
+  } catch (err) {
+    const m = String((err && err.message) || '').toLowerCase();
+    if (m.includes('invalid login credentials')) msg(t('err.invalidCreds'), 'err');
+    else if (m.includes('already registered')) msg(t('err.emailInUse'), 'err');
+    else msg(t('err.generic'), 'err');
+  } finally {
+    btn.disabled = false;
+  }
+};
+$('btn-logout').onclick = async () => { await supabase.auth.signOut(); };
+
+$('btn-google').onclick = async () => {
+  $('btn-google').disabled = true;
+  try {
+    if (mode === 'signup') {
+      const rawRef = $('f-ref').value.trim().toLowerCase();
+      const emailForStamp = $('f-email').value.trim();
+      if (rawRef && CODE_RE.test(rawRef)) {
+        const prev = getRef();
+        try { localStorage.setItem('gl_ref', JSON.stringify({ code: rawRef, name: prev && prev.code === rawRef ? prev.name : undefined, email: emailForStamp, ts: Date.now() })); } catch (e2) {}
+      }
+      if (role) { try { localStorage.setItem('gl_pending_role', JSON.stringify({ role, email: emailForStamp })); } catch (e2) {} }
+    }
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: location.origin + '/cuenta/',
+        scopes: 'openid email profile',
+        queryParams: { access_type: 'offline', prompt: 'select_account' },
+      },
+    });
+    if (error) { msg(t('err.generic'), 'err'); $('btn-google').disabled = false; }
+    // si no hay error, el navegador redirige a Google — no hay mas que hacer aca
+  } catch (e) {
+    msg(t('err.generic'), 'err');
+    $('btn-google').disabled = false;
+  }
+};
+
+// ---- consumo de referido/rol post-login ----
+async function consumePending(session) {
+  const sessionEmail = (session.user.email || '').trim().toLowerCase();
+  const pendingRoleRaw = localStorage.getItem('gl_pending_role');
+  if (pendingRoleRaw) {
+    let parsed = null;
+    try {
+      parsed = JSON.parse(pendingRoleRaw);
+    } catch (e) {
+      localStorage.removeItem('gl_pending_role'); // formato viejo/invalido, no se puede recuperar
+    }
+    if (parsed && parsed.role && emailOrWindowMatches(parsed.email, parsed.ts, sessionEmail)) {
+      try {
+        if (!session.user.user_metadata?.role) await supabase.auth.updateUser({ data: { role: parsed.role } });
+        localStorage.removeItem('gl_pending_role');
+      } catch (e) { /* reintenta en el proximo render */ }
+    }
+  }
+  const r = getRef();
+  if (!r || !emailOrWindowMatches(r.email, r.ts, sessionEmail)) return;
+  try {
+    const res = await fetch(`${FN}/register-referral`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${session.access_token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: r.code }),
+    });
+    if (res.ok || [400, 403, 404, 409].includes(res.status)) clearRef();
+    if (res.ok) await supabase.auth.refreshSession();
+  } catch (e) { /* sin red: reintenta en el proximo login */ }
+}
+
+// ---- vista de cuenta ----
+async function renderAccount() {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) { show('auth'); return; }
+  $('acc-email').textContent = user.email || '';
+  const meta = user.app_metadata || {};
+  const until = meta.pro_until ? new Date(meta.pro_until) : null;
+  const activeUntil = until && until > new Date();
+  const fmtDate = until ? until.toLocaleDateString() : '';
+  const daysLeft = until ? Math.max(0, Math.ceil((until - Date.now()) / 864e5)) : 0;
+
+  let planKey = 'plan.free', untilText = '', showTrial = false, showPay = false;
+  if (meta.plan === 'pro' && activeUntil) {
+    planKey = 'plan.pro';
+    untilText = t('until').replace('{date}', fmtDate);
+  } else if (meta.plan === 'trial' && activeUntil) {
+    planKey = 'plan.trial';
+    untilText = t('daysLeft').replace('{n}', String(daysLeft));
+    showPay = true;
+  } else {
+    showTrial = true;
+    showPay = true;
+  }
+  $('acc-plan').textContent = t(planKey);
+  $('acc-until').textContent = untilText;
+  $('btn-trial').hidden = !showTrial;
+  $('btn-mp').hidden = !showPay;
+  $('btn-stripe').hidden = !showPay;
+  $('btn-trial').textContent = t(meta.referred_by ? 'trial30' : 'trial15');
+  show('account');
+}
+
+async function post(fn, body) {
+  const { data: { session } } = await supabase.auth.getSession();
+  return fetch(`${FN}/${fn}`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${session.access_token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify(body || {}),
+  });
+}
+
+$('btn-trial').onclick = async () => {
+  $('btn-trial').disabled = true;
+  try {
+    const res = await post('activate-trial', { device_id: 'web' });
+    const body = await res.json().catch(() => null);
+    if (res.ok) {
+      await supabase.auth.refreshSession();
+      msg(t('trialOk').replace('{days}', String((body && body.days) || 15)), 'ok');
+      renderAccount();
+    } else if (res.status === 409) {
+      msg(t('trialUsed'), 'err');
+    } else {
+      msg(t('err.generic'), 'err');
+    }
+  } catch (e) { msg(t('err.generic'), 'err'); }
+  finally { $('btn-trial').disabled = false; }
+};
+
+$('btn-mp').onclick = async () => {
+  $('btn-mp').disabled = true;
+  try {
+    const res = await post('create-mp-preference');
+    const body = await res.json().catch(() => null);
+    if (res.ok && body && body.init_point) { location.href = body.init_point; return; }
+    msg(t('err.generic'), 'err');
+  } catch (e) { msg(t('err.generic'), 'err'); }
+  finally { $('btn-mp').disabled = false; }
+};
+
+$('btn-stripe').onclick = async () => {
+  $('btn-stripe').disabled = true;
+  try {
+    const res = await post('create-stripe-session');
+    const body = await res.json().catch(() => null);
+    if (res.ok && body && body.url) { location.href = body.url; return; }
+    msg(t('err.generic'), 'err');
+  } catch (e) { msg(t('err.generic'), 'err'); }
+  finally { $('btn-stripe').disabled = false; }
+};
+
+// ---- arranque + cambios de sesión ----
+async function render() {
+  const { data: { session } } = await supabase.auth.getSession();
+  renderRefBanner();
+  if (session) {
+    await consumePending(session);
+    await renderAccount();
+  } else {
+    show('auth');
+  }
+}
+
+supabase.auth.onAuthStateChange((event) => {
+  if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') render();
+});
+
+setMode('login');
+render();
+</script>
+
+</body>
+</html>

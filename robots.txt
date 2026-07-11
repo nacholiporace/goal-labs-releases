@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /r/
+Disallow: /cuenta/
 
 Sitemap: https://goallabs.com.ar/sitemap.xml
