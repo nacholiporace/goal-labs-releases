@@ -332,10 +332,10 @@ $('form-auth').onsubmit = async (e) => {
       if (rawRef && !CODE_RE.test(rawRef)) { msg(t('err.refInvalid'), 'err'); return; }
       if (rawRef) {
         const prev = getRef();
-        try { localStorage.setItem('gl_ref', JSON.stringify({ code: rawRef, name: prev && prev.code === rawRef ? prev.name : undefined, ts: Date.now() })); } catch (e2) {}
+        try { localStorage.setItem('gl_ref', JSON.stringify({ code: rawRef, name: prev && prev.code === rawRef ? prev.name : undefined, email, ts: Date.now() })); } catch (e2) {}
       }
-      if (role) { try { localStorage.setItem('gl_pending_role', role); } catch (e2) {} }
-      const { error } = await supabase.auth.signUp({
+      if (role) { try { localStorage.setItem('gl_pending_role', JSON.stringify({ role, email })); } catch (e2) {} }
+      const { data, error } = await supabase.auth.signUp({
         email, password: pass,
         options: {
           emailRedirectTo: location.origin + '/cuenta/',
@@ -343,7 +343,10 @@ $('form-auth').onsubmit = async (e) => {
         },
       });
       if (error) throw error;
-      msg(t('checkEmail'), 'ok');
+      if (!data.session) {
+        msg(t('checkEmail'), 'ok');
+      }
+      // si ya hay sesion (auto-confirm), el listener SIGNED_IN ya se encarga de mostrar la vista de cuenta
     } else {
       const { error } = await supabase.auth.signInWithPassword({ email, password: pass });
       if (error) throw error;
@@ -362,15 +365,19 @@ $('btn-logout').onclick = async () => { await supabase.auth.signOut(); };
 
 // ---- consumo de referido/rol post-login ----
 async function consumePending(session) {
-  const pendingRole = localStorage.getItem('gl_pending_role');
-  if (pendingRole) {
+  const sessionEmail = (session.user.email || '').trim().toLowerCase();
+  const pendingRoleRaw = localStorage.getItem('gl_pending_role');
+  if (pendingRoleRaw) {
     try {
-      if (!session.user.user_metadata?.role) await supabase.auth.updateUser({ data: { role: pendingRole } });
-      localStorage.removeItem('gl_pending_role');
+      const parsed = JSON.parse(pendingRoleRaw);
+      if (parsed && parsed.role && (parsed.email || '').trim().toLowerCase() === sessionEmail) {
+        if (!session.user.user_metadata?.role) await supabase.auth.updateUser({ data: { role: parsed.role } });
+        localStorage.removeItem('gl_pending_role');
+      }
     } catch (e) {}
   }
   const r = getRef();
-  if (!r) return;
+  if (!r || !r.email || (r.email || '').trim().toLowerCase() !== sessionEmail) return;
   try {
     const res = await fetch(`${FN}/register-referral`, {
       method: 'POST',
