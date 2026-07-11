@@ -375,7 +375,9 @@ async function consumePending(session) {
         if (!session.user.user_metadata?.role) await supabase.auth.updateUser({ data: { role: parsed.role } });
         localStorage.removeItem('gl_pending_role');
       }
-    } catch (e) {}
+    } catch (e) {
+      localStorage.removeItem('gl_pending_role'); // formato viejo/invalido, no se puede recuperar
+    }
   }
   const r = getRef();
   if (!r || !r.email || (r.email || '').trim().toLowerCase() !== sessionEmail) return;
@@ -475,15 +477,16 @@ $('btn-stripe').onclick = async () => {
 async function render() {
   const { data: { session } } = await supabase.auth.getSession();
   renderRefBanner();
-  if (session) await renderAccount(); else show('auth');
+  if (session) {
+    await consumePending(session);
+    await renderAccount();
+  } else {
+    show('auth');
+  }
 }
 
-supabase.auth.onAuthStateChange((event, session) => {
-  if (event === 'SIGNED_IN' && session) {
-    consumePending(session).then(render);
-  } else if (event === 'SIGNED_OUT') {
-    render();
-  }
+supabase.auth.onAuthStateChange((event) => {
+  if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') render();
 });
 
 setMode('login');
