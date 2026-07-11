@@ -241,7 +241,8 @@ if (CODE_RE.test(refParam)) {
   let prev = null;
   try { prev = JSON.parse(localStorage.getItem('gl_ref') || 'null'); } catch (e) {}
   const name = (prev && prev.code === refParam) ? prev.name : undefined;
-  try { localStorage.setItem('gl_ref', JSON.stringify({ code: refParam, name, ts: Date.now() })); } catch (e) {}
+  const email = (prev && prev.code === refParam) ? prev.email : undefined;
+  try { localStorage.setItem('gl_ref', JSON.stringify({ code: refParam, name, email, ts: Date.now() })); } catch (e) {}
 }
 function getRef() {
   try {
