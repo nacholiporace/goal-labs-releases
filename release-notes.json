@@ -1,4 +1,9 @@
 {
+  "1.7.2": {
+    "es": "## ¿Qué hay de nuevo?\n\n### Video\n- Un video nuevo arranca desde el principio, no desde donde había quedado el anterior.\n\n### Guardar\n- Si escribís `.goal` al guardar, el archivo ya no queda con la extensión repetida.\n\n### Mac\n- Corrige la 1.7.1 de Mac, que abría con la ventana vacía. Está firmada y notarizada por Apple, y sigue siendo una versión de prueba.",
+    "en": "## What's new?\n\n### Video\n- A new video starts from the beginning, not from where the previous one was left.\n\n### Saving\n- If you type `.goal` when saving, the file no longer ends up with the extension twice.\n\n### Mac\n- Fixes version 1.7.1 for Mac, which opened with an empty window. It is signed and notarized by Apple, and it is still a test version.",
+    "it": "## Novità\n\n### Video\n- Un nuovo video parte dall'inizio, non dal punto in cui era rimasto quello precedente.\n\n### Salvataggio\n- Se scrivi `.goal` quando salvi, il file non resta più con l'estensione ripetuta.\n\n### Mac\n- Corregge la versione 1.7.1 per Mac, che si apriva con la finestra vuota. È firmata e notarizzata da Apple ed è ancora una versione di prova."
+  },
   "1.7.1": {
     "es": "## ¿Qué hay de nuevo?\n\n### Inicio más simple\n- Al entrar, la app ya no muestra la pantalla de bienvenida, el tutorial ni la lista de primeros pasos.\n\n### Mac\n- Primera versión para Mac con Apple Silicon (macOS 13 o posterior), firmada y notarizada por Apple. Es una versión de prueba.",
     "en": "## What's new?\n\n### Simpler start\n- The app no longer shows the welcome screen, the tutorial or the first-steps checklist when you open it.\n\n### Mac\n- First version for Mac with Apple Silicon (macOS 13 or later), signed and notarized by Apple. It is a test version.",
